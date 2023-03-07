@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (float) var horisontalSpeed = 100.0 # cкорость полета корабля
-export (float) var verticalSpeed = 200.0 # cкорость вертикального движения корабля
+export (float) var mcSpeed = 100.0 # cкорость полета корабля
+export (float) var mcVSpeed = 200.0 # cкорость вертикального движения корабля
 
 
 var mcMotion = Vector2() # вектор скорости
@@ -27,12 +27,12 @@ func spaceshipMove(delta) -> void:
 	
 	
 	if inputVector.length() > 0: # Если есть движение корабля
-		inputVector = inputVector.normalized() * verticalSpeed
+		inputVector = inputVector.normalized() * mcVSpeed
 		
 	
 	position.y += inputVector.y * delta 
 	# delta позволяет естественно набирать скорость (не моментально)	
-	position.x += horisontalSpeed * delta
+	position.x += mcSpeed * delta
 	position.y = clamp(position.y, 0, viewportSize.y) 
 		
 	mcMotion = move_and_slide(inputVector)
