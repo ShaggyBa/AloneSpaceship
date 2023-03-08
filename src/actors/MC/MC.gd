@@ -1,10 +1,13 @@
-extends KinematicBody2D
-
-export (float) var mcSpeed = 100.0 # cкорость полета корабля
-export (float) var mcVSpeed = 200.0 # cкорость вертикального движения корабля
+extends Area2D
+class_name MC
 
 
-var mcMotion = Vector2() # вектор скорости
+export (float) var mcSpeed = 200.0 # cкорость полета корабля
+export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
+export (int) var mcHP = 3
+
+
+var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
 
@@ -17,30 +20,23 @@ func _process(delta) -> void:
 	
 func spaceshipMove(delta) -> void:
 		
-	var inputVector = Vector2.ZERO # Обнуление координат вектора скоростей
+	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	inputVector.x = 1 
 	
-	if Input.is_action_pressed("ui_up"): # Зажатие стрелки вверх или W
-		inputVector.y -= 1
+	global_position.x += inputVector.x * mcSpeed * delta 
+	global_position.y += inputVector.y * mcVSpeed * delta 
 	
-	if Input.is_action_pressed("ui_down"): # Зажатие стрелки вниз или S
-		inputVector.y += 1
-	
-	
-	if inputVector.length() > 0: # Если есть движение корабля
-		inputVector = inputVector.normalized() * mcVSpeed
+	global_position.y = clamp(position.y, 0, viewportSize.y) 
+
+
+func takeDamage(damage):
+	mcHP -= damage
+	if mcHP <= 0:
+		queue_free()
+		get_tree().reload_current_scene()
+
+func _on_MC_area_entered(area: Area2D) -> void:
+	if area.is_in_group("meteorites"):
+		# var meteorite = load("res://src/actors/Objects/meteorite/meteorite.tscn")
 		
-	
-	position.y += inputVector.y * delta 
-	# delta позволяет естественно набирать скорость (не моментально)	
-	position.x += mcSpeed * delta
-	position.y = clamp(position.y, 0, viewportSize.y) 
-		
-	mcMotion = move_and_slide(inputVector)
-
-
-
-
-
-
-
-
+		area.takeDamage(1)
