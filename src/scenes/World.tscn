@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Backgrounds/Space Background.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/spawners/meteorite_spawn/MeteoriteSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Assets/Sprites/Stars/background_4.png" type="Texture" id=5]
+[ext_resource path="res://src/Assets/Sprites/Stars/background_1.png" type="Texture" id=6]
 
 [node name="Node" type="Node"]
 
@@ -16,14 +18,32 @@ layer = -1
 scale = Vector2( 1.5, 1.5 )
 transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_offset = Vector2( 360, 300 )
-motion_mirroring = Vector2( 900, 500 )
-
-[node name="Icon" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color( 0.780392, 0.109804, 0.109804, 1 )
-scale = Vector2( 16.0312, 9.3125 )
+[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 257.333, 317.333 )
+scale = Vector2( 0.827091, 0.827091 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.5, 1 )
+motion_mirroring = Vector2( 600, 330 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( -76, -198 )
+scale = Vector2( 2.29259, 2.29259 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.75, 1 )
+motion_mirroring = Vector2( 600, 330 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 34.6667, -45.3333 )
+scale = Vector2( 2.293, 2.293 )
+texture = ExtResource( 5 )
 centered = false
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]

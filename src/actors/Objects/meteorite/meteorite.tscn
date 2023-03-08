@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://src/Assets/Sprites/Asteroids/2088450262.png" type="Texture" id=1]
 [ext_resource path="res://src/actors/Objects/meteorite/meteorite.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -11,8 +11,8 @@ script = ExtResource( 2 )
 speed = 200.0
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0.0392157, 0.729412, 1 )
-scale = Vector2( 1, 1.00328 )
+position = Vector2( -15, -12 )
+scale = Vector2( 0.882011, 0.884904 )
 texture = ExtResource( 1 )
 centered = false
 
