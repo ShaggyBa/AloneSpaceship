@@ -10,14 +10,16 @@ var meteoriteHP = 1
 signal meteoriteIsHitting
 
 
-func _process(delta: float):
+func _physics_process(delta):
 	global_position.x -= speed * delta
+	if meteoriteHP <= 0:	
+		# эффект затухания
+		set_modulate(lerp(get_modulate(), Color(1,1,1,0), 0.1))
+
 
 
 func takeDamage(damage):
 	meteoriteHP -= damage
-	if meteoriteHP <= 0:
-		queue_free()
 
 
 func _on_Meteorite_area_entered(area: Area2D) -> void:

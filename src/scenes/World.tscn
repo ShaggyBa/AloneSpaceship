@@ -49,7 +49,9 @@ texture = ExtResource( 5 )
 centered = false
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2807, 92 )
+position = Vector2( 2807, 0 )
 numberOfMeteorites = 2
-meteoriteSpawnTimer = 1.0
-randomMeteoritePosition = Vector2( 150, 1000 )
+meteoriteSpawnTimer = 3.0
+randomMeteoritePosition = Vector2( 150, 900 )
+
+[connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]

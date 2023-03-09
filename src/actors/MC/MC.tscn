@@ -36,4 +36,7 @@ limit_top = -50
 limit_bottom = 650
 smoothing_enabled = true
 
+[node name="Muzzle" type="Position2D" parent="."]
+position = Vector2( 30, 0 )
+
 [connection signal="area_entered" from="." to="." method="_on_MC_area_entered"]
