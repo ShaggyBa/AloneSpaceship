@@ -7,8 +7,10 @@ export (Vector2) var randomMeteoritePosition
 
 var meteoritePath = preload("res://src/actors/Objects/meteorite/meteorite.tscn")
 
+var rand = RandomNumberGenerator.new()
+
+
 func _ready():
-	var rand = RandomNumberGenerator.new()
 	while (true):
 		yield(get_tree().create_timer(meteoriteSpawnTimer), "timeout")
 		

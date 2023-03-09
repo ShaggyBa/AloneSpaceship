@@ -7,6 +7,12 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 export (int) var mcHP = 3
 
 
+signal spawnShoot(location)
+
+
+onready var muzzle = $Muzzle
+
+
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
@@ -14,9 +20,12 @@ var viewportSize : Vector2
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
 
-func _process(delta) -> void:
+func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
 	
+	if Input.is_action_just_pressed("ui_accept"):
+		shoot()
+		
 	
 func spaceshipMove(delta) -> void:
 		
@@ -35,8 +44,13 @@ func takeDamage(damage):
 		queue_free()
 		get_tree().reload_current_scene()
 
+
 func _on_MC_area_entered(area: Area2D) -> void:
 	if area.is_in_group("meteorites"):
 		# var meteorite = load("res://src/actors/Objects/meteorite/meteorite.tscn")
 		
 		area.takeDamage(1)
+
+
+func shoot():
+	emit_signal("spawnShoot", muzzle.global_position)
