@@ -15,6 +15,12 @@ script = ExtResource( 7 )
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 
+[node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 968, -50 )
+numberOfMeteorites = 1
+meteoriteSpawnTimer = 10.0
+randomMeteoritePosition = Vector2( 150, 650 )
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
 scale = Vector2( 1.5, 1.5 )
@@ -47,11 +53,5 @@ position = Vector2( 34.6667, -45.3333 )
 scale = Vector2( 2.293, 2.293 )
 texture = ExtResource( 5 )
 centered = false
-
-[node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2807, 0 )
-numberOfMeteorites = 2
-meteoriteSpawnTimer = 3.0
-randomMeteoritePosition = Vector2( 150, 900 )
 
 [connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]
