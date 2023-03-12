@@ -55,10 +55,9 @@ func spaceshipMove(delta) -> void:
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = 1 
 	
-	position.x += inputVector.x * mcSpeed * delta 
-	position.y += inputVector.y * mcVSpeed * delta 
-	
-	position.y = clamp(position.y, 0, viewportSize.y) 
+	global_position.x += inputVector.x * mcSpeed * delta 
+	global_position.y += inputVector.y * mcVSpeed * delta 
+	global_position.y = clamp(position.y, 0, viewportSize.y) 
 
 # Получение урона
 func takeDamage(damage):
