@@ -3,7 +3,7 @@
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Assets/Backgrounds/Space Background.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/Objects/meteorite/Spawner/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Assets/Sprites/Stars/background_4.png" type="Texture" id=5]
 [ext_resource path="res://src/Assets/Sprites/Stars/background_1.png" type="Texture" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
@@ -33,6 +33,7 @@ motion_scale = Vector2( 1.5, 1 )
 motion_mirroring = Vector2( 600, 330 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+visible = false
 position = Vector2( -76, -198 )
 scale = Vector2( 2.29259, 2.29259 )
 texture = ExtResource( 6 )
@@ -49,9 +50,10 @@ texture = ExtResource( 5 )
 centered = false
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2807, 0 )
-numberOfMeteorites = 2
-meteoriteSpawnTimer = 3.0
-randomMeteoritePosition = Vector2( 150, 900 )
+position = Vector2( 1079, 310 )
+
+[node name="SpawnTimer" type="Timer" parent="MeteoriteSpawner"]
+one_shot = true
 
 [connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]
+[connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
