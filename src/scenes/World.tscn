@@ -16,9 +16,9 @@ script = ExtResource( 7 )
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1125, 0 )
-numberOfMeteorites = 1
-meteoriteSpawnTimer = 1.0
-randomMeteoritePosition = Vector2( 150, 600 )
+
+[node name="SpawnTimer" type="Timer" parent="MeteoriteSpawner"]
+one_shot = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 
@@ -69,11 +69,5 @@ scale = Vector2( 2.293, 2.293 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1079, 310 )
-
-[node name="SpawnTimer" type="Timer" parent="MeteoriteSpawner"]
-one_shot = true
-
-[connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]
 [connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
+[connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]
