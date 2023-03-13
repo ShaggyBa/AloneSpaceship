@@ -8,9 +8,6 @@ export (int) var mcHP = 3
 export (float) var shootDelay = 1.0
 
 
-signal spawnShoot(location)
-
-
 var plShoot = preload("res://src/actors/Projectiles/MC_shoot.tscn") 
 
 

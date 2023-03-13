@@ -7,24 +7,23 @@ preload("res://src/actors/Objects/meteorite/Meteor_2/meteorite_2.tscn"),
 preload("res://src/actors/Objects/meteorite/Meteor_3/meteorite_3.tscn")
 ]
 
-onready var spawnTimer := $SpawnTimer
+onready var timer := $SpawnTimer
 
-var nextSpawnTime := 1.0
+export (float) var spawnTimer := 1.0
 
 func _ready():
 	randomize()
-	spawnTimer.start(nextSpawnTime)
+	timer.start(spawnTimer)
 	
 func _on_SpawnTimer_timeout():
 	#спавн метеоров
 	var ViewRect := get_viewport_rect()
-	var yPos := rand_range(ViewRect.position.y, ViewRect.end.y)
+	var yPos := rand_range(0, ViewRect.end.y)
 	var meteorPreload = preloadMeteors[randi() % preloadMeteors.size()]
-	var meteor: Meteorite = meteorPreload.instance()
+	var meteor = meteorPreload.instance()
 	meteor.position = Vector2(position.x, yPos)
 	get_tree().current_scene.add_child(meteor)
-	print('spawn')
 
 	#рестарт таймера
-	spawnTimer.start(nextSpawnTime)
+	timer.start(spawnTimer)
 

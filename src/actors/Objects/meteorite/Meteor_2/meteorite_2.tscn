@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/actors/Objects/meteorite/Meteor_1/meteorite.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actors/Objects/meteorite/Meteor_2/meteorite_2.gd" type="Script" id=2]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/2057470128.png" type="Texture" id=3]
 
-[node name="bigMeteorite" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-speed = 100.0
+[node name="Meteorite" instance=ExtResource( 1 )]
+maxSpeed = 130.0
+maxRotationRate = 35.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 1.07, 1.02 )
@@ -15,7 +14,7 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 44.9298, 41.0354 )
 scale = Vector2( -0.338587, 0.744533 )
-polygon = PoolVector2Array( 38.1874, -49.7432, 52.9547, -44.3707, 85.4426, -18.8513, 70.6754, -1.39073, 67.7219, 24.1286, 50.0012, 26.8149, 35.234, 32.1874, 29.3271, 44.2755, 20.4667, 42.9324, 8.6529, 40.2461, -12.0213, 40.2461, -29.742, 46.9617, -35.6489, 48.3048, -47.4627, 45.6186, -79.9506, 37.5599, -79.9506, 29.5011, -68.1368, 25.4717, -29.742, 21.4424, -0.207458, 20.0993, 17.5133, 13.3836, -3.1609, 8.01114, -3.1609, 3.98177, 14.5598, 3.98177, 29.3271, 1.29552, 29.3271, -10.7926, 26.3736, -20.1945, 35.234, -26.9101, 35.234, -34.9688, 20.4667, -34.9688, 2.746, -41.6844, 5.69945, -47.0569, 23.4202, -49.7432 )
+polygon = PoolVector2Array( -38.6022, 48.3049, 29.3272, 44.2755, 61.8151, 25.4718, 82.4893, -20.1944, 64.7686, -34.9688, 41.141, -49.7431, 11.6065, -49.7431, -79.9505, 34.8737 )
 
 [node name="VisibilityNotifier2D" parent="." index="2"]
 position = Vector2( 44, 40.5 )

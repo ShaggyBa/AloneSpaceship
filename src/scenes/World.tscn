@@ -70,4 +70,3 @@ texture = ExtResource( 5 )
 centered = false
 
 [connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
-[connection signal="spawnShoot" from="MC" to="." method="_on_MC_spawnShoot"]
