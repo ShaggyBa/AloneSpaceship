@@ -16,11 +16,13 @@ script = ExtResource( 7 )
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1125, 0 )
+spawnTimer = 1.5
 
 [node name="SpawnTimer" type="Timer" parent="MeteoriteSpawner"]
 one_shot = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
+invincibilityDelay = 1.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
