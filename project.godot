@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "MC",
 "language": "GDScript",
 "path": "res://src/actors/MC/MC.gd"
+}, {
+"base": "Area2D",
+"class": "Meteorite",
+"language": "GDScript",
+"path": "res://src/actors/Objects/meteorite/Meteor_1/meteorite.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"MC": ""
+"MC": "",
+"Meteorite": ""
 }
 
 [application]
