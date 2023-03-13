@@ -1,34 +1,53 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Assets/Backgrounds/Space Background.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actors/Objects/meteorite/Spawner/MeteoriteSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Assets/Sprites/Stars/background_4.png" type="Texture" id=5]
 [ext_resource path="res://src/Assets/Sprites/Stars/background_1.png" type="Texture" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
+[ext_resource path="res://src/Assets/Backgrounds/line.png" type="Texture" id=8]
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
+[node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1125, 0 )
+numberOfMeteorites = 1
+meteoriteSpawnTimer = 1.0
+randomMeteoritePosition = Vector2( 150, 600 )
+
 [node name="MC" parent="." instance=ExtResource( 1 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
-scale = Vector2( 1.5, 1.5 )
-transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
-position = Vector2( 257.333, 317.333 )
+position = Vector2( 461, 323 )
 scale = Vector2( 0.827091, 0.827091 )
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ParallaxBackground"]
+position = Vector2( 1035, 295 )
+amount = 75
+lifetime = 7.5
+speed_scale = 3.0
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 300 )
+direction = Vector2( -1, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 0.5
+scale_amount = 0.35
+scale_amount_random = 0.5
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2( 1.5, 1 )
 motion_mirroring = Vector2( 600, 330 )
 
@@ -40,6 +59,7 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2( 1.75, 1 )
 motion_mirroring = Vector2( 600, 330 )
 
