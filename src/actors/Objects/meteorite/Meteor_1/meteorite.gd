@@ -16,7 +16,8 @@ var speed = null
 var rotationSpeed = null
 var randomScale = null
 
-signal meteoriteIsHitting
+
+var pMeteoriteEffect = preload("res://src/actors/Objects/meteorite/MeteoriteEffect.tscn")
 
 
 func _ready():
@@ -35,6 +36,11 @@ func _process(delta):
 func takeDamage(damage):
 	meteoriteHP -= damage
 	if meteoriteHP <= 0:	
+		var meteoriteEffect = pMeteoriteEffect.instance()
+		meteoriteEffect.texture = $Sprite.texture
+		meteoriteEffect.position = position
+		meteoriteEffect.scale = scale
+		get_parent().add_child(meteoriteEffect)
 		queue_free()
 
 
