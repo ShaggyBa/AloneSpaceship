@@ -9,11 +9,14 @@
 config_version=4
 
 _global_script_classes=[ {
+<<<<<<< Updated upstream
 "base": "Area2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://src/actors/Enemies/BaseEnemy.gd"
 }, {
+=======
+>>>>>>> Stashed changes
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
