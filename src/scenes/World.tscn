@@ -88,11 +88,11 @@ centered = false
 
 [node name="FastEnemy" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1009, 295 )
+horisontalSpeed = 500.0
 enemyDamage = 3
 
 [node name="ShooterEnemy" parent="." instance=ExtResource( 11 )]
 position = Vector2( 933, 142 )
-horisontalSpeed = -200.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

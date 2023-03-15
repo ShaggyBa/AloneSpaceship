@@ -10,8 +10,18 @@ export (int) var enemyHP = 5
 export (int) var enemyDamage = 1
 
 
+var direction = 1
+
+onready var 	 viewportRect = get_viewport_rect()
+
+
 func _physics_process(delta):
-	position.x -= horisontalSpeed * delta
+	global_position.x += horisontalSpeed * delta
+	global_position.y += verticalSpeed * delta * direction
+	if global_position.y < viewportRect.position.y \
+	or global_position.y > viewportRect.end.y:
+		direction *= -1
+		
 	if enemyHP <= 0:
 		queue_free()
 

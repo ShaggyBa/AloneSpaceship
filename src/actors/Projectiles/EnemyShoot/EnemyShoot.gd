@@ -10,7 +10,6 @@ var pShootEffect = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShootEf
 func _physics_process(delta):
 	global_position.x -= shootSpeed * delta
 
-
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()
 
