@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Assets/Backgrounds/Space Background.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Backgrounds/Background.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Assets/Sprites/Stars/background_4.png" type="Texture" id=5]
-[ext_resource path="res://src/Assets/Sprites/Stars/background_1.png" type="Texture" id=6]
+[ext_resource path="res://src/Assets/Backgrounds/Planets.png" type="Texture" id=5]
+[ext_resource path="res://src/Assets/Backgrounds/Stars.png" type="Texture" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
 [ext_resource path="res://src/Assets/Backgrounds/line.png" type="Texture" id=8]
+[ext_resource path="res://src/Assets/Audio/LevelMusic/battle.wav" type="AudioStream" id=9]
+[ext_resource path="res://src/Assets/Backgrounds/Nebula.png" type="Texture" id=10]
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
@@ -15,6 +17,7 @@ script = ExtResource( 7 )
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 1125, 0 )
 spawnTimer = 1.5
 
@@ -28,11 +31,14 @@ invincibilityDelay = 1.0
 layer = -1
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
-position = Vector2( 461, 323 )
-scale = Vector2( 0.827091, 0.827091 )
+position = Vector2( 488, 324 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="ParallaxBackground"]
+visible = false
 position = Vector2( 1035, 295 )
 amount = 75
 lifetime = 7.5
@@ -48,27 +54,41 @@ initial_velocity_random = 0.5
 scale_amount = 0.35
 scale_amount_random = 0.5
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
-motion_scale = Vector2( 1.5, 1 )
-motion_mirroring = Vector2( 600, 330 )
+[node name="Planets" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( -119, -99 )
+motion_scale = Vector2( 0.07, 1 )
+motion_mirroring = Vector2( 1825, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-visible = false
-position = Vector2( -76, -198 )
-scale = Vector2( 2.29259, 2.29259 )
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Planets"]
+position = Vector2( -427, -279 )
+scale = Vector2( 2.035, 2.035 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="neibula" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 61, 0 )
+motion_scale = Vector2( 0.15, 1 )
+motion_mirroring = Vector2( 1100, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/neibula"]
+position = Vector2( -458, -113 )
+scale = Vector2( 0.960044, 0.960044 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="Stars" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.5, 1 )
+motion_mirroring = Vector2( 1100, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Stars"]
+position = Vector2( -212, -68 )
+scale = Vector2( 0.91625, 0.91625 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
-motion_scale = Vector2( 1.75, 1 )
-motion_mirroring = Vector2( 600, 330 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 34.6667, -45.3333 )
-scale = Vector2( 2.293, 2.293 )
-texture = ExtResource( 5 )
-centered = false
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -17.442
+autoplay = true
 
 [connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
