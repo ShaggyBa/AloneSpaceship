@@ -9,17 +9,19 @@ export (float) var shootDelay = 1.0
 export (float) var invincibilityDelay = 0.3
 
 
-var plShoot = preload("res://src/actors/Projectiles/MC_shoot.tscn") 
+var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn") 
 
 
 onready var muzzle = $Muzzle
-
+onready var shield = $Shield
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
+
 var timerShooting = Timer.new()
 var timerInvincibility = Timer.new()
+
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
@@ -27,13 +29,11 @@ func _ready() -> void:
 	setTimerShooting()
 	setTimerInvincibility()
 	
+	
 func _process(delta: float) -> void:
 	shooting()
-	# Эффект мерцания от полученного урона, пока нет спрайта щитка
-	if !timerInvincibility.is_stopped():
-		modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0 
-	else:
-		modulate.a = 1
+	shieldEffect()
+		
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
 	
@@ -77,8 +77,12 @@ func takeDamage(damage):
 		queue_free()
 		get_tree().reload_current_scene()
 
-# Столкновение с метеоритами
-func _on_MC_area_entered(area: Area2D) -> void:
-	if area.is_in_group("meteorites"):
-		print("Spaceship take damage from meteorite")
-		
+
+func shieldEffect():
+	if !timerInvincibility.is_stopped():
+		shield.visible = true
+		shield.playing = true
+	else:
+		shield.visible = false
+		shield.playing = false
+

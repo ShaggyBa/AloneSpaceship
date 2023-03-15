@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DynamicFight_3.mp3-685eb172c7d6c8429932c1c677e86b33.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Music/Simple Music/DynamicFight_3.mp3"
+dest_files=[ "res://.import/DynamicFight_3.mp3-685eb172c7d6c8429932c1c677e86b33.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

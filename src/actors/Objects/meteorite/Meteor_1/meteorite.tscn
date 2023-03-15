@@ -3,7 +3,7 @@
 [ext_resource path="res://src/actors/Objects/meteorite/Meteor_1/meteorite.gd" type="Script" id=1]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/1440544241.png" type="Texture" id=2]
 
-[node name="Meteorite" type="Area2D" groups=["meteorites"]]
+[node name="Meteorite" type="Area2D" groups=["damageable"]]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource( 1 )

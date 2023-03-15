@@ -32,23 +32,28 @@ func _process(delta):
 	global_position.x -= speed * delta
 	rotation_degrees += rotationSpeed * delta 
 	
+	if meteoriteHP <= 0:	
+		spawnMeteoriteEffect()
+		queue_free()
+	
 	
 func takeDamage(damage):
 	meteoriteHP -= damage
-	if meteoriteHP <= 0:	
-		var meteoriteEffect = pMeteoriteEffect.instance()
-		meteoriteEffect.texture = $Sprite.texture
-		meteoriteEffect.position = position
-		meteoriteEffect.scale = scale
-		get_parent().add_child(meteoriteEffect)
-		queue_free()
+
+
+func spawnMeteoriteEffect():
+	var meteoriteEffect = pMeteoriteEffect.instance()
+	meteoriteEffect.texture = $Sprite.texture
+	meteoriteEffect.position = Vector2(position.x, position.y + 50)
+	meteoriteEffect.scale = scale
+	get_parent().add_child(meteoriteEffect)
 
 
 func _on_Meteorite_area_entered(area: Area2D) -> void:
 	if area is MC:
 		area.takeDamage(meteoriteHP)
-		queue_free()
+		meteoriteHP = 0
 
-
+ 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
