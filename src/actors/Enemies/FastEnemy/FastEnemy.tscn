@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/actors/Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+
+[node name="FastEnemy" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.5 )
+verticalSpeed = 300.0
+horisontalSpeed = 450.0
+enemyHP = 2

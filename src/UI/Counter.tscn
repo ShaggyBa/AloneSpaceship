@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/Assets/Sprites/MainShip/Main Ship - Base - Full health.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.0172786, 1 )

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/Projectiles/BaseShoot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/Projectiles/EnemyShoot/EnemyShoot.gd" type="Script" id=2]
+
+[node name="EnemyShoot" instance=ExtResource( 1 )]
+collision_layer = 32
+collision_mask = 11
+script = ExtResource( 2 )
+shootSpeed = 500.0
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 0.0352941, 0.65098, 0.266667, 1 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+visible = false

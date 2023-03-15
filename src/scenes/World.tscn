@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Assets/Backgrounds/Space Background.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://src/Assets/Sprites/Stars/background_1.png" type="Texture" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
 [ext_resource path="res://src/Assets/Backgrounds/line.png" type="Texture" id=8]
+[ext_resource path="res://src/actors/Enemies/FastEnemy/FastEnemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/scenes/parallaxBackground/ParallaxBackground.gd" type="Script" id=10]
+[ext_resource path="res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
@@ -22,10 +25,12 @@ spawnTimer = 1.5
 one_shot = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
+mcHP = 30
 invincibilityDelay = 1.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
+script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
 position = Vector2( 461, 323 )
@@ -34,6 +39,7 @@ texture = ExtResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="ParallaxBackground"]
 position = Vector2( 1035, 295 )
+emitting = false
 amount = 75
 lifetime = 7.5
 speed_scale = 3.0
@@ -70,5 +76,13 @@ position = Vector2( 34.6667, -45.3333 )
 scale = Vector2( 2.293, 2.293 )
 texture = ExtResource( 5 )
 centered = false
+
+[node name="FastEnemy" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1009, 295 )
+enemyDamage = 3
+
+[node name="ShooterEnemy" parent="." instance=ExtResource( 11 )]
+position = Vector2( 933, 142 )
+horisontalSpeed = -200.0
 
 [connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
