@@ -79,10 +79,10 @@ centered = false
 
 [node name="FastEnemy" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1009, 295 )
+horisontalSpeed = 500.0
 enemyDamage = 3
 
 [node name="ShooterEnemy" parent="." instance=ExtResource( 11 )]
 position = Vector2( 933, 142 )
-horisontalSpeed = -200.0
 
 [connection signal="timeout" from="MeteoriteSpawner/SpawnTimer" to="MeteoriteSpawner" method="_on_SpawnTimer_timeout"]
