@@ -56,6 +56,7 @@ func shooting():
 		var shoot = plShoot.instance()
 		shoot.global_position = $Muzzle.global_position
 		get_tree().current_scene.add_child(shoot)
+		$ShotSound.play()
 	
 # Передвижение
 func spaceshipMove(delta) -> void:
