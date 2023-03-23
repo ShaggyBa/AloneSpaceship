@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/GUI.gd" type="Script" id=2]
@@ -6,36 +6,12 @@
 [ext_resource path="res://src/Assets/Sprites/Asteroids/3564814884.png" type="Texture" id=4]
 [ext_resource path="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/Interface.tscn" type="PackedScene" id=6]
-
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.278431, 0.411765, 0.54902, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-shadow_color = Color( 0, 0, 0, 0.403922 )
-shadow_offset = Vector2( 5, 5 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.0313726, 0.180392, 0.329412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-shadow_color = Color( 0, 0, 0, 0.403922 )
-shadow_offset = Vector2( 5, 5 )
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 0.0784314, 0.258824, 0.439216, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-shadow_color = Color( 0, 0, 0, 0.403922 )
-shadow_offset = Vector2( 5, 5 )
+[ext_resource path="res://src/UI/img/arrow_up.png" type="Texture" id=7]
+[ext_resource path="res://src/UI/img/arrow_down.png" type="Texture" id=8]
+[ext_resource path="res://src/UI/img/w_arrow_up.png" type="Texture" id=9]
+[ext_resource path="res://src/UI/img/w_arrow_down.png" type="Texture" id=10]
+[ext_resource path="res://src/UI/img/x_w.png" type="Texture" id=11]
+[ext_resource path="res://src/UI/img/x_b.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.278431, 0.411765, 0.54902, 1 )
@@ -68,32 +44,113 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.403922 )
 shadow_offset = Vector2( 5, 5 )
 
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 1, 1, 1, 0.101961 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 0, 0, 0, 0.403922 )
+shadow_size = 1
+shadow_offset = Vector2( 5, 5 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.313726, 0.313726, 0.313726, 0.109804 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 0, 0, 0, 0.403922 )
+shadow_size = 1
+shadow_offset = Vector2( 5, 5 )
+
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 328.0, 556.0, 441.0 ],
+"_edit_vertical_guides_": [ 55.0, 973.0 ]
+}
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
-
-[node name="PauseBtn" type="Button" parent="Interface"]
-visible = false
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 87.0
-margin_bottom = 48.0
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-text = "Pause"
 
 [node name="PauseBtn2" type="Button" parent="Interface"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 133.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 125, 40 )
+margin_right = 207.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 224, 64 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 1 )
 text = "Pause"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -214.0
+margin_right = 160.0
+rect_min_size = Vector2( 160, 100 )
+custom_constants/separation = 15
+
+[node name="UpBtn" type="Button" parent="Interface/VBoxContainer"]
+margin_right = 160.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+rect_pivot_offset = Vector2( -249, -636 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/normal = SubResource( 13 )
+text = "up"
+
+[node name="DownBtn" type="Button" parent="Interface/VBoxContainer"]
+margin_top = 85.0
+margin_right = 160.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 0, 70 )
+rect_pivot_offset = Vector2( -249, -636 )
+theme = ExtResource( 3 )
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/normal = SubResource( 13 )
+text = "down"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Interface"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -200.0
+margin_right = 136.0
+margin_bottom = -8.0
+custom_constants/separation = 15
+
+[node name="UpTBtn" type="TouchScreenButton" parent="Interface/VBoxContainer2"]
+normal = ExtResource( 9 )
+pressed = ExtResource( 7 )
+action = "ui_up"
+
+[node name="DownTBtn" type="TouchScreenButton" parent="Interface/VBoxContainer2"]
+position = Vector2( 0, 128 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 8 )
+action = "ui_down"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Interface"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_top = -192.0
+
+[node name="FireBtn" type="TouchScreenButton" parent="Interface/VBoxContainer3"]
+position = Vector2( 56, 56 )
+normal = ExtResource( 11 )
+pressed = ExtResource( 12 )
+action = "ui_accept"
 
 [node name="Control" type="Control" parent="."]
 visible = false
@@ -151,6 +208,9 @@ margin_bottom = 41.0
 pause_mode = 2
 visible = false
 
-[connection signal="pressed" from="Interface/PauseBtn" to="PauseMenu" method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Interface/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Interface/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]
+[connection signal="pressed" from="Interface/VBoxContainer/UpBtn" to="." method="_on_UpBtn_pressed"]
+[connection signal="resized" from="Interface/VBoxContainer/UpBtn" to="." method="_on_UpBtn_resized"]
+[connection signal="pressed" from="Interface/VBoxContainer/DownBtn" to="." method="_on_DownBtn_pressed"]
+[connection signal="resized" from="Interface/VBoxContainer/DownBtn" to="." method="_on_DownBtn_resized"]

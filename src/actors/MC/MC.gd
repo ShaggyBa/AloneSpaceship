@@ -62,6 +62,7 @@ func spaceshipMove(delta) -> void:
 		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = 1 
+	print(str(Input.get_action_strength("ui_up")))
 	
 	global_position.x += inputVector.x * mcSpeed * delta 
 	global_position.y += inputVector.y * mcVSpeed * delta 
