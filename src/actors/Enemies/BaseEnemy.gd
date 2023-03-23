@@ -21,20 +21,18 @@ func _physics_process(delta):
 	if global_position.y < viewportRect.position.y \
 	or global_position.y > viewportRect.end.y:
 		direction *= -1
-		
+
+func takeDamage(amount):
+	enemyHP -= amount
 	if enemyHP <= 0:
 		queue_free()
 
 
-func takeDamage(amount):
-	enemyHP -= amount
-	
-
-func _on_VisibilityNotifier2D_screen_exited():
+func _on_VisibilityNotifier2D_screen_exited():	
 	queue_free()
 
 
 func _on_BaseEnemy_area_entered(area):
 	if area is MC:
 		area.takeDamage(enemyDamage*10)
-		enemyHP = 0
+		queue_free()
