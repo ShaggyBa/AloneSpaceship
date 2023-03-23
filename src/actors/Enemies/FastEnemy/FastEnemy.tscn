@@ -7,3 +7,4 @@
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
 verticalSpeed = 0.0
+horisontalSpeed = 500.0
