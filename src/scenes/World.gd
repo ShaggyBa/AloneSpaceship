@@ -14,3 +14,7 @@ func _process(delta: float) -> void:
 	counter.set_points(floor(points))
 	
 
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://src/scenes/World_2.tscn")

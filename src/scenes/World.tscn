@@ -5,7 +5,7 @@
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
-[ext_resource path="res://src/Assets/Audio/LevelMusic/battle.wav" type="AudioStream" id=9]
+[ext_resource path="res://src/Assets/Music/LevelMusic/battle.wav" type="AudioStream" id=9]
 [ext_resource path="res://src/actors/Enemies/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]

@@ -17,11 +17,9 @@ texture = ExtResource( 4 )
 
 [node name="Stars" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.05, 0.01 )
-motion_mirroring = Vector2( 1024, 800 )
+motion_mirroring = Vector2( 1200, 800 )
 
 [node name="Sprite" type="Sprite" parent="Stars"]
-position = Vector2( -222, -74 )
-scale = Vector2( 0.91625, 0.91625 )
 texture = ExtResource( 5 )
 centered = false
 
@@ -39,11 +37,9 @@ centered = false
 [node name="nebula" type="ParallaxLayer" parent="."]
 position = Vector2( 61, 0 )
 motion_scale = Vector2( 0.1, 1 )
-motion_mirroring = Vector2( 915, 0 )
+motion_mirroring = Vector2( 1200, 800 )
 
 [node name="Sprite" type="Sprite" parent="nebula"]
-position = Vector2( -458, -68 )
-scale = Vector2( 0.960044, 0.960044 )
 texture = ExtResource( 6 )
 centered = false
 

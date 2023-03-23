@@ -74,6 +74,7 @@ func takeDamage(damage):
 		return
 	timerInvincibility.start()
 	mcHP -= damage
+	$Hit.play()
 	if mcHP <= 0:
 		queue_free()
 		get_tree().reload_current_scene()
