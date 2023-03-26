@@ -22,6 +22,7 @@ func _physics_process(delta):
 	or global_position.y > viewportRect.end.y:
 		direction *= -1
 
+
 func takeDamage(amount):
 	enemyHP -= amount
 	if enemyHP <= 0:
@@ -36,3 +37,4 @@ func _on_BaseEnemy_area_entered(area):
 	if area is MC:
 		area.takeDamage(enemyDamage*10)
 		queue_free()
+		
