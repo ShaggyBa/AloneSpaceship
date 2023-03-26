@@ -56,6 +56,7 @@ func shooting():
 		var shoot = plShoot.instance()
 		shoot.global_position = $Muzzle.global_position
 		get_tree().current_scene.add_child(shoot)
+		$ShotSound.play()
 	
 # Передвижение
 func spaceshipMove(delta) -> void:
@@ -73,6 +74,7 @@ func takeDamage(damage):
 		return
 	timerInvincibility.start()
 	mcHP -= damage
+	$Hit.play()
 	if mcHP <= 0:
 		queue_free()
 		get_tree().reload_current_scene()

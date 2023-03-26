@@ -151,6 +151,5 @@ margin_bottom = 41.0
 pause_mode = 2
 visible = false
 
-[connection signal="pressed" from="Interface/PauseBtn" to="PauseMenu" method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Interface/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Interface/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]

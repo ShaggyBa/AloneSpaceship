@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/battle.wav-92e8f9f9d6a66182d09ee4415e53eca8.sample"
+path="res://.import/hit.wav-f8ac826e5861e43389e5df05d0705d25.sample"
 
 [deps]
 
-source_file="res://src/Assets/Audio/LevelMusic/battle.wav"
-dest_files=[ "res://.import/battle.wav-92e8f9f9d6a66182d09ee4415e53eca8.sample" ]
+source_file="res://src/Assets/Music/Sound Effects/hit.wav"
+dest_files=[ "res://.import/hit.wav-f8ac826e5861e43389e5df05d0705d25.sample" ]
 
 [params]
 
@@ -17,7 +17,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=2
+edit/loop_mode=0
 edit/loop_begin=0
 edit/loop_end=-1
 compress/mode=0
