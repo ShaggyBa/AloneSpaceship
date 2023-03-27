@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Main Ship - Base - Slight damage.png-a9917ea0a0d50d9dc712dd887c2dc8b7.stex"
+path="res://.import/LowHP.png-b0c0a3bc05fbb52624e4fa9f6ed13f2c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Slight damage.png"
-dest_files=[ "res://.import/Main Ship - Base - Slight damage.png-a9917ea0a0d50d9dc712dd887c2dc8b7.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/model/LowHP.png"
+dest_files=[ "res://.import/LowHP.png-b0c0a3bc05fbb52624e4fa9f6ed13f2c.stex" ]
 
 [params]
 

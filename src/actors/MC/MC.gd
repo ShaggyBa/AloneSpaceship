@@ -4,12 +4,17 @@ class_name MC
 
 export (float) var mcSpeed = 200.0 # cкорость полета корабля
 export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
-export (int) var mcHP = 3
+export (int) var mcHP = 5
 export (float) var shootDelay = 1.0
 export (float) var invincibilityDelay = 0.3
 
 
-var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn") 
+var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn")
+
+var fullHp = preload("res://.import/FullHP.png-7b15d036f94fd66c3c7ecacbb6ffe53f.stex")
+var semiHp = preload("res://.import/SemiHP.png-1d6d0480e137ee29da64f1a005e66b16.stex")
+var lowHp = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
+var veryLowHp = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
 
 
 onready var muzzle = $Muzzle
@@ -33,6 +38,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
+	hideSpite()
 		
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -71,15 +77,18 @@ func spaceshipMove(delta) -> void:
 # Получение урона
 func takeDamage(damage):
 	if !timerInvincibility.is_stopped():
+		#print("урон не получается")
+		$ShieldHit.play()
 		return
 	timerInvincibility.start()
 	mcHP -= damage
+	#print("урон получается")
 	$Hit.play()
 	if mcHP <= 0:
 		queue_free()
 		get_tree().reload_current_scene()
 
-
+# эффект щита
 func shieldEffect():
 	if !timerInvincibility.is_stopped():
 		shield.visible = true
@@ -87,4 +96,13 @@ func shieldEffect():
 	else:
 		shield.visible = false
 		shield.playing = false
-
+		
+func hideSpite():
+	if mcHP == 5: 
+		$Model.set_texture(fullHp)
+	elif mcHP == 4:
+		$Model.set_texture(semiHp)
+	elif mcHP == 3:
+		$Model.set_texture(lowHp)
+	elif mcHP < 3: 
+		$Model.set_texture(veryLowHp)

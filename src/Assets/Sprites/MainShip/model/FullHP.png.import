@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Main Ship - Base - Full health.png-560db6cbde2271812ec0ea2beb06104c.stex"
+path="res://.import/FullHP.png-7b15d036f94fd66c3c7ecacbb6ffe53f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png"
-dest_files=[ "res://.import/Main Ship - Base - Full health.png-560db6cbde2271812ec0ea2beb06104c.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/model/FullHP.png"
+dest_files=[ "res://.import/FullHP.png-7b15d036f94fd66c3c7ecacbb6ffe53f.stex" ]
 
 [params]
 

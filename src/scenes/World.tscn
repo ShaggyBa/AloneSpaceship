@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
@@ -29,7 +29,8 @@ one_shot = true
 bossSpawning = false
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcHP = 300
+mcSpeed = 10.0
+invincibilityDelay = 0.1
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 
