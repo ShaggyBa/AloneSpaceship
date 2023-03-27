@@ -2,10 +2,10 @@ extends Node2D
 
 # Чем дольше игра, тем меньше длительность этого таймера
 export (float) var nextSpawnTime = 2.0
-
+export (float) var minSpawnRate = 1.0
 export (int) var maxEnemySpawn = 5
 
-var counter = 0
+var enemies = []
 
 var preloadedEnemies = [
 	preload("res://src/actors/Enemies/FastEnemy/FastEnemy.tscn"),
@@ -19,19 +19,18 @@ onready var viewportRect = get_viewport_rect()
 
 func _ready():
 	randomize()
-	spawnTimer.start(nextSpawnTime )
+	spawnTimer.start(nextSpawnTime)
+
+
 	
 
-
-
 func _on_SpawnTimer_timeout():
+	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
 		
-	if counter < maxEnemySpawn:
-		counter += 1
-		print(counter)
 		# Создание врага
 		var preloadedEnemy = preloadedEnemies[randi() % preloadedEnemies.size()]
 		var enemy = preloadedEnemy.instance()
+		
 		
 		if randf() < 0.3 and preloadedEnemy == preloadedEnemies[1] and bossSpawning:
 			enemy.scale = Vector2(5, 5)
@@ -44,18 +43,22 @@ func _on_SpawnTimer_timeout():
 			var enemyAttackDelay = enemy.enemyAttackDelay
 			enemy.enemyAttackDelay = rand_range(enemyAttackDelay - 0.05, enemyAttackDelay + 0.25)	
 		
+		enemy.global_position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
 		
-		enemy.global_position = Vector2($Position2D.position.x, rand_range(0, viewportRect.end.y))
-		add_child(enemy)
-				
+		if preloadedEnemy == preloadedEnemies[0]:
+			enemy.position.y = get_tree().current_scene.get_node("MC").position.y	
+		
+		
+		#if enemies.size() < maxEnemySpawn:
+		#	enemies.push_back(enemy)
+			
+		get_tree().current_scene.add_child(enemy)
+		if nextSpawnTime > minSpawnRate:
+			nextSpawnTime -= 0.05 
+			
+		print(nextSpawnTime)
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)
 	else:
-		spawnTimer.stop()	
-	
-
-
-func _on_EnemySpawner_child_exiting_tree(node):
-	counter -= 1
-	if counter < maxEnemySpawn:
 		spawnTimer.start(nextSpawnTime)
+		

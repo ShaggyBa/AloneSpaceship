@@ -21,9 +21,8 @@ func _on_SpawnTimer_timeout():
 	var yPos := rand_range(0, ViewRect.end.y)
 	var meteorPreload = preloadMeteors[randi() % preloadMeteors.size()]
 	var meteor = meteorPreload.instance()
-	meteor.position = Vector2(position.x, yPos)
+	meteor.position = Vector2($Position2D.global_position.x, yPos)
 	get_tree().current_scene.add_child(meteor)
-
 	#рестарт таймера
 	timer.start(spawnTimer)
 
