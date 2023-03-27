@@ -25,15 +25,10 @@ func _physics_process(delta):
 
 func takeDamage(amount):
 	enemyHP -= amount
+	$Hit.play()	
 	if enemyHP <= 0:
 		queue_free()
 
-
-func takeDamage(amount):
-	enemyHP -= amount
-	$Destroyed.play()
-	$Hit.play()
-	
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
