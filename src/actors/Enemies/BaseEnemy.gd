@@ -29,7 +29,13 @@ func takeDamage(amount):
 		queue_free()
 
 
-func _on_VisibilityNotifier2D_screen_exited():	
+func takeDamage(amount):
+	enemyHP -= amount
+	$Destroyed.play()
+	$Hit.play()
+	
+
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 

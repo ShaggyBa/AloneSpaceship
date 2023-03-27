@@ -4,7 +4,7 @@
 [ext_resource path="res://src/UI/GUI.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/3564814884.png" type="Texture" id=4]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png" type="Texture" id=5]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/FullHP.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/Interface.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=10]
