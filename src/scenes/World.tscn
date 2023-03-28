@@ -25,8 +25,9 @@ spawnTimer = 5.0
 bossSpawning = false
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcSpeed = 10.0
-invincibilityDelay = 0.1
+mcSpeed = 100.0
+mcHP = 10
+delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 

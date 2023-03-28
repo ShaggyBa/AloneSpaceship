@@ -6,26 +6,32 @@ export (float) var mcSpeed = 200.0 # cкорость полета корабля
 export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
 export (int) var mcHP = 5
 export (float) var shootDelay = 1.0
-export (float) var invincibilityDelay = 0.3
+export (float) var delayShieldRestoring = 0.3
 
 
 var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn")
 
-var fullHp = preload("res://.import/FullHP.png-7b15d036f94fd66c3c7ecacbb6ffe53f.stex")
-var semiHp = preload("res://.import/SemiHP.png-1d6d0480e137ee29da64f1a005e66b16.stex")
-var lowHp = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
-var veryLowHp = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
+var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/FullHP.png")
+var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
+var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
+var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
 
 
 onready var muzzle = $Muzzle
 onready var shield = $Shield
+onready var sprite = $Sprite
+onready var hitSound = $Hit
+onready var shotSound = $ShotSound
+onready var shieldHitSound = $ShieldHit
+
+onready var maxHP = mcHP
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
 
 var timerShooting = Timer.new()
-var timerInvincibility = Timer.new()
+var timerShieldRestoring = Timer.new()
 
 
 func _ready() -> void:
@@ -38,7 +44,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
-	hideSpite()
 		
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -51,9 +56,9 @@ func setTimerShooting()->void:
 	
 	
 func setTimerInvincibility()->void:
-	timerInvincibility.set_one_shot(true)
-	timerInvincibility.set_wait_time(invincibilityDelay)
-	add_child(timerInvincibility)
+	timerShieldRestoring.set_one_shot(true)
+	timerShieldRestoring.set_wait_time(delayShieldRestoring)
+	add_child(timerShieldRestoring)
 
 # Стрельба
 func shooting():
@@ -62,7 +67,7 @@ func shooting():
 		var shoot = plShoot.instance()
 		shoot.global_position = $Muzzle.global_position
 		get_tree().current_scene.add_child(shoot)
-		$ShotSound.play()
+		shotSound.play()
 	
 # Передвижение
 func spaceshipMove(delta) -> void:
@@ -76,33 +81,36 @@ func spaceshipMove(delta) -> void:
 
 # Получение урона
 func takeDamage(damage):
-	if !timerInvincibility.is_stopped():
-		#print("урон не получается")
-		$ShieldHit.play()
-		return
-	timerInvincibility.start()
-	mcHP -= damage
-	#print("урон получается")
-	$Hit.play()
-	if mcHP <= 0:
-		queue_free()
-		get_tree().reload_current_scene()
+	if timerShieldRestoring.is_stopped():
+		shieldHitSound.play()
+		timerShieldRestoring.start()
+	else:
+		mcHP -= damage
+		changeState()	
+		print("Текущий HP: ", mcHP)
+		hitSound.play()
+		if mcHP <= 0:
+			queue_free()
+			get_tree().reload_current_scene()
 
 # эффект щита
 func shieldEffect():
-	if !timerInvincibility.is_stopped():
+	if timerShieldRestoring.is_stopped():
 		shield.visible = true
 		shield.playing = true
 	else:
 		shield.visible = false
 		shield.playing = false
 		
-func hideSpite():
-	if mcHP == 5: 
-		$Model.set_texture(fullHp)
-	elif mcHP == 4:
-		$Model.set_texture(semiHp)
-	elif mcHP == 3:
-		$Model.set_texture(lowHp)
-	elif mcHP < 3: 
-		$Model.set_texture(veryLowHp)
+func changeState():
+	var MCCurrentState = float(mcHP) / float(maxHP)
+	print(MCCurrentState)
+	if MCCurrentState >= 0.8: 
+		print("Change")
+		sprite.set_texture(pFullHP)
+	elif MCCurrentState >= 0.6:
+		sprite.set_texture(pSemiHP)
+	elif MCCurrentState >= 0.4:
+		sprite.set_texture(pLowHP)
+	elif MCCurrentState >= 0.2: 
+		sprite.set_texture(pVeryLowHP)

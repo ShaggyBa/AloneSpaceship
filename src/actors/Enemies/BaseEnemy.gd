@@ -16,7 +16,7 @@ onready var 	 viewportRect = get_viewport_rect()
 
 
 func _physics_process(delta):
-	global_position.x += horisontalSpeed * delta
+	global_position.x -= horisontalSpeed * delta
 	global_position.y += verticalSpeed * delta * direction
 	if global_position.y < viewportRect.position.y \
 	or global_position.y > viewportRect.end.y:

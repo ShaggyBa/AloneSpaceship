@@ -36,27 +36,24 @@ func _on_SpawnTimer_timeout():
 			enemy.scale = Vector2(5, 5)
 			enemy.enemyDamage = 5
 			enemy.enemyAttackDelay = 0.1
-			enemy.enemyHP = 10
-			enemy.verticalSpeed = 45
+			enemy.enemyHP = 30
+			enemy.verticalSpeed = 10
 		
 		if preloadedEnemy == preloadedEnemies[1]:
 			var enemyAttackDelay = enemy.enemyAttackDelay
 			enemy.enemyAttackDelay = rand_range(enemyAttackDelay - 0.05, enemyAttackDelay + 0.25)	
 		
-		enemy.global_position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
+		enemy.position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
 		
 		if preloadedEnemy == preloadedEnemies[0]:
+			var crntSpeed = enemy.horisontalSpeed
+			enemy.horisontalSpeed = rand_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
 			enemy.position.y = get_tree().current_scene.get_node("MC").position.y	
-		
-		
-		#if enemies.size() < maxEnemySpawn:
-		#	enemies.push_back(enemy)
 			
 		get_tree().current_scene.add_child(enemy)
-		if nextSpawnTime > minSpawnRate:
-			nextSpawnTime -= 0.05 
+		# if nextSpawnTime > minSpawnRate:
+		#	nextSpawnTime -= 0.05 
 			
-		print(nextSpawnTime)
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)
 	else:
