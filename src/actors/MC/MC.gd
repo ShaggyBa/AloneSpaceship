@@ -19,10 +19,12 @@ var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png"
 
 onready var muzzle = $Muzzle
 onready var shield = $Shield
-onready var sprite = $Sprite
+onready var sprite = $MCSprite
 onready var hitSound = $Hit
 onready var shotSound = $ShotSound
 onready var shieldHitSound = $ShieldHit
+onready var engineSprite = $EngineSprite
+
 
 onready var maxHP = mcHP
 
@@ -74,7 +76,7 @@ func spaceshipMove(delta) -> void:
 		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = 1 
-	
+	changeStateEngine(inputVector.y)
 	global_position.x += inputVector.x * mcSpeed * delta 
 	global_position.y += inputVector.y * mcVSpeed * delta 
 	global_position.y = clamp(position.y, 0, viewportSize.y) 
@@ -106,7 +108,6 @@ func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
-		print("Change")
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
 		sprite.set_texture(pSemiHP)
@@ -114,3 +115,11 @@ func changeState():
 		sprite.set_texture(pLowHP)
 	elif MCCurrentState >= 0.2: 
 		sprite.set_texture(pVeryLowHP)
+
+
+func changeStateEngine(inputVector: int):
+	if inputVector == 0:
+		engineSprite.set_animation("idle")
+	else:
+		engineSprite.set_animation("powering")
+	engineSprite.playing = true
