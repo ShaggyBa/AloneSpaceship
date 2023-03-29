@@ -24,7 +24,7 @@ onready var hitSound = $Hit
 onready var shotSound = $ShotSound
 onready var shieldHitSound = $ShieldHit
 onready var engineSprite = $EngineSprite
-
+onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
 
@@ -111,10 +111,13 @@ func changeState():
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
 		sprite.set_texture(pSemiHP)
+		crushEffects.emitting = true
 	elif MCCurrentState >= 0.4:
 		sprite.set_texture(pLowHP)
+		crushEffects.amount = 10		
 	elif MCCurrentState >= 0.2: 
 		sprite.set_texture(pVeryLowHP)
+		crushEffects.amount = 15				
 
 
 func changeStateEngine(inputVector: int):
