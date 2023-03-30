@@ -29,3 +29,6 @@ func _on_PauseBtn_pressed():
 	self.is_paused = !is_paused
 
 
+func _on_TryByn_pressed():
+	queue_free()
+	get_tree().reload_current_scene()
