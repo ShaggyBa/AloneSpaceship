@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://src/UI/Counter.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/FullHP.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0.0172786, 1 )
@@ -22,6 +23,7 @@ patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
+script = ExtResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -40,4 +42,4 @@ margin_left = 4.553
 margin_top = -18.522
 margin_right = 44.491
 margin_bottom = 18.478
-text = "99"
+text = "0"

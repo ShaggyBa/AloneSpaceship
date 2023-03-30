@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/actors/Projectiles/BaseShoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/Projectiles/EnemyShoot/EnemyShoot.gd" type="Script" id=2]
+[ext_resource path="res://src/Assets/Sprites/Enemies/shoot.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.0
+} ]
 
 [node name="EnemyShoot" instance=ExtResource( 1 )]
 collision_layer = 32
@@ -11,9 +20,7 @@ shootSpeed = 500.0
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color( 0.0352941, 0.65098, 0.266667, 1 )
-
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
-
-[node name="VisibilityNotifier2D" parent="." index="2"]
-visible = false
+position = Vector2( 33, -14 )
+scale = Vector2( 2, 2.65 )
+frames = SubResource( 1 )
+frame = 0
