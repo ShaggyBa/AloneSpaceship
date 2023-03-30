@@ -9,6 +9,8 @@ script = ExtResource( 1 )
 one_shot = true
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 1000, 0 )
+position = Vector2( 1050, 0 )
+
+[node name="BossTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

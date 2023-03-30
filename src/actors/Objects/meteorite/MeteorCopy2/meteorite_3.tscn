@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/actors/Objects/meteorite/Meteor_1/meteorite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/3112124858.png" type="Texture" id=2]
 
 [node name="Meteorite" instance=ExtResource( 1 )]
-maxSpeed = 70.0
+minSpeed = 50.0
+maxSpeed = 75.0
 minRotationRate = -10.0
 maxRotationRate = 10.0
 meteoriteHP = 3

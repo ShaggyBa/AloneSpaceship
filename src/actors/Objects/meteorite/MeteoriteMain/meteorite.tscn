@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/actors/Objects/meteorite/Meteor_1/meteorite.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.gd" type="Script" id=1]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/1440544241.png" type="Texture" id=2]
 
 [node name="Meteorite" type="Area2D" groups=["damageable"]]
@@ -21,6 +21,7 @@ build_mode = 1
 polygon = PoolVector2Array( 1, -23, -5, -23, -9, -16, -15, -16, -16, -20, -17, -20, -19, -20, -20, -19, -20, -18, -20, -17, -19, -16, -17, -15, -17, -14, -16, -14, -16, -12, -17, -11, -17, -10, -18, -9, -19, -9, -20, -8, -21, -8, -24, -5, -24, -3, -25, -3, -25, -1, -31, 5, -31, 6, -30, 7, -27, 8, -18, 8, -18, 9, -16, 9, -16, 10, -12, 13, -6, 13, -6, 12, 1, 12, 7, 7, 7, 6, 8, 4, 14, 0, 14, -1, 17, -1, 17, 0, 18, 1, 19, 2, 19, 4, 20, 4, 20, 11, 18, 14, 18, 15, 19, 17, 22, 19, 28, 19, 28, 18, 31, 18, 31, 17, 33, 17, 33, 16, 34, 16, 34, 15, 35, 15, 35, 5, 33, 3, 31, 2, 28, 1, 27, 0, 27, -2, 26, -2, 26, -4, 25, -4, 25, -7, 24, -7, 24, -13, 23, -13, 23, -15, 21, -17, 20, -17, 18, -19, 17, -19, 17, -20, 11, -20, 11, -18, 8, -18, 8, -17, 6, -17, 6, -17, 5, -17, 5, -18, 4, -18, 3, -20, 2, -22 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( 23, 31 )
 scale = Vector2( 3.3, 2.1 )
 
