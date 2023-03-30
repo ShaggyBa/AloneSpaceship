@@ -27,6 +27,7 @@ one_shot = true
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1125, 0 )
+nextSpawnTime = 5.0
 bossSpawning = false
 
 [node name="MC" parent="." instance=ExtResource( 1 )]

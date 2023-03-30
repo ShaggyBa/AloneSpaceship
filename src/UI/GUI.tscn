@@ -1,17 +1,13 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/UI/GUI.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=3]
-[ext_resource path="res://src/Assets/Sprites/Asteroids/3564814884.png" type="Texture" id=4]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/Main Ship - Base - Full health.png" type="Texture" id=5]
-[ext_resource path="res://src/UI/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/img/arrow_up.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/img/arrow_down.png" type="Texture" id=8]
 [ext_resource path="res://src/UI/img/w_arrow_up.png" type="Texture" id=9]
 [ext_resource path="res://src/UI/img/w_arrow_down.png" type="Texture" id=10]
 [ext_resource path="res://src/UI/img/x_w.png" type="Texture" id=11]
 [ext_resource path="res://src/UI/img/x_b.png" type="Texture" id=12]
+[ext_resource path="res://src/UI/LifeIcon.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.278431, 0.411765, 0.54902, 1 )
@@ -44,81 +40,52 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.403922 )
 shadow_offset = Vector2( 5, 5 )
 
-[sub_resource type="StyleBoxFlat" id=13]
-bg_color = Color( 1, 1, 1, 0.101961 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-shadow_color = Color( 0, 0, 0, 0.403922 )
-shadow_size = 1
-shadow_offset = Vector2( 5, 5 )
-
-[sub_resource type="StyleBoxFlat" id=14]
-bg_color = Color( 0.313726, 0.313726, 0.313726, 0.109804 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-shadow_color = Color( 0, 0, 0, 0.403922 )
-shadow_size = 1
-shadow_offset = Vector2( 5, 5 )
-
 [node name="CanvasLayer" type="CanvasLayer"]
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 328.0, 556.0, 441.0 ],
-"_edit_vertical_guides_": [ 55.0, 973.0 ]
-}
 
-[node name="Interface" parent="." instance=ExtResource( 6 )]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
 
-[node name="PauseBtn2" type="Button" parent="Interface"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 207.0
-margin_bottom = 71.0
+[node name="PauseBtn2" type="Button" parent="Control"]
+margin_right = 224.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 224, 64 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 1 )
 text = "Pause"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
-visible = false
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = -214.0
-margin_right = 160.0
-rect_min_size = Vector2( 160, 100 )
-custom_constants/separation = 15
+[node name="LifeContainer" type="HBoxContainer" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_right = 102.0
+margin_bottom = 48.0
 
-[node name="UpBtn" type="Button" parent="Interface/VBoxContainer"]
-margin_right = 160.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
-rect_pivot_offset = Vector2( -249, -636 )
-custom_styles/hover = SubResource( 13 )
-custom_styles/pressed = SubResource( 14 )
-custom_styles/normal = SubResource( 13 )
-text = "up"
+[node name="LifeIcon" parent="Control/LifeContainer" instance=ExtResource( 13 )]
 
-[node name="DownBtn" type="Button" parent="Interface/VBoxContainer"]
-margin_top = 85.0
-margin_right = 160.0
-margin_bottom = 155.0
-rect_min_size = Vector2( 0, 70 )
-rect_pivot_offset = Vector2( -249, -636 )
-theme = ExtResource( 3 )
-custom_styles/hover = SubResource( 13 )
-custom_styles/pressed = SubResource( 14 )
-custom_styles/normal = SubResource( 13 )
-text = "down"
+[node name="LifeIcon2" parent="Control/LifeContainer" instance=ExtResource( 13 )]
+margin_left = 52.0
+margin_right = 100.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Interface"]
+[node name="LifeIcon3" parent="Control/LifeContainer" instance=ExtResource( 13 )]
+margin_left = 104.0
+margin_right = 152.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/HBoxContainer2"]
+margin_top = 1.0
+margin_right = 32.0
+margin_bottom = 38.0
+text = "123"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -127,18 +94,18 @@ margin_right = 136.0
 margin_bottom = -8.0
 custom_constants/separation = 15
 
-[node name="UpTBtn" type="TouchScreenButton" parent="Interface/VBoxContainer2"]
+[node name="UpTBtn" type="TouchScreenButton" parent="Control/VBoxContainer2"]
 normal = ExtResource( 9 )
 pressed = ExtResource( 7 )
 action = "ui_up"
 
-[node name="DownTBtn" type="TouchScreenButton" parent="Interface/VBoxContainer2"]
+[node name="DownTBtn" type="TouchScreenButton" parent="Control/VBoxContainer2"]
 position = Vector2( 0, 128 )
 normal = ExtResource( 10 )
 pressed = ExtResource( 8 )
 action = "ui_down"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Interface"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -146,71 +113,8 @@ anchor_bottom = 1.0
 margin_left = -192.0
 margin_top = -192.0
 
-[node name="FireBtn" type="TouchScreenButton" parent="Interface/VBoxContainer3"]
+[node name="FireBtn" type="TouchScreenButton" parent="Control/VBoxContainer3"]
 position = Vector2( 56, 56 )
 normal = ExtResource( 11 )
 pressed = ExtResource( 12 )
 action = "ui_accept"
-
-[node name="Control" type="Control" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 3 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_right = 52.0
-margin_bottom = 37.0
-size_flags_horizontal = 0
-
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_right = 24.0
-margin_bottom = 37.0
-size_flags_horizontal = 10
-text = "99"
-align = 1
-valign = 1
-
-[node name="Sprite" type="Sprite" parent="Control/VBoxContainer/HBoxContainer2"]
-position = Vector2( 879.294, 38 )
-rotation = -1.5708
-scale = Vector2( 0.851517, 0.851517 )
-texture = ExtResource( 5 )
-centered = false
-
-[node name="Label2" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_left = 28.0
-margin_right = 52.0
-margin_bottom = 37.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-text = "99"
-align = 1
-valign = 1
-
-[node name="Sprite2" type="Sprite" parent="Control/VBoxContainer/HBoxContainer2"]
-position = Vector2( 1021.29, 24 )
-rotation = 2.45393
-scale = Vector2( 0.459916, 0.459916 )
-texture = ExtResource( 4 )
-centered = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 41.0
-margin_right = 52.0
-margin_bottom = 41.0
-
-[node name="PauseMenu" parent="." instance=ExtResource( 1 )]
-pause_mode = 2
-visible = false
-
-[connection signal="pressed" from="Interface/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
-[connection signal="pressed" from="Interface/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]
-[connection signal="pressed" from="Interface/VBoxContainer/UpBtn" to="." method="_on_UpBtn_pressed"]
-[connection signal="resized" from="Interface/VBoxContainer/UpBtn" to="." method="_on_UpBtn_resized"]
-[connection signal="pressed" from="Interface/VBoxContainer/DownBtn" to="." method="_on_DownBtn_pressed"]
-[connection signal="resized" from="Interface/VBoxContainer/DownBtn" to="." method="_on_DownBtn_resized"]
