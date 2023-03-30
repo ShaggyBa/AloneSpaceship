@@ -159,6 +159,7 @@ collision_layer = 2
 collision_mask = 57
 gravity = 0.0
 script = ExtResource( 2 )
+mcSpeed = 500.0
 mcHP = 100
 shootDelay = 0.21
 
@@ -209,10 +210,8 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( 0, -1 )
-offset = Vector2( 360, 0 )
-current = true
-zoom = Vector2( 0.95, 1.2 )
 limit_top = -50
 limit_bottom = 650
 limit_smoothed = true

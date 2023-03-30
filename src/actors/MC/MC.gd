@@ -66,25 +66,36 @@ func setTimerInvincibility()->void:
 func shooting():
 	if Input.is_action_pressed("ui_accept") and timerShooting.is_stopped():
 		timerShooting.start()		
-		var shoot = plShoot.instance()
-		shoot.global_position = $Muzzle.global_position
-		get_tree().current_scene.add_child(shoot)
-		shotSound.play()
+		create_shoot()
+		
 	
+func create_shoot():
+	var shoot = plShoot.instance()
+	shoot.global_position = $Muzzle.global_position
+	get_tree().current_scene.add_child(shoot)
+	shotSound.play()
+
 # Передвижение
-func spaceshipMove(delta) -> void:
+func spaceshipMove(delta):
 		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	inputVector.x = 1 
-	changeStateEngine(inputVector.y)
-	global_position.x += inputVector.x * mcSpeed * delta 
+	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	changeStateEngine(inputVector)
+	changeVectorPosition(inputVector, delta)
+	
+
+func changeVectorPosition(inputVector, delta):
+	global_position.x += inputVector.x * mcSpeed * delta
 	global_position.y += inputVector.y * mcVSpeed * delta 
-	global_position.y = clamp(position.y, 0, viewportSize.y) 
+	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
+	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
+	 
 
 # Получение урона
 func takeDamage(damage):
 	if timerShieldRestoring.is_stopped():
 		shieldHitSound.play()
+		yield(get_tree().create_timer(0.15), "timeout")
 		timerShieldRestoring.start()
 	else:
 		mcHP -= damage
@@ -106,7 +117,6 @@ func shieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
-	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
@@ -120,8 +130,8 @@ func changeState():
 		crushEffects.amount = 15				
 
 
-func changeStateEngine(inputVector: int):
-	if inputVector == 0:
+func changeStateEngine(inputVector: Vector2):
+	if inputVector.x == 0 and inputVector.y == 0:
 		engineSprite.set_animation("idle")
 	else:
 		engineSprite.set_animation("powering")

@@ -1,29 +1,73 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://src/actors/Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Assets/Sprites/Enemies/Nautolan Ship - Fighter - Base.png" type="Texture" id=2]
+[ext_resource path="res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Assets/Sprites/Enemies/attack/PNGs/Nautolan Ship - Fighter - Weapons.png" type="Texture" id=2]
 [ext_resource path="res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.gd" type="Script" id=3]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
 [node name="ShooterEnemy" instance=ExtResource( 1 )]
-scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
-horisontalSpeed = 0.0
+horisontalSpeed = 25.0
+enemyHP = 5
+enemyDamage = 1
 enemyAttackDelay = 1.0
 
 [node name="AnimatedSprite" parent="." index="0"]
-frames = SubResource( 1 )
+frames = SubResource( 10 )
+frame = 3
 
 [node name="CollisionPolygon2D" parent="." index="1"]
-polygon = PoolVector2Array( 29, 1, 11, 17, 5, 10, -4, 3, -4, -3.5, 4.5, -9, 11.5, -16.5 )
+polygon = PoolVector2Array( 26, -6, 14.6667, -14.6667, 5.33333, -9.33333, -1.33333, -2, -1.33333, 4, 4.66667, 10, 14, 16.6667, 25.3333, 6 )
 
 [node name="VisibilityNotifier2D" parent="." index="2"]
-position = Vector2( 1.25, 0.250001 )
-scale = Vector2( 1.875, 1.875 )
+position = Vector2( 0.666666, 0 )
+scale = Vector2( 2.5, 2.53333 )
+
+[node name="Muzzle" parent="FiringPositions" index="0"]
+position = Vector2( -6.66667, -9.33333 )
+
+[node name="Muzzle2" parent="FiringPositions" index="1"]
+position = Vector2( -6, 8.66667 )

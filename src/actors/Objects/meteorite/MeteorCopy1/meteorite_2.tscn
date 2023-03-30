@@ -1,15 +1,16 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/actors/Objects/meteorite/Meteor_1/meteorite.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Assets/Sprites/Asteroids/2057470128.png" type="Texture" id=3]
+[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Assets/Sprites/Asteroids/2057470128.png" type="Texture" id=2]
 
 [node name="Meteorite" instance=ExtResource( 1 )]
-maxSpeed = 130.0
+minSpeed = 100.0
+maxSpeed = 200.0
 maxRotationRate = 35.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 1.07, 1.02 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 44.9298, 41.0354 )

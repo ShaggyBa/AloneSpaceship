@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Enemy",
+"class": "BattleEnemy",
+"language": "GDScript",
+"path": "res://src/actors/Enemies/BattleEnemy/BattleEnemy.gd"
+}, {
 "base": "Area2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -27,9 +32,10 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Meteorite",
 "language": "GDScript",
-"path": "res://src/actors/Objects/meteorite/Meteor_1/meteorite.gd"
+"path": "res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.gd"
 } ]
 _global_script_class_icons={
+"BattleEnemy": "",
 "Enemy": "",
 "GitAPI": "",
 "MC": "",
@@ -72,6 +78,7 @@ ui_cancel={
 ui_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_right={
