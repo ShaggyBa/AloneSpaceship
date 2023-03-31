@@ -21,9 +21,12 @@ onready var muzzle = $Muzzle
 onready var shield = $Shield
 #onready var bonusShield = $Shield
 onready var sprite = $Sprite
+onready var sprite = $MCSprite
 onready var hitSound = $Hit
 onready var shotSound = $ShotSound
 onready var shieldHitSound = $ShieldHit
+onready var engineSprite = $EngineSprite
+onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
 
@@ -65,25 +68,36 @@ func setTimerInvincibility()->void:
 func shooting():
 	if Input.is_action_pressed("ui_accept") and timerShooting.is_stopped():
 		timerShooting.start()		
-		var shoot = plShoot.instance()
-		shoot.global_position = $Muzzle.global_position
-		get_tree().current_scene.add_child(shoot)
-		shotSound.play()
+		create_shoot()
+		
 	
+func create_shoot():
+	var shoot = plShoot.instance()
+	shoot.global_position = $Muzzle.global_position
+	get_tree().current_scene.add_child(shoot)
+	shotSound.play()
+
 # Передвижение
-func spaceshipMove(delta) -> void:
+func spaceshipMove(delta):
 		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	inputVector.x = 1 
+	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	changeStateEngine(inputVector)
+	changeVectorPosition(inputVector, delta)
 	
-	global_position.x += inputVector.x * mcSpeed * delta 
+
+func changeVectorPosition(inputVector, delta):
+	global_position.x += inputVector.x * mcSpeed * delta
 	global_position.y += inputVector.y * mcVSpeed * delta 
-	global_position.y = clamp(position.y, 0, viewportSize.y) 
+	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
+	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
+	 
 
 # Получение урона
 func takeDamage(damage):
 	if timerShieldRestoring.is_stopped():
 		shieldHitSound.play()
+		yield(get_tree().create_timer(0.15), "timeout")
 		timerShieldRestoring.start()
 	else:
 		mcHP -= damage
@@ -119,13 +133,22 @@ func BonusShieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
-	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
-		print("Change")
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
 		sprite.set_texture(pSemiHP)
+		crushEffects.emitting = true
 	elif MCCurrentState >= 0.4:
 		sprite.set_texture(pLowHP)
+		crushEffects.amount = 10		
 	elif MCCurrentState >= 0.2: 
 		sprite.set_texture(pVeryLowHP)
+		crushEffects.amount = 15				
+
+
+func changeStateEngine(inputVector: Vector2):
+	if inputVector.x == 0 and inputVector.y == 0:
+		engineSprite.set_animation("idle")
+	else:
+		engineSprite.set_animation("powering")
+	engineSprite.playing = true

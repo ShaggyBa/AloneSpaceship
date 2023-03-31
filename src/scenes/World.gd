@@ -9,9 +9,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	$MeteoriteSpawner.global_position.x += $MC.mcSpeed * delta
-	$EnemySpawner.global_position.x += $MC.mcSpeed * delta
-	$BonusSpawner.global_position.x += $MC.mcSpeed * delta
+	#$MeteoriteSpawner.global_position.x += $MC.mcSpeed * delta
+	#$EnemySpawner.global_position.x += $MC.mcSpeed * delta
 	points += delta * 25
 	counter.set_points(floor(points))
 	

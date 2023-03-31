@@ -17,6 +17,10 @@ _data = {
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 302 )
+current = true
+
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
@@ -25,10 +29,11 @@ script = ExtResource( 7 )
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
+maxEnemySpawn = 1
 bossSpawning = false
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcSpeed = 500.0
+mcHP = 10
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

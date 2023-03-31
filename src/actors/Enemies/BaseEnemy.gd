@@ -4,8 +4,8 @@ extends Area2D
 class_name Enemy
 
 
-export (float) var verticalSpeed = 100.0
-export (float) var horisontalSpeed = 200.0
+export (float) var verticalSpeed = 50.0
+export (float) var horisontalSpeed = 100.0
 export (int) var enemyHP = 5
 export (int) var enemyDamage = 1
 
@@ -18,8 +18,8 @@ onready var 	 viewportRect = get_viewport_rect()
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
 	global_position.y += verticalSpeed * delta * direction
-	if global_position.y < viewportRect.position.y \
-	or global_position.y > viewportRect.end.y:
+	if global_position.y < viewportRect.position.y + 15 \
+	or global_position.y > viewportRect.end.y - 15:
 		direction *= -1
 
 
@@ -36,6 +36,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_BaseEnemy_area_entered(area):
 	if area is MC:
-		area.takeDamage(enemyDamage*10)
+		area.takeDamage(enemyDamage*5)
 		queue_free()
 		
