@@ -10,11 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "Bonus",
+"language": "GDScript",
+"path": "res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.gd"
+}, {
+"base": "Area2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://src/actors/Enemies/BaseEnemy.gd"
 }, {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://src/actors/Objects/meteorite/Meteor_1/meteorite.gd"
 } ]
 _global_script_class_icons={
+"Bonus": "",
 "Enemy": "",
 "GitAPI": "",
 "MC": "",

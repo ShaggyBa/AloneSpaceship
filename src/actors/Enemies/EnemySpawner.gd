@@ -1,7 +1,7 @@
 extends Node2D
 
 # Чем дольше игра, тем меньше длительность этого таймера
-export (float) var nextSpawnTime = 2.0
+export (float) var nextSpawnTime = 5.0
 export (float) var minSpawnRate = 1.0
 export (int) var maxEnemySpawn = 5
 
@@ -13,16 +13,12 @@ var preloadedEnemies = [
 ]
 export (bool) var bossSpawning = true
 
-
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()
 
 func _ready():
 	randomize()
 	spawnTimer.start(nextSpawnTime)
-
-
-	
 
 func _on_SpawnTimer_timeout():
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:

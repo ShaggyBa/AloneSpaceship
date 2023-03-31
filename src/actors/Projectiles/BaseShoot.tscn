@@ -1,37 +1,45 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/actors/Projectiles/BaseShoot.gd" type="Script" id=1]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/Main ship weapon - Projectile - Zapper.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main ship weapon - Projectile - Zapper.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 224, 0, 32, 32 )
 
