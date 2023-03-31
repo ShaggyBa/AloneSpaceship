@@ -20,7 +20,6 @@ var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png"
 onready var muzzle = $Muzzle
 onready var shield = $Shield
 #onready var bonusShield = $Shield
-onready var sprite = $Sprite
 onready var sprite = $MCSprite
 onready var hitSound = $Hit
 onready var shotSound = $ShotSound

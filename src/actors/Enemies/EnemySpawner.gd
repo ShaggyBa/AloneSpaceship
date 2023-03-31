@@ -56,7 +56,7 @@ func _on_SpawnTimer_timeout():
 		if preloadedEnemy == preloadedEnemies[0]:
 			var crntSpeed = enemy.horisontalSpeed
 			enemy.horisontalSpeed = rand_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
-			enemy.global_position.y = get_tree().current_scene.get_node("MC").position.y	
+			enemy.position.y = get_tree().current_scene.get_node("MC").position.y	
 			
 		get_tree().current_scene.add_child(enemy)
 		
