@@ -4,7 +4,7 @@ extends Area2D
 export (float) var shootSpeed = 1000.0
 
 
-var pShootEffect =preload("res://src/actors/Projectiles/BaseShootEffect.tscn")
+var pShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect.tscn")
 
 
 func _physics_process(delta):
