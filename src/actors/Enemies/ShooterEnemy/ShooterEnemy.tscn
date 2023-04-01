@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Assets/Sprites/Enemies/attack/PNGs/Nautolan Ship - Fighter - Weapons.png" type="Texture" id=2]
 [ext_resource path="res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.gd" type="Script" id=3]
 
@@ -45,29 +45,26 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 9.0
 } ]
 
 [node name="ShooterEnemy" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 3 )
-horisontalSpeed = 25.0
+verticalSpeed = 100.0
+horisontalSpeed = 35.0
 enemyHP = 5
-enemyDamage = 1
-enemyAttackDelay = 1.0
+enemyAttackDelay = 0.5
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 10 )
-frame = 3
+frame = 0
+playing = false
 
-[node name="CollisionPolygon2D" parent="." index="1"]
-polygon = PoolVector2Array( 26, -6, 14.6667, -14.6667, 5.33333, -9.33333, -1.33333, -2, -1.33333, 4, 4.66667, 10, 14, 16.6667, 25.3333, 6 )
+[node name="FiringPositions" type="Node2D" parent="." index="3"]
 
-[node name="VisibilityNotifier2D" parent="." index="2"]
-position = Vector2( 0.666666, 0 )
-scale = Vector2( 2.5, 2.53333 )
+[node name="Muzzle" type="Position2D" parent="FiringPositions" index="0"]
+position = Vector2( -6, -8 )
 
-[node name="Muzzle" parent="FiringPositions" index="0"]
-position = Vector2( -6.66667, -9.33333 )
-
-[node name="Muzzle2" parent="FiringPositions" index="1"]
-position = Vector2( -6, 8.66667 )
+[node name="Muzzle2" type="Position2D" parent="FiringPositions" index="1"]
+position = Vector2( -6, 9 )

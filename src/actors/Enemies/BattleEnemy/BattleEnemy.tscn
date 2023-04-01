@@ -45,7 +45,7 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 16.0
 } ]
 
 [node name="BattleEnemy" instance=ExtResource( 1 )]
@@ -55,11 +55,13 @@ verticalSpeed = 200.0
 horisontalSpeed = 10.0
 enemyHP = 20
 enemyDamage = 5
+enemyBigAttackDelay = 2.5
 enemyAttackDelay = 0.3
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-frame = 2
+frame = 0
+playing = false
 
 [node name="CollisionPolygon2D" parent="." index="1"]
 position = Vector2( -12.6667, -0.666667 )
@@ -72,10 +74,16 @@ scale = Vector2( 5.72561, 4.39623 )
 [node name="FiringPositions" type="Node2D" parent="." index="3"]
 
 [node name="Muzzle" type="Position2D" parent="FiringPositions" index="0"]
-position = Vector2( -15.3333, -16 )
+position = Vector2( -10.6667, -14 )
 __meta__ = {
 "_gizmo_extents_": 5.0
 }
 
 [node name="Muzzle2" type="Position2D" parent="FiringPositions" index="1"]
-position = Vector2( -15.3333, 15.3333 )
+position = Vector2( -10.6667, 14 )
+
+[node name="Muzzle3" type="Position2D" parent="FiringPositions" index="2"]
+position = Vector2( -19.3333, -16 )
+
+[node name="Muzzle4" type="Position2D" parent="FiringPositions" index="3"]
+position = Vector2( -19.3333, 16 )

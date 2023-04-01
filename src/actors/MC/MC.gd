@@ -100,7 +100,7 @@ func takeDamage(damage):
 		timerShieldRestoring.start()
 	else:
 		mcHP -= damage
-		changeState()	
+		changeState()			
 		print("Текущий HP: ", mcHP)
 		hitSound.play()
 		if mcHP <= 0:
@@ -123,24 +123,21 @@ func BonusShieldEffect():
 	add_child(bonusShield)
 	
 	#bonusShield.emit_signal(sayHello)
-
-#func sayHello(area):
-	#print("Я вызвалась")
 		
-	
-	
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
+		crushEffects.emitting = true			
 		sprite.set_texture(pSemiHP)
-		crushEffects.emitting = true
 	elif MCCurrentState >= 0.4:
+		crushEffects.emitting = true					
 		sprite.set_texture(pLowHP)
 		crushEffects.amount = 10		
-	elif MCCurrentState >= 0.2: 
+	else: 
+		crushEffects.emitting = true	
 		sprite.set_texture(pVeryLowHP)
 		crushEffects.amount = 15				
 

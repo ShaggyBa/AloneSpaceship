@@ -28,7 +28,6 @@ onready var viewportRect = get_viewport_rect()
 func _ready():
 	randomize()
 	spawnTimer.start(nextSpawnTime)
-	bossTimer.start(nextBossSpawn)
 
 	
 

@@ -29,8 +29,8 @@ current = true
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-maxEnemySpawn = 1
-bossSpawning = false
+nextSpawnTime = 0.1
+maxEnemySpawn = 3
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcHP = 10
@@ -41,7 +41,6 @@ delayShieldRestoring = 5.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -20.102
-autoplay = true
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( 1023, 4.76837e-07 )
