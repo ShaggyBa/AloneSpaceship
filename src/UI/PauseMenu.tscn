@@ -21,10 +21,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 362.0
-margin_top = 210.0
+margin_top = 160.0
 margin_right = 662.0
-margin_bottom = 390.0
-rect_min_size = Vector2( 300, 180 )
+margin_bottom = 439.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
@@ -49,16 +48,24 @@ rect_pivot_offset = Vector2( -659, -126 )
 [node name="ResumeBtn" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 67.0
 margin_right = 300.0
-margin_bottom = 107.0
-rect_min_size = Vector2( 300, 40 )
+margin_bottom = 131.0
+rect_min_size = Vector2( 300, 64 )
 text = "Resume Game"
 
-[node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 117.0
+[node name="TryByn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 141.0
 margin_right = 300.0
-margin_bottom = 157.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 205.0
+rect_min_size = Vector2( 0, 64 )
+text = "Try Again"
+
+[node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 215.0
+margin_right = 300.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 0, 64 )
 text = "Quit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeBtn" to="." method="_on_ResumeBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/TryByn" to="." method="_on_TryByn_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
