@@ -21,9 +21,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -150.0
-margin_top = -95.5
+margin_top = -134.0
 margin_right = 150.0
-margin_bottom = 95.5
+margin_bottom = 134.0
 rect_min_size = Vector2( 300, 95 )
 custom_constants/separation = 13
 alignment = 1
@@ -42,12 +42,20 @@ margin_bottom = 114.0
 rect_min_size = Vector2( 300, 64 )
 text = "Start"
 
-[node name="QuitBtn" type="Button" parent="VBoxContainer"]
+[node name="OptionsBtn" type="Button" parent="VBoxContainer"]
 margin_top = 127.0
 margin_right = 300.0
 margin_bottom = 191.0
 rect_min_size = Vector2( 300, 64 )
+text = "Options"
+
+[node name="QuitBtn" type="Button" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 300.0
+margin_bottom = 268.0
+rect_min_size = Vector2( 300, 64 )
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]

@@ -31,6 +31,7 @@ onready var maxHP = mcHP
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
+var move_vector = Vector2(0,0)
 
 
 var timerShooting = Timer.new()
@@ -82,6 +83,9 @@ func create_shoot():
 	shotSound.play()
 
 # Передвижение
+func _on_CanvasLayer_use_move_vector(move_vector):
+	print(move_vector)
+	
 func spaceshipMove(delta):
 		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -109,7 +113,7 @@ func takeDamage(damage):
 		print("Текущий HP: ", mcHP)
 		hitSound.play()
 		if mcHP <= 0:
-			Input.parse_input_event(game_over)
+			Input.parse_input_event(game_over)  # переход на экран смерти
 			#queue_free()
 			#get_tree().reload_current_scene()
 
@@ -145,5 +149,8 @@ func changeStateEngine(inputVector: Vector2):
 	engineSprite.playing = true
 
 
-func _on_MC_game_over():
-	pass # Replace with function body.
+
+
+
+
+

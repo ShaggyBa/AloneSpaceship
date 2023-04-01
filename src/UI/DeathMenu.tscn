@@ -9,6 +9,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 457.0, 566.0 ]
+}
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -34,22 +37,28 @@ text = "GAME OVER!"
 align = 1
 valign = 1
 
-[node name="Counter2" parent="CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
 margin_top = 47.0
 margin_right = 300.0
-margin_bottom = 63.0
-
-[node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 73.0
-margin_right = 300.0
-margin_bottom = 73.0
+margin_bottom = 47.0
 rect_pivot_offset = Vector2( -659, -126 )
 
 [node name="Control2" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 83.0
+margin_top = 57.0
+margin_right = 300.0
+margin_bottom = 57.0
+rect_pivot_offset = Vector2( -659, -126 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+anchor_right = 0.074
+margin_top = 67.0
 margin_right = 300.0
 margin_bottom = 83.0
-rect_pivot_offset = Vector2( -659, -126 )
+
+[node name="Counter2" parent="CenterContainer/VBoxContainer/CenterContainer" instance=ExtResource( 3 )]
+margin_left = 153.0
+margin_right = 169.0
+margin_bottom = 16.0
 
 [node name="TryBtn" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 93.0
