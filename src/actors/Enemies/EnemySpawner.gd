@@ -1,7 +1,7 @@
 extends Node2D
 
 # Чем дольше игра, тем меньше длительность этого таймера
-export (float) var nextSpawnTime = 2.0
+export (float) var nextSpawnTime = 5.0
 export (float) var minSpawnRate = 1.0
 export (int) var maxEnemySpawn = 5
 
@@ -18,7 +18,6 @@ var pBoss = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
 
 export (bool) var bossSpawning = true
 export (float) var nextBossSpawn = 2
-
 
 
 onready var spawnTimer = $SpawnTimer
@@ -57,7 +56,7 @@ func _on_SpawnTimer_timeout():
 		if preloadedEnemy == preloadedEnemies[0]:
 			var crntSpeed = enemy.horisontalSpeed
 			enemy.horisontalSpeed = rand_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
-			enemy.global_position.y = get_tree().current_scene.get_node("MC").position.y	
+			enemy.position.y = get_tree().current_scene.get_node("MC").position.y	
 			
 		get_tree().current_scene.add_child(enemy)
 		

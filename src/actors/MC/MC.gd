@@ -19,6 +19,7 @@ var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png"
 
 onready var muzzle = $Muzzle
 onready var shield = $Shield
+#onready var bonusShield = $Shield
 onready var sprite = $MCSprite
 onready var hitSound = $Hit
 onready var shotSound = $ShotSound
@@ -125,6 +126,20 @@ func shieldEffect():
 	else:
 		shield.visible = false
 		shield.playing = false
+		
+		
+func BonusShieldEffect():
+	var sceneBonusShield = preload("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
+	var bonusShield = sceneBonusShield.instance()
+	add_child(bonusShield)
+	
+	#bonusShield.emit_signal(sayHello)
+
+#func sayHello(area):
+	#print("Я вызвалась")
+		
+	
+	
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
