@@ -35,12 +35,9 @@ func _process(delta):
 	if meteoriteHP <= 0:	
 		spawnMeteoriteEffect()
 		queue_free()
-		
-	
-	
+
 func takeDamage(damage):
 	meteoriteHP -= damage
-	
 
 
 func spawnMeteoriteEffect():
