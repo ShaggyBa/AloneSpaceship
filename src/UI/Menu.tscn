@@ -15,39 +15,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.027451, 0.00784314, 0.168627, 0.901961 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -71.5
-margin_right = 150.0
-margin_bottom = 71.5
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 362.0
+margin_top = 166.0
+margin_right = 662.0
+margin_bottom = 434.0
 rect_min_size = Vector2( 300, 95 )
 custom_constants/separation = 13
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_right = 300.0
 margin_bottom = 37.0
 text = "Alone Spaceship"
 align = 1
 valign = 1
 
-[node name="StartBtn" type="Button" parent="VBoxContainer"]
+[node name="StartBtn" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 50.0
 margin_right = 300.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 300, 40 )
+margin_bottom = 114.0
+rect_min_size = Vector2( 300, 64 )
 text = "Start"
 
-[node name="QuitBtn" type="Button" parent="VBoxContainer"]
-margin_top = 103.0
+[node name="OptionsBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 127.0
 margin_right = 300.0
-margin_bottom = 143.0
-rect_min_size = Vector2( 300, 40 )
+margin_bottom = 191.0
+rect_min_size = Vector2( 300, 64 )
+text = "Option"
+
+[node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 204.0
+margin_right = 300.0
+margin_bottom = 268.0
+rect_min_size = Vector2( 300, 64 )
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]

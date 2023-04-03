@@ -35,12 +35,17 @@ var viewportSize : Vector2
 var timerShooting = Timer.new()
 var timerShieldRestoring = Timer.new()
 
+var game_over = InputEventAction.new()
+
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
 	# Создание таймера для стрельбы
 	setTimerShooting()
 	setTimerInvincibility()
+	
+	game_over.action = "over"
+	game_over.pressed = true
 	
 	
 func _process(delta: float) -> void:
@@ -103,8 +108,9 @@ func takeDamage(damage):
 		print("Текущий HP: ", mcHP)
 		hitSound.play()
 		if mcHP <= 0:
-			queue_free()
-			get_tree().reload_current_scene()
+			Input.parse_input_event(game_over)
+			#queue_free()
+			#get_tree().reload_current_scene()
 
 # эффект щита
 func shieldEffect():
