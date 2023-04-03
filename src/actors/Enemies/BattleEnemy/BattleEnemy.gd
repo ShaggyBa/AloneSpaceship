@@ -38,4 +38,4 @@ func shooting():
 			var shoot = plShoot.instance()
 			shoot.global_position = muzzle.global_position
 			get_tree().current_scene.add_child(shoot)
-	
+			$Shoot.play()

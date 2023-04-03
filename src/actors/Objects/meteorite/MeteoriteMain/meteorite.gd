@@ -38,6 +38,7 @@ func _process(delta):
 
 func takeDamage(damage):
 	meteoriteHP -= damage
+	$Hit.play()
 
 
 func spawnMeteoriteEffect():

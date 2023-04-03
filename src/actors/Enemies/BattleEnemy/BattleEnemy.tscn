@@ -5,38 +5,47 @@
 [ext_resource path="res://src/Assets/Sprites/Enemies/attack/PNGs/Nautolan Ship - Battlecruiser - Weapons.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 896, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 1024, 0, 128, 128 )
 
@@ -59,7 +68,7 @@ enemyAttackDelay = 0.3
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-frame = 2
+frame = 4
 
 [node name="CollisionPolygon2D" parent="." index="1"]
 position = Vector2( -12.6667, -0.666667 )
@@ -79,3 +88,6 @@ __meta__ = {
 
 [node name="Muzzle2" type="Position2D" parent="FiringPositions" index="1"]
 position = Vector2( -15.3333, 15.3333 )
+
+[node name="Shoot" parent="." index="6"]
+volume_db = -27.51

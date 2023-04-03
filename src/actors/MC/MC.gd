@@ -16,7 +16,7 @@ var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
 var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
 var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
 
-
+onready var BS = load("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
 onready var muzzle = $Muzzle
 onready var shield = $Shield
 onready var sprite = $MCSprite
@@ -27,6 +27,8 @@ onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
+
+
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -41,11 +43,16 @@ func _ready() -> void:
 	# Создание таймера для стрельбы
 	setTimerShooting()
 	setTimerInvincibility()
+	var bonusMode = BS.instance()
+	bonusMode.connect("bonusEntered", self, "doWhat")
 	
+func doWhat():
+	print("it works")
 	
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
+	
 		
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -116,16 +123,6 @@ func shieldEffect():
 		shield.playing = false
 		
 		
-func BonusShieldEffect():
-	var sceneBonusShield = preload("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
-	var bonusShield = sceneBonusShield.instance()
-	add_child(bonusShield)
-	print("Щит добавлен")
-	
-	
-func SpawnShield():
-	print("spawnShield")
-		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
@@ -135,10 +132,10 @@ func changeState():
 		crushEffects.emitting = true
 	elif MCCurrentState >= 0.4:
 		sprite.set_texture(pLowHP)
-		crushEffects.amount = 10		
+		crushEffects.amount = 10
 	elif MCCurrentState >= 0.2: 
 		sprite.set_texture(pVeryLowHP)
-		crushEffects.amount = 15				
+		crushEffects.amount = 15
 
 
 func changeStateEngine(inputVector: Vector2):
@@ -146,4 +143,5 @@ func changeStateEngine(inputVector: Vector2):
 		engineSprite.set_animation("idle")
 	else:
 		engineSprite.set_animation("powering")
-	engineSprite.playing = true
+	engineSprite.playing = true 
+	
