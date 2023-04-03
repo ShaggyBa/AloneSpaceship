@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/GUI.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=3]
-[ext_resource path="res://src/Assets/Sprites/Asteroids/3564814884.png" type="Texture" id=4]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/FullHP.png" type="Texture" id=5]
+[ext_resource path="res://src/UI/img/pixil-frame-0 (1).png" type="Texture" id=3]
+[ext_resource path="res://src/UI/img/pixil-frame-0 (2).png" type="Texture" id=4]
 [ext_resource path="res://src/UI/Interface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/DeathMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.278431, 0.411765, 0.54902, 1 )
@@ -68,6 +68,9 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.403922 )
 shadow_offset = Vector2( 5, 5 )
 
+[sub_resource type="CircleShape2D" id=13]
+radius = 64.0
+
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 2 )
 
@@ -95,57 +98,18 @@ custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 1 )
 text = "Pause"
 
-[node name="Control" type="Control" parent="."]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Interface"]
+position = Vector2( 122, 395 )
+normal = ExtResource( 3 )
+shape = SubResource( 13 )
+
+[node name="InnerCircle" type="Sprite" parent="Interface"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 3 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_right = 52.0
-margin_bottom = 37.0
-size_flags_horizontal = 0
-
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_right = 24.0
-margin_bottom = 37.0
-size_flags_horizontal = 10
-text = "99"
-align = 1
-valign = 1
-
-[node name="Sprite" type="Sprite" parent="Control/VBoxContainer/HBoxContainer2"]
-position = Vector2( 879.294, 38 )
-rotation = -1.5708
-scale = Vector2( 0.851517, 0.851517 )
-texture = ExtResource( 5 )
-centered = false
-
-[node name="Label2" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_left = 28.0
-margin_right = 52.0
-margin_bottom = 37.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-text = "99"
-align = 1
-valign = 1
-
-[node name="Sprite2" type="Sprite" parent="Control/VBoxContainer/HBoxContainer2"]
-position = Vector2( 1021.29, 24 )
-rotation = 2.45393
-scale = Vector2( 0.459916, 0.459916 )
+position = Vector2( 317, 437 )
 texture = ExtResource( 4 )
-centered = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 41.0
-margin_right = 52.0
-margin_bottom = 41.0
+[node name="DeathMenu" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2

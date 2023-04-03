@@ -25,7 +25,7 @@ func _on_SpawnTimer_timeout():
 		
 	
 		# Position 
-		bonus.position = Vector2($Position2D.position.x, rand_range(0, viewportRect.end.y))
+		bonus.position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
 		get_tree().current_scene.add_child(bonus)
 	
 		# Restart timer

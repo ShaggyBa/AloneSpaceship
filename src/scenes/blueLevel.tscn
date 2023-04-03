@@ -10,7 +10,6 @@
 [node name="blueLevel" type="ParallaxBackground"]
 layer = -1
 script = ExtResource( 1 )
-camera_velocity = Vector2( -1000, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 488, 324 )

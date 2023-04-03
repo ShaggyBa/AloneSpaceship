@@ -4,42 +4,34 @@
 [ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main ship weapon - Projectile - Zapper.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 224, 0, 32, 32 )
 
@@ -48,11 +40,11 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 2 )
+extents = Vector2( 5.33333, 3 )
 
 [node name="Shoot" type="Area2D"]
 collision_layer = 4
@@ -64,16 +56,20 @@ position = Vector2( 22, -14 )
 rotation = 1.57239
 frames = SubResource( 10 )
 frame = 5
+playing = true
 centered = false
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 6, 2 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 3.5, 2 )
-scale = Vector2( 2.45, 0.85 )
+visible = false
+position = Vector2( 6, 2 )
+scale = Vector2( 2.6, 0.85 )
 
 [connection signal="area_entered" from="." to="." method="_on_Shoot_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

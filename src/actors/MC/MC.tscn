@@ -110,14 +110,17 @@ atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 0, 64, 64 )
 
