@@ -12,7 +12,7 @@ export (int) var enemyDamage = 1
 
 var direction = 1
 
-onready var 	 viewportRect = get_viewport_rect()
+onready var viewportRect = get_viewport_rect()
 
 
 func _physics_process(delta):
@@ -27,7 +27,7 @@ func takeDamage(amount):
 	enemyHP -= amount
 	$Hit.play()	
 	if enemyHP <= 0:
-		queue_free()
+		death()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -39,3 +39,13 @@ func _on_BaseEnemy_area_entered(area):
 		area.takeDamage(enemyDamage*5)
 		queue_free()
 		
+		
+func death():
+	$AnimatedSprite.queue_free()
+	$CollisionPolygon2D.queue_free()
+	$Destroyed.play()
+	print("play")
+
+
+func _on_Destroyed_finished():
+	queue_free()

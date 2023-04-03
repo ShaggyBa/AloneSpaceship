@@ -1,35 +1,43 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Assets/Sprites/Enemies/attack/PNGs/Nautolan Ship - Scout - Weapons.png" type="Texture" id=1]
 [ext_resource path="res://src/actors/Enemies/BaseEnemy.gd" type="Script" id=2]
-[ext_resource path="res://src/Assets/Music/Sound Effects/EnemyHit.mp3" type="AudioStream" id=3]
-[ext_resource path="res://src/Assets/Music/Sound Effects/608890__therobotrob__ship-destroyed.mp3" type="AudioStream" id=4]
+[ext_resource path="res://src/Assets/Sound/EnemiesSound/EnemyHit.mp3" type="AudioStream" id=3]
+[ext_resource path="res://src/Assets/Sound/EnemiesSound/DestroiedEnemy.wav" type="AudioStream" id=4]
+[ext_resource path="res://src/Assets/Sound/EnemiesSound/Shoot.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 384, 0, 64, 64 )
 
@@ -66,11 +74,15 @@ scale = Vector2( 1.65, 1.875 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -38.124
+volume_db = -38.0
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = 0.647
+volume_db = -27.0
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="area_entered" from="." to="." method="_on_BaseEnemy_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="finished" from="Destroyed" to="." method="_on_Destroyed_finished"]
