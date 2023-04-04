@@ -75,21 +75,24 @@ animations = [ {
 radius = 26.0192
 
 [node name="AroundShield" type="Area2D" groups=["BonusEffects"]]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 190, 124 )
+position = Vector2( 0, 1.19209e-07 )
+scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 13 )
 animation = "blinking"
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 190, 123 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 14 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 193.813, 123 )
-scale = Vector2( 3.11875, 2.8 )
+position = Vector2( 6.5, -0.499997 )
+scale = Vector2( 4.75, 4.05 )
 
 [connection signal="area_entered" from="." to="." method="_on_AroundShield_area_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

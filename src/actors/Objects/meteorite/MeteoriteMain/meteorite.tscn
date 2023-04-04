@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.gd" type="Script" id=1]
 [ext_resource path="res://src/Assets/Sprites/Asteroids/1440544241.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Sound/MeteoritesSound/MeteoriteHit.wav" type="AudioStream" id=3]
 
 [node name="Meteorite" type="Area2D" groups=["damageable"]]
 collision_layer = 8
@@ -24,6 +25,10 @@ polygon = PoolVector2Array( 1, -23, -5, -23, -9, -16, -15, -16, -16, -20, -17, -
 visible = false
 position = Vector2( 23, 31 )
 scale = Vector2( 3.3, 2.1 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -27.0
 
 [connection signal="area_entered" from="." to="." method="_on_Meteorite_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

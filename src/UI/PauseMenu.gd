@@ -23,9 +23,15 @@ func _on_ResumeBtn_pressed():
 
 func _on_QuitBtn_pressed():
 	get_tree().change_scene("res://src/UI/Menu.tscn")
+	
 
 
 func _on_PauseBtn_pressed():
 	self.is_paused = !is_paused
 
 
+
+
+func _on_TryBtn_pressed():
+	queue_free()
+	get_tree().reload_current_scene()

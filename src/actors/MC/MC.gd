@@ -16,7 +16,7 @@ var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
 var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
 var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
 
-
+onready var BS = load("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
 onready var muzzle = $Muzzle
 onready var shield = $Shield
 #onready var bonusShield = $Shield
@@ -29,6 +29,8 @@ onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
 
+
+
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
@@ -36,17 +38,25 @@ var viewportSize : Vector2
 var timerShooting = Timer.new()
 var timerShieldRestoring = Timer.new()
 
+var game_over = InputEventAction.new()
+
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
 	# Создание таймера для стрельбы
 	setTimerShooting()
 	setTimerInvincibility()
+	var bonusMode = BS.instance()
+	bonusMode.connect("bonusEntered", self, "doWhat")
+	
+	game_over.action = "over"
+	game_over.pressed = true
 	
 	
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
+	
 		
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -104,8 +114,9 @@ func takeDamage(damage):
 		print("Текущий HP: ", mcHP)
 		hitSound.play()
 		if mcHP <= 0:
-			queue_free()
-			get_tree().reload_current_scene()
+			Input.parse_input_event(game_over)
+			#queue_free()
+			#get_tree().reload_current_scene()
 
 # эффект щита
 func shieldEffect():
@@ -139,7 +150,7 @@ func changeState():
 	else: 
 		crushEffects.emitting = true	
 		sprite.set_texture(pVeryLowHP)
-		crushEffects.amount = 15				
+		crushEffects.amount = 15
 
 
 func changeStateEngine(inputVector: Vector2):
@@ -147,4 +158,5 @@ func changeStateEngine(inputVector: Vector2):
 		engineSprite.set_animation("idle")
 	else:
 		engineSprite.set_animation("powering")
-	engineSprite.playing = true
+	engineSprite.playing = true 
+	
