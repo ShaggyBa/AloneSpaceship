@@ -25,15 +25,6 @@ margin_right = 255.0
 margin_bottom = 146.0
 custom_constants/separation = 20
 
-[node name="MusicSlider" type="HSlider" parent="VBoxContainer"]
-visible = false
-margin_left = 210.0
-margin_right = 510.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 10
-tick_count = 7
-
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 510.0
 margin_bottom = 37.0
@@ -53,10 +44,11 @@ text = "Music"
 [node name="MusicSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
 margin_left = 210.0
 margin_right = 510.0
-margin_bottom = 16.0
+margin_bottom = 37.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 10
-tick_count = 7
+size_flags_vertical = 1
+tick_count = 6
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 114.0
@@ -71,10 +63,11 @@ text = "Sound FX"
 [node name="FXSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 210.0
 margin_right = 510.0
-margin_bottom = 16.0
+margin_bottom = 37.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 10
-tick_count = 7
+size_flags_vertical = 1
+tick_count = 6
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 171.0
@@ -86,13 +79,14 @@ margin_right = 121.0
 margin_bottom = 37.0
 text = "Control Size"
 
-[node name="SizeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
+[node name="ConrolSizeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
 margin_left = 210.0
 margin_right = 510.0
-margin_bottom = 16.0
+margin_bottom = 37.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 10
-tick_count = 7
+size_flags_vertical = 1
+tick_count = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 228.0
@@ -106,8 +100,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 200, 64 )
 text = "Quit"
 
-[connection signal="value_changed" from="VBoxContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer2/FXSlider" to="." method="_on_FXSlider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/SizeSlider" to="." method="_on_SizeSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/ConrolSizeSlider" to="." method="_on_ConrolSizeSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]

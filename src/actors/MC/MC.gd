@@ -38,6 +38,8 @@ var timerShieldRestoring = Timer.new()
 
 var game_over = InputEventAction.new()
 
+signal health_changed(new_value) 
+
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
@@ -47,6 +49,8 @@ func _ready() -> void:
 	
 	game_over.action = "over"
 	game_over.pressed = true
+		
+	emit_signal("health_changed", mcHP)
 	
 	
 func _process(delta: float) -> void:
@@ -84,8 +88,8 @@ func create_shoot():
 # Передвижение
 func spaceshipMove(delta):
 		
-	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	#inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	#inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changeVectorPosition(inputVector, delta)
 	
@@ -107,6 +111,7 @@ func takeDamage(damage):
 		mcHP -= damage
 		changeState()			
 		print("Текущий HP: ", mcHP)
+		emit_signal("health_changed", mcHP)
 		hitSound.play()
 		if mcHP <= 0:
 			Input.parse_input_event(game_over)
@@ -154,3 +159,7 @@ func changeStateEngine(inputVector: Vector2):
 	else:
 		engineSprite.set_animation("powering")
 	engineSprite.playing = true
+
+
+func _on_CanvasLayer_change_move(new_move):
+	inputVector = new_move

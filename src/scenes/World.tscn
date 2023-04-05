@@ -49,3 +49,6 @@ curve = SubResource( 1 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2( 0, 5 )
 rotation = 2.06635
+
+[connection signal="change_move" from="CanvasLayer" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="health_changed" from="MC" to="CanvasLayer" method="_on_MC_health_changed"]

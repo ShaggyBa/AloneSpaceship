@@ -22,9 +22,9 @@ rect_min_size = Vector2( 146, 0 )
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
 margin_top = 1.0
-margin_right = 64.0
+margin_right = 68.0
 margin_bottom = 38.0
-text = "Score:"
+text = "Health:"
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 134.0
