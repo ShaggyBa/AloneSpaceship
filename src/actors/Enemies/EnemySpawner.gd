@@ -31,12 +31,12 @@ func _ready():
 		bossTimer.start(nextBossSpawn)
 		print("Timer start")
 	else:
-		print("Timer delete")		
+	#print("Timer delete")		
 		bossTimer.queue_free()
 	
 	
-func _process(delta):
-	print(bossTimer.time_left)
+#func _process(delta):
+	#print(bossTimer.time_left)
 	
 	
 func _on_BossTimer_timeout():

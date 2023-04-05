@@ -115,7 +115,7 @@ func takeDamage(damage):
 	else:
 		mcHP -= damage
 		changeState()			
-		print("Текущий HP: ", mcHP)
+		#print("Текущий HP: ", mcHP)
 		emit_signal("health_changed", mcHP)
 		hitSound.play()
 		if mcHP <= 0:

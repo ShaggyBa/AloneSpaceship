@@ -2,7 +2,7 @@ extends Node
 
 var points := 0.0
 
-onready var counter := $CanvasLayer/Control/HBoxContainer2/ScoreCounter
+onready var counter := $CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter
 onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/CenterContainer/ScoreCounter
 
 
