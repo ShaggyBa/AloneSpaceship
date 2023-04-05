@@ -8,12 +8,10 @@ onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContaine
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	$Music.play()
 
 
 func _process(delta: float) -> void:
-	#$MeteoriteSpawner.global_position.x += $MC.mcSpeed * delta
-	#$EnemySpawner.global_position.x += $MC.mcSpeed * delta
 	points += delta * 25
 	counter.set_points(floor(points))
 	counter_final.set_points(floor(points))

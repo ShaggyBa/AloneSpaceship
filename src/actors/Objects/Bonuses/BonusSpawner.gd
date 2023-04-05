@@ -22,6 +22,7 @@ func _on_SpawnTimer_timeout():
 		# Spawn bonus
 		var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
 		var bonus = bonusPreloaded.instance()
+		
 	
 		# Position 
 		bonus.position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
