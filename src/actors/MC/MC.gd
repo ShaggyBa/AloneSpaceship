@@ -17,6 +17,8 @@ var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
 var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
 
 onready var BS = load("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
+
+
 onready var muzzle = $Muzzle
 onready var shield = $Shield
 #onready var bonusShield = $Shield
@@ -38,7 +40,9 @@ var viewportSize : Vector2
 var timerShooting = Timer.new()
 var timerShieldRestoring = Timer.new()
 
+
 var game_over = InputEventAction.new()
+
 
 signal health_changed(new_value) 
 
@@ -48,6 +52,7 @@ func _ready() -> void:
 	# Создание таймера для стрельбы
 	setTimerShooting()
 	setTimerInvincibility()
+	
 	var bonusMode = BS.instance()
 	bonusMode.connect("bonusEntered", self, "doWhat")
 	
@@ -93,13 +98,13 @@ func create_shoot():
 # Передвижение
 func spaceshipMove(delta):
 		
-	#inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	#inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
-	changeVectorPosition(inputVector, delta)
+	changePosition(inputVector, delta)
 	
 
-func changeVectorPosition(inputVector, delta):
+func changePosition(inputVector, delta):
 	global_position.x += inputVector.x * mcSpeed * delta
 	global_position.y += inputVector.y * mcVSpeed * delta 
 	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
@@ -144,6 +149,7 @@ func BonusShieldEffect():
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
+		crushEffects.emitting = false		
 		sprite.set_texture(pFullHP)
 	elif MCCurrentState >= 0.6:
 		crushEffects.emitting = true			
@@ -166,5 +172,18 @@ func changeStateEngine(inputVector: Vector2):
 	engineSprite.playing = true 
 	
 
-func _on_CanvasLayer_change_move(new_move):
+func _on_CanvasLayer_change_move(new_move: Vector2):
 	inputVector = new_move
+
+
+func _on_MC_area_entered(area):
+	#if area.name == "Heard": # если area.name == @Heard@10 - то скипается код
+	if area.is_in_group("Heal"):
+		if mcHP + 5 < maxHP:
+			mcHP += 5
+		else:
+			mcHP = maxHP
+		emit_signal("health_changed", mcHP)	
+		changeState()
+	else:
+		print(area.name)							

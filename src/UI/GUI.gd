@@ -48,6 +48,5 @@ func  calculate_move_vector(event_position):
 
 func _on_MC_health_changed(new_value):
 	health_counter.set_points(floor(new_value))
-	pass # Replace with function body.
 
 

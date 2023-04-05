@@ -41,10 +41,9 @@ func _on_BaseEnemy_area_entered(area):
 		
 		
 func death():
-	$AnimatedSprite.queue_free()
+	$AnimatedSprite.visible = false
 	$CollisionPolygon2D.queue_free()
 	$Destroyed.play()
-	print("play")
 
 
 func _on_Destroyed_finished():

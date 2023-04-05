@@ -106,6 +106,7 @@ custom_styles/normal = SubResource( 1 )
 text = "Pause"
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
+visible = false
 position = Vector2( 121, 395 )
 normal = ExtResource( 3 )
 shape = SubResource( 13 )
@@ -116,6 +117,7 @@ position = Vector2( 316, 437 )
 texture = ExtResource( 4 )
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="Control"]
+visible = false
 position = Vector2( 840, 426 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )

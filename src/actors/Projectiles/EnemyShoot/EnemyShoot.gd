@@ -2,7 +2,7 @@ extends Area2D
 
 
 export (float) var shootSpeed = 500.0
-export (int) var damage = 1
+var damage
 
 
 var pShootEffect = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShootEffect.tscn")
