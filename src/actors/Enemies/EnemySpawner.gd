@@ -4,8 +4,7 @@ extends Node2D
 export (float) var nextSpawnTime = 5.0
 export (float) var minSpawnRate = 1.0
 export (int) var maxEnemySpawn = 5
-export (bool) var bossSpawning = true
-export (float) var nextBossSpawn = 5
+export (bool) var changeSpawnRate = false 
 
 
 var enemies = []
@@ -16,37 +15,14 @@ var preloadedEnemies = [
 ]
 
 
-var pBoss = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
-
-
 onready var spawnTimer = $SpawnTimer
-onready var bossTimer = $BossTimer
 
 onready var viewportRect = get_viewport_rect()
 
 func _ready():
 	randomize()
 	spawnTimer.start(nextSpawnTime)
-	if bossSpawning:
-		bossTimer.start(nextBossSpawn)
-		print("Timer start")
-	else:
-	#print("Timer delete")		
-		bossTimer.queue_free()
 	
-	
-#func _process(delta):
-	#print(bossTimer.time_left)
-	
-	
-func _on_BossTimer_timeout():
-	if bossTimer.is_stopped() and not get_tree().current_scene.get_node("BattleEnemy"):
-			var boss = pBoss.instance()
-			boss.global_position = Vector2($Position2D.global_position.x, viewportRect.end.y / 2)
-			get_tree().current_scene.add_child(boss)
-			bossTimer.start(nextBossSpawn)
-
-
 func _on_SpawnTimer_timeout():
 	
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
@@ -57,8 +33,10 @@ func _on_SpawnTimer_timeout():
 		
 			
 		if preloadedEnemy == preloadedEnemies[1]:
-			var enemyAttackDelay = enemy.enemyAttackDelay
-			enemy.enemyAttackDelay = rand_range(enemyAttackDelay - 0.05, enemyAttackDelay + 0.25)	
+			var enemyVerticalSpeed = enemy.verticalSpeed
+			enemy.verticalSpeed = rand_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 50)	
+			var enemyHorisontalSpeed = enemy.horisontalSpeed
+			enemy.horisontalSpeed = rand_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
 		enemy.global_position = Vector2($Position2D.global_position.x, rand_range(25, viewportRect.end.y - 25))
 		
 		if preloadedEnemy == preloadedEnemies[0]:
@@ -68,8 +46,9 @@ func _on_SpawnTimer_timeout():
 			
 		get_tree().current_scene.add_child(enemy)
 		
-		# if nextSpawnTime > minSpawnRate:
-		#	nextSpawnTime -= 0.05 
+		if changeSpawnRate:
+			if nextSpawnTime > minSpawnRate:
+				nextSpawnTime -= 0.05 
 			
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)

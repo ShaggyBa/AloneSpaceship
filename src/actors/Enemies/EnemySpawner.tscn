@@ -15,4 +15,3 @@ position = Vector2( 1050, 0 )
 one_shot = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
-[connection signal="timeout" from="BossTimer" to="." method="_on_BossTimer_timeout"]
