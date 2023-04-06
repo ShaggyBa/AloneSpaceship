@@ -13,7 +13,9 @@ export (int) var enemyDamage = 1
 var direction = 1
 
 onready var viewportRect = get_viewport_rect()
+onready var isDeath = false
 
+onready var maxHP = enemyHP
 
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
@@ -26,6 +28,7 @@ func _physics_process(delta):
 func takeDamage(amount):
 	enemyHP -= amount
 	$Hit.play()	
+	changeState()
 	if enemyHP <= 0:
 		death()
 
@@ -41,6 +44,7 @@ func _on_BaseEnemy_area_entered(area):
 		
 		
 func death():
+	isDeath = true
 	$AnimatedSprite.visible = false
 	$CollisionPolygon2D.queue_free()
 	$Destroyed.play()
@@ -48,3 +52,7 @@ func death():
 
 func _on_Destroyed_finished():
 	queue_free()
+
+
+func changeState():
+	pass

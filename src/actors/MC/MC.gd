@@ -8,6 +8,7 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 export (int) var mcHP = 5
 
 export (float) var shootDelay = 1.0
+export (int) var mcDamage = 1
 
 export (float) var delayShieldRestoring = 0.3
 export (float) var duringShieldBonus = 2
@@ -100,22 +101,22 @@ func shooting():
 	
 func create_shoot():
 	var shoot = plShoot.instance()
-	shoot.global_position = muzzle.global_position
+	shoot.global_position = $Muzzle.global_position
+	shoot.damage = mcDamage
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
 
 # Передвижение
 func spaceshipMove(delta):
-		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changePosition(inputVector, delta)
 	
 
-func changePosition(inputVector, delta):
-	global_position.x += inputVector.x * mcSpeed * delta
-	global_position.y += inputVector.y * mcVSpeed * delta 
+func changePosition(vector:Vector2, delta:float):
+	global_position.x += vector.x * mcSpeed * delta
+	global_position.y += vector.y * mcVSpeed * delta 
 	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
 	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
 	 
@@ -168,8 +169,8 @@ func changeState():
 		crushEffects.amount = 15
 
 
-func changeStateEngine(inputVector: Vector2):
-	if inputVector.x == 0 and inputVector.y == 0:
+func changeStateEngine(vector: Vector2):
+	if vector.x == 0 and vector.y == 0:
 		engineSprite.set_animation("idle")
 	else:
 		engineSprite.set_animation("powering")

@@ -4,8 +4,8 @@ class_name Meteorite
 
 export (float) var minSpeed = 20.0
 export (float) var maxSpeed = 100.0
-export (float) var minRotationRate = -20
-export (float) var maxRotationRate = 20
+export (float) var minRotationRate = -20.0
+export (float) var maxRotationRate = 20.0
 
 export (int) var meteoriteHP = 1
 

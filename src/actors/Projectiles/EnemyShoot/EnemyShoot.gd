@@ -8,6 +8,10 @@ var damage
 var pShootEffect = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShootEffect.tscn")
 
 
+func _ready():
+	$Sprite.playing = true
+
+
 func _physics_process(delta):
 	global_position.x -= shootSpeed * delta
 
