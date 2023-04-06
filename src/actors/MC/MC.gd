@@ -7,6 +7,7 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 
 export (int) var mcHP = 5
 
+
 export (float) var shootDelay = 1.0
 export (int) var mcDamage = 1
 
@@ -33,7 +34,7 @@ onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
-
+var isInvicibility = false
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -43,14 +44,12 @@ var timerShooting = Timer.new()
 var timerShieldRestoring = Timer.new()
 var timerDuringShieldBonus = Timer.new()
 
-
 var game_over = InputEventAction.new()
 
-
-var isInvicibility = false
-
-
 signal health_changed(new_value)
+signal damage_changed(new_value)
+signal shootDelay_changed(new_value)
+signal speed_changed(new_value)
 
 
 func _ready() -> void:
@@ -60,16 +59,18 @@ func _ready() -> void:
 	setTimerInvincibility()
 	setTimerShieldBonus()
 	
-	
 	game_over.action = "over"
 	game_over.pressed = true
 		
 	emit_signal("health_changed", mcHP)
+	emit_signal("damage_changed", mcDamage)
+	emit_signal("shootDelay_changed", round(1 / shootDelay))
+	emit_signal("speed_changed", mcSpeed)
 	
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
-	print(timerDuringShieldBonus.time_left)
+#	print(timerDuringShieldBonus.time_left)
 	
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -199,7 +200,7 @@ func heal():
 func timerShieldBonus():
 	timerDuringShieldBonus.start(duringShieldBonus)
 	shieldBonus()
-	print("start")
+#	print("start")
 	
 func shieldBonus():
 	isInvicibility = true
@@ -211,4 +212,13 @@ func disabledShieldBonus():
 	shield.animation = "autoshield"
 	
 
+# Тут функция умножения урона, если будет другая функция,
+# вызови эту функцию для каждого изменения урона =)	
+func damageBonus():
+	emit_signal("damage_changed", mcDamage)
 	
+func shootDelayBonus():
+	emit_signal("shootDelay_changed", shootDelay)
+
+func speedBonus():
+	emit_signal("speed_changed", mcVSpeed)

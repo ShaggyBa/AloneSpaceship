@@ -14,10 +14,15 @@ var direction = 1
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
+onready var maxHP = enemyHP
 
 signal add_to_score(value) #value: int
+var enemy_death = InputEventAction.new()
 
-onready var maxHP = enemyHP
+
+func _ready():
+	enemy_death.action = "enemy_death"
+	enemy_death.pressed = true
 
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
@@ -32,7 +37,8 @@ func takeDamage(amount):
 	$Hit.play()	
 	changeState()
 	if enemyHP <= 0:
-		emit_signal("add_to_score",kill_points)
+		#emit_signal("add_to_score",kill_points)
+		Input.parse_input_event(enemy_death)
 		death()
 
 

@@ -52,4 +52,7 @@ position = Vector2( 0, 5 )
 rotation = 2.06635
 
 [connection signal="change_move" from="CanvasLayer" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="damage_changed" from="MC" to="CanvasLayer" method="_on_MC_damage_changed"]
 [connection signal="health_changed" from="MC" to="CanvasLayer" method="_on_MC_health_changed"]
+[connection signal="shootDelay_changed" from="MC" to="CanvasLayer" method="_on_MC_shootDelay_changed"]
+[connection signal="speed_changed" from="MC" to="CanvasLayer" method="_on_MC_speed_changed"]

@@ -95,7 +95,10 @@ margin_bottom = 82.0
 [node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
 margin_right = 71.0
 margin_bottom = 37.0
-text = "RPM: "
+text = "RPS: "
+__meta__ = {
+"_editor_description_": "Cкорость стрелбы"
+}
 
 [node name="Label3" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
 margin_top = 41.0
@@ -134,16 +137,16 @@ margin_left = 407.0
 margin_right = 484.0
 margin_bottom = 82.0
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
+[node name="Damage" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
 margin_right = 77.0
 margin_bottom = 37.0
 text = "Damage:"
 
-[node name="Label3" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
+[node name="Health" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
 margin_top = 41.0
 margin_right = 77.0
 margin_bottom = 78.0
-text = "Kills:"
+text = "Health::"
 
 [node name="VBoxContainer6" type="VBoxContainer" parent="Control/HBoxContainer"]
 margin_left = 488.0
@@ -156,7 +159,7 @@ anchor_bottom = 0.0
 margin_right = 24.0
 margin_bottom = 39.0
 
-[node name="KillsCounter" parent="Control/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
+[node name="HealthCounter" parent="Control/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 43.0
@@ -169,21 +172,21 @@ margin_right = 946.0
 margin_bottom = 82.0
 size_flags_horizontal = 10
 
-[node name="Health" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
-margin_left = 8.0
+[node name="Score" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
 margin_right = 82.0
 margin_bottom = 37.0
-size_flags_horizontal = 10
-size_flags_vertical = 5
-text = "Health: "
-
-[node name="Score" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
-margin_top = 41.0
-margin_right = 82.0
-margin_bottom = 78.0
 size_flags_horizontal = 8
 size_flags_vertical = 5
 text = "  Score: "
+
+[node name="Kills" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
+margin_left = 30.0
+margin_top = 41.0
+margin_right = 82.0
+margin_bottom = 78.0
+size_flags_horizontal = 10
+size_flags_vertical = 5
+text = "Kills: "
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="Control/HBoxContainer"]
 margin_left = 950.0
@@ -191,19 +194,19 @@ margin_right = 974.0
 margin_bottom = 82.0
 size_flags_horizontal = 8
 
-[node name="HealthCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
+[node name="ScoreCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 24.0
 margin_bottom = 39.0
+size_flags_horizontal = 8
 
-[node name="ScoreCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
+[node name="KillsCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 43.0
 margin_right = 24.0
 margin_bottom = 82.0
-size_flags_horizontal = 8
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
 visible = false
