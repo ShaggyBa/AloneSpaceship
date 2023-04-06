@@ -5,8 +5,8 @@ var preloadedBonuses = [
 		preload("res://src/actors/Objects/Bonuses/BonusHealth/HealthBonus.tscn")
 	]
 
-export (float) var nextSpawnTime = 5.0
-export (int) var maxBonusSpawn = 2
+export (float) var nextSpawnTime = 2.0
+export (int) var maxBonusSpawn = 3
 
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()

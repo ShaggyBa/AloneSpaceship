@@ -110,50 +110,62 @@ atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=43]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=44]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=45]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=46]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=47]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=48]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=49]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=50]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=51]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=52]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=53]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=54]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 0, 64, 64 )
 
@@ -178,7 +190,9 @@ collision_mask = 57
 gravity = 0.0
 script = ExtResource( 2 )
 mcSpeed = 500.0
+mcHP = 100
 shootDelay = 0.21
+duringShieldBonus = 5.0
 
 [node name="EngineSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 1, 0 )

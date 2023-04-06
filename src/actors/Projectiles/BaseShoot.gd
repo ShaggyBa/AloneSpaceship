@@ -17,9 +17,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 
 func _on_Shoot_area_entered(area):
 	if (area.is_in_group("damageable")):
-		area.takeDamage(1)
-		var shootEffect = pShootEffect.instance()
-		shootEffect.position = position
-		get_parent().add_child(shootEffect)
-		queue_free()
+			area.takeDamage(1)
+			var shootEffect = pShootEffect.instance()
+			shootEffect.position = position
+			get_parent().add_child(shootEffect)
+			queue_free()
 
