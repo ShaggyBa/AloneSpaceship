@@ -44,7 +44,7 @@ var timerShieldRestoring = Timer.new()
 var game_over = InputEventAction.new()
 
 
-signal health_changed(new_value) 
+signal health_changed(new_value)
 
 
 func _ready() -> void:

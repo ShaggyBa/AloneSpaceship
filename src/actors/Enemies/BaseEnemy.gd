@@ -8,12 +8,13 @@ export (float) var verticalSpeed = 50.0
 export (float) var horisontalSpeed = 100.0
 export (int) var enemyHP = 5
 export (int) var enemyDamage = 1
-
+var kill_points = 25 #очки за убийство противника
 
 var direction = 1
 
 onready var viewportRect = get_viewport_rect()
 
+signal add_to_score(value) #value: int
 
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
@@ -27,6 +28,7 @@ func takeDamage(amount):
 	enemyHP -= amount
 	$Hit.play()	
 	if enemyHP <= 0:
+		emit_signal("add_to_score",kill_points)
 		death()
 
 
@@ -41,9 +43,10 @@ func _on_BaseEnemy_area_entered(area):
 		
 		
 func death():
-	$AnimatedSprite.visible = false
+	$AnimatedSprite.queue_free()
 	$CollisionPolygon2D.queue_free()
 	$Destroyed.play()
+	print("play")
 
 
 func _on_Destroyed_finished():
