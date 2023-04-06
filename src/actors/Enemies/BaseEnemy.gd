@@ -10,7 +10,10 @@ export (int) var enemyHP = 5
 export (int) var enemyDamage = 1
 var kill_points = 25 #очки за убийство противника
 
+
 var direction = 1
+
+onready var hit = $Hit
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
@@ -34,7 +37,7 @@ func _physics_process(delta):
 
 func takeDamage(amount):
 	enemyHP -= amount
-	$Hit.play()	
+	hit.play()	
 	changeState()
 	if enemyHP <= 0:
 		#emit_signal("add_to_score",kill_points)

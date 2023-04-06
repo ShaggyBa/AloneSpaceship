@@ -12,6 +12,5 @@ func _physics_process(delta):
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	queue_free()
 
-
-func _on_AroundShield_area_entered(area):
+func _on_Bonus_area_entered(area):
 	queue_free()

@@ -3,13 +3,15 @@ extends Node
 var points := 0.0
 var points_multiplier = 100
 
+onready var music = $Music
+
 onready var counter := $CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter
 onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/CenterContainer/ScoreCounter
 
 
 
 func _ready() -> void:
-	$Music.play()
+	music.play()
 
 
 func _process(delta: float) -> void:

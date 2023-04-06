@@ -5,50 +5,62 @@
 [ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/helmet_02e.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=16]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=17]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=22]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=23]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=24]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=25]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=26]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 704, 0, 64, 64 )
 
@@ -68,7 +80,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=14]
 radius = 26.0192
 
-[node name="AroundShield" type="Area2D" groups=["BonusEffects"]]
+[node name="Bonus" type="Area2D" groups=["BonusEffects"]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
@@ -87,4 +99,5 @@ shape = SubResource( 14 )
 position = Vector2( 6.5, -0.499997 )
 scale = Vector2( 4.75, 4.05 )
 
+[connection signal="area_entered" from="." to="." method="_on_Bonus_area_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

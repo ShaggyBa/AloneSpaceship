@@ -6,5 +6,3 @@
 [node name="AroundShield" groups=["ShieldBonus"] instance=ExtResource( 1 )]
 monitoring = false
 script = ExtResource( 2 )
-
-[connection signal="area_entered" from="." to="." method="_on_AroundShield_area_entered"]
