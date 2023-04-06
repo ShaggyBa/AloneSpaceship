@@ -4,9 +4,13 @@ class_name MC
 
 export (float) var mcSpeed = 200.0 # cкорость полета корабля
 export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
+
 export (int) var mcHP = 5
+
 export (float) var shootDelay = 1.0
+
 export (float) var delayShieldRestoring = 0.3
+export (float) var duringShieldBonus = -1
 
 
 var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn")
@@ -15,8 +19,6 @@ var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/FullHP.png")
 var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
 var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
 var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
-
-onready var BS = load("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
 
 
 onready var muzzle = $Muzzle
@@ -30,7 +32,6 @@ onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
 
 onready var maxHP = mcHP
-
 
 
 var inputVector = Vector2.ZERO # вектор скорости
@@ -53,8 +54,6 @@ func _ready() -> void:
 	setTimerShooting()
 	setTimerInvincibility()
 	
-	var bonusMode = BS.instance()
-	bonusMode.connect("bonusEntered", self, "doWhat")
 	
 	game_over.action = "over"
 	game_over.pressed = true
@@ -138,14 +137,6 @@ func shieldEffect():
 		shield.playing = false
 		
 		
-func BonusShieldEffect():
-	var sceneBonusShield = preload("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn")
-	var bonusShield = sceneBonusShield.instance()
-	add_child(bonusShield)
-	
-	#bonusShield.emit_signal(sayHello)
-		
-		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
@@ -185,5 +176,15 @@ func _on_MC_area_entered(area):
 			mcHP = maxHP
 		emit_signal("health_changed", mcHP)	
 		changeState()
-	else:
-		print(area.name)							
+	elif area.is_in_group("ShieldBonus"):
+		ShieldBonus()
+							
+func ShieldBonus():
+	var TimerDuringShieldBonus = Timer.new()
+	add_child(TimerDuringShieldBonus)
+	TimerDuringShieldBonus.start(duringShieldBonus)
+	
+
+	
+
+	

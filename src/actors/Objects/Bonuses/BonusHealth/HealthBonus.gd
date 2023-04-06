@@ -1,5 +1,5 @@
 extends Bonus
 
 
-func _ready():
-	pass # Replace with function body.
+func _on_Heard_area_entered(area):
+	queue_free()

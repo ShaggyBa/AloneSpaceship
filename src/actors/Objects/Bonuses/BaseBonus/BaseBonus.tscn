@@ -1,0 +1,90 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/Main Ship - Shields - Round Shield.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/Objects/Bonuses/BaseBonus/BaseBonus.gd" type="Script" id=2]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/helmet_02e.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 576, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 640, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 704, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "blinking",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hearding",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 26.0192
+
+[node name="AroundShield" type="Area2D" groups=["BonusEffects"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 1.19209e-07 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 13 )
+animation = "blinking"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 14 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 6.5, -0.499997 )
+scale = Vector2( 4.75, 4.05 )
+
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
