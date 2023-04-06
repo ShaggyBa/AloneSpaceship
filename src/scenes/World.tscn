@@ -24,7 +24,8 @@ current = true
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
-nextSpawnTime = 1.0
+nextSpawnTime = 5.0
+maxBonusSpawn = 2
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 spawnTimer = 5.0

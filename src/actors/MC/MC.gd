@@ -101,7 +101,7 @@ func shooting():
 	
 func create_shoot():
 	var shoot = plShoot.instance()
-	shoot.global_position = $Muzzle.global_position
+	shoot.global_position = muzzle.global_position
 	shoot.damage = mcDamage
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
@@ -187,6 +187,7 @@ func _on_MC_area_entered(area):
 		heal()
 	elif area.is_in_group("ShieldBonus"):
 		timerShieldBonus()
+	#elif area.is_in_group("DamageBonus"):
 
 func heal():
 	if mcHP + 5 < maxHP:
