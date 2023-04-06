@@ -1,6 +1,6 @@
 extends Enemy
 
-export (float) var enemyAttackDelay = 1 
+export (float) var enemyAttackDelay = 1.0
 
 
 onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn") 
@@ -16,7 +16,7 @@ func _ready() -> void:
 	setTimerShooting()
 	aSprite.playing = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	shooting()
 
 
@@ -27,8 +27,7 @@ func setTimerShooting()->void:
  
 
 func shooting():
-	
-	if timerShooting.is_stopped():
+	if timerShooting.is_stopped() and not isDeath:
 		timerShooting.start()		
 		var shoot = plShoot.instance()
 		shoot.damage = enemyDamage

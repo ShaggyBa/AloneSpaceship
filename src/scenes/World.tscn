@@ -30,8 +30,7 @@ nextSpawnTime = 1.0
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 10.0
-maxEnemySpawn = 2
+minSpawnRate = 3.0
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
