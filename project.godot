@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Bonus",
 "language": "GDScript",
-"path": "res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.gd"
+"path": "res://src/actors/Objects/Bonuses/BaseBonus/BaseBonus.gd"
 }, {
 "base": "Area2D",
 "class": "Enemy",

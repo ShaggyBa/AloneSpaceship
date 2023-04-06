@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	points += delta * 25
+	points += delta * 100
 	counter.set_points(floor(points))
 	counter_final.set_points(floor(points))
 

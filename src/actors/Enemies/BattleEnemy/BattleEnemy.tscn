@@ -42,13 +42,23 @@ region = Rect2( 1024, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
-"name": "default",
-"speed": 16.0
+"name": "bottomGun",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "topGun",
+"speed": 4.0
 } ]
 
-[node name="BattleEnemy" groups=["boss"] instance=ExtResource( 1 )]
+[node name="BattleEnemy" groups=["BattleEnemy"] instance=ExtResource( 1 )]
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
 verticalSpeed = 200.0
@@ -56,11 +66,12 @@ horisontalSpeed = 10.0
 enemyHP = 20
 enemyDamage = 5
 enemyBigAttackDelay = 2.5
-enemyAttackDelay = 0.3
+enemyAttackDelay = 1.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-frame = 0
+animation = "topGun"
+frame = 1
 playing = false
 
 [node name="CollisionPolygon2D" parent="." index="1"]

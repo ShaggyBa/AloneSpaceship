@@ -206,6 +206,7 @@ margin_bottom = 82.0
 size_flags_horizontal = 8
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
+visible = false
 position = Vector2( 15, 457 )
 normal = ExtResource( 3 )
 shape = SubResource( 13 )
@@ -216,6 +217,7 @@ position = Vector2( 316, 437 )
 texture = ExtResource( 4 )
 
 [node name="FireBtn" type="TouchScreenButton" parent="Control"]
+visible = false
 position = Vector2( 883, 462 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )
