@@ -2,7 +2,7 @@ extends NinePatchRect
 
 onready var points_label := $Label
 onready var static_points = 0
-
+	
 func set_points(points: int) -> void:
 	if points < 0:
 		points = 0

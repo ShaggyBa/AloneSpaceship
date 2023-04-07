@@ -12,6 +12,7 @@ onready var score_counter := $Control/HBoxContainer/VBoxContainer4/ScoreCounter
 onready var damage_counter := $Control/HBoxContainer/VBoxContainer6/DamageCounter
 onready var rpm_counter := $Control/HBoxContainer/VBoxContainer2/RPMCounter
 onready var speed_counter := $Control/HBoxContainer/VBoxContainer2/SpeedCounter
+onready var final_score := $DeathMenu/CenterContainer/VBoxContainer/CenterContainer/ScoreCounter
 
 
 var move_vector = Vector2(0,0)
@@ -66,9 +67,9 @@ func  calculate_move_vector(event_position):
 	return (event_position - texture_center).normalized()
 
 
-
 func _on_MC_health_changed(new_value):
 	health_counter.set_points(floor(new_value))
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("enemy_death"):
@@ -77,10 +78,6 @@ func _unhandled_input(event):
 		score_counter.increase_points_on(enemy_death_points)
 	
 	
-func _process(delta):
-	pass
-
-
 func _on_MC_damage_changed(new_value):
 	damage_counter.set_points(new_value)
 
@@ -91,3 +88,9 @@ func _on_MC_shootDelay_changed(new_value):
 
 func _on_MC_speed_changed(new_value):
 	speed_counter.set_points(new_value)
+
+
+func _on_DeathMenu_game_is_over():
+	pass
+#	final_score.set_points(score_counter.get_points())
+	#print("game over")

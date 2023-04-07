@@ -253,3 +253,4 @@ visible = false
 
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]
+[connection signal="game_is_over" from="DeathMenu" to="." method="_on_DeathMenu_game_is_over"]
