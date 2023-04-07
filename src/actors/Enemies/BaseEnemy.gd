@@ -17,8 +17,17 @@ onready var hit = $Hit
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
-
 onready var maxHP = enemyHP
+
+
+onready var sprite = $AnimatedSprite
+onready var engine = $Engine
+
+
+func _ready() -> void:
+	sprite.playing = true
+	engine.playing = true
+	
 
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
@@ -48,7 +57,13 @@ func _on_BaseEnemy_area_entered(area):
 		
 func death():
 	isDeath = true
-	$AnimatedSprite.visible = false
+	
+	sprite.visible = false
+	sprite.playing = false
+	
+	engine.visible = false
+	engine.playing = false
+	
 	$CollisionPolygon2D.queue_free()
 	$Destroyed.play()
 
