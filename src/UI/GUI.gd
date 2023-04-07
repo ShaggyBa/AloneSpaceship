@@ -25,9 +25,6 @@ var kills = 0
 signal change_move(new_move)
 
 
-func _ready()->void:
-	pass
-
 func _input(event):
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		if joy_stick.is_pressed():

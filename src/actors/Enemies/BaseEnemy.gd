@@ -23,9 +23,16 @@ signal add_to_score(value) #value: int
 var enemy_death = InputEventAction.new()
 
 
-func _ready():
+onready var sprite = $AnimatedSprite
+onready var engine = $Engine
+
+
+func _ready() -> void:
+	sprite.playing = true
+	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
+	
 
 func _physics_process(delta):
 	global_position.x -= horisontalSpeed * delta
@@ -57,7 +64,13 @@ func _on_BaseEnemy_area_entered(area):
 		
 func death():
 	isDeath = true
-	$AnimatedSprite.visible = false
+	
+	sprite.visible = false
+	sprite.playing = false
+	
+	engine.visible = false
+	engine.playing = false
+	
 	$CollisionPolygon2D.queue_free()
 	$Destroyed.play()
 

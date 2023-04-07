@@ -54,7 +54,7 @@ signal speed_changed(new_value)
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
-	# Создание таймера для стрельбы
+
 	setTimerShooting()
 	setTimerInvincibility()
 	setTimerShieldBonus()
@@ -70,22 +70,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
-#	print(timerDuringShieldBonus.time_left)
+	
 	
 func _physics_process(delta) -> void:
-	spaceshipMove(delta) # функция движения корабля
+	spaceshipMove(delta)
 	
 	
-# Создание таймера
 func setTimerShooting()->void:
 	timerShooting.set_one_shot(true)
 	timerShooting.set_wait_time(shootDelay)
 	add_child(timerShooting)
 	
+	
 func setTimerInvincibility()->void:
 	timerShieldRestoring.set_one_shot(true)
 	timerShieldRestoring.set_wait_time(delayShieldRestoring)
 	add_child(timerShieldRestoring)
+	
 	
 func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.set_one_shot(true)
@@ -93,7 +94,6 @@ func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.connect("timeout", self, "disabledShieldBonus")
 
 
-# Стрельба
 func shooting():
 	if Input.is_action_pressed("ui_accept") and timerShooting.is_stopped():
 		timerShooting.start()		
@@ -107,7 +107,7 @@ func create_shoot():
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
 
-# Передвижение
+
 func spaceshipMove(delta):
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -133,14 +133,17 @@ func takeDamage(damage):
 			timerShieldRestoring.start()
 		else:
 			mcHP -= damage
+			
 			changeState()			
-			#print("Текущий HP: ", mcHP)
+			
+			print("Текущий HP: ", mcHP)
+			
 			emit_signal("health_changed", mcHP)
+			
 			hitSound.play()
+			
 			if mcHP <= 0:
 				Input.parse_input_event(game_over)
-				#queue_free()
-				#get_tree().reload_current_scene()
 
 # эффект щита
 func shieldEffect():
@@ -183,13 +186,16 @@ func _on_CanvasLayer_change_move(new_move: Vector2):
 
 
 func _on_MC_area_entered(area):
-	#if area.name == "Heard": # если area.name == @Heard@10 - то скипается код
 	if area.is_in_group("Heal"):
 		heal()
 	elif area.is_in_group("ShieldBonus"):
 		timerShieldBonus()
-	#elif area.is_in_group("DamageBonus"):
-
+	elif area.is_in_group("addDamage"):
+		addPassiveDamageBonus()
+	elif area.is_in_group("addShootSpeed"):
+		addPassiveShootSpeedBonus()
+		
+		
 func heal():
 	if mcHP + 5 < maxHP:
 		mcHP += 5
@@ -197,26 +203,33 @@ func heal():
 		mcHP = maxHP
 	emit_signal("health_changed", mcHP)	
 	changeState()
+	
 		
 func timerShieldBonus():
 	timerDuringShieldBonus.start(duringShieldBonus)
 	shieldBonus()
-#	print("start")
+	
 	
 func shieldBonus():
 	isInvicibility = true
 	timerShieldRestoring.stop()
 	shield.animation = "invincibility"
 
+
 func disabledShieldBonus():
 	isInvicibility = false
 	shield.animation = "autoshield"
 	
 
-# Тут функция умножения урона, если будет другая функция,
-# вызови эту функцию для каждого изменения урона =)	
-func damageBonus():
+func addPassiveDamageBonus():
+	mcDamage += 1
+	
+	
+func addPassiveShootSpeedBonus():
 	emit_signal("damage_changed", mcDamage)
+	if shootDelay > 0.1:
+		shootDelay -= 0.05 
+	timerShooting.set_wait_time(shootDelay)
 	
 func shootDelayBonus():
 	emit_signal("shootDelay_changed", shootDelay)

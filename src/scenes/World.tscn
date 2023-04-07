@@ -7,7 +7,7 @@
 [ext_resource path="res://src/actors/Objects/Bonuses/BonusSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
 [ext_resource path="res://src/Assets/Sound/LevelSound/battle.wav" type="AudioStream" id=9]
-[ext_resource path="res://src/actors/Enemies/EnemySpawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -36,6 +36,7 @@ changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcHP = 20
+shootDelay = 1.0
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

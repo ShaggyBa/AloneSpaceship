@@ -4,6 +4,8 @@ extends Enemy
 export (float) var enemyBigAttackDelay = 2.5 
 export (float) var enemyAttackDelay = 1.0 
 
+export (int) var enemyBigAttackDamage = 5.0
+
 
 onready var muzzles = $FiringPositions.get_children()
 onready var aSprite = $AnimatedSprite
@@ -46,7 +48,7 @@ func shooting():
 			
 			for muzzle in groupGun:
 				var doubleShoot = plBigShoot.instance()
-				doubleShoot.damage = enemyDamage					
+				doubleShoot.damage = enemyBigAttackDamage					
 				doubleShoot.global_position = muzzle.global_position
 				get_tree().current_scene.add_child(doubleShoot)
 				
@@ -59,7 +61,7 @@ func shooting():
 
 
 func changeState():
-	if float(enemyHP) / float(maxHP) == 0.2:
+	if float(enemyHP) / float(maxHP) <= 0.2:
 		aSprite.speed_scale = 2
 		aSprite.modulate = "f76969"
 		enemyAttackDelay = 0.5

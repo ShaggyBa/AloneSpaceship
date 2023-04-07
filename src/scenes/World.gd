@@ -1,7 +1,8 @@
 extends Node
 
 var points := 0.0
-var points_multiplier = 100
+var multiscore = 1.0
+var dec = 1
 
 onready var music = $Music
 
@@ -15,11 +16,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	pass
-	counter.increase_points_on(floor(delta * points_multiplier))
-#	points += delta * 100
-#	counter.set_points(floor(points))
-#	counter_final.set_points(floor(points))
+	if points / 1000 > dec:
+		dec += 1
+		multiscore += 0.05
+		
+	
+	points += delta * 100 * multiscore
+	counter.set_points(floor(points))
+	counter_final.set_points(floor(points))
+
 
 
 func _on_Button_pressed():
