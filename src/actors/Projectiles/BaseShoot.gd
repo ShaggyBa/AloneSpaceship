@@ -1,5 +1,6 @@
 extends Area2D
 
+class_name ShootClass
 
 export (float) var shootSpeed = 1000.0
 

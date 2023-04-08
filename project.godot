@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Meteorite",
 "language": "GDScript",
 "path": "res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.gd"
+}, {
+"base": "Area2D",
+"class": "ShootClass",
+"language": "GDScript",
+"path": "res://src/actors/Projectiles/BaseShoot.gd"
 } ]
 _global_script_class_icons={
 "Bonus": "",
 "Enemy": "",
 "GitAPI": "",
 "MC": "",
-"Meteorite": ""
+"Meteorite": "",
+"ShootClass": ""
 }
 
 [application]

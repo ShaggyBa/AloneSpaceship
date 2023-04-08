@@ -24,18 +24,17 @@ current = true
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
-nextSpawnTime = 5.0
-maxBonusSpawn = 2
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-minSpawnRate = 3.0
+nextSpawnTime = 1.0
+minSpawnRate = 4.0
+maxEnemySpawn = 7
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcHP = 20
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

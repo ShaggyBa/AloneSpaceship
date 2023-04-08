@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/actors/Projectiles/BaseShoot.gd" type="Script" id=1]
 [ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main ship weapon - Projectile - Zapper.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Sprites/Enemies/attackEffects/PNGs/Nautolan - Wave.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -43,16 +44,45 @@ flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 224, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 64, 64 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "waves",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.33333, 3 )
+extents = Vector2( 2.5, 8.75 )
 
 [node name="Shoot" type="Area2D"]
 collision_layer = 4
@@ -63,8 +93,6 @@ script = ExtResource( 1 )
 position = Vector2( 22, -14 )
 rotation = 1.57239
 frames = SubResource( 10 )
-frame = 6
-playing = true
 centered = false
 flip_v = true
 

@@ -110,62 +110,50 @@ atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=43]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=46]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=47]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=48]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=49]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=50]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=51]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=52]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=54]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 0, 64, 64 )
 
@@ -191,7 +179,8 @@ gravity = 0.0
 script = ExtResource( 2 )
 mcSpeed = 500.0
 mcHP = 100
-shootDelay = 0.21
+shootDelay = 0.1
+bonusShootDelay = 2.0
 duringShieldBonus = 5.0
 
 [node name="EngineSprite" type="AnimatedSprite" parent="."]
@@ -255,20 +244,27 @@ frames = SubResource( 14 )
 animation = "autoshield"
 frame = 3
 
-[node name="ShotSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -22.608
+[node name="Audio" type="AudioStreamPlayer" parent="."]
 
-[node name="Hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -19.656
-
-[node name="ShieldHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -25.0
-
-[node name="Destoied" type="AudioStreamPlayer" parent="."]
+[node name="Destoied" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
 volume_db = -19.186
 
+[node name="ShotSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 4 )
+volume_db = -22.608
+
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 5 )
+volume_db = -19.656
+
+[node name="ShieldHit" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 6 )
+volume_db = -25.0
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+volume_db = -11.653
+
 [connection signal="area_entered" from="." to="." method="_on_MC_area_entered"]
+[connection signal="finished" from="Audio/GameOver" to="." method="_on_GameOver_finished"]

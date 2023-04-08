@@ -7,14 +7,20 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 
 export (int) var mcHP = 5
 
-export (float) var shootDelay = 1.0
+
+export (float) var shootDelay = 0.3
+export (float) var bonusShootDelay = 1
+
 export (int) var mcDamage = 1
 
 export (float) var delayShieldRestoring = 0.3
-export (float) var duringShieldBonus = 2
+
+export (float) var duringShieldBonus = 2.0
+export (float) var duringDamageBonus = 5.0
 
 
 var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn")
+var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
 
 var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/FullHP.png")
 var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
@@ -24,13 +30,14 @@ var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png"
 
 onready var muzzle = $Muzzle
 onready var shield = $Shield
-#onready var bonusShield = $Shield
 onready var sprite = $MCSprite
-onready var hitSound = $Hit
-onready var shotSound = $ShotSound
-onready var shieldHitSound = $ShieldHit
 onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
+
+onready var hitSound = $Audio/Hit
+onready var shotSound = $Audio/ShotSound
+onready var shieldHitSound = $Audio/ShieldHit
+onready var gameOverSound = $Audio/ShieldHit
 
 onready var maxHP = mcHP
 
@@ -40,14 +47,18 @@ var viewportSize : Vector2
 
 
 var timerShooting = Timer.new()
+var timerBonusShooting = Timer.new()
 var timerShieldRestoring = Timer.new()
 var timerDuringShieldBonus = Timer.new()
+var timerDuringDamageBonus = Timer.new()
+
 
 
 var game_over = InputEventAction.new()
 
 
 var isInvicibility = false
+var isDamageUp = false
 
 
 signal health_changed(new_value) 
@@ -57,8 +68,10 @@ func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
 	# Создание таймера для стрельбы
 	setTimerShooting()
+	setTimerBonusShooting()
 	setTimerInvincibility()
 	setTimerShieldBonus()
+	setTimerDamageBonus()
 	
 	
 	game_over.action = "over"
@@ -69,7 +82,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
-	print(timerDuringShieldBonus.time_left)
+	#print(timerShooting.time_left)
+	print(timerBonusShooting.time_left)
 	
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -81,6 +95,11 @@ func setTimerShooting()->void:
 	timerShooting.set_wait_time(shootDelay)
 	add_child(timerShooting)
 	
+func setTimerBonusShooting()->void:
+	timerBonusShooting.set_one_shot(true)
+	timerBonusShooting.set_wait_time(bonusShootDelay)
+	add_child(timerBonusShooting)
+	
 func setTimerInvincibility()->void:
 	timerShieldRestoring.set_one_shot(true)
 	timerShieldRestoring.set_wait_time(delayShieldRestoring)
@@ -90,19 +109,33 @@ func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.set_one_shot(true)
 	add_child(timerDuringShieldBonus)
 	timerDuringShieldBonus.connect("timeout", self, "disabledShieldBonus")
+	
+func setTimerDamageBonus()->void:
+	timerDuringDamageBonus.set_one_shot(true)
+	add_child(timerDuringDamageBonus)
+	timerDuringDamageBonus.connect("timeout", self, "disabledDamageBonus")
 
 
 # Стрельба
 func shooting():
-	if Input.is_action_pressed("ui_accept") and timerShooting.is_stopped():
-		timerShooting.start()		
-		create_shoot()
+	if (Input.is_action_pressed("ui_accept")) and (timerShooting.is_stopped() and timerBonusShooting.is_stopped()):
+		if isDamageUp:
+			timerBonusShooting.start()
+			create_shoot()
+		else:
+			timerShooting.start()		
+			create_shoot()
 		
 	
 func create_shoot():
-	var shoot = plShoot.instance()
+	var shoot
+	if isDamageUp:
+		shoot = shootBonus.instance()
+		shoot.damage = mcDamage / 1.25
+	else: 
+		shoot = plShoot.instance()
+		shoot.damage = mcDamage / 1.25
 	shoot.global_position = muzzle.global_position
-	shoot.damage = mcDamage
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
 
@@ -138,6 +171,7 @@ func takeDamage(damage):
 			hitSound.play()
 			if mcHP <= 0:
 				Input.parse_input_event(game_over)
+				
 				#queue_free()
 				#get_tree().reload_current_scene()
 
@@ -186,8 +220,10 @@ func _on_MC_area_entered(area):
 	if area.is_in_group("Heal"):
 		heal()
 	elif area.is_in_group("ShieldBonus"):
-		timerShieldBonus()
-	#elif area.is_in_group("DamageBonus"):
+		shieldBonus()
+	elif area.is_in_group("DamageBonus"):
+		damageBonus()
+		
 
 func heal():
 	if mcHP + 5 < maxHP:
@@ -197,19 +233,25 @@ func heal():
 	emit_signal("health_changed", mcHP)	
 	changeState()
 		
-func timerShieldBonus():
-	timerDuringShieldBonus.start(duringShieldBonus)
-	shieldBonus()
-	print("start")
+
+func damageBonus():
+	isDamageUp = true
+	timerDuringDamageBonus.start(duringDamageBonus)
+	timerShooting.stop()
+	
+func disabledDamageBonus():
+	isDamageUp = false
+		
 	
 func shieldBonus():
 	isInvicibility = true
+	timerDuringShieldBonus.start(duringShieldBonus)
 	timerShieldRestoring.stop()
 	shield.animation = "invincibility"
 
 func disabledShieldBonus():
 	isInvicibility = false
 	shield.animation = "autoshield"
-	
+
 
 	
