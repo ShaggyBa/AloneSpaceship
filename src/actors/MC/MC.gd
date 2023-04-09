@@ -192,6 +192,8 @@ func takeDamage(damage):
 
 
 func burning(delay:int):
+	if isInvicibility:
+		return
 	for _i in range(delay):
 		tickRateDamage.start()
 		sprite.modulate = "00ff6a"		
@@ -257,12 +259,10 @@ func _on_MC_area_entered(area):
 		
 		
 func heal():
-	print("value: ", mcHP)
 	if mcHP + (maxHP / 4) < maxHP:
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	print("heal: ", mcHP)
 	emit_signal("health_changed", mcHP)	
 	changeState()
 	
@@ -290,7 +290,16 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 1
+	mcDamage *= 2
+	
+	
+func addPassiveSpeed():
+	mcVSpeed += floor(mcVSpeed * 0.1)
+	mcSpeed += floor(mcSpeed * 0.1)
+	
+	
+func addPassiveMultiscoreBonus():
+	get_tree().current_scene.multiscore += 0.1
 	
 	
 func addPassiveShootSpeedBonus():
@@ -299,12 +308,21 @@ func addPassiveShootSpeedBonus():
 		shootDelay -= 0.05 
 	timerShooting.set_wait_time(shootDelay)
 	
+
+func addPassiveMaxHPBonus():
+	maxHP += 10
+	mcHP += 10
+	emit_signal("health_changed", mcHP)
+	
+	
 func shootDelayBonus():
 	emit_signal("shootDelay_changed", shootDelay)
+
 
 func speedBonus():
 	emit_signal("speed_changed", mcVSpeed)
 
+
 func _on_tickRateDamage_timeout():
-	takeDamage(maxHP * 0.2)
+	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"

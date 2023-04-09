@@ -13,8 +13,6 @@ var kill_points = 25 #очки за убийство противника
 
 var direction = 1
 
-onready var hit = $Hit
-onready var destroyed = $Destroyed
 
 
 onready var viewportRect = get_viewport_rect()
@@ -24,7 +22,8 @@ onready var maxHP = enemyHP
 signal add_to_score(value) #value: int
 var enemy_death = InputEventAction.new()
 
-
+onready var hit = $Hit
+onready var destroyed = $Destroyed
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 
@@ -37,6 +36,10 @@ func _ready() -> void:
 	
 
 func _physics_process(delta):
+	moving(delta)
+
+
+func moving(delta:float)->void:
 	global_position.x -= horisontalSpeed * delta
 	global_position.y += verticalSpeed * delta * direction
 	if global_position.y < viewportRect.position.y + 15 \
