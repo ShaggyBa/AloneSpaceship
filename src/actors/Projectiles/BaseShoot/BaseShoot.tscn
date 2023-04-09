@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://src/actors/Projectiles/BaseShoot.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/Projectiles/BaseShoot/BaseShoot.gd" type="Script" id=1]
 [ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main ship weapon - Projectile - Zapper.png" type="Texture" id=2]
 [ext_resource path="res://src/Assets/Sprites/Enemies/attackEffects/PNGs/Nautolan - Wave.png" type="Texture" id=3]
 

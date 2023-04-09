@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 	points += delta * 100
 	counter.set_points(floor(points))
 	counter_final.set_points(floor(points))
-	if points > 150:
-		changeBack()
+	if points > 10000:
+		changeBack() 
 	
 
 func changeBack():

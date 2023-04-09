@@ -60,9 +60,12 @@ enemyDamage = 3
 enemyAttackDelay = 1.0
 
 [node name="AnimatedSprite" parent="." index="0"]
+visible = false
 frames = SubResource( 10 )
 animation = "idle"
-frame = 0
+
+[node name="Death" parent="." index="1"]
+animation = "ShooterDeath"
 
 [node name="FiringPositions" type="Node2D" parent="." index="3"]
 

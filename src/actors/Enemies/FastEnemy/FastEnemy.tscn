@@ -11,4 +11,9 @@ horisontalSpeed = 1000.0
 enemyDamage = 2
 
 [node name="AnimatedSprite" parent="." index="0"]
-frame = 6
+visible = false
+animation = "Fast"
+frame = 3
+
+[node name="Death" parent="." index="1"]
+animation = "FastDeath"

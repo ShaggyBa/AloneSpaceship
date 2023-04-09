@@ -5,7 +5,7 @@ class_name ShootClass
 export (float) var shootSpeed = 1000.0
 
 
-var pShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect.tscn")
+var pShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect/BaseShootEffect.tscn")
 
 var damage
 

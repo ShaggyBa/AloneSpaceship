@@ -29,12 +29,13 @@ current = true
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 1.0
-minSpawnRate = 4.0
-maxEnemySpawn = 7
+nextSpawnTime = 0.1
+minSpawnRate = 1000.0
+maxEnemySpawn = 2000
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
+mcHP = 1000
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

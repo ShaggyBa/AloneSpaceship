@@ -9,7 +9,7 @@ export (int) var mcHP = 5
 
 
 export (float) var shootDelay = 0.3
-export (float) var bonusShootDelay = 1
+export (float) var bonusShootDelay = 0.2
 
 export (int) var mcDamage = 1
 
@@ -19,13 +19,13 @@ export (float) var duringShieldBonus = 2.0
 export (float) var duringDamageBonus = 5.0
 
 
-var plShoot = preload("res://src/actors/Projectiles/BaseShoot.tscn")
+var plShoot = preload("res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
 
-var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/FullHP.png")
-var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/SemiHP.png")
-var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/LowHP.png")
-var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/VeryLowHP.png")
+var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/States/FullHP.png")
+var pSemiHP = preload("res://src/Assets/Sprites/MainShip/model/States/SemiHP.png")
+var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/States/LowHP.png")
+var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/States/VeryLowHP.png")
 
 
 onready var muzzle = $Muzzle
@@ -82,8 +82,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shooting()
 	shieldEffect()
-	#print(timerShooting.time_left)
-	print(timerBonusShooting.time_left)
 	
 func _physics_process(delta) -> void:
 	spaceshipMove(delta) # функция движения корабля
@@ -134,7 +132,7 @@ func create_shoot():
 		shoot.damage = mcDamage / 1.25
 	else: 
 		shoot = plShoot.instance()
-		shoot.damage = mcDamage / 1.25
+		shoot.damage = mcDamage
 	shoot.global_position = muzzle.global_position
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
@@ -223,13 +221,19 @@ func _on_MC_area_entered(area):
 		shieldBonus()
 	elif area.is_in_group("DamageBonus"):
 		damageBonus()
+	elif area.is_in_group("damageable"):
+		timerDuringShieldBonus.stop()
+		if timerDuringShieldBonus.is_stopped():
+			disabledShieldBonus()
 		
 
 func heal():
-	if mcHP + 5 < maxHP:
-		mcHP += 5
+	print("value: ", mcHP)
+	if mcHP + (maxHP / 4) < maxHP:
+		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
+	print("heal: ", mcHP)
 	emit_signal("health_changed", mcHP)	
 	changeState()
 		

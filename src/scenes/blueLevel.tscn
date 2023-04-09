@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/parallaxBackground/ParallaxBackground.gd" type="Script" id=1]
-[ext_resource path="res://src/Assets/Backgrounds/Planets.png" type="Texture" id=2]
-[ext_resource path="res://src/Assets/Backgrounds/line.png" type="Texture" id=3]
-[ext_resource path="res://src/Assets/Backgrounds/Background.png" type="Texture" id=4]
-[ext_resource path="res://src/Assets/Backgrounds/Stars.png" type="Texture" id=5]
-[ext_resource path="res://src/Assets/Backgrounds/Nebula.png" type="Texture" id=6]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/Planets.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/line.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/Background.png" type="Texture" id=4]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/Stars.png" type="Texture" id=5]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/Nebula.png" type="Texture" id=6]
 
 [node name="blueLevel" type="ParallaxBackground"]
 layer = -1
@@ -16,6 +16,7 @@ position = Vector2( 488, 324 )
 texture = ExtResource( 4 )
 
 [node name="Stars" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2( 0.05, 0.01 )
 motion_mirroring = Vector2( 1200, 800 )
 
@@ -35,6 +36,7 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="nebula" type="ParallaxLayer" parent="."]
+visible = false
 position = Vector2( 61, 0 )
 motion_scale = Vector2( 0.1, 1 )
 motion_mirroring = Vector2( 1200, 800 )

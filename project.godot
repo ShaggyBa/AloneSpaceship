@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "ShootClass",
 "language": "GDScript",
-"path": "res://src/actors/Projectiles/BaseShoot.gd"
+"path": "res://src/actors/Projectiles/BaseShoot/BaseShoot.gd"
 } ]
 _global_script_class_icons={
 "Bonus": "",

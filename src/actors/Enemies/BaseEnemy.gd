@@ -6,7 +6,7 @@ class_name Enemy
 
 export (float) var verticalSpeed = 50.0
 export (float) var horisontalSpeed = 100.0
-export (int) var enemyHP = 5
+export (int) var enemyHP = 1
 export (int) var enemyDamage = 1
 
 
@@ -53,12 +53,16 @@ func death():
 	isDeath = true
 	$AnimatedSprite.visible = false
 	$CollisionPolygon2D.queue_free()
+	$Death.playing = true
 	destroyed.play()
 
 
-func _on_Destroyed_finished():
+func _on_Death_animation_finished():
 	queue_free()
 
 
 func changeState():
 	pass
+
+
+

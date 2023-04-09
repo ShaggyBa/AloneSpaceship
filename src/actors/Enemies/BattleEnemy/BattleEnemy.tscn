@@ -72,15 +72,13 @@ enemyAttackDelay = 1.0
 frames = SubResource( 1 )
 animation = "topGun"
 frame = 1
-playing = false
 
-[node name="CollisionPolygon2D" parent="." index="1"]
+[node name="Death" parent="." index="1"]
+animation = "BattleDeath"
+
+[node name="CollisionPolygon2D" parent="." index="2"]
 position = Vector2( -12.6667, -0.666667 )
 polygon = PoolVector2Array( 6, -34.6667, -1.33333, -18.6667, -8, -18, -8.66667, -13.3333, -16.6667, -13.3333, -22, -22, -31.3333, -2.66667, -28.6667, -0.666667, -28.6667, 2.66667, -31.3333, 4, -22, 24.6667, -16.6667, 14, -8.66667, 14.6667, -5.33333, 19.3333, -1.33333, 20, 6, 37.3333, 30, 18, 58, 1.33333, 30.6667, -17.3333 )
-
-[node name="VisibilityNotifier2D" parent="." index="2"]
-position = Vector2( -2, -0.666667 )
-scale = Vector2( 5.72561, 4.39623 )
 
 [node name="FiringPositions" type="Node2D" parent="." index="3"]
 
@@ -98,3 +96,7 @@ position = Vector2( -19.3333, -16 )
 
 [node name="Muzzle4" type="Position2D" parent="FiringPositions" index="3"]
 position = Vector2( -19.3333, 16 )
+
+[node name="VisibilityNotifier2D" parent="." index="4"]
+position = Vector2( -2, -0.666667 )
+scale = Vector2( 5.72561, 4.39623 )
