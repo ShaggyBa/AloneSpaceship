@@ -242,9 +242,7 @@ func _on_MC_area_entered(area):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
-		
-
-		timerShieldBonus()
+			#timerShieldBonus()
 	elif area.is_in_group("addDamage"):
 		addPassiveDamageBonus()
 	elif area.is_in_group("addShootSpeed"):

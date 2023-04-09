@@ -36,7 +36,6 @@ maxEnemySpawn = 2000
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcHP = 20
 shootDelay = 0.5
 delayShieldRestoring = 5.0
 

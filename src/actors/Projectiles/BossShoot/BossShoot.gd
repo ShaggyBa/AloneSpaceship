@@ -5,7 +5,7 @@ export (float) var rayDuracity = 2.0
 export (float) var speed = 750.0
 
 
-onready var plShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect.tscn")
+onready var plShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect/BaseShootEffect.tscn")
 
 
 onready var timerRayDuracity = $TimerRayDuracity
