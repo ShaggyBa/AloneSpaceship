@@ -33,11 +33,13 @@ onready var shield = $Shield
 onready var sprite = $MCSprite
 onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
+onready var collision = $CollisionShape2D
 
 onready var hitSound = $Audio/Hit
 onready var shotSound = $Audio/ShotSound
 onready var shieldHitSound = $Audio/ShieldHit
 onready var gameOverSound = $Audio/ShieldHit
+onready var destroyed = $Audio/Destroyed
 
 onready var maxHP = mcHP
 
@@ -60,6 +62,7 @@ var game_over = InputEventAction.new()
 
 var isInvicibility = false
 var isDamageUp = false
+var isDead = false
 
 
 signal health_changed(new_value) 
@@ -182,8 +185,21 @@ func takeDamage(damage):
 			hitSound.play()
 			
 			if mcHP <= 0:
-				Input.parse_input_event(game_over)
+				death()
 
+func death():
+	isDead = true
+	collision.queue_free()
+	mcVSpeed /= 4
+	mcSpeed /= 4
+	destroyed.play()
+	sprite.animation = "Death"
+	sprite.playing = true
+	#sprite.connect("animation_finished", self, "_on_Death_Animation")
+	destroyed.connect("finished", self, "_on_Death_Animation")
+
+func _on_Death_Animation():
+	Input.parse_input_event(game_over)
 
 func burning(delay:int):
 	for _i in range(delay):
@@ -205,17 +221,17 @@ func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
-		sprite.set_texture(pFullHP)
+		sprite.animation = "FullHP"
 	elif MCCurrentState >= 0.6:
 		crushEffects.emitting = true			
-		sprite.set_texture(pSemiHP)
+		sprite.animation = "SemiHP"
 	elif MCCurrentState >= 0.4:
 		crushEffects.emitting = true					
-		sprite.set_texture(pLowHP)
+		sprite.animation = "LowHP"
 		crushEffects.amount = 10		
 	else: 
 		crushEffects.emitting = true	
-		sprite.set_texture(pVeryLowHP)
+		sprite.animation = "VeryLowHP"
 		crushEffects.amount = 15
 
 
@@ -242,7 +258,6 @@ func _on_MC_area_entered(area):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
-			#timerShieldBonus()
 	elif area.is_in_group("addDamage"):
 		addPassiveDamageBonus()
 	elif area.is_in_group("addShootSpeed"):
@@ -250,12 +265,12 @@ func _on_MC_area_entered(area):
 		
 		
 func heal():
-	print("value: ", mcHP)
+	#print("value: ", mcHP)
 	if mcHP + (maxHP / 4) < maxHP:
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	print("heal: ", mcHP)
+	#print("heal: ", mcHP)
 	emit_signal("health_changed", mcHP)	
 	changeState()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://src/Assets/Sprites/MainShip/model/States/FullHP.png" type="Texture" id=1]
 [ext_resource path="res://src/actors/MC/MC.gd" type="Script" id=2]
@@ -10,19 +10,20 @@
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Powering.png" type="Texture" id=8]
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Idle.png" type="Texture" id=9]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/GameOver.mp3" type="AudioStream" id=10]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/SemiHP.png" type="Texture" id=11]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/VeryLowHP.png" type="Texture" id=12]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/LowHP.png" type="Texture" id=13]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/Death/McDeath.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=25]
-flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=26]
-flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 48, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=27]
-flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 96, 0, 48, 48 )
 
@@ -55,103 +56,153 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 100, 100 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 14 )
+region = Rect2( 100, 0, 100, 100 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 14 )
+region = Rect2( 200, 0, 100, 100 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 14 )
+region = Rect2( 300, 0, 100, 100 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 14 )
+region = Rect2( 400, 0, 100, 100 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 14 )
+region = Rect2( 500, 0, 100, 100 )
+
+[sub_resource type="SpriteFrames" id=55]
+animations = [ {
+"frames": [ SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"loop": true,
+"name": "Death",
+"speed": 2.5
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "FullHP",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "LowHP",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "SemiHP",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "VeryLowHP",
+"speed": 0.0
+} ]
+
 [sub_resource type="AtlasTexture" id=33]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=34]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=35]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=36]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=37]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=38]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=39]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=40]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=41]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=42]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=43]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=46]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=47]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=48]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=49]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=50]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=51]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=52]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 576, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=54]
-flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 0, 64, 64 )
 
@@ -188,10 +239,11 @@ scale = Vector2( 2, 2 )
 frames = SubResource( 32 )
 animation = "idle"
 
-[node name="MCSprite" type="Sprite" parent="."]
-rotation = 1.5708
+[node name="MCSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.82739, 1.82739 )
-texture = ExtResource( 1 )
+frames = SubResource( 55 )
+animation = "Death"
+speed_scale = 0.997
 
 [node name="CrushEffects" type="CPUParticles2D" parent="."]
 position = Vector2( 0, -6 )
@@ -222,6 +274,7 @@ position = Vector2( 0, 2 )
 polygon = PoolVector2Array( 24, 0, 7, 10, -8, 25, -24, 25, -23, -30, -9, -30, 9, -11, 23, -7 )
 
 [node name="Muzzle" type="Position2D" parent="." groups=["player"]]
+visible = false
 position = Vector2( 35, 0 )
 __meta__ = {
 "_gizmo_extents_": 5.0
@@ -235,6 +288,7 @@ limit_bottom = 650
 limit_smoothed = true
 
 [node name="Shield" type="AnimatedSprite" parent="."]
+visible = false
 rotation = 1.5708
 scale = Vector2( 1.85, 1.85 )
 z_index = 1
@@ -244,9 +298,9 @@ frame = 3
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 
-[node name="Destoied" type="AudioStreamPlayer" parent="Audio"]
+[node name="Destroyed" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
-volume_db = -19.186
+volume_db = -14.017
 
 [node name="ShotSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )
@@ -260,9 +314,4 @@ volume_db = -19.656
 stream = ExtResource( 6 )
 volume_db = -25.0
 
-[node name="GameOver" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 10 )
-volume_db = -11.653
-
 [connection signal="area_entered" from="." to="." method="_on_MC_area_entered"]
-[connection signal="finished" from="Audio/GameOver" to="." method="_on_GameOver_finished"]

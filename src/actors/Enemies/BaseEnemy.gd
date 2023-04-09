@@ -13,9 +13,11 @@ export (int) var enemyDamage = 1
 
 var direction = 1
 
-onready var hit = $Hit
-onready var destroyed = $Destroyed
+onready var hit = $Audio/Hit
+onready var destroyed = $Audio/Destroyed
 
+
+#onready var playerInst = get_tree().current_scene.get_node("MC")
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
@@ -24,6 +26,8 @@ onready var maxHP = enemyHP
 
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
+onready var deathAnimation = $Death
+onready var collision = $CollisionPolygon2D
 
 
 func _ready() -> void:
@@ -66,9 +70,12 @@ func death():
 	engine.visible = false
 	engine.playing = false
 	
-	$CollisionPolygon2D.queue_free()
-	$Death.playing = true
+	collision.queue_free()
+	deathAnimation.playing = true
 	destroyed.play()
+	
+	horisontalSpeed /= 2
+	verticalSpeed /= 2
 
 
 func _on_Death_animation_finished():
