@@ -6,8 +6,8 @@ var dec = 1
 
 onready var music = $Music
 
-onready var counter := $CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter
-onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
+onready var counter := $GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter
+onready var counter_final := $GUI/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 
 var newBack = preload("res://src/scenes/orangeLevel.tscn")
 var orangeInst

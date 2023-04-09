@@ -4,8 +4,6 @@ extends Control
 signal game_is_over()
 
 
-signal game_is_over()
-
 func _on_TryBtn_pressed()->void:
 	queue_free()
 	get_tree().reload_current_scene()

@@ -29,6 +29,7 @@ func _ready() -> void:
 	
 	rotation = _target.angle_to_point(position)
 
+
 func _physics_process(delta: float) -> void:
 	global_position += targetPos * speed * delta
 	

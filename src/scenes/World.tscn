@@ -22,7 +22,7 @@ script = ExtResource( 7 )
 position = Vector2( 512, 302 )
 current = true
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
+[node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
 
@@ -30,9 +30,7 @@ current = true
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 0.1
-minSpawnRate = 1000.0
-maxEnemySpawn = 2000
+minSpawnRate = 2.0
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
@@ -56,8 +54,5 @@ rotation = 2.06635
 [node name="Boss" parent="." instance=ExtResource( 6 )]
 position = Vector2( 917, 283 )
 
-[connection signal="change_move" from="CanvasLayer" to="MC" method="_on_CanvasLayer_change_move"]
-[connection signal="damage_changed" from="MC" to="CanvasLayer" method="_on_MC_damage_changed"]
-[connection signal="health_changed" from="MC" to="CanvasLayer" method="_on_MC_health_changed"]
-[connection signal="shootDelay_changed" from="MC" to="CanvasLayer" method="_on_MC_shootDelay_changed"]
-[connection signal="speed_changed" from="MC" to="CanvasLayer" method="_on_MC_speed_changed"]
+[connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]

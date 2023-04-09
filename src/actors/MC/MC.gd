@@ -41,7 +41,6 @@ onready var shieldHitSound = $Audio/ShieldHit
 onready var gameOverSound = $Audio/ShieldHit
 
 onready var maxHP = mcHP
-var isInvicibility = false
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -87,6 +86,7 @@ func _ready() -> void:
 	emit_signal("damage_changed", mcDamage)
 	emit_signal("shootDelay_changed", round(1 / shootDelay))
 	emit_signal("speed_changed", mcSpeed)
+	
 	
 func _process(_delta: float) -> void:
 	shooting()
@@ -155,8 +155,8 @@ func create_shoot():
 
 
 func spaceshipMove(delta):
-#	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-#	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changePosition(inputVector, delta)
 	
@@ -168,7 +168,6 @@ func changePosition(vector:Vector2, delta:float):
 	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
 	 
 
-# Получение урона
 func takeDamage(damage):
 	if isInvicibility: 
 		return
@@ -182,7 +181,7 @@ func takeDamage(damage):
 			
 			changeState()			
 			
-#			print("Текущий HP: ", mcHP)
+			print("Текущий HP: ", mcHP)
 			
 			emit_signal("health_changed", mcHP)
 			
@@ -210,6 +209,7 @@ func shieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
+	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
 		sprite.set_texture(pFullHP)

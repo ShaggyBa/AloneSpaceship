@@ -18,7 +18,7 @@ onready var kills_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxCont
 onready var damage_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter
 onready var rpm_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPMCounter
 onready var speed_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter
-onready var final_score := $DeathMenu/CenterContainer/VBoxContainer/CenterContainer/ScoreCounter
+onready var final_score := $DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 
 
 var move_vector = Vector2(0,0)
@@ -58,13 +58,13 @@ func _on_MC_health_changed(new_value):
 	health_counter.set_points(floor(new_value))
 
 
-func _unhandled_input(event):
-	if event.is_action_pressed("enemy_death"):
-		kills += 1
-		kills_counter.set_points(kills)
-		kills_counterD.set_points(kills)
-		score_counter.increase_points_on(enemy_death_points)
-	
+#func _unhandled_input(event):
+#	if event.is_action_pressed("enemy_death"):
+#		kills += 1
+#		kills_counter.set_points(kills)
+#		kills_counterD.set_points(kills)
+#		score_counter.increase_points_on(enemy_death_points)
+#
 	
 func _on_MC_damage_changed(new_value):
 	damage_counter.set_points(new_value)
