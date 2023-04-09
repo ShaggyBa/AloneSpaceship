@@ -3,12 +3,15 @@ extends Control
 
 signal game_is_over()
 
-func _on_TryBtn_pressed():
+
+signal game_is_over()
+
+func _on_TryBtn_pressed()->void:
 	queue_free()
 	get_tree().reload_current_scene()
 
 
-func _on_QuitBtn_pressed():
+func _on_QuitBtn_pressed()->void:
 	get_tree().change_scene("res://src/UI/Menu.tscn")
 
 

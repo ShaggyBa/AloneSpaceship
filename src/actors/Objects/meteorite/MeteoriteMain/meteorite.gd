@@ -55,6 +55,8 @@ func _on_Meteorite_area_entered(area: Area2D) -> void:
 	if area is MC:
 		area.takeDamage(meteoriteHP)
 		meteoriteHP = 0
+	if area.is_in_group("boss"):
+		meteoriteHP = 0
 
  
 func _on_VisibilityNotifier2D_screen_exited():

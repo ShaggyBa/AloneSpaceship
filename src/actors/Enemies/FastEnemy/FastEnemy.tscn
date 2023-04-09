@@ -13,6 +13,12 @@ enemyDamage = 2
 [node name="Engine" parent="." index="0"]
 position = Vector2( -3, 0 )
 scale = Vector2( 0.95, 1.5 )
+frames = null
 
 [node name="AnimatedSprite" parent="." index="1"]
+visible = false
+animation = "Fast"
 frame = 6
+
+[node name="Death" parent="." index="2"]
+animation = "FastDeath"

@@ -2,7 +2,8 @@ extends Node2D
 
 var preloadedBonuses = [
 		preload("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn"),
-		preload("res://src/actors/Objects/Bonuses/BonusHealth/HealthBonus.tscn")
+		preload("res://src/actors/Objects/Bonuses/BonusHealth/HealthBonus.tscn"),
+		preload("res://src/actors/Objects/Bonuses/BonusDamage/DamageBonus.tscn"),
 	]
 
 export (float) var nextSpawnTime = 2.0
@@ -25,7 +26,7 @@ func _on_SpawnTimer_timeout():
 		
 	
 		# Position 
-		bonus.position = Vector2($Position2D.global_position.x, rand_range(0, viewportRect.end.y))
+		bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(0, viewportRect.end.y))
 		get_tree().current_scene.add_child(bonus)
 	
 		# Restart timer

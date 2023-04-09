@@ -9,7 +9,8 @@ onready var music = $Music
 onready var counter := $CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter
 onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 
-
+var newBack = preload("res://src/scenes/orangeLevel.tscn")
+var orangeInst
 
 func _ready() -> void:
 	music.play()
@@ -24,8 +25,12 @@ func _process(delta: float) -> void:
 	points += delta * 100 * multiscore
 	counter.set_points(floor(points))
 	counter_final.set_points(floor(points))
+	if points > 10000:
+		changeBack() 
+	
 
-
-
-func _on_Button_pressed():
-	get_tree().change_scene("res://src/scenes/World_2.tscn")
+func changeBack():
+	orangeInst = newBack.instance()
+	add_child(orangeInst)
+	$blueLevel.queue_free()
+		

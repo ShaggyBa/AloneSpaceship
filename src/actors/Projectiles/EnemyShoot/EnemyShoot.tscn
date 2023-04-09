@@ -1,8 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://src/actors/Projectiles/BaseShoot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/Projectiles/EnemyShoot/EnemyShoot.gd" type="Script" id=2]
 [ext_resource path="res://src/Assets/Sprites/Enemies/attackEffects/PNGs/Nautolan - Bullet.png" type="Texture" id=3]
+
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )

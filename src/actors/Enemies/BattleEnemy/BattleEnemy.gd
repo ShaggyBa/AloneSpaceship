@@ -8,7 +8,6 @@ export (int) var enemyBigAttackDamage = 5.0
 
 
 onready var muzzles = $FiringPositions.get_children()
-onready var aSprite = $AnimatedSprite
 
 onready var groupGun = [muzzles[0], muzzles[1]]
 

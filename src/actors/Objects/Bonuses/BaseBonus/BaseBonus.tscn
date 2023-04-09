@@ -1,103 +1,225 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=47 format=2]
 
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/Main Ship - Shields - Round Shield.png" type="Texture" id=1]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/iconShieldBonus.png" type="Texture" id=1]
 [ext_resource path="res://src/actors/Objects/Bonuses/BaseBonus/BaseBonus.gd" type="Script" id=2]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/helmet_02e.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/HealBonus.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/DamageBonus.png" type="Texture" id=4]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/animFrame.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 9, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=16]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 70, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=17]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 131, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 192, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 253, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 314, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 375, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=22]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 436, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=23]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 512, 0, 64, 64 )
+region = Rect2( 497, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 576, 0, 64, 64 )
+region = Rect2( 558, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=25]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 640, 0, 64, 64 )
+region = Rect2( 619, 0, 61, 57 )
 
 [sub_resource type="AtlasTexture" id=26]
-flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 704, 0, 64, 64 )
+region = Rect2( 680, 0, 61, 57 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 741, 0, 61, 57 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 5 )
+region = Rect2( 90, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 5 )
+region = Rect2( 180, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 5 )
+region = Rect2( 270, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 5 )
+region = Rect2( 360, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 5 )
+region = Rect2( 450, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 5 )
+region = Rect2( 540, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 5 )
+region = Rect2( 630, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 5 )
+region = Rect2( 720, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 5 )
+region = Rect2( 810, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 5 )
+region = Rect2( 900, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 5 )
+region = Rect2( 990, 0, 90, 79 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 3 )
+region = Rect2( 6, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 3 )
+region = Rect2( 69, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 3 )
+region = Rect2( 132, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 3 )
+region = Rect2( 195, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 3 )
+region = Rect2( 258, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 3 )
+region = Rect2( 321, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 3 )
+region = Rect2( 447, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 3 )
+region = Rect2( 510, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 3 )
+region = Rect2( 573, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 3 )
+region = Rect2( 636, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 3 )
+region = Rect2( 699, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 3 )
+region = Rect2( 762, 0, 63, 51 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 3 )
+region = Rect2( 825, 0, 63, 51 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": true,
-"name": "blinking",
+"name": "Blinking",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
 "loop": true,
-"name": "hearding",
+"name": "Border",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Damaging",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "Hearding",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=14]
-radius = 26.0192
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 40, 39.6667 )
 
 [node name="Bonus" type="Area2D" groups=["BonusEffects"]]
+position = Vector2( -4, 0 )
+scale = Vector2( 0.6, 0.6 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 1.19209e-07 )
+position = Vector2( 5, 4 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 13 )
-animation = "blinking"
+
+[node name="Border" type="AnimatedSprite" parent="."]
+position = Vector2( 11, 3 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 13 )
+animation = "Border"
+frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 3 )
 scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 14 )
+shape = SubResource( 54 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 6.5, -0.499997 )
-scale = Vector2( 4.75, 4.05 )
+position = Vector2( 4, 3.81611 )
+scale = Vector2( 7.54931, 6.51839 )
 
 [connection signal="area_entered" from="." to="." method="_on_Bonus_area_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -6,7 +6,7 @@ class_name Enemy
 
 export (float) var verticalSpeed = 50.0
 export (float) var horisontalSpeed = 100.0
-export (int) var enemyHP = 5
+export (int) var enemyHP = 1
 export (int) var enemyDamage = 1
 var kill_points = 25 #очки за убийство противника
 
@@ -14,6 +14,8 @@ var kill_points = 25 #очки за убийство противника
 var direction = 1
 
 onready var hit = $Hit
+onready var destroyed = $Destroyed
+
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
@@ -23,12 +25,12 @@ signal add_to_score(value) #value: int
 var enemy_death = InputEventAction.new()
 
 
-onready var sprite = $AnimatedSprite
+onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 
 
 func _ready() -> void:
-	sprite.playing = true
+	aSprite.playing = true
 	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
@@ -59,25 +61,29 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_BaseEnemy_area_entered(area):
 	if area is MC:
 		area.takeDamage(enemyDamage*5)
-		queue_free()
+		death()
 		
 		
 func death():
 	isDeath = true
 	
-	sprite.visible = false
-	sprite.playing = false
+	aSprite.visible = false
+	aSprite.playing = false
 	
 	engine.visible = false
 	engine.playing = false
 	
 	$CollisionPolygon2D.queue_free()
-	$Destroyed.play()
+	$Death.playing = true
+	destroyed.play()
 
 
-func _on_Destroyed_finished():
+func _on_Death_animation_finished():
 	queue_free()
 
 
 func changeState():
 	pass
+
+
+

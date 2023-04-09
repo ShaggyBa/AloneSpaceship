@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/Projectiles/BonusShootEffect/BonusShootEffect.gd" type="Script" id=1]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/effectShootBonus.png" type="Texture" id=2]
+
+[node name="Sprite" type="Sprite"]
+scale = Vector2( 0.705128, 0.705128 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
