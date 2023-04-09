@@ -1,11 +1,11 @@
 extends Control
 
-func _on_TryBtn_pressed():
+func _on_TryBtn_pressed()->void:
 	queue_free()
 	get_tree().reload_current_scene()
 
 
-func _on_QuitBtn_pressed():
+func _on_QuitBtn_pressed()->void:
 	get_tree().change_scene("res://src/UI/Menu.tscn")
 
 

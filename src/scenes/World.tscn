@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/Objects/Bonuses/BonusSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actors/Boss/Boss.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
 [ext_resource path="res://src/Assets/Sound/LevelSound/battle.wav" type="AudioStream" id=9]
-[ext_resource path="res://src/actors/Enemies/EnemySpawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -35,7 +36,8 @@ maxEnemySpawn = 2000
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcHP = 1000
+mcHP = 20
+shootDelay = 0.5
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
@@ -52,5 +54,7 @@ curve = SubResource( 1 )
 position = Vector2( 0, 5 )
 rotation = 2.06635
 
+[node name="Boss" parent="." instance=ExtResource( 6 )]
+position = Vector2( 917, 283 )
+
 [connection signal="change_move" from="CanvasLayer" to="MC" method="_on_CanvasLayer_change_move"]
-[connection signal="health_changed" from="MC" to="CanvasLayer" method="_on_MC_health_changed"]

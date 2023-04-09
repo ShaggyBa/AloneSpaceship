@@ -7,7 +7,6 @@ onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoo
 
 onready var muzzles = $FiringPositions.get_children()	
 
-onready var aSprite = $AnimatedSprite
 
 var timerShooting = Timer.new()
 var currentGun = true

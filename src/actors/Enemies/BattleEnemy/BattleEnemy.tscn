@@ -64,11 +64,18 @@ script = ExtResource( 2 )
 verticalSpeed = 200.0
 horisontalSpeed = 10.0
 enemyHP = 20
-enemyDamage = 5
+enemyDamage = 3
 enemyBigAttackDelay = 2.5
 enemyAttackDelay = 1.0
+enemyBigAttackDamage = 5
 
-[node name="AnimatedSprite" parent="." index="0"]
+[node name="Engine" parent="." index="0"]
+modulate = Color( 0.756863, 0, 1, 1 )
+position = Vector2( -10, 0 )
+scale = Vector2( 1.59, 3.06667 )
+frame = 0
+
+[node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "topGun"
 frame = 1
