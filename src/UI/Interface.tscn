@@ -24,7 +24,9 @@ margin_right = 146.0
 margin_bottom = 48.0
 
 [node name="ScoreCounter" parent="HBoxContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 392.0
 margin_right = 416.0
 margin_bottom = 48.0
 size_flags_horizontal = 10

@@ -87,85 +87,6 @@ margin_bottom = 41.0
 rect_min_size = Vector2( 50, 1 )
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 250.0
-margin_right = 321.0
-margin_bottom = 82.0
-
-[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
-margin_right = 71.0
-margin_bottom = 37.0
-text = "RPS: "
-__meta__ = {
-"_editor_description_": "Cкорость стрелбы"
-}
-
-[node name="Label3" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
-margin_top = 41.0
-margin_right = 71.0
-margin_bottom = 78.0
-text = "Speed: "
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 325.0
-margin_right = 349.0
-margin_bottom = 82.0
-
-[node name="RPMCounter" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 24.0
-margin_bottom = 39.0
-
-[node name="SpeedCounter" parent="Control/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 43.0
-margin_right = 24.0
-margin_bottom = 82.0
-
-[node name="Control2" type="Control" parent="Control/HBoxContainer"]
-margin_left = 353.0
-margin_top = 40.0
-margin_right = 403.0
-margin_bottom = 41.0
-rect_min_size = Vector2( 50, 1 )
-size_flags_vertical = 4
-
-[node name="VBoxContainer5" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 407.0
-margin_right = 484.0
-margin_bottom = 82.0
-
-[node name="Damage" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
-margin_right = 77.0
-margin_bottom = 37.0
-text = "Damage:"
-
-[node name="Health" type="Label" parent="Control/HBoxContainer/VBoxContainer5"]
-margin_top = 41.0
-margin_right = 77.0
-margin_bottom = 78.0
-text = "Health::"
-
-[node name="VBoxContainer6" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 488.0
-margin_right = 512.0
-margin_bottom = 82.0
-
-[node name="DamageCounter" parent="Control/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 24.0
-margin_bottom = 39.0
-
-[node name="HealthCounter" parent="Control/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 43.0
-margin_right = 24.0
-margin_bottom = 82.0
-
 [node name="VBoxContainer3" type="VBoxContainer" parent="Control/HBoxContainer"]
 margin_left = 864.0
 margin_right = 946.0
@@ -179,14 +100,14 @@ size_flags_horizontal = 8
 size_flags_vertical = 5
 text = "  Score: "
 
-[node name="Kills" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
-margin_left = 30.0
+[node name="Health" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
+margin_left = 14.0
 margin_top = 41.0
 margin_right = 82.0
 margin_bottom = 78.0
 size_flags_horizontal = 10
 size_flags_vertical = 5
-text = "Kills: "
+text = "Health:"
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="Control/HBoxContainer"]
 margin_left = 950.0
@@ -201,7 +122,7 @@ margin_right = 24.0
 margin_bottom = 39.0
 size_flags_horizontal = 8
 
-[node name="KillsCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
+[node name="HealthCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 43.0
@@ -209,18 +130,16 @@ margin_right = 24.0
 margin_bottom = 82.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
-visible = false
-position = Vector2( 15, 457 )
+position = Vector2( 68, 404 )
 normal = ExtResource( 3 )
 shape = SubResource( 13 )
 
 [node name="InnerCircle" type="Sprite" parent="Control"]
 visible = false
-position = Vector2( 316, 437 )
+position = Vector2( 120, 483 )
 texture = ExtResource( 4 )
 
 [node name="FireBtn" type="TouchScreenButton" parent="Control"]
-visible = false
 position = Vector2( 883, 462 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )
@@ -244,12 +163,202 @@ margin_right = 403.0
 margin_bottom = 48.0
 size_flags_horizontal = 10
 
+[node name="Label" type="Label" parent="Control"]
+margin_left = 373.0
+margin_top = 44.0
+margin_right = 413.0
+margin_bottom = 81.0
+
+[node name="Control" type="Control" parent="Control"]
+margin_left = 828.0
+margin_top = 592.0
+margin_right = 868.0
+margin_bottom = 632.0
+
 [node name="DeathMenu" parent="." instance=ExtResource( 7 )]
 visible = false
+
+[node name="CenterContainer2" type="CenterContainer" parent="DeathMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -131.0
+margin_right = 131.0
+margin_bottom = 82.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeathMenu/CenterContainer2"]
+margin_right = 262.0
+margin_bottom = 82.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/CenterContainer2/HBoxContainer"]
+margin_right = 71.0
+margin_bottom = 82.0
+
+[node name="Label" type="Label" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 71.0
+margin_bottom = 37.0
+text = "RPS: "
+__meta__ = {
+"_editor_description_": "Cкорость стрелбы"
+}
+
+[node name="Label3" type="Label" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 71.0
+margin_bottom = 78.0
+text = "Speed: "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DeathMenu/CenterContainer2/HBoxContainer"]
+margin_left = 75.0
+margin_right = 99.0
+margin_bottom = 82.0
+
+[node name="RPMCounter" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 24.0
+margin_bottom = 39.0
+
+[node name="SpeedCounter" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 43.0
+margin_right = 24.0
+margin_bottom = 82.0
+
+[node name="Control2" type="Control" parent="DeathMenu/CenterContainer2/HBoxContainer"]
+margin_left = 103.0
+margin_top = 40.0
+margin_right = 153.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 50, 1 )
+size_flags_vertical = 4
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="DeathMenu/CenterContainer2/HBoxContainer"]
+margin_left = 157.0
+margin_right = 234.0
+margin_bottom = 82.0
+
+[node name="Damage" type="Label" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer5"]
+margin_right = 77.0
+margin_bottom = 37.0
+text = "Damage:"
+
+[node name="Kills" type="Label" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer5"]
+margin_top = 41.0
+margin_right = 77.0
+margin_bottom = 78.0
+text = "Kills:"
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="DeathMenu/CenterContainer2/HBoxContainer"]
+margin_left = 238.0
+margin_right = 262.0
+margin_bottom = 82.0
+
+[node name="DamageCounter" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 24.0
+margin_bottom = 39.0
+
+[node name="KillsCounter" parent="DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 43.0
+margin_right = 24.0
+margin_bottom = 82.0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
 visible = false
+
+[node name="CenterContainer2" type="CenterContainer" parent="PauseMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -131.0
+margin_right = 131.0
+margin_bottom = 82.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/CenterContainer2"]
+margin_right = 262.0
+margin_bottom = 82.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CenterContainer2/HBoxContainer"]
+margin_right = 71.0
+margin_bottom = 82.0
+
+[node name="Label" type="Label" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 71.0
+margin_bottom = 37.0
+text = "RPS: "
+__meta__ = {
+"_editor_description_": "Cкорость стрелбы"
+}
+
+[node name="Label3" type="Label" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 71.0
+margin_bottom = 78.0
+text = "Speed: "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu/CenterContainer2/HBoxContainer"]
+margin_left = 75.0
+margin_right = 99.0
+margin_bottom = 82.0
+
+[node name="RPMCounter" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 24.0
+margin_bottom = 39.0
+
+[node name="SpeedCounter" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 43.0
+margin_right = 24.0
+margin_bottom = 82.0
+
+[node name="Control2" type="Control" parent="PauseMenu/CenterContainer2/HBoxContainer"]
+margin_left = 103.0
+margin_top = 40.0
+margin_right = 153.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 50, 1 )
+size_flags_vertical = 4
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="PauseMenu/CenterContainer2/HBoxContainer"]
+margin_left = 157.0
+margin_right = 234.0
+margin_bottom = 82.0
+
+[node name="Damage" type="Label" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer5"]
+margin_right = 77.0
+margin_bottom = 37.0
+text = "Damage:"
+
+[node name="Kills" type="Label" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer5"]
+margin_top = 41.0
+margin_right = 77.0
+margin_bottom = 78.0
+text = "Kills:"
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="PauseMenu/CenterContainer2/HBoxContainer"]
+margin_left = 238.0
+margin_right = 262.0
+margin_bottom = 82.0
+
+[node name="DamageCounter" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 24.0
+margin_bottom = 39.0
+
+[node name="KillsCounter" parent="PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 43.0
+margin_right = 24.0
+margin_bottom = 82.0
 
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]

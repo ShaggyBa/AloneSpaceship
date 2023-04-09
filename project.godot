@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Alone Spaceship"
-run/main_scene="res://src/UI/Menu.tscn"
+run/main_scene="res://src/scenes/World.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -117,6 +117,7 @@ enemy_death={
 
 [input_devices]
 
+pointing/ios/touch_delay=0.01
 pointing/emulate_touch_from_mouse=true
 
 [layer_names]

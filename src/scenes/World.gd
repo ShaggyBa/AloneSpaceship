@@ -7,7 +7,7 @@ var dec = 1
 onready var music = $Music
 
 onready var counter := $CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter
-onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/CenterContainer/ScoreCounter
+onready var counter_final := $CanvasLayer/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 
 
 

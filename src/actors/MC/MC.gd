@@ -109,8 +109,8 @@ func create_shoot():
 
 
 func spaceshipMove(delta):
-	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+#	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+#	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changePosition(inputVector, delta)
 	
@@ -136,7 +136,7 @@ func takeDamage(damage):
 			
 			changeState()			
 			
-			print("Текущий HP: ", mcHP)
+#			print("Текущий HP: ", mcHP)
 			
 			emit_signal("health_changed", mcHP)
 			
