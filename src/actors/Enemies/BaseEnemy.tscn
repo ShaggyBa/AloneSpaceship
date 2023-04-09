@@ -79,7 +79,6 @@ modulate = Color( 0, 1, 0.439216, 1 )
 rotation = -1.5708
 scale = Vector2( 0.95, 1.2 )
 frames = SubResource( 13 )
-frame = 3
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

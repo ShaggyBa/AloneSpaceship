@@ -9,10 +9,10 @@ export (bool) var changeSpawnRate = false
 var enemies = []
 var preloadedEnemies = [
 	preload("res://src/actors/Enemies/FastEnemy/FastEnemy.tscn"),
-	preload("res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn"),
-	preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
+	preload("res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn")
 ]
 
+onready var battleEnemy = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
 
 onready var counter = 1
 
@@ -41,7 +41,10 @@ func _on_SpawnTimer_timeout():
 		if preloadedEnemy == preloadedEnemies[1]:
 			createShooterEnemy(enemy)
 			
-		if preloadedEnemy == preloadedEnemies[2] and currentScore > 10000 \
+		if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
+			preloadedEnemies.append(battleEnemy)
+			 
+		if preloadedEnemy == battleEnemy \
 		and get_tree().get_nodes_in_group("BattleEnemy").size() < maxEnemySpawn / 5:
 			createBattleEnemy(enemy)
 			

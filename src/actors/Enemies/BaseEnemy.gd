@@ -20,12 +20,12 @@ onready var isDeath = false
 onready var maxHP = enemyHP
 
 
-onready var sprite = $AnimatedSprite
+onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 
 
 func _ready() -> void:
-	sprite.playing = true
+	aSprite.playing = true
 	engine.playing = true
 	
 
@@ -58,8 +58,8 @@ func _on_BaseEnemy_area_entered(area):
 func death():
 	isDeath = true
 	
-	sprite.visible = false
-	sprite.playing = false
+	aSprite.visible = false
+	aSprite.playing = false
 	
 	engine.visible = false
 	engine.playing = false
