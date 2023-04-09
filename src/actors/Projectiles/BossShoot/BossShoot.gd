@@ -10,7 +10,6 @@ onready var plShootEffect = preload("res://src/actors/Projectiles/BaseShootEffec
 
 onready var timerRayDuracity = $TimerRayDuracity
 onready var raySprite = $Ray
-onready var playerPos = $PlayerMarker
 
 
 onready var _target = get_tree().current_scene.get_node("MC").global_position
@@ -28,6 +27,7 @@ func _ready() -> void:
 	targetPos = Vector2(cos(angle), sin(angle))
 	
 	rotation = _target.angle_to_point(position)
+
 
 func _physics_process(delta: float) -> void:
 	global_position += targetPos * speed * delta

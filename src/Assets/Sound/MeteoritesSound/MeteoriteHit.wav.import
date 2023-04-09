@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample"
+
+[deps]
+
+source_file="res://src/Assets/Sound/MeteoritesSound/MeteoriteHit.wav"
+dest_files=[ "res://.import/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

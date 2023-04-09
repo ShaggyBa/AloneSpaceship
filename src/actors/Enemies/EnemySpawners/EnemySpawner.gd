@@ -27,7 +27,7 @@ func _ready():
 	spawnTimer.start(nextSpawnTime)
 	
 func _on_SpawnTimer_timeout():
-	var currentScore = get_tree().current_scene.get_node("CanvasLayer/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
+	var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
 	
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
 		

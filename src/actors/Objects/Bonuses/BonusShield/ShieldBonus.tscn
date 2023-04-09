@@ -4,6 +4,7 @@
 [ext_resource path="res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.gd" type="Script" id=2]
 
 [node name="AroundShield" groups=["ShieldBonus"] instance=ExtResource( 1 )]
+monitoring = false
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]

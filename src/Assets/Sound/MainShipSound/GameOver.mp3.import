@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GameOver.mp3-8f9b9a917e3a3793571f8fc30d543a0f.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Sound/MainShipSound/GameOver.mp3"
+dest_files=[ "res://.import/GameOver.mp3-8f9b9a917e3a3793571f8fc30d543a0f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

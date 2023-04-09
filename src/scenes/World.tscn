@@ -9,11 +9,6 @@
 [ext_resource path="res://src/Assets/Sound/LevelSound/battle.wav" type="AudioStream" id=9]
 [ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array(  )
-}
-
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
 
@@ -21,7 +16,7 @@ script = ExtResource( 7 )
 position = Vector2( 512, 302 )
 current = true
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
+[node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
 
@@ -48,12 +43,5 @@ delayShieldRestoring = 5.0
 stream = ExtResource( 9 )
 volume_db = -20.102
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 1023, 4.76837e-07 )
-curve = SubResource( 1 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 0, 5 )
-rotation = 2.06635
-
-[connection signal="change_move" from="CanvasLayer" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]

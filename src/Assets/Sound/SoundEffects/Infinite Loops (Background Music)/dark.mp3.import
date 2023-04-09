@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dark.mp3-d4aa9d457848f772754d5a7e742e6373.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/dark.mp3"
+dest_files=[ "res://.import/dark.mp3-d4aa9d457848f772754d5a7e742e6373.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

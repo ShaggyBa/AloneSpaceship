@@ -8,6 +8,7 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 export (int) var mcHP = 5
 
 
+
 export (float) var shootDelay = 0.3
 export (float) var bonusShootDelay = 0.2
 
@@ -43,7 +44,6 @@ onready var destroyed = $Audio/Destroyed
 
 onready var maxHP = mcHP
 
-
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
 
@@ -65,7 +65,10 @@ var isDamageUp = false
 var isDead = false
 
 
-signal health_changed(new_value) 
+signal health_changed(new_value)
+signal damage_changed(new_value)
+signal shootDelay_changed(new_value)
+signal speed_changed(new_value)
 
 
 func _ready() -> void:
@@ -83,6 +86,10 @@ func _ready() -> void:
 	game_over.pressed = true
 		
 	emit_signal("health_changed", mcHP)
+	emit_signal("damage_changed", mcDamage)
+	emit_signal("shootDelay_changed", round(1 / shootDelay))
+	emit_signal("speed_changed", mcSpeed)
+	
 	
 func _process(_delta: float) -> void:
 	shooting()
@@ -164,7 +171,6 @@ func changePosition(vector:Vector2, delta:float):
 	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
 	 
 
-# Получение урона
 func takeDamage(damage):
 	if isInvicibility: 
 		return
@@ -202,6 +208,8 @@ func _on_Death_Animation():
 	Input.parse_input_event(game_over)
 
 func burning(delay:int):
+	if isInvicibility:
+		return
 	for _i in range(delay):
 		tickRateDamage.start()
 		sprite.modulate = "00ff6a"		
@@ -219,6 +227,7 @@ func shieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
+	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
 		sprite.animation = "FullHP"
@@ -265,12 +274,10 @@ func _on_MC_area_entered(area):
 		
 		
 func heal():
-	#print("value: ", mcHP)
 	if mcHP + (maxHP / 4) < maxHP:
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	#print("heal: ", mcHP)
 	emit_signal("health_changed", mcHP)	
 	changeState()
 	
@@ -298,15 +305,39 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 1
+	mcDamage *= 2
+	
+	
+func addPassiveSpeed():
+	mcVSpeed += floor(mcVSpeed * 0.1)
+	mcSpeed += floor(mcSpeed * 0.1)
+	
+	
+func addPassiveMultiscoreBonus():
+	get_tree().current_scene.multiscore += 0.1
 	
 	
 func addPassiveShootSpeedBonus():
+	emit_signal("damage_changed", mcDamage)
 	if shootDelay > 0.1:
 		shootDelay -= 0.05 
 	timerShooting.set_wait_time(shootDelay)
 	
 
+func addPassiveMaxHPBonus():
+	maxHP += 10
+	mcHP += 10
+	emit_signal("health_changed", mcHP)
+	
+	
+func shootDelayBonus():
+	emit_signal("shootDelay_changed", shootDelay)
+
+
+func speedBonus():
+	emit_signal("speed_changed", mcVSpeed)
+
+
 func _on_tickRateDamage_timeout():
-	takeDamage(maxHP * 0.2)
+	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
