@@ -65,11 +65,14 @@ var isInvicibility = false
 var isDamageUp = false
 var isDead = false
 
+var HealthCounter
+var RPSCounter
+var SpeedCounter
+var DamageCounter
 
-signal health_changed(new_value)
-signal damage_changed(new_value)
-signal shootDelay_changed(new_value)
-signal speed_changed(new_value)
+var DeathMenu
+
+onready var game_data = SaveFile.game_data
 
 
 func _ready() -> void:
@@ -86,10 +89,7 @@ func _ready() -> void:
 	game_over.action = "over"
 	game_over.pressed = true
 		
-	emit_signal("health_changed", mcHP)
-	emit_signal("damage_changed", mcDamage)
-	emit_signal("shootDelay_changed", round(1 / shootDelay))
-	emit_signal("speed_changed", mcSpeed)
+	stat_inizialization()	
 	
 	
 func _process(_delta: float) -> void:
@@ -193,6 +193,7 @@ func takeDamage(damage):
 			changeState()			
 			
 			print("Текущий HP: ", mcHP)
+			HealthCounter.set_points(mcHP)
 			
 			hitSound.play()
 			
@@ -292,6 +293,7 @@ func heal():
 	else:
 		mcHP = maxHP
 	changeState()
+	HealthCounter.set_points(mcHP)
 	
 		
 
@@ -317,13 +319,15 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 3
+	mcDamage += 2
+	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
 	if mcVSpeed < 900:
 		mcVSpeed += floor(mcVSpeed * 0.02)
 	if mcSpeed < 900:
 		mcSpeed += floor(mcSpeed * 0.02)
+	SpeedCounter.set_points(mcSpeed)
 #	SpeedCounter.set_points() -> 1.0 + 0.1 (1.0 === 100% скорости передвижения; 1.1 === 110%)
 # 1.0x -> поймали бонус: 1.1x
 	
@@ -340,6 +344,7 @@ func addPassiveShootSpeedBonus():
 func addPassiveMaxHPBonus():
 	maxHP += 10
 	mcHP += 10
+	HealthCounter.set_points(mcHP)
 
 
 func death():
@@ -351,7 +356,8 @@ func death():
 	sprite.modulate = "ffffff"
 	sprite.playing = true
 	destroyed.connect("finished", self, "_on_Destroyed")
-
+	save_score()
+	Input.parse_input_event(game_over)
 
 func _on_Destroyed():
 	Input.parse_input_event(game_over)
@@ -362,3 +368,26 @@ func _on_Destroyed():
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
+
+
+func stat_inizialization() -> void:
+	
+	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
+	
+	DamageCounter = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/DamageCounter")
+	RPSCounter    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/ShootSpeedCounter")
+	SpeedCounter  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/SpeedCounter")
+	
+
+	DeathMenu      = get_tree().current_scene.get_node("GUI/DeathMenu")
+	
+	HealthCounter.set_points(mcHP)
+	
+	DamageCounter.set_points(mcDamage)
+	RPSCounter.set_points(round(1 / shootDelay))
+	SpeedCounter.set_points(mcSpeed)
+	
+func save_score():
+	if game_data.score < get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points():
+		game_data.score = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
+	SaveFile.save_data()

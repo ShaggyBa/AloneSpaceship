@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
 [ext_resource path="res://src/Assets/Sound/MenuSound/Button.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/Assets/Sound/MenuSound/Music.wav" type="AudioStream" id=4]
+[ext_resource path="res://src/UI/Counter.tscn" type="PackedScene" id=5]
 
 [node name="PauseMenu" type="Control"]
 margin_right = 1024.0
 margin_bottom = 600.0
+rect_pivot_offset = Vector2( -329, -89 )
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -15,6 +17,63 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.027451, 0.00784314, 0.168627, 0.698039 )
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -285.5
+margin_right = 285.5
+margin_bottom = 82.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+margin_top = 21.0
+margin_right = 571.0
+margin_bottom = 60.0
+custom_constants/separation = 41
+
+[node name="ShootSpeed" type="Label" parent="CenterContainer2/HBoxContainer"]
+margin_top = 1.0
+margin_right = 128.0
+margin_bottom = 38.0
+text = "Shoot Speed:"
+__meta__ = {
+"_editor_description_": "Cкорость стрелбы"
+}
+
+[node name="ShootSpeedCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 169.0
+margin_right = 193.0
+margin_bottom = 39.0
+
+[node name="Speed" type="Label" parent="CenterContainer2/HBoxContainer"]
+margin_left = 234.0
+margin_top = 1.0
+margin_right = 305.0
+margin_bottom = 38.0
+text = "Speed: "
+
+[node name="SpeedCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 346.0
+margin_right = 370.0
+margin_bottom = 39.0
+
+[node name="Damage" type="Label" parent="CenterContainer2/HBoxContainer"]
+margin_left = 411.0
+margin_top = 1.0
+margin_right = 506.0
+margin_bottom = 38.0
+text = "   Damage:"
+
+[node name="DamageCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 547.0
+margin_right = 571.0
+margin_bottom = 39.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 pause_mode = 2
@@ -41,6 +100,13 @@ margin_top = 47.0
 margin_right = 300.0
 margin_bottom = 47.0
 rect_pivot_offset = Vector2( -659, -126 )
+
+[node name="HighScoreCounter" type="Label" parent="CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 57.0
+margin_right = 300.0
+margin_bottom = 94.0
+grow_horizontal = 2
 
 [node name="Control2" type="Control" parent="CenterContainer/VBoxContainer"]
 margin_top = 57.0

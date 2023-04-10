@@ -1,8 +1,10 @@
 extends Control
 
+onready var game_data = SaveFile.game_data
 
 signal game_is_over()
 
+var is_paused = false setget set_is_over
 
 func _on_TryBtn_pressed()->void:
 	queue_free()
@@ -12,8 +14,6 @@ func _on_TryBtn_pressed()->void:
 func _on_QuitBtn_pressed()->void:
 	get_tree().change_scene("res://src/UI/Menu.tscn")
 
-
-var is_paused = false setget set_is_over
 
 func _ready():
 	self.is_paused = !is_paused
@@ -28,3 +28,8 @@ func set_is_over(value):
 	is_paused = value
 	get_tree().paused = is_paused
 	visible = is_paused
+	update_score()
+
+func update_score():
+	$CenterContainer/VBoxContainer/HBoxContainer2/HighScoreCounter.text = str(game_data.score)
+	print(game_data.score)

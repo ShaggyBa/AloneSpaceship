@@ -36,7 +36,6 @@ minSpawnRate = 1.5
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 400.0
-mcHP = 2000
 shootDelay = 0.5
 delayShieldRestoring = 5.0
 
