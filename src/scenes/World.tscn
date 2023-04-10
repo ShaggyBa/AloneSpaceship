@@ -22,6 +22,7 @@ current = true
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 6 )]
+nextSpawnTime = 1.0
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 spawnTimer = 5.0
@@ -29,7 +30,7 @@ spawnTimer = 5.0
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
 nextSpawnTime = 2.0
 minSpawnRate = 0.1
-maxEnemySpawn = 0
+maxEnemySpawn = 10
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 500.0
