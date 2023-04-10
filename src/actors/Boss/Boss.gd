@@ -9,9 +9,8 @@ export (int) var bossDamage = 10
 
 
 onready var viewportRect = get_viewport_rect()
-onready var endPositionX = viewportRect.end.x + 200
-
 onready var canShoot = true
+onready var maxHP = bossHP
 
 
 onready var aSprite = $Sprite
@@ -22,7 +21,6 @@ onready var muzzle = $muzzle
 
 
 onready var _target = get_tree().current_scene.get_node("MC")
-onready var _checkoutPosition = get_tree().current_scene.get_node("ReadyPoint").global_position
 
 onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
 
@@ -34,9 +32,6 @@ var timerRay = Timer.new()
 var timerShooting = Timer.new()
 
 var stateChanged = false
-var readyPosition = false
-
-var maxHP
 
 
 func _ready() -> void:
@@ -47,8 +42,6 @@ func _ready() -> void:
 	+ _target.mcDamage * (1.0 / _target.shootDelay) 
 	
 	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
-	
-	maxHP = bossHP
 	
 	setTimerShooting()
 	
@@ -103,7 +96,6 @@ func takeDamage(amount):
 
 
 func moving(delta:float) :
-		
 	global_position.x += horisontalSpeed * delta * directionX
 	global_position.y += verticalSpeed * delta * directionY
 	
@@ -112,13 +104,10 @@ func moving(delta:float) :
 		directionY *= -1
 		
 	if global_position.x < viewportRect.end.x / 2 \
-	or global_position.x > endPositionX:
+	or global_position.x > viewportRect.end.x - 90:
 		directionX *= -1
 
-	if global_position.x <= _checkoutPosition.x and not readyPosition:
-		endPositionX -= 300
-		readyPosition = true
-		
+
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
@@ -162,4 +151,3 @@ func changeState():
 
 		stateChanged = true
 		
-

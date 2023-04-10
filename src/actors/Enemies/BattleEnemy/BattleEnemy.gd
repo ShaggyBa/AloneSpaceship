@@ -11,9 +11,7 @@ onready var muzzles = $FiringPositions.get_children()
 
 onready var groupGun = [muzzles[0], muzzles[1]]
 
-onready var endPositionX = viewportRect.end.x + 500
 
-onready var _checkoutPosition = get_tree().current_scene.get_node("ReadyPoint").global_position
 
 onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
 onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
@@ -24,9 +22,6 @@ var currentGun = true
 
 var directionY = direction
 var directionX = -1
-
-var readyPosition = false
-var stateChanged = false
 
 func _ready() -> void:
 	randomize()
@@ -59,12 +54,8 @@ func moving(delta:float)->void:
 		directionY *= -1
 		
 	if global_position.x < viewportRect.end.x / 2 \
-	or global_position.x > endPositionX:
+	or global_position.x > viewportRect.end.x - 90:
 		directionX *= -1
-
-	if global_position.x <= _checkoutPosition.x and not readyPosition:
-		endPositionX -= 550
-		readyPosition = true
 
 
 func shooting():
@@ -102,4 +93,3 @@ func changeState():
 		verticalSpeed *= 1.25
 		horisontalSpeed *= 1.5
 		timerShooting.set_wait_time(enemyAttackDelay)
-		stateChanged = true

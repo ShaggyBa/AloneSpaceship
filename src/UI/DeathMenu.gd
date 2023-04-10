@@ -1,8 +1,8 @@
 extends Control
 
+
 signal game_is_over()
- 
-var is_paused = false setget set_is_over
+
 
 func _on_TryBtn_pressed()->void:
 	queue_free()
@@ -13,10 +13,11 @@ func _on_QuitBtn_pressed()->void:
 	get_tree().change_scene("res://src/UI/Menu.tscn")
 
 
+var is_paused = false setget set_is_over
+
 func _ready():
 	self.is_paused = !is_paused
 	self.is_paused = !is_paused
-
 
 func _unhandled_input(event):
 	if event.is_action_pressed("over"):

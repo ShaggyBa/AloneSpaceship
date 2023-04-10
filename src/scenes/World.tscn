@@ -1,17 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/Objects/Bonuses/BonusSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/actors/Objects/Bonuses/PassiveBonusSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Assets/Sound/SoundEffects/Simple Music/DeepSpaceA.mp3" type="AudioStream" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
-[ext_resource path="res://src/Assets/Sound/LevelSound/battle.wav" type="AudioStream" id=9]
 [ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
+multiscore = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 302 )
@@ -22,31 +22,27 @@ current = true
 [node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
 maxBonusSpawn = 0
 
-[node name="PassiveBonusSpawner" parent="." instance=ExtResource( 6 )]
-nextSpawnTime = 1.0
-
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-spawnTimer = 5.0
+spawnTimer = 100.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 2.0
-minSpawnRate = 0.1
-maxEnemySpawn = 10
+nextSpawnTime = 1.0
+maxEnemySpawn = 100
+changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 500.0
 mcHP = 100
-shootDelay = 0.5
+shootDelay = 0.2
+bonusShootDelay = 0.1
 mcDamage = 1
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -20.102
-
-[node name="ReadyPoint" type="Position2D" parent="."]
-position = Vector2( 800, 300 )
+stream = ExtResource( 6 )
+volume_db = -7.0
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
+[connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]

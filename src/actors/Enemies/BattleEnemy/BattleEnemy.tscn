@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/actors/Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/Enemies/BattleEnemy/BattleEnemy.gd" type="Script" id=2]
 [ext_resource path="res://src/Assets/Sprites/Enemies/attack/PNGs/Nautolan Ship - Battlecruiser - Weapons.png" type="Texture" id=3]
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Powering.png" type="Texture" id=4]
+[ext_resource path="res://src/Assets/Sprites/Enemies/Death/Battle/Nautolan Ship - Battlecruiser.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
@@ -28,6 +29,54 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 1024, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 1152, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 1280, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 1408, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -67,6 +116,11 @@ region = Rect2( 1024, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "Death",
+"speed": 12.0
+}, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "bottomGun",
@@ -104,9 +158,9 @@ frames = SubResource( 15 )
 frames = SubResource( 1 )
 animation = "idle"
 
-[node name="Death" parent="." index="2"]
-visible = false
-animation = "BattleDeath"
+[node name="CollisionPolygon2D" parent="." index="2"]
+position = Vector2( -12.6667, -0.666667 )
+polygon = PoolVector2Array( 6, -34.6667, -1.33333, -18.6667, -8, -18, -8.66667, -13.3333, -16.6667, -13.3333, -22, -22, -31.3333, -2.66667, -28.6667, -0.666667, -28.6667, 2.66667, -31.3333, 4, -22, 24.6667, -16.6667, 14, -8.66667, 14.6667, -5.33333, 19.3333, -1.33333, 20, 6, 37.3333, 30, 18, 58, 1.33333, 30.6667, -17.3333 )
 
 [node name="FiringPositions" type="Node2D" parent="." index="3"]
 visible = false
@@ -126,10 +180,6 @@ position = Vector2( -19.3333, -16 )
 [node name="Muzzle4" type="Position2D" parent="FiringPositions" index="3"]
 position = Vector2( -19.3333, 16 )
 
-[node name="CollisionPolygon2D" parent="." index="4"]
-position = Vector2( -12.6667, -0.666667 )
-polygon = PoolVector2Array( 6, -34.6667, -1.33333, -18.6667, -8, -18, -8.66667, -13.3333, -16.6667, -13.3333, -22, -22, -31.3333, -2.66667, -28.6667, -0.666667, -28.6667, 2.66667, -31.3333, 4, -22, 24.6667, -16.6667, 14, -8.66667, 14.6667, -5.33333, 19.3333, -1.33333, 20, 6, 37.3333, 30, 18, 58, 1.33333, 30.6667, -17.3333 )
-
-[node name="VisibilityNotifier2D" parent="." index="5"]
+[node name="VisibilityNotifier2D" parent="." index="4"]
 position = Vector2( -2, -0.666667 )
 scale = Vector2( 5.72561, 4.39623 )

@@ -7,15 +7,15 @@ onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoo
 
 onready var muzzles = $FiringPositions.get_children()	
 
+onready var shot = $Audio/shoot
+
 
 var timerShooting = Timer.new()
 var currentGun = true
 
-
 func _ready() -> void:
 	setTimerShooting()
 	aSprite.playing = true
-
 
 func _process(_delta: float) -> void:
 	shooting()
@@ -37,7 +37,7 @@ func shooting():
 			shoot.global_position = muzzles[0].global_position
 		else:
 			aSprite.animation = "bottomGunShoot"			
-			shoot.global_position = muzzles[1].global_position			
+			shoot.global_position = muzzles[1].global_position		
 		get_tree().current_scene.add_child(shoot)
 		currentGun = !currentGun
 
