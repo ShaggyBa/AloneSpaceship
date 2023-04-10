@@ -18,7 +18,6 @@
 [ext_resource path="res://src/Assets/Sound/BonusesSound/active.wav" type="AudioStream" id=16]
 [ext_resource path="res://src/Assets/Sound/BonusesSound/passive.mp3" type="AudioStream" id=17]
 
-
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 48, 48 )
@@ -318,6 +317,7 @@ volume_db = -25.0
 
 [node name="PassiveBonus" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 17 )
-volume_db = -14.858
+volume_db = -25.0
+pitch_scale = 0.75
 
 [connection signal="area_entered" from="." to="." method="_on_MC_area_entered"]

@@ -23,13 +23,16 @@ current = true
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="ActiveBonusSpawner" parent="." instance=ExtResource( 5 )]
+nextSpawnTime = 7.0
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
+nextSpawnTime = 7.0
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 2.0
+nextSpawnTime = 3.0
+minSpawnRate = 1.5
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 400.0
@@ -41,10 +44,11 @@ delayShieldRestoring = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -15.0
+volume_db = -7.0
 
 [node name="positionToReady" type="Position2D" parent="."]
 position = Vector2( 900, 299 )
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
 [connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]
+[connection signal="finished" from="Music" to="." method="_on_Music_finished"]

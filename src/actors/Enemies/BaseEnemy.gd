@@ -30,6 +30,7 @@ onready var collision = $CollisionPolygon2D
 
 var coef = 1.0
 
+
 func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
@@ -37,7 +38,7 @@ func _ready() -> void:
 	enemy_death.pressed = true
 	maxHP = floor(maxHP * coef)
 	enemyDamage = floor(enemyDamage * coef)
-	print("maxHP: ", maxHP, " EnemyDamage: ", enemyDamage)
+
 
 func _physics_process(delta):
 	moving(delta)
@@ -80,8 +81,8 @@ func death():
 	aSprite.playing = true
 	destroyed.play()
 	
-	horisontalSpeed /= 4
-	verticalSpeed /= 4
+	horisontalSpeed *= 0.3
+	verticalSpeed *= 0.3
 
 
 func _on_Death_animation_finished():

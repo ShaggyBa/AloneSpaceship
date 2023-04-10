@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PassiveHP.png-cc6a6284324e13ee4b22f6b4ee0786df.stex"
+path="res://.import/image.png-0320f50b5fec01ed7a18c6bd06d69b2a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/PassiveBonus/PassiveHP.png"
-dest_files=[ "res://.import/PassiveHP.png-cc6a6284324e13ee4b22f6b4ee0786df.stex" ]
+source_file="res://src/Assets/image.png"
+dest_files=[ "res://.import/image.png-0320f50b5fec01ed7a18c6bd06d69b2a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -6,8 +6,7 @@ var preloadedBonuses = [
 		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusDamage/DamageBonus.tscn"),
 	]
 
-export (float) var maxBonusSpawn = 1
-var nextSpawnTime = randi() % 5 + 7
+export (float) var nextSpawnTime = 3.0
 
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()
@@ -17,18 +16,15 @@ func _ready():
 	spawnTimer.start(nextSpawnTime)
 
 func _on_SpawnTimer_timeout():
-	if get_tree().get_nodes_in_group("ActiveBonus").size() < maxBonusSpawn:
-		
-		var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
-		var bonus = bonusPreloaded.instance()
-		
-		# Position 
-		bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
-		get_tree().current_scene.add_child(bonus)
+	var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
+	var bonus = bonusPreloaded.instance()
 	
-		# Restart timer
-		spawnTimer.start(nextSpawnTime)
-	else: 
-		spawnTimer.start(nextSpawnTime)
-		spawnTimer.start(nextSpawnTime)
+	# Position 
+	bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
+	get_tree().current_scene.add_child(bonus)
+
+	nextSpawnTime = rand_range(nextSpawnTime, nextSpawnTime * 2)
+	# Restart timer
+	spawnTimer.start(nextSpawnTime)
+
 

@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 		multiscore += 0.05
 		
 	
-	points += delta * 100 * multiscore
+	points += delta * 50 * multiscore
 #	counter.increase_points_on(floor(delta * 100 * multiscore))
 	counter_final.set_points(counter.get_points())
 	counter.set_points(floor(points))
@@ -47,3 +47,8 @@ func changeBack():
 	add_child(orangeInst)
 	$blueLevel.queue_free()
 		
+
+
+func _on_Music_finished() -> void:
+	yield(get_tree().create_timer(10), "timeout")
+	music.play()

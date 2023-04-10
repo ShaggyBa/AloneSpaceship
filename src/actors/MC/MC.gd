@@ -256,7 +256,7 @@ func _on_CanvasLayer_change_move(new_move: Vector2):
 
 func _on_MC_area_entered(area):
 	
-	if area.is_in_group("Active"):
+	if area.is_in_group("ActiveBonus"):
 		activeBonusSound.play()
 		if area.is_in_group("Heal"):
 			heal()
@@ -265,28 +265,26 @@ func _on_MC_area_entered(area):
 		elif area.is_in_group("DamageBonus"):
 			damageBonus()
 	
-	if area.is_in_group("Passive"):
+	if area.is_in_group("PassiveBonus"):
 		passiveBonusSound.play()
 		if area.is_in_group("addDamage"):
 			addPassiveDamageBonus()
 		elif area.is_in_group("addShootSpeed"):
 			addPassiveShootSpeedBonus()
+		elif area.is_in_group("addMaxHP"):
+			addPassiveMaxHPBonus()	
+		elif area.is_in_group("addMultiscore"):
+			addPassiveMultiscoreBonus()
+		elif area.is_in_group("addSpeed"):
+			addPassiveSpeed()
 	
 	elif area.is_in_group("damageable"):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
 	
-	elif area.is_in_group("addDamage"):
-		addPassiveDamageBonus()
-	elif area.is_in_group("addShootSpeed"):
-		addPassiveShootSpeedBonus()
-	elif area.is_in_group("addMaxHP"):
-		addPassiveMaxHPBonus()	
-	elif area.is_in_group("addMultiscore"):
-		addPassiveMultiscoreBonus()
-	elif area.is_in_group("addSpeed"):
-		addPassiveSpeed()
+	
+		
 			
 func heal():
 	if mcHP + (maxHP / 4) < maxHP:
@@ -319,7 +317,7 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 2
+	mcDamage += 3
 	
 func addPassiveSpeed():
 	if mcVSpeed < 900:
@@ -334,7 +332,6 @@ func addPassiveMultiscoreBonus():
 	
 	
 func addPassiveShootSpeedBonus():
-	emit_signal("damage_changed", mcDamage)
 	if shootDelay > 0.1:
 		shootDelay -= 0.05 
 	timerShooting.set_wait_time(shootDelay)

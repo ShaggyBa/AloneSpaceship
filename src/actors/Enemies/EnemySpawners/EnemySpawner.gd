@@ -51,7 +51,7 @@ func _on_SpawnTimer_timeout():
 			
 		if changeSpawnRate:
 			if nextSpawnTime > minSpawnRate:
-				nextSpawnTime -= 0.05 
+				nextSpawnTime -= 0.025 
 				
 		increaseMaxEnemySpawn(currentScore)
 				
