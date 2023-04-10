@@ -62,6 +62,10 @@ boot_splash/image="res://src/UI/img/BootImage.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
 
+[autoload]
+
+SaveFile="*res://src/Save/save_file.gd"
+
 [display]
 
 window/size/resizable=false

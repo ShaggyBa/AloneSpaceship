@@ -28,9 +28,13 @@ func _process(delta: float) -> void:
 		
 	
 	points += delta * 100 * multiscore
-#	counter.increase_points_on(floor(delta * 100 * multiscore))
+	
+	counter.increase_points_on(floor(delta * 100 * multiscore))
 	counter_final.set_points(counter.get_points())
-	counter.set_points(floor(points))
+	
+#	counter.increase_points_on(floor(delta * 100 * multiscore))
+#	counter_final.set_points(counter.get_points())
+#	counter.set_points(floor(points))
 #	counter_final.set_points(counter.get_points())
 	
 	if points > 100000 and not bossIsSpawning:
