@@ -18,10 +18,6 @@ position = Vector2( 5, 1.66667 )
 frames = SubResource( 1 )
 animation = "Gun"
 
-[node name="CollisionShape2D" parent="." index="2"]
-visible = false
-
 [node name="VisibilityNotifier2D" parent="." index="3"]
-visible = false
 position = Vector2( 4, 4 )
 scale = Vector2( 6.925, 6.35751 )

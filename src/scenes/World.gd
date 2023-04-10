@@ -18,6 +18,7 @@ var bossIsSpawning = false
 
 func _ready() -> void:
 	music.play()
+	
 
 
 func _process(delta: float) -> void:
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 	counter.set_points(floor(points))
 	counter_final.set_points(floor(points))
 	
-	if points > 10000 and not bossIsSpawning:
+	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
 		boss.global_position = Vector2(1000, 300)
 		add_child(boss)

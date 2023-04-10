@@ -77,7 +77,7 @@ extents = Vector2( 40, 39.6667 )
 
 [node name="Bonus" type="Area2D" groups=["BonusEffects"]]
 position = Vector2( -4, 0 )
-scale = Vector2( 0.6, 0.6 )
+scale = Vector2( 0.3, 0.3 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
