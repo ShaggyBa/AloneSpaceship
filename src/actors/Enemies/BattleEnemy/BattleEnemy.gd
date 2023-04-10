@@ -29,8 +29,11 @@ var readyPosition = false
 var stateChanged = false
 
 func _ready() -> void:
-	setTimerShooting()
+	randomize()
+	enemyAttackDelay = rand_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
+	aSprite.speed_scale = enemyAttackDelay	
 	aSprite.playing = true
+	setTimerShooting()
 
 
 func _process(_delta: float) -> void:
@@ -91,7 +94,7 @@ func shooting():
 
 
 func changeState():
-	if float(enemyHP) / float(maxHP) <= 0.2 and not stateChanged:
+	if float(enemyHP) / float(maxHP) <= 0.5 and not stateChanged:
 		aSprite.speed_scale = 2
 		aSprite.modulate = "f76969"
 		enemyAttackDelay = 0.5

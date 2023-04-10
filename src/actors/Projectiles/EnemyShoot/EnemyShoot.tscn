@@ -4,7 +4,6 @@
 [ext_resource path="res://src/actors/Projectiles/EnemyShoot/EnemyShoot.gd" type="Script" id=2]
 [ext_resource path="res://src/Assets/Sprites/Enemies/attackEffects/PNGs/Nautolan - Bullet.png" type="Texture" id=3]
 
-
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 9, 12 )

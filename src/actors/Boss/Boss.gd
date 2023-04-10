@@ -43,8 +43,10 @@ func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
 	
-	bossHP += _target.maxHP * _target.mcDamage
-	bossDamage += _target.mcDamage * 5
+	bossHP += _target.maxHP * (1.0 / _target.shootDelay) \
+	+ _target.mcDamage * (1.0 / _target.shootDelay) 
+	
+	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
 	
 	maxHP = bossHP
 	

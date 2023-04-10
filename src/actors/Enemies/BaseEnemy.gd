@@ -49,7 +49,6 @@ func _ready() -> void:
 	enemyDamage *= coef
 	enemyHP *= coef
 
-
 	
 func _physics_process(delta):
 	moving(delta)

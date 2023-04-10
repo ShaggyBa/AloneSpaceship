@@ -8,8 +8,9 @@ export (bool) var changeSpawnRate = false
 
 var enemies = []
 var preloadedEnemies = [
-	preload("res://src/actors/Enemies/FastEnemy/FastEnemy.tscn"),
-	preload("res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn")
+#	preload("res://src/actors/Enemies/FastEnemy/FastEnemy.tscn"),
+#	preload("res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn")
+	preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
 ]
 
 onready var battleEnemy = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
@@ -35,12 +36,12 @@ func _on_SpawnTimer_timeout():
 		# Создание врага
 		var preloadedEnemy = preloadedEnemies[randi() % preloadedEnemies.size()]
 		var enemy = preloadedEnemy.instance()
-		
-		if preloadedEnemy == preloadedEnemies[0]:
-			createFastEnemy(enemy)
-			
-		if preloadedEnemy == preloadedEnemies[1]:
-			createShooterEnemy(enemy)
+#
+#		if preloadedEnemy == preloadedEnemies[0]:
+#			createFastEnemy(enemy)
+#
+#		if preloadedEnemy == preloadedEnemies[1]:
+#			createShooterEnemy(enemy)
 			
 		if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
 			preloadedEnemies.append(battleEnemy)

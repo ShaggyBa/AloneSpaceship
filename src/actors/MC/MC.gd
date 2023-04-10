@@ -7,7 +7,7 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 
 export (int) var mcHP = 5
 
-export (float) var shootDelay = 0.3
+export (float) var shootDelay = 0.5
 
 export (int) var mcDamage = 1
 
@@ -286,7 +286,7 @@ func _on_MC_area_entered(area):
 		addPassiveMaxHPBonus()	
 	elif area.is_in_group("addMultiscore"):
 		addPassiveMultiscoreBonus()
-	elif area.area_is_in_group("addSpeed"):
+	elif area.is_in_group("addSpeed"):
 		addPassiveSpeed()
 			
 func heal():
@@ -294,7 +294,6 @@ func heal():
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-#	emit_signal("health_changed", mcHP)
 	HealthCounter.set_points(mcHP)	
 	changeState()
 
@@ -322,12 +321,14 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 5
+	mcDamage += 2
 	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
-	mcVSpeed += floor(mcVSpeed * 0.05)
-	mcSpeed += floor(mcSpeed * 0.05)
+	if mcVSpeed < 900:
+		mcVSpeed += floor(mcVSpeed * 0.02)
+	if mcSpeed < 900:
+		mcSpeed += floor(mcSpeed * 0.02)
 #	SpeedCounter.set_points() -> 1.0 + 0.1 (1.0 === 100% скорости передвижения; 1.1 === 110%)
 # 1.0x -> поймали бонус: 1.1x
 	
@@ -346,9 +347,9 @@ func addPassiveShootSpeedBonus():
 	
 
 func addPassiveMaxHPBonus():
-	maxHP += 10
-	mcHP += 10
-	HealthCounter.set_points(maxHP)
+	maxHP += 20
+	mcHP += 20
+	HealthCounter.set_points(mcHP)
 
 	
 #
