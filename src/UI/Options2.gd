@@ -7,13 +7,13 @@ func _on_QuitBtn_pressed():
 
 
 
-func _on_MusicSlider_value_changed(value):
+func _on_MusicSlider_value_changed(_value):
 	pass # Replace with function body.
 
 
-func _on_FXSlider_value_changed(value):
+func _on_FXSlider_value_changed(_value):
 	pass # Replace with function body.
 
 
-func _on_ConrolSizeSlider_value_changed(value):
+func _on_ConrolSizeSlider_value_changed(_value):
 	pass # Replace with function body.

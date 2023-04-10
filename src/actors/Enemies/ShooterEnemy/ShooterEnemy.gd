@@ -11,9 +11,11 @@ onready var muzzles = $FiringPositions.get_children()
 var timerShooting = Timer.new()
 var currentGun = true
 
+
 func _ready() -> void:
 	setTimerShooting()
 	aSprite.playing = true
+
 
 func _process(_delta: float) -> void:
 	shooting()

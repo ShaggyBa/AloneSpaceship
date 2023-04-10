@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	
 	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
-		boss.global_position = Vector2(1000, 300)
+		boss.global_position = Vector2(1100, 300)
 		add_child(boss)
 		bossIsSpawning = true
 

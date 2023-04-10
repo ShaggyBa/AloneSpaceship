@@ -53,7 +53,7 @@ func _on_SpawnTimer_timeout():
 			if nextSpawnTime > minSpawnRate:
 				nextSpawnTime -= 0.05 
 				
-		increaseMaxEnemySpawn(currentScore)
+		increaseDifficult(currentScore)
 				
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)
@@ -61,10 +61,10 @@ func _on_SpawnTimer_timeout():
 		spawnTimer.start(nextSpawnTime)
 		
 		
-func increaseMaxEnemySpawn(score):
+func increaseDifficult(score):
 	if float(score) / 5000.0 > counter:
 			counter += 1
-			difficultCoef += 10
+			difficultCoef += 0.5
 			if counter % 2 == 0:
 				maxEnemySpawn += 1
 

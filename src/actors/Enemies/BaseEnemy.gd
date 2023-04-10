@@ -23,7 +23,10 @@ onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
 onready var maxHP = enemyHP
 
+
 signal add_to_score(value) #value: int
+
+var coef = 1.0
 var enemy_death = InputEventAction.new()
 
 onready var aSprite = $AnimatedSprite
@@ -37,12 +40,12 @@ func _ready() -> void:
 	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
-	
-	verticalSpeed *= coef
-	horisontalSpeed *= coef
-	enemyHP += enemyHP * coef
-	enemyDamage += enemyDamage * coef
 
+	enemyDamage *= coef
+	enemyHP *= coef
+
+
+	
 func _physics_process(delta):
 	moving(delta)
 

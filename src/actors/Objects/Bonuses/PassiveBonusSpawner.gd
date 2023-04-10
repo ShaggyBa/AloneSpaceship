@@ -1,13 +1,16 @@
 extends Node2D
 
-var preloadedBonuses = [
-		preload("res://src/actors/Objects/Bonuses/ActiveBonuses/BonusShield/ShieldBonus.tscn"),
-		preload("res://src/actors/Objects/Bonuses/ActiveBonuses/BonusHealth/HealthBonus.tscn"),
-		preload("res://src/actors/Objects/Bonuses/ActiveBonuses/BonusDamage/DamageBonus.tscn"),
+export (float) var nextSpawnTime = 5.0
+export (int) var maxBonusSpawn = 3
+
+onready var preloadedBonuses = [
+		preload("res://src/actors/Objects/Bonuses/PassiveBonuses/passiveDamage/passiveDamage.tscn"),
+		preload("res://src/actors/Objects/Bonuses/PassiveBonuses/passiveHP/passiveHP.tscn"),
+		preload("res://src/actors/Objects/Bonuses/PassiveBonuses/passiveShootDelay/passiveShootDelay.tscn"),
+		preload("res://src/actors/Objects/Bonuses/PassiveBonuses/passiveMulti/passiveMulti.tscn"),
+		preload("res://src/actors/Objects/Bonuses/PassiveBonuses/passiveSpeed/passiveSpeed.tscn")		
 	]
 
-export (float) var nextSpawnTime = 2.0
-export (int) var maxBonusSpawn = 3
 
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()

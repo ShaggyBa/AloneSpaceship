@@ -39,7 +39,6 @@ func _on_TimerRayDuracity_timeout() -> void:
 
 func _on_BossShoot_area_entered(area: Area2D) -> void:
 	if area.is_in_group("damageable") or area is MC:
-		print("Попадание")
 		area.takeDamage(damage)
 		
 		if area is MC:

@@ -7,10 +7,7 @@ export (float) var mcVSpeed = 300.0 # cкорость вертикального
 
 export (int) var mcHP = 5
 
-
-
 export (float) var shootDelay = 0.3
-export (float) var bonusShootDelay = 0.2
 
 export (int) var mcDamage = 1
 
@@ -93,7 +90,7 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	shooting()
-	shieldEffect()
+	passiveShieldEffect()
 	
 	
 func _physics_process(delta) -> void:
@@ -105,10 +102,6 @@ func setTimerShooting()->void:
 	timerShooting.set_wait_time(shootDelay)
 	add_child(timerShooting)
 	
-func setTimerBonusShooting()->void:
-	timerBonusShooting.set_one_shot(true)
-	timerBonusShooting.set_wait_time(bonusShootDelay)
-	add_child(timerBonusShooting)
 	
 func setTimerInvincibility()->void:
 	timerShieldRestoring.set_one_shot(true)
@@ -116,25 +109,27 @@ func setTimerInvincibility()->void:
 	add_child(timerShieldRestoring)
 	
 	
+func setTimerBonusShooting()->void:
+	timerBonusShooting.set_one_shot(true)
+	timerBonusShooting.set_wait_time(shootDelay)
+	add_child(timerBonusShooting)
+	
+	
 func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.set_one_shot(true)
 	add_child(timerDuringShieldBonus)
 	timerDuringShieldBonus.connect("timeout", self, "disabledShieldBonus")
 	
+	
 func setTimerDamageBonus()->void:
 	timerDuringDamageBonus.set_one_shot(true)
 	add_child(timerDuringDamageBonus)
 	timerDuringDamageBonus.connect("timeout", self, "disabledDamageBonus")
-
-
-func setTickRateDamage()->void:
-	tickRateDamage.set_one_shot(true)
-	tickRateDamage.set_wait_time(1.0)
-	tickRateDamage.connect("timeout", self, "_on_tickRateDamage_timeout")
-	add_child(tickRateDamage)
 	
 
 func shooting():
+	if isDead:
+		return
 	if (Input.is_action_pressed("ui_accept")) and (timerShooting.is_stopped() and timerBonusShooting.is_stopped()):
 		if isDamageUp:
 			timerBonusShooting.start()
@@ -158,6 +153,9 @@ func create_shoot():
 
 
 func spaceshipMove(delta):
+	if isDead:
+		return
+		
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
@@ -192,30 +190,33 @@ func takeDamage(damage):
 			if mcHP <= 0 and not isDead:
 				death()
 
-func death():
-	isDead = true
-	collision.queue_free()
-	mcVSpeed = 0
-	mcSpeed = 0
-	destroyed.play()
-	sprite.animation = "Death"
-	sprite.playing = true
-	#sprite.connect("animation_finished", self, "_on_Death_Animation")
-	destroyed.connect("finished", self, "_on_Death_Animation")
 
-func _on_Death_Animation():
-	Input.parse_input_event(game_over)
-
-func burning(delay:int):
-	if isInvicibility:
-		return
-	for _i in range(delay):
-		tickRateDamage.start()
-		sprite.modulate = "00ff6a"		
-		yield(tickRateDamage, "timeout")
+func setTickRateDamage()->void:
+	tickRateDamage.set_one_shot(true)
+	tickRateDamage.set_wait_time(1.0)
+	tickRateDamage.connect("timeout", self, "_on_tickRateDamage_timeout")
+	add_child(tickRateDamage)
 	
 
-func shieldEffect():
+func burning(times:int):
+	if isInvicibility or isDead:
+		return
+	
+	sprite.modulate = "00ff6a"				
+	for _time in range(times):
+		tickRateDamage.start()
+		yield(tickRateDamage, "timeout")
+	sprite.modulate = "ffffff"	
+	
+
+func _on_tickRateDamage_timeout():
+	takeDamage(mcHP * 0.2)
+
+
+func passiveShieldEffect():
+	if isDead:
+		return
+		
 	if timerShieldRestoring.is_stopped():
 		shield.visible = true
 		shield.playing = true
@@ -225,6 +226,8 @@ func shieldEffect():
 		
 		
 func changeState():
+	if isDead:
+		return
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
@@ -261,10 +264,12 @@ func _on_MC_area_entered(area):
 		shieldBonus()
 	elif area.is_in_group("DamageBonus"):
 		damageBonus()
+	
 	elif area.is_in_group("damageable"):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
+	
 	elif area.is_in_group("addDamage"):
 		addPassiveDamageBonus()
 	elif area.is_in_group("addShootSpeed"):
@@ -318,7 +323,7 @@ func addPassiveMultiscoreBonus():
 func addPassiveShootSpeedBonus():
 	emit_signal("damage_changed", mcDamage)
 	if shootDelay > 0.1:
-		shootDelay -= 0.05 
+		shootDelay -= 0.02 
 	timerShooting.set_wait_time(shootDelay)
 	
 
@@ -336,6 +341,17 @@ func speedBonus():
 	emit_signal("speed_changed", mcVSpeed)
 
 
-func _on_tickRateDamage_timeout():
-	takeDamage(mcHP * 0.2)
+
+func death():
+	isDead = true
+	collision.queue_free()
+	destroyed.play()
+	shield.queue_free()
+	sprite.animation = "Death"
 	sprite.modulate = "ffffff"
+	sprite.playing = true
+	destroyed.connect("finished", self, "_on_Destroyed")
+
+
+func _on_Destroyed():
+	Input.parse_input_event(game_over)

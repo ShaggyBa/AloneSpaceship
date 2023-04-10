@@ -1,21 +1,21 @@
 extends Area2D
 
-class_name Bonus
 
 export (float) var speed = 500.0
 
-onready var sprite = $AnimatedSprite
+onready var aSprite = $AnimatedSprite
 onready var border = $Border
 
 func _ready():
-	sprite.playing = true
+	aSprite.playing = true
 	border.playing = true
 
 func _physics_process(delta):
 	global_position.x -= speed * delta
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	queue_free()
 
-func _on_Bonus_area_entered(area):
-	queue_free()
+func _on_Bonus_area_entered(_area):
+	if _area is MC:
+		queue_free()
