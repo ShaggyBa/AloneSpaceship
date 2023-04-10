@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/Objects/Bonuses/PassiveBonus/BaseBonus/PassiveBaseBonus.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 23.3333, 22.2222 )
+
+[node name="Bonus" type="Area2D" groups=["PassiveBonus"]]
+position = Vector2( -4, 0 )
+scale = Vector2( 0.3, 0.3 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 5, 4 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 5, 3.33333 )
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 54 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 5, 3.33333 )
+scale = Vector2( 3.83333, 3.66667 )
+
+[connection signal="area_entered" from="." to="." method="_on_Bonus_area_entered"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

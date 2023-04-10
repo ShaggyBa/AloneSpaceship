@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actors/Objects/Bonuses/BonusSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actors/Objects/Bonuses/ActiveBonus/ActiveBonusSpawner/ActiveBonusSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Assets/Sound/SoundEffects/Simple Music/DeepSpaceA.mp3" type="AudioStream" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
+[ext_resource path="res://src/actors/Objects/Bonuses/PassiveBonus/PassiveBonusSpawner/PassiveBonusSpawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
@@ -18,7 +19,9 @@ current = true
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 
-[node name="BonusSpawner" parent="." instance=ExtResource( 5 )]
+[node name="ActiveBonusSpawner" parent="." instance=ExtResource( 5 )]
+
+[node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 spawnTimer = 100.0

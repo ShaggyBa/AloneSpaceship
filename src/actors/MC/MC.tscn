@@ -6,7 +6,7 @@
 [ext_resource path="res://src/Assets/Sound/MainShipSound/Blaster.wav" type="AudioStream" id=4]
 [ext_resource path="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/273562__n_audioman__hit_hurt39.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/shield.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ShieldBonus.png" type="Texture" id=7]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/ShieldBonus.png" type="Texture" id=7]
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Powering.png" type="Texture" id=8]
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Idle.png" type="Texture" id=9]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/GameOver.mp3" type="AudioStream" id=10]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/Assets/Sound/MainShipSound/BLLTRico_Ricochet Metallic_04.wav" type="AudioStream" id=15]
 [ext_resource path="res://src/Assets/Sound/BonusesSound/active.wav" type="AudioStream" id=16]
 [ext_resource path="res://src/Assets/Sound/BonusesSound/passive.mp3" type="AudioStream" id=17]
+
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 9 )
