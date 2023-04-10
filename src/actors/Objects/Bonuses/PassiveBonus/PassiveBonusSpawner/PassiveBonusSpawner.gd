@@ -28,7 +28,7 @@ func _on_SpawnTimer_timeout():
 	
 
 	# Position 
-	bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(0, viewportRect.end.y))
+	bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
 	
 	
 		

@@ -49,5 +49,4 @@ volume_db = -7.0
 position = Vector2( 900, 299 )
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
-[connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]
 [connection signal="finished" from="Music" to="." method="_on_Music_finished"]
