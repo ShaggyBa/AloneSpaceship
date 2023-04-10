@@ -38,6 +38,10 @@ func _ready() -> void:
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
 	
+	verticalSpeed *= coef
+	horisontalSpeed *= coef
+	enemyHP += enemyHP * coef
+	enemyDamage += enemyDamage * coef
 
 func _physics_process(delta):
 	moving(delta)

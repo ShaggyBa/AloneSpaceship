@@ -184,7 +184,6 @@ func takeDamage(damage):
 			
 			changeState()			
 			
-			print("Текущий HP: ", mcHP)
 			
 			emit_signal("health_changed", mcHP)
 			
@@ -227,7 +226,6 @@ func shieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
-	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
 		sprite.animation = "FullHP"
