@@ -9,6 +9,9 @@ onready var music = $Music
 onready var counter := $GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter
 onready var counter_final := $GUI/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 
+#var ScoreCounter
+#var ScoreCounterF
+
 onready var plBoss = preload("res://src/actors/Boss/Boss.tscn")
 onready var newBack = preload("res://src/scenes/orangeLevel.tscn")
 
@@ -18,7 +21,9 @@ var bossIsSpawning = false
 
 func _ready() -> void:
 	music.play()
-	
+#	ScoreCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter")
+#	ScoreCounterF = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter")
+
 
 
 func _process(delta: float) -> void:
@@ -28,8 +33,10 @@ func _process(delta: float) -> void:
 		
 	
 	points += delta * 100 * multiscore
-	counter.set_points(floor(points))
-	counter_final.set_points(floor(points))
+	counter.increase_points_on(floor(delta * 100 * multiscore))
+	counter_final.set_points(counter.get_points())
+#	counter.set_points(floor(points))
+#	counter_final.set_points(floor(points))
 	
 	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
