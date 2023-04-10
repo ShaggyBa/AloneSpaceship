@@ -21,6 +21,7 @@ onready var muzzle = $muzzle
 
 
 onready var _target = get_tree().current_scene.get_node("MC")
+onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
 onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
 
@@ -32,7 +33,9 @@ var timerRay = Timer.new()
 var timerShooting = Timer.new()
 
 var stateChanged = false
+var isReady = false
 
+onready var viewportEndX = viewportRect.end.x + 210
 
 func _ready() -> void:
 	aSprite.playing = true
@@ -62,7 +65,7 @@ func setTimerShooting()->void:
 
 
 func shooting():
-	if timerShooting.is_stopped() and canShoot:
+	if timerShooting.is_stopped() and canShoot and isReady:
 		timerShooting.start()	
 		aSprite.animation = "attack"
 		attackSound.playing = true
@@ -104,10 +107,13 @@ func moving(delta:float) :
 		directionY *= -1
 		
 	if global_position.x < viewportRect.end.x / 2 \
-	or global_position.x > viewportRect.end.x - 90:
+	or global_position.x > viewportEndX:
 		directionX *= -1
 
-
+	if global_position.x <= _positionToReady.x and not isReady:
+		viewportEndX -= 290
+		isReady = true
+		
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 

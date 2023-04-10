@@ -60,6 +60,7 @@ var tickRateDamage = Timer.new()
 var game_over = InputEventAction.new()
 
 
+
 var isInvicibility = false
 var isDamageUp = false
 var isDead = false
@@ -107,7 +108,7 @@ func setTimerShooting()->void:
 	
 func setTimerBonusShooting()->void:
 	timerBonusShooting.set_one_shot(true)
-	timerBonusShooting.set_wait_time(bonusShootDelay)
+	timerBonusShooting.set_wait_time(shootDelay)
 	add_child(timerBonusShooting)
 	
 func setTimerInvincibility()->void:
@@ -135,6 +136,9 @@ func setTickRateDamage()->void:
 	
 
 func shooting():
+	if isDead:
+		return
+	
 	if (Input.is_action_pressed("ui_accept")) and (timerShooting.is_stopped() and timerBonusShooting.is_stopped()):
 		if isDamageUp:
 			timerBonusShooting.start()
@@ -158,6 +162,8 @@ func create_shoot():
 
 
 func spaceshipMove(delta):
+	if isDead:
+		return
 	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
@@ -188,37 +194,29 @@ func takeDamage(damage):
 			
 			print("Текущий HP: ", mcHP)
 			
-			emit_signal("health_changed", mcHP)
-			
 			hitSound.play()
 			
 			if mcHP <= 0 and not isDead:
 				death()
 
-func death():
-	isDead = true
-	collision.queue_free()
-	mcVSpeed = 0
-	mcSpeed = 0
-	destroyed.play()
-	sprite.animation = "Death"
-	sprite.playing = true
-	#sprite.connect("animation_finished", self, "_on_Death_Animation")
-	destroyed.connect("finished", self, "_on_Death_Animation")
 
 func _on_Death_Animation():
 	Input.parse_input_event(game_over)
 
 func burning(delay:int):
-	if isInvicibility:
+	if isInvicibility or isDead:
 		return
+
+	sprite.modulate = "00ff6a"				
 	for _i in range(delay):
 		tickRateDamage.start()
-		sprite.modulate = "00ff6a"		
 		yield(tickRateDamage, "timeout")
+	sprite.modulate = "ffffff"				
 	
 
 func shieldEffect():
+	if isDead:
+		return
 	if timerShieldRestoring.is_stopped():
 		shield.visible = true
 		shield.playing = true
@@ -229,7 +227,6 @@ func shieldEffect():
 		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
-	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
 		sprite.animation = "FullHP"
@@ -296,7 +293,6 @@ func heal():
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	HealthCounter.set_points(mcHP)	
 	changeState()
 	
 		
@@ -324,7 +320,6 @@ func disabledShieldBonus():
 
 func addPassiveDamageBonus():
 	mcDamage += 2
-	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
 	if mcVSpeed < 900:
@@ -348,17 +343,6 @@ func addPassiveShootSpeedBonus():
 func addPassiveMaxHPBonus():
 	maxHP += 10
 	mcHP += 10
-	HealthCounter.set_points(maxHP)
-
-	
-	
-func shootDelayBonus():
-	emit_signal("shootDelay_changed", shootDelay)
-
-
-func speedBonus():
-	emit_signal("speed_changed", mcVSpeed)
-
 
 
 func death():
@@ -370,38 +354,13 @@ func death():
 	sprite.modulate = "ffffff"
 	sprite.playing = true
 	destroyed.connect("finished", self, "_on_Destroyed")
-	DeathMenu.set_is_over(true)
 
 
 func _on_Destroyed():
 	Input.parse_input_event(game_over)
 
 
-func stat_inizialization() -> void:
 	
-	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
-	
-	DamageCounter = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
-	RPSCounter    = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
-	SpeedCounter  = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
-	
-	DamageCounterP = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
-	RPSCounterP    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
-	SpeedCounterP  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
-	
-	DeathMenu      = get_tree().current_scene.get_node("GUI/DeathMenu")
-	
-	HealthCounter.set_points(mcHP)
-
-	
-	
-func shootDelayBonus():
-	emit_signal("shootDelay_changed", shootDelay)
-
-
-func speedBonus():
-	emit_signal("speed_changed", mcVSpeed)
-
 
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)

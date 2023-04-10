@@ -1,5 +1,4 @@
-extends Enemy
-
+extends enemy
 
 export (float) var enemyBigAttackDelay = 2.5 
 export (float) var enemyAttackDelay = 1.0 
@@ -11,7 +10,7 @@ onready var muzzles = $FiringPositions.get_children()
 
 onready var groupGun = [muzzles[0], muzzles[1]]
 
-
+onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
 onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
 onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
@@ -20,8 +19,18 @@ var timerShooting = Timer.new()
 
 var currentGun = true
 
-var directionY = direction
 var directionX = -1
+
+var directionY = directionX
+
+
+
+var isReady = false
+
+onready var viewportEndX = viewportRect.end.x + 210
+
+var stateChanged = false
+
 
 func _ready() -> void:
 	randomize()
@@ -54,12 +63,16 @@ func moving(delta:float)->void:
 		directionY *= -1
 		
 	if global_position.x < viewportRect.end.x / 2 \
-	or global_position.x > viewportRect.end.x - 90:
+	or global_position.x > viewportEndX:
 		directionX *= -1
+
+	if global_position.x <= _positionToReady.x and not isReady:
+		viewportEndX -= 290
+		isReady = true
 
 
 func shooting():
-	if timerShooting.is_stopped() and not isDeath:
+	if timerShooting.is_stopped() and not isDeath and isReady:
 		timerShooting.start()
 		var shoot = plShoot.instance()
 		shoot.damage = enemyDamage				
@@ -93,3 +106,4 @@ func changeState():
 		verticalSpeed *= 1.25
 		horisontalSpeed *= 1.5
 		timerShooting.set_wait_time(enemyAttackDelay)
+		stateChanged = true

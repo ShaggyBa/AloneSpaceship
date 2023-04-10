@@ -1,7 +1,7 @@
 extends Area2D
 
 
-class_name Enemy
+class_name enemy
 
 
 export (float) var verticalSpeed = 50.0
