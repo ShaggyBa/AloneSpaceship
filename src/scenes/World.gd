@@ -28,15 +28,15 @@ func _process(delta: float) -> void:
 		
 	
 	points += delta * 100 * multiscore
-	counter.increase_points_on(floor(delta * 100 * multiscore))
+#	counter.increase_points_on(floor(delta * 100 * multiscore))
 	counter_final.set_points(counter.get_points())
-#	counter.set_points(floor(points))
+	counter.set_points(floor(points))
 #	counter_final.set_points(counter.get_points())
 	
 	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
-		boss.global_position = Vector2(1000, 300)
-		#add_child(boss)
+		boss.global_position = Vector2(1100, 300)
+		add_child(boss)
 		bossIsSpawning = true
 
 	if points > 100000 and get_tree().get_nodes_in_group("boss").size() == 0:

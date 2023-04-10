@@ -1,4 +1,4 @@
-extends Enemy
+extends enemy
 
 export (float) var enemyAttackDelay = 1.0
 

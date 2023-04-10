@@ -87,7 +87,8 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 verticalSpeed = 0.0
 horisontalSpeed = 1000.0
-enemyDamage = 2
+enemyHP = 3
+enemyDamage = 4
 
 [node name="Engine" parent="." index="0"]
 position = Vector2( -3, 0 )

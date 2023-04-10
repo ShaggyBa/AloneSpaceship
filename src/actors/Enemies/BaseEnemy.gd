@@ -28,13 +28,16 @@ onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 onready var collision = $CollisionPolygon2D
 
+var coef = 1.0
 
 func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
-	
+	maxHP = floor(maxHP * coef)
+	enemyDamage = floor(enemyDamage * coef)
+	print("maxHP: ", maxHP, " EnemyDamage: ", enemyDamage)
 
 func _physics_process(delta):
 	moving(delta)

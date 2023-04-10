@@ -5,9 +5,6 @@ export (float) var rayDuracity = 2.0
 export (float) var speed = 750.0
 
 
-onready var plShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect/BaseShootEffect.tscn")
-
-
 onready var timerRayDuracity = $TimerRayDuracity
 onready var raySprite = $Ray
 
@@ -45,11 +42,3 @@ func _on_BossShoot_area_entered(area: Area2D) -> void:
 		if area is MC:
 			area.burning(int(rayDuracity))
 		
-		var shootEffect = plShootEffect.instance()
-		shootEffect.position = position
-		get_parent().add_child(shootEffect)
-
-#
-#func moveTo(targetPosition:Vector2, delta:float):
-#	global_position = Vector2.move_toward(targetPosition, delta).normalized()
-#	print(global_position)
