@@ -172,7 +172,7 @@ func changePosition(vector:Vector2, delta:float):
 	 
 
 func takeDamage(damage):
-	if isInvicibility: 
+	if isInvicibility or isDead: 
 		return
 	else:	
 		if timerShieldRestoring.is_stopped():
@@ -189,14 +189,14 @@ func takeDamage(damage):
 			
 			hitSound.play()
 			
-			if mcHP <= 0:
+			if mcHP <= 0 and not isDead:
 				death()
 
 func death():
 	isDead = true
 	collision.queue_free()
-	mcVSpeed /= 4
-	mcSpeed /= 4
+	mcVSpeed = 0
+	mcSpeed = 0
 	destroyed.play()
 	sprite.animation = "Death"
 	sprite.playing = true
