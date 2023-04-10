@@ -346,8 +346,51 @@ func addPassiveShootSpeedBonus():
 	
 
 func addPassiveMaxHPBonus():
-	maxHP += 20
-	mcHP += 20
+	maxHP += 10
+	mcHP += 10
+	HealthCounter.set_points(maxHP)
+
+	
+	
+func shootDelayBonus():
+	emit_signal("shootDelay_changed", shootDelay)
+
+
+func speedBonus():
+	emit_signal("speed_changed", mcVSpeed)
+
+
+
+func death():
+	isDead = true
+	collision.queue_free()
+	destroyed.play()
+	shield.queue_free()
+	sprite.animation = "Death"
+	sprite.modulate = "ffffff"
+	sprite.playing = true
+	destroyed.connect("finished", self, "_on_Destroyed")
+	DeathMenu.set_is_over(true)
+
+
+func _on_Destroyed():
+	Input.parse_input_event(game_over)
+
+
+func stat_inizialization() -> void:
+	
+	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
+	
+	DamageCounter = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
+	RPSCounter    = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
+	SpeedCounter  = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
+	
+	DamageCounterP = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
+	RPSCounterP    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
+	SpeedCounterP  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
+	
+	DeathMenu      = get_tree().current_scene.get_node("GUI/DeathMenu")
+	
 	HealthCounter.set_points(mcHP)
 
 	

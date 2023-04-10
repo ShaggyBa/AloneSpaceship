@@ -21,19 +21,19 @@ func _ready():
 
 func _on_SpawnTimer_timeout():
 	
-	if get_tree().get_nodes_in_group("passive").size() < maxBonusSpawn:
+#	if get_tree().get_nodes_in_group("BonusEffects").size() < maxBonusSpawn:
 	
-		# Spawn bonus
-		var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
-		var bonus = bonusPreloaded.instance()
-		
+	# Spawn bonus
+	var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
+	var bonus = bonusPreloaded.instance()
+	
 
-		# Position 
-		bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(0, viewportRect.end.y))
-		get_tree().current_scene.add_child(bonus)
+	# Position 
+	bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(0, viewportRect.end.y))
+	get_tree().current_scene.add_child(bonus)
 
-		# Restart timer
-		spawnTimer.start(nextSpawnTime)
-	else: 
-		spawnTimer.start(nextSpawnTime)
-		
+	# Restart timer
+	spawnTimer.start(nextSpawnTime)
+#else: 
+	spawnTimer.start(nextSpawnTime)
+	
