@@ -18,7 +18,7 @@ func _ready():
 
 func _on_SpawnTimer_timeout():
 	
-	if get_tree().get_nodes_in_group("BonusEffects").size() < maxBonusSpawn:
+	if get_tree().get_nodes_in_group("active").size() < maxBonusSpawn:
 	
 		# Spawn bonus
 		var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]

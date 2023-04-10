@@ -282,8 +282,13 @@ func _on_MC_area_entered(area):
 		addPassiveDamageBonus()
 	elif area.is_in_group("addShootSpeed"):
 		addPassiveShootSpeedBonus()
-		
-		
+	elif area.is_in_group("addMaxHP"):
+		addPassiveMaxHPBonus()	
+	elif area.is_in_group("addMultiscore"):
+		addPassiveMultiscoreBonus()
+	elif area.area_is_in_group("addSpeed"):
+		addPassiveSpeed()
+			
 func heal():
 	if mcHP + (maxHP / 4) < maxHP:
 		mcHP += maxHP / 4
@@ -317,16 +322,18 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage *= 2
-	
+	mcDamage += 5
+	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
-	mcVSpeed += floor(mcVSpeed * 0.1)
-	mcSpeed += floor(mcSpeed * 0.1)
-	
+	mcVSpeed += floor(mcVSpeed * 0.05)
+	mcSpeed += floor(mcSpeed * 0.05)
+#	SpeedCounter.set_points() -> 1.0 + 0.1 (1.0 === 100% скорости передвижения; 1.1 === 110%)
+# 1.0x -> поймали бонус: 1.1x
 	
 func addPassiveMultiscoreBonus():
 	get_tree().current_scene.multiscore += 0.1
+# 1.0x -> поймали бонус: 1.1x
 	
 	
 func addPassiveShootSpeedBonus():
@@ -335,6 +342,8 @@ func addPassiveShootSpeedBonus():
 		shootDelay -= 0.02 
 	timerShooting.set_wait_time(shootDelay)
 	
+# 1.0x -> поймали бонус: 1.1x
+	
 
 func addPassiveMaxHPBonus():
 	maxHP += 10
@@ -342,13 +351,13 @@ func addPassiveMaxHPBonus():
 	HealthCounter.set_points(maxHP)
 
 	
-	
-func shootDelayBonus():
-	emit_signal("shootDelay_changed", shootDelay)
-
-
-func speedBonus():
-	emit_signal("speed_changed", mcVSpeed)
+#
+#func shootDelayBonus():
+#	emit_signal("shootDelay_changed", shootDelay)
+#
+#
+#func speedBonus():
+#	emit_signal("speed_changed", mcVSpeed)
 
 
 
