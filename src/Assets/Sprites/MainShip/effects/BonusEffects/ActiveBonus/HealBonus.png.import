@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PassDamage.png-21b76f835a22147d21b20c1f2ac9290c.stex"
+path="res://.import/HealBonus.png-ed5c8a7816c8cc9b4e6992ec28936c9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/MainEffects/PassDamage.png"
-dest_files=[ "res://.import/PassDamage.png-21b76f835a22147d21b20c1f2ac9290c.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/HealBonus.png"
+dest_files=[ "res://.import/HealBonus.png-ed5c8a7816c8cc9b4e6992ec28936c9b.stex" ]
 
 [params]
 

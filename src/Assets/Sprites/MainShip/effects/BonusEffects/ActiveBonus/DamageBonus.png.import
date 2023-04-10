@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/effectShootBonus.png-14e313c9a2b54222cd1a03202c76e6f3.stex"
+path="res://.import/DamageBonus.png-acfbcd131080633e80575f4b9a8ba8c3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/effectShootBonus.png"
-dest_files=[ "res://.import/effectShootBonus.png-14e313c9a2b54222cd1a03202c76e6f3.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/DamageBonus.png"
+dest_files=[ "res://.import/DamageBonus.png-acfbcd131080633e80575f4b9a8ba8c3.stex" ]
 
 [params]
 

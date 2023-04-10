@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Damage.png-553bfb098d7d41f3b58bd74b44e854d2.stex"
+path="res://.import/PassiveSpeedMC.png-0574aa20719c1c211e16ae96b1cb8441.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/Damage.png"
-dest_files=[ "res://.import/Damage.png-553bfb098d7d41f3b58bd74b44e854d2.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/PassiveBonus/PassiveSpeedMC.png"
+dest_files=[ "res://.import/PassiveSpeedMC.png-0574aa20719c1c211e16ae96b1cb8441.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

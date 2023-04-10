@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iconShieldBonus.png-ff657a5bea71712e13df3dc3bfb91587.stex"
+path="res://.import/animFrame.png-34a1c08794a06f6ba6ab4e0ea27e3f0c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/iconShieldBonus.png"
-dest_files=[ "res://.import/iconShieldBonus.png-ff657a5bea71712e13df3dc3bfb91587.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/animFrame.png"
+dest_files=[ "res://.import/animFrame.png-34a1c08794a06f6ba6ab4e0ea27e3f0c.stex" ]
 
 [params]
 
