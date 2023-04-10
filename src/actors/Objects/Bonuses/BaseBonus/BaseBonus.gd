@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name PassiveBonus
+class_name Bonus
 
 export (float) var speed = 500.0
 

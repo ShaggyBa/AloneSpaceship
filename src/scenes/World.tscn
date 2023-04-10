@@ -32,7 +32,7 @@ changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 500.0
-mcHP = 100
+mcHP = 10000
 shootDelay = 0.2
 bonusShootDelay = 0.1
 mcDamage = 1
@@ -42,7 +42,7 @@ delayShieldRestoring = 5.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -7.0
+volume_db = -15.0
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
 [connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]

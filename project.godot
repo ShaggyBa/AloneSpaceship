@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
-"class": "ActiveBonus",
+"class": "Bonus",
 "language": "GDScript",
-"path": "res://src/actors/Objects/Bonuses/ActiveBonus/Base/ActiveBonus.gd"
+"path": "res://src/actors/Objects/Bonuses/BaseBonus/BaseBonus.gd"
 }, {
 "base": "Area2D",
 "class": "Enemy",
@@ -35,22 +35,16 @@ _global_script_classes=[ {
 "path": "res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.gd"
 }, {
 "base": "Area2D",
-"class": "PassiveBonus",
-"language": "GDScript",
-"path": "res://src/actors/Objects/Bonuses/PassiveBonus/Base/PassiveBonus.gd"
-}, {
-"base": "Area2D",
 "class": "ShootClass",
 "language": "GDScript",
 "path": "res://src/actors/Projectiles/BaseShoot/BaseShoot.gd"
 } ]
 _global_script_class_icons={
-"ActiveBonus": "",
+"Bonus": "",
 "Enemy": "",
 "GitAPI": "",
 "MC": "",
 "Meteorite": "",
-"PassiveBonus": "",
 "ShootClass": ""
 }
 
