@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DeepSpaceB.mp3-09c0587f0838ab16b53911a87fee69ac.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Sound/SoundEffects/Simple Music/DeepSpaceB.mp3"
+dest_files=[ "res://.import/DeepSpaceB.mp3-09c0587f0838ab16b53911a87fee69ac.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RhytmicBounceB.mp3-332f9a1a57dee84e3f7cd7601753a595.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Sound/SoundEffects/Simple Music/RhytmicBounceB.mp3"
+dest_files=[ "res://.import/RhytmicBounceB.mp3-332f9a1a57dee84e3f7cd7601753a595.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

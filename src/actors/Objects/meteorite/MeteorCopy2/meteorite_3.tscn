@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/Objects/meteorite/MeteoriteMain/meteorite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Assets/Sprites/Asteroids/3112124858.png" type="Texture" id=2]
+
+[node name="Meteorite" instance=ExtResource( 1 )]
+minSpeed = 50.0
+maxSpeed = 75.0
+minRotationRate = -10.0
+maxRotationRate = 10.0
+meteoriteHP = 3
+minScale = 1.0
+maxScale = 3.0
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 1.08, 1.06 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 58.4931, 129.054 )
+scale = Vector2( 1.99908, 4.46428 )
+polygon = PoolVector2Array( 3.25495, -10.7641, 2.75472, -12.7801, -23.7575, -12.7801, -26.2586, -12.5561, -28.2596, -14.3481, -23.7575, -18.8281, -26.2586, -21.5161, -24.7579, -23.9801, -14.7533, -25.7721, -5.24896, -25.1001, 2.25449, -28.2361, 6.75656, -27.7881, 13.7598, -17.7081 )
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+position = Vector2( 43, 41.5 )
+scale = Vector2( 4.2, 4.05 )

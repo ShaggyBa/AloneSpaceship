@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DubStepDropBoom.mp3-4dd216aa693a896fb3b339166dcad534.mp3str"
+
+[deps]
+
+source_file="res://src/Assets/Sound/SoundEffects/Simple Music/DubStepDropBoom.mp3"
+dest_files=[ "res://.import/DubStepDropBoom.mp3-4dd216aa693a896fb3b339166dcad534.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
