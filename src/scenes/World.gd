@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
 		boss.global_position = Vector2(1000, 300)
-		add_child(boss)
+		#add_child(boss)
 		bossIsSpawning = true
 
 	if points > 100000 and get_tree().get_nodes_in_group("boss").size() == 0:

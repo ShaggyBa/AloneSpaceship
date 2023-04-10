@@ -11,7 +11,7 @@ animations = [ {
 "speed": 0.0
 } ]
 
-[node name="Bonus" groups=["DamageBonus"] instance=ExtResource( 1 )]
+[node name="Bonus" groups=["Active", "DamageBonus"] instance=ExtResource( 1 )]
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( 5, 1.66667 )
