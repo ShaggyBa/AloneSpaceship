@@ -293,7 +293,7 @@ frame = 3
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
-volume_db = -14.017
+volume_db = -7.0
 
 [node name="ShotSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )

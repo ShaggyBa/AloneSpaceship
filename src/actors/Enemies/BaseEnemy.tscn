@@ -46,7 +46,7 @@ volume_db = -38.0
 
 [node name="Destroyed" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )
-volume_db = -27.0
+volume_db = -33.0
 
 [connection signal="area_entered" from="." to="." method="_on_BaseEnemy_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -15,10 +15,10 @@ onready var newBack = preload("res://src/scenes/orangeLevel.tscn")
 var orangeInst
 var bossIsSpawning = false
 
+onready var mcState = get_tree().current_scene.get_node("MC")
 
 func _ready() -> void:
 	music.play()
-	
 
 
 func _process(delta: float) -> void:
@@ -39,6 +39,8 @@ func _process(delta: float) -> void:
 
 	if points > 100000 and get_tree().get_nodes_in_group("boss").size() == 0:
 		changeBack() 
+
+
 
 func changeBack():
 	orangeInst = newBack.instance()
