@@ -17,12 +17,6 @@ var rotationSpeed = null
 var randomScale = null
 
 
-onready var takeHit = $Audio/Hit
-onready var destroyed = $Audio/Destroyed
-
-onready var collision = $CollisionShape2D
-onready var mSprite = $Sprite
-
 var pMeteoriteEffect = preload("res://src/actors/Objects/meteorite/MeteoriteEffect.tscn")
 
 
@@ -37,36 +31,32 @@ func _ready():
 func _process(delta):
 	global_position.x -= speed * delta
 	rotation_degrees += rotationSpeed * delta 
+	
+	if meteoriteHP <= 0:	
+		spawnMeteoriteEffect()
+		queue_free()
 		
-		
+	
+	
 func takeDamage(damage):
 	meteoriteHP -= damage
-	takeHit.play()
-	if meteoriteHP <= 0:	
-		death()
+	$Hit.play()
 
-func death():
-	
-	collision.queue_free()
-	mSprite.queue_free()
-	
-	destroyed.play()
-	spawnMeteoriteEffect()
-	
+
 func spawnMeteoriteEffect():
 	var meteoriteEffect = pMeteoriteEffect.instance()
-	meteoriteEffect.texture = mSprite.texture
+	meteoriteEffect.texture = $Sprite.texture
 	meteoriteEffect.position = Vector2(position.x, position.y + 50)
 	meteoriteEffect.scale = scale
 	get_parent().add_child(meteoriteEffect)
-	
+
 
 func _on_Meteorite_area_entered(area: Area2D) -> void:
 	if area is MC:
 		area.takeDamage(meteoriteHP)
-		death()
+		meteoriteHP = 0
 	if area.is_in_group("boss"):
-		death()
+		meteoriteHP = 0
 
  
 func _on_VisibilityNotifier2D_screen_exited():

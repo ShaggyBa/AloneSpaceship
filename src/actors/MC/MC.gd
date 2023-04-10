@@ -38,9 +38,6 @@ onready var shotSound = $Audio/ShotSound
 onready var shieldHitSound = $Audio/ShieldHit
 onready var gameOverSound = $Audio/ShieldHit
 onready var destroyed = $Audio/Destroyed
-onready var ricochet = $Audio/Ricochet
-onready var activeBonusSound = $Audio/ActiveBonus
-onready var passiveBonusSound = $Audio/PassiveBonus
 
 onready var maxHP = mcHP
 
@@ -173,9 +170,7 @@ func changePosition(vector:Vector2, delta:float):
 	 
 
 func takeDamage(damage):
-	if isInvicibility:
-		ricochet.play()
-	elif isDead:
+	if isInvicibility or isDead: 
 		return
 	else:	
 		if timerShieldRestoring.is_stopped():
@@ -261,28 +256,24 @@ func changeStateEngine(vector: Vector2):
 func _on_CanvasLayer_change_move(new_move: Vector2):
 	inputVector = new_move
 
+
 func _on_MC_area_entered(area):
-	
-	if area.is_in_group("Active"):
-		activeBonusSound.play()
-		if area.is_in_group("Heal"):
-			heal()
-		elif area.is_in_group("ShieldBonus"):
-			shieldBonus()
-		elif area.is_in_group("DamageBonus"):
-			damageBonus()
-	
-	if area.is_in_group("Passive"):
-		passiveBonusSound.play()
-		if area.is_in_group("addDamage"):
-			addPassiveDamageBonus()
-		elif area.is_in_group("addShootSpeed"):
-			addPassiveShootSpeedBonus()
+	if area.is_in_group("Heal"):
+		heal()
+	elif area.is_in_group("ShieldBonus"):
+		shieldBonus()
+	elif area.is_in_group("DamageBonus"):
+		damageBonus()
 	
 	elif area.is_in_group("damageable"):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
+	
+	elif area.is_in_group("addDamage"):
+		addPassiveDamageBonus()
+	elif area.is_in_group("addShootSpeed"):
+		addPassiveShootSpeedBonus()
 		
 		
 func heal():

@@ -17,6 +17,8 @@ onready var hit = $Audio/Hit
 onready var destroyed = $Audio/Destroyed
 
 
+#onready var playerInst = get_tree().current_scene.get_node("MC")
+
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
 onready var maxHP = enemyHP
@@ -29,6 +31,7 @@ var enemy_death = InputEventAction.new()
 
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
+onready var deathAnimation = $Death
 onready var collision = $CollisionPolygon2D
 
 
@@ -58,7 +61,9 @@ func moving(delta:float)->void:
 func takeDamage(amount):
 	enemyHP -= amount
 	hit.play()	
+	changeState()
 	if enemyHP <= 0:
+		#emit_signal("add_to_score",kill_points)
 		Input.parse_input_event(enemy_death)
 		death()
 
@@ -76,21 +81,26 @@ func _on_BaseEnemy_area_entered(area):
 func death():
 	isDeath = true
 	
-	engine.queue_free()
+	aSprite.visible = false
+	aSprite.playing = false
+	
+	engine.visible = false
+	engine.playing = false
 	
 	collision.queue_free()
-	aSprite.animation = "Death"
-	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")
-	aSprite.playing = true
+	deathAnimation.playing = true
 	destroyed.play()
 	
-	horisontalSpeed /= 4
-	verticalSpeed /= 4
+	horisontalSpeed /= 2
+	verticalSpeed /= 2
 
 
 func _on_Death_animation_finished():
 	queue_free()
 
+
+func changeState():
+	pass
 
 
 

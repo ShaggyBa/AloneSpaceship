@@ -5,8 +5,9 @@
 [ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/Objects/Bonuses/BonusSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Assets/Sound/SoundEffects/Simple Music/DeepSpaceA.mp3" type="AudioStream" id=6]
+[ext_resource path="res://src/actors/Objects/Bonuses/PassiveBonusSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/World.gd" type="Script" id=7]
+[ext_resource path="res://src/Assets/Sound/LevelSound/battle.wav" type="AudioStream" id=9]
 [ext_resource path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
@@ -23,7 +24,7 @@ current = true
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 6 )]
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-spawnTimer = 100.0
+spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
 nextSpawnTime = 2.0
@@ -40,8 +41,8 @@ delayShieldRestoring = 5.0
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -15.0
+stream = ExtResource( 9 )
+volume_db = -20.102
 
 [node name="ReadyPoint" type="Position2D" parent="."]
 position = Vector2( 800, 300 )
