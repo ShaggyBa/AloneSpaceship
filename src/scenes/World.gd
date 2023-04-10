@@ -1,7 +1,7 @@
 extends Node
 
 var points := 0.0
-var multiscore = 1.0
+export (float) var multiscore = 1.0
 var dec = 1
 
 onready var music = $Music

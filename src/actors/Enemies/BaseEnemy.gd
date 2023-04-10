@@ -26,8 +26,6 @@ onready var maxHP = enemyHP
 signal add_to_score(value) #value: int
 var enemy_death = InputEventAction.new()
 
-onready var hit = $Hit
-onready var destroyed = $Destroyed
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 onready var deathAnimation = $Death

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
+multiscore = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 302 )
@@ -24,17 +25,15 @@ current = true
 spawnTimer = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 0.1
-minSpawnRate = 1000.0
-maxEnemySpawn = 20000
+nextSpawnTime = 1.0
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 500.0
-mcHP = 1
+mcHP = 100
 shootDelay = 0.2
-bonusShootDelay = 0.6
-mcDamage = 3
+bonusShootDelay = 0.1
+mcDamage = 100
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
