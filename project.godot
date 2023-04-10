@@ -58,6 +58,8 @@ _global_script_class_icons={
 
 config/name="Alone Spaceship"
 run/main_scene="res://src/UI/Menu.tscn"
+boot_splash/image="res://src/UI/img/BootImage.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [display]
