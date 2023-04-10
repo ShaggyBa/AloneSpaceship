@@ -134,6 +134,7 @@ visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
+visible = false
 
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]

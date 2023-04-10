@@ -8,7 +8,7 @@ export (float) var verticalSpeed = 50.0
 export (float) var horisontalSpeed = 100.0
 export (int) var enemyHP = 1
 export (int) var enemyDamage = 1
-var kill_points = 25 #очки за убийство противника
+var kill_points = 2500 #очки за убийство противника
 
 
 var direction = 1
@@ -31,13 +31,15 @@ onready var collision = $CollisionPolygon2D
 
 onready var KillsCounter
 onready var KillsCounterP
+onready var ScoreCounter
 
 func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
 	KillsCounterP = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter")
-	KillsCounter = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter")
-	
+	KillsCounter  = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter")
+	ScoreCounter  = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter")
+
 
 func _physics_process(delta):
 	moving(delta)
@@ -58,6 +60,7 @@ func takeDamage(amount):
 	if enemyHP <= 0:
 		KillsCounter.increase_points()
 		KillsCounterP.increase_points()
+		ScoreCounter.increase_points_on(kill_points)
 		death()
 
 

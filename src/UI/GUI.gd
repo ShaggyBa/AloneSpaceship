@@ -6,20 +6,6 @@ onready var pause_button := $Control/HBoxContainer/PauseBtn2
 onready var joy_stick := $Control/TouchScreenButton
 onready var inner_circle := $Control/InnerCircle
 
-onready var health_counter := $Control/HBoxContainer/VBoxContainer4/HealthCounter
-onready var score_counter := $Control/HBoxContainer/VBoxContainer4/ScoreCounter
-
-onready var kills_counter := $PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter
-onready var damage_counter := $PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter
-onready var rpm_counter := $PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPMCounter
-onready var speed_counter := $PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter
-
-onready var kills_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter
-onready var damage_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter
-onready var rpm_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPMCounter
-onready var speed_counterD := $DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter
-onready var final_score := $DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
-
 
 var move_vector = Vector2(0,0)
 var joystick_active = false
@@ -33,6 +19,9 @@ var joy_event_index = 0
 signal change_move(new_move)
 
 
+func _ready():
+	pass
+	
 func _input(event):
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		if joy_stick.is_pressed():
@@ -51,22 +40,3 @@ func _input(event):
 func  calculate_move_vector(event_position):
 	var texture_center = joy_stick.position + Vector2(64,64)
 	return (event_position - texture_center).normalized()
-
-
-
-
-
-#func _unhandled_input(event):
-#	if event.is_action_pressed("enemy_death"):
-#		kills += 1
-#		kills_counter.set_points(kills)
-#		kills_counterD.set_points(kills)
-#		score_counter.increase_points_on(enemy_death_points)
-#
-	
-
-
-func _on_DeathMenu_game_is_over():
-	pass
-	final_score.set_points(score_counter.get_points())
-	#print("game over")

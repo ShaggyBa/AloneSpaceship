@@ -7,6 +7,7 @@ func set_points(points: int) -> void:
 	if points < 0:
 		points = 0
 	points_label.text = str(points)
+	static_points = points
 
 func increase_points() -> void:
 	static_points += 1
@@ -17,4 +18,4 @@ func increase_points_on(value) -> void:
 	points_label.text = str(static_points)	
 
 func get_points():
-	return int(points_label.text)
+	return static_points

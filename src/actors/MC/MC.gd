@@ -71,6 +71,7 @@ var DamageCounter
 var RPSCounterP
 var SpeedCounterP
 var DamageCounterP
+var DeathMenu
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
@@ -165,8 +166,11 @@ func spaceshipMove(delta):
 func changePosition(vector:Vector2, delta:float):
 	global_position.x += vector.x * mcSpeed * delta
 	global_position.y += vector.y * mcVSpeed * delta 
-	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
-	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
+	# на телефоне используются другие значения clamp
+#	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
+#	global_position.x = clamp(global_position.x, 50, viewportSize.x - 50) 
+	global_position.y = clamp(global_position.y, 50, viewportSize.y - 500)
+	global_position.x = clamp(global_position.x, 100, viewportSize.x - 50) 
 	 
 
 func takeDamage(damage):
@@ -192,6 +196,7 @@ func takeDamage(damage):
 			if mcHP <= 0:
 				death()
 
+
 func death():
 	isDead = true
 	collision.queue_free()
@@ -202,9 +207,12 @@ func death():
 	sprite.playing = true
 	#sprite.connect("animation_finished", self, "_on_Death_Animation")
 	destroyed.connect("finished", self, "_on_Death_Animation")
+	DeathMenu.set_is_over(true)
+
 
 func _on_Death_Animation():
 	Input.parse_input_event(game_over)
+
 
 func burning(delay:int):
 	if isInvicibility:
@@ -277,19 +285,20 @@ func heal():
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	emit_signal("health_changed", mcHP)	
+#	emit_signal("health_changed", mcHP)
+	HealthCounter.set_points(mcHP)	
 	changeState()
-	
-		
 
+	
 func damageBonus():
 	isDamageUp = true
 	timerDuringDamageBonus.start(duringDamageBonus)
 	timerShooting.stop()
 	
+	
 func disabledDamageBonus():
 	isDamageUp = false
-		
+	
 	
 func shieldBonus():
 	isInvicibility = true
@@ -326,20 +335,13 @@ func addPassiveShootSpeedBonus():
 func addPassiveMaxHPBonus():
 	maxHP += 10
 	mcHP += 10
-	emit_signal("health_changed", mcHP)
+	HealthCounter.set_points(mcHP)
+
 	
-	
-func shootDelayBonus():
-	emit_signal("shootDelay_changed", shootDelay)
-
-
-func speedBonus():
-	emit_signal("speed_changed", mcVSpeed)
-
-
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
+
 
 func stat_inizialization() -> void:
 	
@@ -353,12 +355,14 @@ func stat_inizialization() -> void:
 	RPSCounterP    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
 	SpeedCounterP  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
 	
+	DeathMenu      = get_tree().current_scene.get_node("GUI/DeathMenu")
+	
 	HealthCounter.set_points(mcHP)
 	
 	DamageCounter.set_points(mcDamage)
-	RPSCounter.set_points(round(shootDelay * 100))
+	RPSCounter.set_points(round(1 / shootDelay))
 	SpeedCounter.set_points(mcSpeed)
 	
 	DamageCounterP.set_points(mcDamage)
-	RPSCounterP.set_points(round(shootDelay * 100))
+	RPSCounterP.set_points(round(1 / shootDelay))
 	SpeedCounterP.set_points(mcSpeed)

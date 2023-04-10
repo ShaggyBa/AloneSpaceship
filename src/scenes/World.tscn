@@ -11,7 +11,6 @@
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
-multiscore = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 302 )
@@ -30,10 +29,8 @@ changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 500.0
-mcHP = 100
 shootDelay = 0.2
 bonusShootDelay = 0.1
-mcDamage = 100
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
@@ -43,4 +40,3 @@ stream = ExtResource( 9 )
 volume_db = -20.102
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
-[connection signal="health_changed" from="MC" to="GUI" method="_on_MC_health_changed"]
