@@ -2,8 +2,8 @@ extends Area2D
 
 
 export (float) var bossAttackDelay = 2.0
-export (float) var verticalSpeed = 35.0
-export (float) var horisontalSpeed = 10.0
+export (float) var verticalSpeed = 100.0
+export (float) var horisontalSpeed = 75.0
 export (int) var bossHP = 50
 export (int) var bossDamage = 10
 
@@ -41,11 +41,11 @@ func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
 	
-	bossHP += _target.maxHP * (1.0 / _target.shootDelay) \
-	+ _target.mcDamage * (1.0 / _target.shootDelay) 
+	bossHP += _target.maxHP * (1.0 / _target.shootDelay) + _target.mcDamage * \
+	(1.0 / _target.shootDelay)
 	
 	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
-	
+	print(bossHP, " ", bossDamage)
 	setTimerShooting()
 	
 
@@ -121,7 +121,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_Boss_area_entered(area):
 	if area is MC:
 		area.takeDamage(bossDamage*5)
-		bossHP -= area.mcDamage * 2
+		bossHP -= area.mcDamage * 10
 		
 		
 func death():
@@ -152,8 +152,8 @@ func changeState():
 		aSprite.speed_scale = 2
 		bossDamage *= floor(1.5)
 		attackSound.pitch_scale = 2
-		verticalSpeed *= 4
-		horisontalSpeed *= 5
+		verticalSpeed *= 2
+		horisontalSpeed *= 2.5
 
 		stateChanged = true
 		

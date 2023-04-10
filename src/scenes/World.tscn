@@ -12,6 +12,9 @@
 
 [node name="Node" type="Node"]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 302 )
@@ -24,18 +27,14 @@ current = true
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
-spawnTimer = 100.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 1.0
-maxEnemySpawn = 10
-changeSpawnRate = true
+nextSpawnTime = 2.0
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-mcVSpeed = 500.0
-mcHP = 10
-shootDelay = 0.2
-mcDamage = 1
+mcVSpeed = 400.0
+mcHP = 2000
+shootDelay = 0.5
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

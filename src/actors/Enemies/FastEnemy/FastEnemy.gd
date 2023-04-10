@@ -1,3 +1,3 @@
-extends Enemy
+extends enemy
 
 

@@ -37,6 +37,7 @@ func _ready() -> void:
 	enemyAttackDelay = rand_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
 	aSprite.speed_scale = enemyAttackDelay	
 	aSprite.playing = true
+	enemyBigAttackDamage = floor(enemyBigAttackDamage * coef)
 	setTimerShooting()
 
 
