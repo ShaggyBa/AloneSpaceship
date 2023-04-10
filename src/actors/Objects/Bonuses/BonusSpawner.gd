@@ -1,9 +1,9 @@
 extends Node2D
 
 var preloadedBonuses = [
-		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusShield/ShieldBonus.tscn"),
-		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusHealth/HealthBonus.tscn"),
-		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusDamage/DamageBonus.tscn"),
+		preload("res://src/actors/Objects/Bonuses/BonusShield/ShieldBonus.tscn"),
+		preload("res://src/actors/Objects/Bonuses/BonusHealth/HealthBonus.tscn"),
+		preload("res://src/actors/Objects/Bonuses/BonusDamage/DamageBonus.tscn"),
 	]
 
 var nextSpawnTime = null

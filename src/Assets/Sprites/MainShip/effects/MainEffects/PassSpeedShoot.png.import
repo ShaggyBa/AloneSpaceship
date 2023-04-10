@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ShieldBonus.png-35ae4d375ecbdfa44f8f177d9ee757a6.stex"
+path="res://.import/PassSpeedShoot.png-7d1e4fac361da36e60e4609691f239e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/MainEffects/ShieldBonus.png"
-dest_files=[ "res://.import/ShieldBonus.png-35ae4d375ecbdfa44f8f177d9ee757a6.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/MainEffects/PassSpeedShoot.png"
+dest_files=[ "res://.import/PassSpeedShoot.png-7d1e4fac361da36e60e4609691f239e4.stex" ]
 
 [params]
 

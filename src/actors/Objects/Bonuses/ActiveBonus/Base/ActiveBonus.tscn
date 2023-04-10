@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/actors/Objects/Bonuses/ActiveBonus/Base/ActiveBonus.gd" type="Script" id=1]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/animFrame.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/animFrame.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=68]
 animations = [ {

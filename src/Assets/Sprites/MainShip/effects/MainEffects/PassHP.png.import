@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iconShieldBonus.png-350c392b09211867b9f4be98a49e8f3a.stex"
+path="res://.import/PassHP.png-6056bb49f3b8199e31b4f6eec895f332.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/iconShieldBonus.png"
-dest_files=[ "res://.import/iconShieldBonus.png-350c392b09211867b9f4be98a49e8f3a.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/MainEffects/PassHP.png"
+dest_files=[ "res://.import/PassHP.png-6056bb49f3b8199e31b4f6eec895f332.stex" ]
 
 [params]
 

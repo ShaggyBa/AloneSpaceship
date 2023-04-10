@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ShootSpeed.png-d7fc81101d5a76da09dfd6b4780294ee.stex"
+path="res://.import/DamageBonus.png-3c5d20d23e227629747b0d767517cb14.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/PassiveBonus/ShootSpeed.png"
-dest_files=[ "res://.import/ShootSpeed.png-d7fc81101d5a76da09dfd6b4780294ee.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/DamageBonus.png"
+dest_files=[ "res://.import/DamageBonus.png-3c5d20d23e227629747b0d767517cb14.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

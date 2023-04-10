@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PassiveMulti.png-e94bed38acb0898fbb4a41596f4bf630.stex"
+path="res://.import/GunBonus.png-ac0ef907cede9c7dea4c138152930c1a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/PassiveBonus/PassiveMulti.png"
-dest_files=[ "res://.import/PassiveMulti.png-e94bed38acb0898fbb4a41596f4bf630.stex" ]
+source_file="res://src/Assets/Sprites/MainShip/effects/BonusEffects/GunBonus.png"
+dest_files=[ "res://.import/GunBonus.png-ac0ef907cede9c7dea4c138152930c1a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
