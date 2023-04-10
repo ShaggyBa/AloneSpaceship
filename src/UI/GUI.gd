@@ -28,7 +28,6 @@ var previous_x = 0
 var enemy_death_points = 100
 var kills = 0
 
-var down = [] 
 var joy_event_index = 0
 
 signal change_move(new_move)
@@ -54,8 +53,7 @@ func  calculate_move_vector(event_position):
 	return (event_position - texture_center).normalized()
 
 
-func _on_MC_health_changed(new_value):
-	health_counter.set_points(floor(new_value))
+
 
 
 #func _unhandled_input(event):
@@ -66,19 +64,6 @@ func _on_MC_health_changed(new_value):
 #		score_counter.increase_points_on(enemy_death_points)
 #
 	
-func _on_MC_damage_changed(new_value):
-	damage_counter.set_points(new_value)
-	damage_counterD.set_points(new_value)
-
-
-func _on_MC_shootDelay_changed(new_value):
-	rpm_counter.set_points(new_value)
-	rpm_counterD.set_points(new_value)
-
-
-func _on_MC_speed_changed(new_value):
-	speed_counter.set_points(new_value)
-	speed_counterD.set_points(new_value)
 
 
 func _on_DeathMenu_game_is_over():

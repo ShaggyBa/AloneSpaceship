@@ -61,12 +61,13 @@ var game_over = InputEventAction.new()
 var isInvicibility = false
 var isDamageUp = false
 
-
-signal health_changed(new_value)
-signal damage_changed(new_value)
-signal shootDelay_changed(new_value)
-signal speed_changed(new_value)
-
+var HealthCounter
+var RPSCounter
+var SpeedCounter
+var DamageCounter
+var RPSCounterP
+var SpeedCounterP
+var DamageCounterP
 
 func _ready() -> void:
 	viewportSize = get_viewport().size # Получение размеров viewport-а
@@ -82,10 +83,7 @@ func _ready() -> void:
 	game_over.action = "over"
 	game_over.pressed = true
 		
-	emit_signal("health_changed", mcHP)
-	emit_signal("damage_changed", mcDamage)
-	emit_signal("shootDelay_changed", round(1 / shootDelay))
-	emit_signal("speed_changed", mcSpeed)
+	stat_inizialization()	
 	
 	
 func _process(_delta: float) -> void:
@@ -155,8 +153,8 @@ func create_shoot():
 
 
 func spaceshipMove(delta):
-	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+#	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+#	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changePosition(inputVector, delta)
 	
@@ -183,7 +181,8 @@ func takeDamage(damage):
 			
 			print("Текущий HP: ", mcHP)
 			
-			emit_signal("health_changed", mcHP)
+			HealthCounter.set_points(mcHP)
+#			emit_signal("health_changed", mcHP)
 			
 			hitSound.play()
 			
@@ -294,7 +293,7 @@ func addPassiveDamageBonus():
 	
 	
 func addPassiveShootSpeedBonus():
-	emit_signal("damage_changed", mcDamage)
+	HealthCounter.set_points(mcDamage)
 	if shootDelay > 0.1:
 		shootDelay -= 0.05 
 	timerShooting.set_wait_time(shootDelay)
@@ -308,3 +307,25 @@ func speedBonus():
 func _on_tickRateDamage_timeout():
 	takeDamage(maxHP * 0.2)
 	sprite.modulate = "ffffff"
+
+func stat_inizialization() -> void:
+	
+	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
+	
+	DamageCounter = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
+	RPSCounter    = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
+	SpeedCounter  = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
+	
+	DamageCounterP = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/DamageCounter")
+	RPSCounterP    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/RPSCounter")
+	SpeedCounterP  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer2/SpeedCounter")
+	
+	HealthCounter.set_points(mcHP)
+	
+	DamageCounter.set_points(mcDamage)
+	RPSCounter.set_points(round(shootDelay * 100))
+	SpeedCounter.set_points(mcSpeed)
+	
+	DamageCounterP.set_points(mcDamage)
+	RPSCounterP.set_points(round(shootDelay * 100))
+	SpeedCounterP.set_points(mcSpeed)

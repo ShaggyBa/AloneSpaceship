@@ -21,19 +21,18 @@ onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
 onready var maxHP = enemyHP
 
-signal add_to_score(value) #value: int
-var enemy_death = InputEventAction.new()
-
 
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 
+onready var KillsCounter
+onready var KillsCounterP
 
 func _ready() -> void:
 	aSprite.playing = true
 	engine.playing = true
-	enemy_death.action = "enemy_death"
-	enemy_death.pressed = true
+	KillsCounterP = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter")
+	KillsCounter = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer2/HBoxContainer/VBoxContainer6/KillsCounter")
 	
 
 func _physics_process(delta):
@@ -49,8 +48,8 @@ func takeDamage(amount):
 	hit.play()	
 	changeState()
 	if enemyHP <= 0:
-		#emit_signal("add_to_score",kill_points)
-		Input.parse_input_event(enemy_death)
+		KillsCounter.increase_points()
+		KillsCounterP.increase_points()
 		death()
 
 
