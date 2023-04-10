@@ -25,6 +25,7 @@ func _ready() -> void:
 #	ScoreCounterF = get_tree().current_scene.get_node("GUI/DeathMenu/CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter")
 
 
+
 func _process(delta: float) -> void:
 	if points / 1000 > dec:
 		dec += 1
@@ -37,10 +38,10 @@ func _process(delta: float) -> void:
 #	counter.set_points(floor(points))
 #	counter_final.set_points(floor(points))
 	
-	if points > 10000 and not bossIsSpawning:
+	if points > 100000 and not bossIsSpawning:
 		var boss = plBoss.instance()
 		boss.global_position = Vector2(1000, 300)
-		add_child(boss)
+		#add_child(boss)
 		bossIsSpawning = true
 
 	if points > 100000 and get_tree().get_nodes_in_group("boss").size() == 0:

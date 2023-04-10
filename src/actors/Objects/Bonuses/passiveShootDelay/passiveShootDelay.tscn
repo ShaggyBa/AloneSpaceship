@@ -43,7 +43,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="addPassiveShootDelay" groups=["addShootSpeed"] instance=ExtResource( 1 )]
+[node name="addPassiveShootDelay" groups=["Passive", "addShootSpeed"] instance=ExtResource( 1 )]
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( 6.66667, 0 )
