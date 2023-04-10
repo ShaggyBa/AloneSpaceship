@@ -34,11 +34,13 @@ onready var shield = $Shield
 onready var sprite = $MCSprite
 onready var engineSprite = $EngineSprite
 onready var crushEffects = $CrushEffects
+onready var collision = $CollisionShape2D
 
 onready var hitSound = $Audio/Hit
 onready var shotSound = $Audio/ShotSound
 onready var shieldHitSound = $Audio/ShieldHit
 onready var gameOverSound = $Audio/ShieldHit
+onready var destroyed = $Audio/Destroyed
 
 onready var maxHP = mcHP
 
@@ -60,6 +62,7 @@ var game_over = InputEventAction.new()
 
 var isInvicibility = false
 var isDamageUp = false
+var isDead = false
 
 var HealthCounter
 var RPSCounter
@@ -187,10 +190,25 @@ func takeDamage(damage):
 			hitSound.play()
 			
 			if mcHP <= 0:
-				Input.parse_input_event(game_over)
+				death()
 
+func death():
+	isDead = true
+	collision.queue_free()
+	mcVSpeed /= 4
+	mcSpeed /= 4
+	destroyed.play()
+	sprite.animation = "Death"
+	sprite.playing = true
+	#sprite.connect("animation_finished", self, "_on_Death_Animation")
+	destroyed.connect("finished", self, "_on_Death_Animation")
+
+func _on_Death_Animation():
+	Input.parse_input_event(game_over)
 
 func burning(delay:int):
+	if isInvicibility:
+		return
 	for _i in range(delay):
 		tickRateDamage.start()
 		sprite.modulate = "00ff6a"		
@@ -211,17 +229,17 @@ func changeState():
 	print(MCCurrentState)
 	if MCCurrentState >= 0.8: 
 		crushEffects.emitting = false		
-		sprite.set_texture(pFullHP)
+		sprite.animation = "FullHP"
 	elif MCCurrentState >= 0.6:
 		crushEffects.emitting = true			
-		sprite.set_texture(pSemiHP)
+		sprite.animation = "SemiHP"
 	elif MCCurrentState >= 0.4:
 		crushEffects.emitting = true					
-		sprite.set_texture(pLowHP)
+		sprite.animation = "LowHP"
 		crushEffects.amount = 10		
 	else: 
 		crushEffects.emitting = true	
-		sprite.set_texture(pVeryLowHP)
+		sprite.animation = "VeryLowHP"
 		crushEffects.amount = 15
 
 
@@ -248,7 +266,6 @@ func _on_MC_area_entered(area):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
-			#timerShieldBonus()
 	elif area.is_in_group("addDamage"):
 		addPassiveDamageBonus()
 	elif area.is_in_group("addShootSpeed"):
@@ -256,12 +273,10 @@ func _on_MC_area_entered(area):
 		
 		
 func heal():
-	print("value: ", mcHP)
 	if mcHP + (maxHP / 4) < maxHP:
 		mcHP += maxHP / 4
 	else:
 		mcHP = maxHP
-	print("heal: ", mcHP)
 	emit_signal("health_changed", mcHP)	
 	changeState()
 	
@@ -289,7 +304,16 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 1
+	mcDamage *= 2
+	
+	
+func addPassiveSpeed():
+	mcVSpeed += floor(mcVSpeed * 0.1)
+	mcSpeed += floor(mcSpeed * 0.1)
+	
+	
+func addPassiveMultiscoreBonus():
+	get_tree().current_scene.multiscore += 0.1
 	
 	
 func addPassiveShootSpeedBonus():
@@ -298,14 +322,23 @@ func addPassiveShootSpeedBonus():
 		shootDelay -= 0.05 
 	timerShooting.set_wait_time(shootDelay)
 	
+
+func addPassiveMaxHPBonus():
+	maxHP += 10
+	mcHP += 10
+	emit_signal("health_changed", mcHP)
+	
+	
 func shootDelayBonus():
 	emit_signal("shootDelay_changed", shootDelay)
+
 
 func speedBonus():
 	emit_signal("speed_changed", mcVSpeed)
 
+
 func _on_tickRateDamage_timeout():
-	takeDamage(maxHP * 0.2)
+	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
 
 func stat_inizialization() -> void:

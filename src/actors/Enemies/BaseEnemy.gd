@@ -13,9 +13,11 @@ var kill_points = 25 #очки за убийство противника
 
 var direction = 1
 
-onready var hit = $Hit
-onready var destroyed = $Destroyed
+onready var hit = $Audio/Hit
+onready var destroyed = $Audio/Destroyed
 
+
+#onready var playerInst = get_tree().current_scene.get_node("MC")
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
@@ -24,6 +26,8 @@ onready var maxHP = enemyHP
 
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
+onready var deathAnimation = $Death
+onready var collision = $CollisionPolygon2D
 
 onready var KillsCounter
 onready var KillsCounterP
@@ -36,6 +40,10 @@ func _ready() -> void:
 	
 
 func _physics_process(delta):
+	moving(delta)
+
+
+func moving(delta:float)->void:
 	global_position.x -= horisontalSpeed * delta
 	global_position.y += verticalSpeed * delta * direction
 	if global_position.y < viewportRect.position.y + 15 \
@@ -72,9 +80,12 @@ func death():
 	engine.visible = false
 	engine.playing = false
 	
-	$CollisionPolygon2D.queue_free()
-	$Death.playing = true
+	collision.queue_free()
+	deathAnimation.playing = true
 	destroyed.play()
+	
+	horisontalSpeed /= 2
+	verticalSpeed /= 2
 
 
 func _on_Death_animation_finished():

@@ -6,22 +6,18 @@
 [ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Big Engine - Powering.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 144, 0, 48, 48 )
 
@@ -93,13 +89,14 @@ position = Vector2( 14.6667, 0.666667 )
 rotation = 1.5708
 scale = Vector2( 2.01866, -3.68455 )
 frames = SubResource( 15 )
+frame = 3
 
 [node name="AnimatedSprite" parent="." index="1"]
-visible = false
 frames = SubResource( 10 )
 animation = "idle"
 
 [node name="Death" parent="." index="2"]
+visible = false
 animation = "ShooterDeath"
 
 [node name="FiringPositions" type="Node2D" parent="." index="3"]

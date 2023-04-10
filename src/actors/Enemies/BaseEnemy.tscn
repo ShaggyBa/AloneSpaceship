@@ -219,15 +219,17 @@ visible = false
 position = Vector2( 3.5, 0.250001 )
 scale = Vector2( 1.65, 1.875 )
 
-[node name="Hit" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
 volume_db = -38.0
 
-[node name="Destroyed" type="AudioStreamPlayer" parent="."]
+[node name="Destroyed" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )
 volume_db = -27.0
 
-[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource( 5 )
 
 [connection signal="area_entered" from="." to="." method="_on_BaseEnemy_area_entered"]

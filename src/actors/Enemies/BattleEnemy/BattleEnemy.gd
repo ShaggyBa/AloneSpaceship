@@ -20,18 +20,40 @@ var timerShooting = Timer.new()
 
 var currentGun = true
 
+var directionY = direction
+var directionX = -1
+
 func _ready() -> void:
 	setTimerShooting()
 	aSprite.playing = true
 
+
 func _process(_delta: float) -> void:
 	shooting()
+
+
+func _physics_process(delta: float) -> void:
+	moving(delta)	
 
 
 func setTimerShooting()->void:
 	timerShooting.set_one_shot(true)
 	timerShooting.set_wait_time(enemyAttackDelay)
 	add_child(timerShooting)
+
+
+func moving(delta:float)->void:
+	global_position.x += horisontalSpeed * delta * directionX
+	global_position.y += verticalSpeed * delta * directionY
+	
+	if global_position.y < viewportRect.position.y + 50 \
+	or global_position.y > viewportRect.end.y - 50:
+		directionY *= -1
+		
+	if global_position.x < viewportRect.end.x / 2 \
+	or global_position.x > viewportRect.end.x - 90:
+		directionX *= -1
+
 
 func shooting():
 	if timerShooting.is_stopped() and not isDeath:
@@ -65,5 +87,6 @@ func changeState():
 		aSprite.modulate = "f76969"
 		enemyAttackDelay = 0.5
 		enemyDamage += 2
-		verticalSpeed += 100
+		verticalSpeed *= 1.25
+		horisontalSpeed *= 1.5
 		timerShooting.set_wait_time(enemyAttackDelay)

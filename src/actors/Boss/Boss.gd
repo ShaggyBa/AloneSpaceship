@@ -9,32 +9,38 @@ export (int) var bossDamage = 10
 
 
 onready var viewportRect = get_viewport_rect()
-onready var isDeath = false
+onready var canShoot = true
 onready var maxHP = bossHP
 
 
-onready var sprite = $Sprite
+onready var aSprite = $Sprite
 onready var engine = $Engine
 onready var attackSound = $Attack
 onready var takeDamageSound = $TakeDamage
 onready var muzzle = $muzzle
 
 
-onready var _target = get_tree().current_scene.get_node("MC").global_position
+onready var _target = get_tree().current_scene.get_node("MC")
 
 onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
 
 
-var direction = 1
-
+var directionY = 1
+var directionX = -1
 
 var timerRay = Timer.new()
 var timerShooting = Timer.new()
 
+var stateChanged = false
+
 
 func _ready() -> void:
-	sprite.playing = true
+	aSprite.playing = true
 	engine.playing = true
+	
+	bossHP += _target.maxHP * 5
+	bossDamage += _target.mcDamage * 5
+	
 	setTimerShooting()
 	
 
@@ -54,9 +60,9 @@ func setTimerShooting()->void:
 
 
 func shooting():
-	if timerShooting.is_stopped() and not isDeath:
+	if timerShooting.is_stopped() and canShoot:
 		timerShooting.start()	
-		sprite.animation = "attack"
+		aSprite.animation = "attack"
 		attackSound.playing = true
 	
 		
@@ -65,9 +71,18 @@ func shooting():
 		yield(get_tree().create_timer(1.0), "timeout")
 		shoot.damage = bossDamage
 		shoot.global_position = muzzle.global_position
-#		shoot.rotation_degrees = _target.angle_to_point(muzzle.position)
 		
-		get_tree().current_scene.add_child(shoot)
+		if stateChanged:
+			var shoot2 = plShoot.instance()
+			shoot2.damage = bossDamage
+			shoot2.global_position = muzzle.global_position
+			
+			var doubleShoot = [shoot, shoot2]
+			for i in doubleShoot:
+				get_tree().current_scene.add_child(i)
+				yield(get_tree().create_timer(0.15), "timeout")
+		else:
+			get_tree().current_scene.add_child(shoot)
 		
 
 func takeDamage(amount):
@@ -79,12 +94,16 @@ func takeDamage(amount):
 
 
 func moving(delta:float) :
-	global_position.x -= horisontalSpeed * delta
-	global_position.y += verticalSpeed * delta * direction
+	global_position.x += horisontalSpeed * delta * directionX
+	global_position.y += verticalSpeed * delta * directionY
 	
 	if global_position.y < viewportRect.position.y + 50 \
 	or global_position.y > viewportRect.end.y - 50:
-		direction *= -1
+		directionY *= -1
+		
+	if global_position.x < viewportRect.end.x / 2 \
+	or global_position.x > viewportRect.end.x - 90:
+		directionX *= -1
 
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -98,21 +117,35 @@ func _on_Boss_area_entered(area):
 		
 		
 func death():
-	isDeath = true
+	canShoot = false
 	
-	sprite.visible = false
-	sprite.playing = false
+	engine.queue_free()
 	
-	engine.visible = false
-	engine.playing = false
+	$CollisionPolygon2D.queue_free()	
 	
-	$CollisionPolygon2D.queue_free()
+	aSprite.animation = "Death"
+	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")
+	aSprite.playing = true
+	verticalSpeed *= 0.1
+	horisontalSpeed *= 0.1
 	$Destroyed.play()
 
 
-func _on_Destroyed_finished():
+func _on_Death_animation_finished():
 	queue_free()
 
 
 func changeState():
-	pass
+	if float(bossHP) / float(maxHP) <= 0.4 and not stateChanged:
+		bossAttackDelay = 1		
+		timerShooting.set_wait_time(bossAttackDelay)
+		aSprite.modulate = "f76969"
+
+		aSprite.speed_scale = 2
+		bossDamage *= floor(1.5)
+		attackSound.pitch_scale = 2
+		verticalSpeed *= 4
+		horisontalSpeed *= 5
+
+		stateChanged = true
+		
