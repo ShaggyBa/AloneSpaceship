@@ -23,7 +23,6 @@ current = true
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="ActiveBonusSpawner" parent="." instance=ExtResource( 5 )]
-nextSpawnTime = 7.0
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
 nextSpawnTime = 7.0

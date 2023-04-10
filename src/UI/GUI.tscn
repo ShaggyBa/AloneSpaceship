@@ -114,18 +114,15 @@ margin_right = 24.0
 margin_bottom = 82.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
-visible = false
 position = Vector2( 68, 404 )
 normal = ExtResource( 3 )
 shape = SubResource( 13 )
 
 [node name="InnerCircle" type="Sprite" parent="Control"]
-visible = false
 position = Vector2( 120, 483 )
 texture = ExtResource( 4 )
 
 [node name="FireBtn" type="TouchScreenButton" parent="Control"]
-visible = false
 position = Vector2( 883, 462 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )

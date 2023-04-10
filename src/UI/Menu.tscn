@@ -22,9 +22,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 362.0
-margin_top = 166.0
+margin_top = 204.0
 margin_right = 662.0
-margin_bottom = 434.0
+margin_bottom = 395.0
 rect_min_size = Vector2( 300, 95 )
 custom_constants/separation = 13
 alignment = 1
@@ -44,6 +44,7 @@ rect_min_size = Vector2( 300, 64 )
 text = "Start"
 
 [node name="OptionsBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
 margin_top = 127.0
 margin_right = 300.0
 margin_bottom = 191.0
@@ -51,9 +52,9 @@ rect_min_size = Vector2( 300, 64 )
 text = "Option"
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 204.0
+margin_top = 127.0
 margin_right = 300.0
-margin_bottom = 268.0
+margin_bottom = 191.0
 rect_min_size = Vector2( 300, 64 )
 text = "Quit"
 
