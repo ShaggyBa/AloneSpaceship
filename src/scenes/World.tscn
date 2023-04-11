@@ -17,7 +17,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 512, 302 )
+position = Vector2( 319, 247 )
 current = true
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
@@ -45,7 +45,7 @@ stream = ExtResource( 6 )
 volume_db = -7.0
 
 [node name="positionToReady" type="Position2D" parent="."]
-position = Vector2( 900, 299 )
+position = Vector2( 495, 243 )
 
 [connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
 [connection signal="finished" from="Music" to="." method="_on_Music_finished"]

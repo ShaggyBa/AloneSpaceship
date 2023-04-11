@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actors/Objects/Bonuses/ActiveBonus/BaseBonus/ActiveBaseBonus.gd"
 }, {
-"base": "EditorVCSInterface",
+"base": "",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -68,6 +68,8 @@ SaveFile="*res://src/Save/save_file.gd"
 
 [display]
 
+window/size/width=640
+window/size/height=480
 window/size/resizable=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

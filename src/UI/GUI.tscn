@@ -72,8 +72,8 @@ custom_styles/normal = SubResource( 1 )
 text = "Pause"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 864.0
-margin_right = 946.0
+margin_left = 480.0
+margin_right = 562.0
 margin_bottom = 82.0
 size_flags_horizontal = 10
 
@@ -94,8 +94,8 @@ size_flags_vertical = 5
 text = "Health:"
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 950.0
-margin_right = 974.0
+margin_left = 566.0
+margin_right = 590.0
 margin_bottom = 82.0
 size_flags_horizontal = 8
 
@@ -114,16 +114,16 @@ margin_right = 24.0
 margin_bottom = 82.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
-position = Vector2( 68, 404 )
+position = Vector2( 13, 343 )
 normal = ExtResource( 3 )
 shape = SubResource( 13 )
 
 [node name="InnerCircle" type="Sprite" parent="Control"]
-position = Vector2( 120, 483 )
+position = Vector2( 79, 409 )
 texture = ExtResource( 4 )
 
 [node name="FireBtn" type="TouchScreenButton" parent="Control"]
-position = Vector2( 883, 462 )
+position = Vector2( 477, 339 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )
 action = "ui_accept"

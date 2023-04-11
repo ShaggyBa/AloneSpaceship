@@ -173,7 +173,7 @@ func spaceshipMove(delta):
 func changePosition(vector:Vector2, delta:float):
 	global_position.x += vector.x * mcSpeed * delta
 	global_position.y += vector.y * mcVSpeed * delta 
-	global_position.y = clamp(global_position.y, 50, viewportSize.y - 500)
+	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
 	global_position.x = clamp(global_position.x, 100, viewportSize.x - 50) 
 	 
 
