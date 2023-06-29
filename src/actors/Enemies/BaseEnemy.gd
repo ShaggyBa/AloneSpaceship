@@ -33,6 +33,7 @@ var coef = 1.0
 
 func _ready() -> void:
 	aSprite.playing = true
+	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")	
 	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
@@ -77,7 +78,6 @@ func death():
 	
 	collision.queue_free()
 	aSprite.animation = "Death"
-	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")
 	aSprite.playing = true
 	destroyed.play()
 	
@@ -86,7 +86,8 @@ func death():
 
 
 func _on_Death_animation_finished():
-	queue_free()
+	if isDeath:
+		queue_free()
 
 
 

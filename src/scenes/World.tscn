@@ -35,7 +35,7 @@ minSpawnRate = 1.5
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
 mcVSpeed = 400.0
-shootDelay = 0.5
+shootDelay = 0.01
 delayShieldRestoring = 5.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
@@ -47,5 +47,4 @@ volume_db = -7.0
 [node name="positionToReady" type="Position2D" parent="."]
 position = Vector2( 900, 299 )
 
-[connection signal="change_move" from="GUI" to="MC" method="_on_CanvasLayer_change_move"]
 [connection signal="finished" from="Music" to="." method="_on_Music_finished"]

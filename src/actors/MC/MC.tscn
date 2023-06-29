@@ -112,42 +112,52 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=33]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=34]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=35]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=36]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=37]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=38]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=39]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=40]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=41]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=42]
+flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 

@@ -251,6 +251,8 @@ position = Vector2( 19, 0 )
 rotation = -1.5708
 scale = Vector2( 1.8, 2.5 )
 frames = SubResource( 41 )
+frame = 3
+playing = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 rotation = -1.5708

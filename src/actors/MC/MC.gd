@@ -43,6 +43,7 @@ onready var activeBonusSound = $Audio/ActiveBonus
 onready var passiveBonusSound = $Audio/PassiveBonus
 
 onready var maxHP = mcHP
+onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -152,7 +153,7 @@ func create_shoot():
 	var shoot
 	if isDamageUp:
 		shoot = shootBonus.instance()
-		shoot.damage = mcDamage / 1.25
+		shoot.damage = mcDamage / 1.5
 	else: 
 		shoot = plShoot.instance()
 		shoot.damage = mcDamage
@@ -164,8 +165,8 @@ func create_shoot():
 func spaceshipMove(delta):
 	if isDead:
 		return
-#	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-#	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	inputVector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	changeStateEngine(inputVector)
 	changePosition(inputVector, delta)
 	
@@ -173,7 +174,7 @@ func spaceshipMove(delta):
 func changePosition(vector:Vector2, delta:float):
 	global_position.x += vector.x * mcSpeed * delta
 	global_position.y += vector.y * mcVSpeed * delta 
-	global_position.y = clamp(global_position.y, 50, viewportSize.y - 500)
+	global_position.y = clamp(global_position.y, 50, viewportSize.y - 50)
 	global_position.x = clamp(global_position.x, 100, viewportSize.x - 50) 
 	 
 
@@ -251,10 +252,7 @@ func changeStateEngine(vector: Vector2):
 		engineSprite.set_animation("powering")
 	engineSprite.playing = true 
 	
-
-func _on_CanvasLayer_change_move(new_move: Vector2):
-	inputVector = new_move
-
+	
 func _on_MC_area_entered(area):
 	
 	if area.is_in_group("ActiveBonus"):
@@ -327,7 +325,7 @@ func addPassiveSpeed():
 		mcVSpeed += floor(mcVSpeed * 0.02)
 	if mcSpeed < 900:
 		mcSpeed += floor(mcSpeed * 0.02)
-	SpeedCounter.set_points(mcSpeed)
+	SpeedCounter.set_points(String(((mcSpeed + mcVSpeed) / 2) / startMCSpeed) + 'x')
 #	SpeedCounter.set_points() -> 1.0 + 0.1 (1.0 === 100% скорости передвижения; 1.1 === 110%)
 # 1.0x -> поймали бонус: 1.1x
 	
@@ -385,7 +383,7 @@ func stat_inizialization() -> void:
 	
 	DamageCounter.set_points(mcDamage)
 	RPSCounter.set_points(round(1 / shootDelay))
-	SpeedCounter.set_points(mcSpeed)
+	SpeedCounter.set_points('1.00')
 	
 func save_score():
 	if game_data.score < get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points():
