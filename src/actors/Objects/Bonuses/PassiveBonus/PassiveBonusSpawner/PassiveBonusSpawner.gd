@@ -2,29 +2,69 @@ extends Node2D
 
 export (float) var nextSpawnTime = 1
 
-onready var preloadedBonuses = [
-		preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveDamage/PassiveDamage.tscn"),
-		preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveHP/PassiveHP.tscn"),
-		preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveShootSpeed/PassiveSpeedShoot.tscn"),
-		preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveMulti/PassiveMulti.tscn"),
-		preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveSpeedMC/PassiveSpeedMC.tscn")		
-	]
+export (bool) var damageBonus = true
+export (bool) var hpBonus = true
+export (bool) var shootSpeedBonus = true
+export (bool) var multiplayerBonus = true
+export (bool) var speedBonus = true
 
+
+onready var pDamageBonus:Dictionary = {
+	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveDamage/PassiveDamage.tscn"),
+	"isSpawning": damageBonus	
+}
+
+onready var pHpBonus:Dictionary = {
+	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveHP/PassiveHP.tscn"),
+	"isSpawning": hpBonus	
+}
+
+onready var pShootSpeedBonus:Dictionary = {
+	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveShootSpeed/PassiveSpeedShoot.tscn"),	
+	"isSpawning": shootSpeedBonus	
+}
+
+onready var pMultiplayerBonus:Dictionary = {
+	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveMulti/PassiveMulti.tscn"),
+	"isSpawning": multiplayerBonus	
+}
+
+onready var pSpeedBonus:Dictionary = {
+	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveSpeedMC/PassiveSpeedMC.tscn"),
+	"isSpawning": speedBonus	
+}
+
+# Создаем массив всех объектов-бонусов
+onready var preloadedBonuses = [
+	pDamageBonus, 
+	pHpBonus, 
+	pMultiplayerBonus, 
+	pShootSpeedBonus, 
+	pSpeedBonus
+]
 
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()
 
 var counter = 1
 
+var activeBonuses = []
+
 func _ready():
 	randomize()
 	spawnTimer.start(nextSpawnTime)
+	
+	# Оставляем только активные бонусы
+	for bonus in preloadedBonuses:
+		if bonus["isSpawning"]:
+			activeBonuses.append(bonus)
 
 func _on_SpawnTimer_timeout():
 	var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()	
 # Spawn bonus
-	var bonusPreloaded = preloadedBonuses[randi() % preloadedBonuses.size()]
-	var bonus = bonusPreloaded.instance()
+	var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
+	
+	var bonus = bonusPreloaded["obj"].instance()
 	
 
 	# Position 
@@ -34,11 +74,11 @@ func _on_SpawnTimer_timeout():
 		
 	get_tree().current_scene.add_child(bonus)
 	
-	if currentScore / 2500 > counter:
-		counter += 1
-		nextSpawnTime = 1.0
-	else:
-		nextSpawnTime = rand_range(nextSpawnTime, nextSpawnTime * 2)
-	# Restart timer
+#	if currentScore / 2500 > counter:
+#		counter += 1
+#		nextSpawnTime = 1.0
+#	else:
+#		nextSpawnTime = rand_range(nextSpawnTime, nextSpawnTime * 2)
+#	# Restart timer
 	spawnTimer.start(nextSpawnTime)
 

@@ -4,7 +4,10 @@ onready var points_label := $Label
 	
 
 func set_points(points: float) -> void:
-	points_label.text = String(points)
+	if points >= 10:
+		points_label.text = "MAX"
+	else:
+		points_label.text = String(points) + 'X'
 	
 	
 func get_points():

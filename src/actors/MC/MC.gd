@@ -16,6 +16,9 @@ export (float) var delayShieldRestoring = 0.3
 export (float) var duringShieldBonus = 2.0
 export (float) var duringDamageBonus = 5.0
 
+export (float) var coef_hp_bonus = 10.0
+export (float) var coef_dmg_bonus = 2
+export (float) var coef_shoot_delay_bonus = 0.05
 
 var plShoot = preload("res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
@@ -61,6 +64,10 @@ var tickRateDamage = Timer.new()
 var game_over = InputEventAction.new()
 
 
+var count_of_dmg_bonus = 0
+var count_of_hp_bonus = 0
+var count_of_shoot_delay_bonus = 0
+
 
 var isInvicibility = false
 var isDamageUp = false
@@ -74,6 +81,7 @@ var DamageCounter
 var DeathMenu
 
 onready var game_data = SaveFile.game_data
+onready var start_shoot_delay= shootDelay
 
 
 func _ready() -> void:
@@ -107,10 +115,12 @@ func setTimerShooting()->void:
 	timerShooting.set_wait_time(shootDelay)
 	add_child(timerShooting)
 	
+	
 func setTimerBonusShooting()->void:
 	timerBonusShooting.set_one_shot(true)
 	timerBonusShooting.set_wait_time(shootDelay)
 	add_child(timerBonusShooting)
+	
 	
 func setTimerInvincibility()->void:
 	timerShieldRestoring.set_one_shot(true)
@@ -122,6 +132,7 @@ func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.set_one_shot(true)
 	add_child(timerDuringShieldBonus)
 	timerDuringShieldBonus.connect("timeout", self, "disabledShieldBonus")
+	
 	
 func setTimerDamageBonus()->void:
 	timerDuringDamageBonus.set_one_shot(true)
@@ -193,12 +204,12 @@ func takeDamage(damage):
 			
 			changeState()			
 			
-			print("Текущий HP: ", mcHP)
 			HealthCounter.set_points(mcHP)
 			
 			hitSound.play()
 			
 			if mcHP <= 0 and not isDead:
+				HealthCounter.set_points(0)
 				death()
 
 
@@ -281,8 +292,6 @@ func _on_MC_area_entered(area):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
-	
-	
 		
 			
 func heal():
@@ -317,7 +326,8 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	mcDamage += 2
+	count_of_dmg_bonus += 1
+	mcDamage += coef_dmg_bonus * (1 - pow(0.5, count_of_dmg_bonus))
 	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
@@ -325,23 +335,30 @@ func addPassiveSpeed():
 		mcVSpeed += floor(mcVSpeed * 0.02)
 	if mcSpeed < 900:
 		mcSpeed += floor(mcSpeed * 0.02)
-	SpeedCounter.set_points(String(((mcSpeed + mcVSpeed) / 2) / startMCSpeed) + 'x')
-#	SpeedCounter.set_points() -> 1.0 + 0.1 (1.0 === 100% скорости передвижения; 1.1 === 110%)
-# 1.0x -> поймали бонус: 1.1x
+	SpeedCounter.set_points(String(stepify((mcSpeed + mcVSpeed) / 2 / startMCSpeed, 0.01)) + 'x')
+	
 	
 func addPassiveMultiscoreBonus():
 	get_tree().current_scene.multiscore += 0.1
 	
 	
 func addPassiveShootSpeedBonus():
-	if shootDelay > 0.1:
-		shootDelay -= 0.05 
-	timerShooting.set_wait_time(shootDelay)
+	if shootDelay > 0.05:
+		
+		count_of_shoot_delay_bonus += 1		
+		
+		shootDelay -= coef_shoot_delay_bonus / (sqrt(count_of_shoot_delay_bonus) + coef_shoot_delay_bonus)
+		
+		timerShooting.set_wait_time(shootDelay)
+		
+		RPSCounter.set_points(stepify(start_shoot_delay / shootDelay, 0.01))
 	
 
 func addPassiveMaxHPBonus():
-	maxHP += 10
-	mcHP += 10
+	count_of_hp_bonus += 1
+	var coef = coef_hp_bonus * (1 - pow(0.5, count_of_hp_bonus))
+	maxHP += round(coef)
+	mcHP += round(coef)
 	HealthCounter.set_points(mcHP)
 
 
@@ -357,11 +374,10 @@ func death():
 	save_score()
 	Input.parse_input_event(game_over)
 
+
 func _on_Destroyed():
 	Input.parse_input_event(game_over)
 
-
-	
 
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
@@ -377,13 +393,14 @@ func stat_inizialization() -> void:
 	SpeedCounter  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/SpeedCounter")
 	
 
-	DeathMenu      = get_tree().current_scene.get_node("GUI/DeathMenu")
+	DeathMenu = get_tree().current_scene.get_node("GUI/DeathMenu")
 	
 	HealthCounter.set_points(mcHP)
 	
 	DamageCounter.set_points(mcDamage)
-	RPSCounter.set_points(round(1 / shootDelay))
+	RPSCounter.set_points(1.00)
 	SpeedCounter.set_points('1.00')
+	
 	
 func save_score():
 	if game_data.score < get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points():
