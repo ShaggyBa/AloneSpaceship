@@ -60,7 +60,6 @@ func _ready():
 			activeBonuses.append(bonus)
 
 func _on_SpawnTimer_timeout():
-	var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()	
 # Spawn bonus
 	var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
 	

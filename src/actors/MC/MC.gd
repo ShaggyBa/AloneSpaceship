@@ -73,15 +73,8 @@ var isInvicibility = false
 var isDamageUp = false
 var isDead = false
 
-var HealthCounter
-var RPSCounter
-var SpeedCounter
-var DamageCounter
 
-var DeathMenu
-
-onready var game_data = SaveFile.game_data
-onready var start_shoot_delay= shootDelay
+onready var start_shoot_delay = shootDelay
 
 
 func _ready() -> void:
@@ -98,7 +91,6 @@ func _ready() -> void:
 	game_over.action = "over"
 	game_over.pressed = true
 		
-	stat_inizialization()	
 	
 	
 func _process(_delta: float) -> void:
@@ -204,12 +196,10 @@ func takeDamage(damage):
 			
 			changeState()			
 			
-			HealthCounter.set_points(mcHP)
 			
 			hitSound.play()
 			
 			if mcHP <= 0 and not isDead:
-				HealthCounter.set_points(0)
 				death()
 
 
@@ -300,7 +290,6 @@ func heal():
 	else:
 		mcHP = maxHP
 	changeState()
-	HealthCounter.set_points(mcHP)
 	
 		
 
@@ -328,14 +317,14 @@ func disabledShieldBonus():
 func addPassiveDamageBonus():
 	count_of_dmg_bonus += 1
 	mcDamage += coef_dmg_bonus * (1 - pow(0.5, count_of_dmg_bonus))
-	DamageCounter.set_points(mcDamage)
 	
 func addPassiveSpeed():
 	if mcVSpeed < 900:
 		mcVSpeed += floor(mcVSpeed * 0.02)
 	if mcSpeed < 900:
 		mcSpeed += floor(mcSpeed * 0.02)
-	SpeedCounter.set_points(String(stepify((mcSpeed + mcVSpeed) / 2 / startMCSpeed, 0.01)) + 'x')
+	
+	# SpeedCounter.set_points(String(stepify((mcSpeed + mcVSpeed) / 2 / startMCSpeed, 0.01)) + 'x')
 	
 	
 func addPassiveMultiscoreBonus():
@@ -351,7 +340,7 @@ func addPassiveShootSpeedBonus():
 		
 		timerShooting.set_wait_time(shootDelay)
 		
-		RPSCounter.set_points(stepify(start_shoot_delay / shootDelay, 0.01))
+	#	RPSCounter.set_points(stepify(start_shoot_delay / shootDelay, 0.01))
 	
 
 func addPassiveMaxHPBonus():
@@ -359,7 +348,6 @@ func addPassiveMaxHPBonus():
 	var coef = coef_hp_bonus * (1 - pow(0.5, count_of_hp_bonus))
 	maxHP += round(coef)
 	mcHP += round(coef)
-	HealthCounter.set_points(mcHP)
 
 
 func death():
@@ -371,7 +359,6 @@ func death():
 	sprite.modulate = "ffffff"
 	sprite.playing = true
 	destroyed.connect("finished", self, "_on_Destroyed")
-	save_score()
 	Input.parse_input_event(game_over)
 
 
@@ -383,26 +370,3 @@ func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
 
-
-func stat_inizialization() -> void:
-	
-	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
-	
-	DamageCounter = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/DamageCounter")
-	RPSCounter    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/ShootSpeedCounter")
-	SpeedCounter  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/SpeedCounter")
-	
-
-	DeathMenu = get_tree().current_scene.get_node("GUI/DeathMenu")
-	
-	HealthCounter.set_points(mcHP)
-	
-	DamageCounter.set_points(mcDamage)
-	RPSCounter.set_points(1.00)
-	SpeedCounter.set_points('1.00')
-	
-	
-func save_score():
-	if game_data.score < get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points():
-		game_data.score = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
-	SaveFile.save_data()

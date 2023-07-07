@@ -28,7 +28,7 @@ func _ready():
 	spawnTimer.start(nextSpawnTime)
 	
 func _on_SpawnTimer_timeout():
-	var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
+	#var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
 	
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
 		
@@ -42,8 +42,8 @@ func _on_SpawnTimer_timeout():
 		if preloadedEnemy == preloadedEnemies[1]:
 			createShooterEnemy(enemy)
 
-		if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
-			preloadedEnemies.append(battleEnemy)
+		#if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
+		#	preloadedEnemies.append(battleEnemy)
 			 
 		if preloadedEnemy == battleEnemy \
 		and get_tree().get_nodes_in_group("BattleEnemy").size() < maxEnemySpawn / 5:
@@ -53,7 +53,7 @@ func _on_SpawnTimer_timeout():
 			if nextSpawnTime > minSpawnRate:
 				nextSpawnTime -= 0.025 
 				
-		increaseMaxEnemySpawn(currentScore)
+		#increaseMaxEnemySpawn(currentScore)
 				
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)

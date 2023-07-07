@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/UI/PauseMenu.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/ui/HealthCounter/HealthCounter.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/HealthCounter/HealthCounter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/HUD.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/ScoreCounter/ScoreCounter.gd" type="Script" id=3]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=6]
-[ext_resource path="res://src/UI/DeathMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Counter.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=8]
@@ -38,25 +37,27 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.403922 )
 shadow_offset = Vector2( 5, 5 )
 
-[node name="GUI" type="CanvasLayer"]
-__meta__ = {
-"_edit_horizontal_guides_": [ 13.0 ]
-}
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 0
+script = ExtResource( 2 )
 
-[node name="Control" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
 anchor_right = 1.0
-margin_right = -50.0
-margin_bottom = 40.0
+anchor_bottom = 0.107
+custom_constants/separation = 650
 
-[node name="PauseBtn2" type="Button" parent="Control/HBoxContainer"]
-margin_top = 9.0
+[node name="PauseBtn" type="Button" parent="HUD/HBoxContainer"]
+margin_top = 7.0
 margin_right = 192.0
-margin_bottom = 73.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 192, 64 )
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 8 )
@@ -64,57 +65,17 @@ custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 1 )
 text = "Pause"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 864.0
-margin_right = 946.0
-margin_bottom = 82.0
-size_flags_horizontal = 10
-
-[node name="Score" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
-margin_right = 82.0
-margin_bottom = 37.0
-size_flags_horizontal = 8
-size_flags_vertical = 5
-text = "  Score: "
-
-[node name="Health" type="Label" parent="Control/HBoxContainer/VBoxContainer3"]
-margin_left = 14.0
-margin_top = 41.0
-margin_right = 82.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer"]
+margin_left = 842.0
+margin_right = 988.0
 margin_bottom = 78.0
-size_flags_horizontal = 10
-size_flags_vertical = 5
-text = "Health:"
+alignment = 1
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="Control/HBoxContainer"]
-margin_left = 950.0
-margin_right = 974.0
-margin_bottom = 82.0
-size_flags_horizontal = 8
-
-[node name="ScoreCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 24.0
-margin_bottom = 39.0
-size_flags_horizontal = 8
+[node name="ScoreCounter" parent="HUD/HBoxContainer/VBoxContainer" instance=ExtResource( 8 )]
+margin_right = 146.0
 script = ExtResource( 3 )
 
-[node name="HealthCounter" parent="Control/HBoxContainer/VBoxContainer4" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 43.0
-margin_right = 24.0
-margin_bottom = 82.0
-script = ExtResource( 2 )
-
-[node name="DeathMenu" parent="." instance=ExtResource( 7 )]
-visible = false
-
-[node name="PauseMenu" parent="." instance=ExtResource( 1 )]
-pause_mode = 2
-visible = false
-
-[connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="." method="_on_PauseBtn_pressed"]
-[connection signal="pressed" from="Control/HBoxContainer/PauseBtn2" to="PauseMenu" method="_on_PauseBtn_pressed"]
-[connection signal="game_is_over" from="DeathMenu" to="." method="_on_DeathMenu_game_is_over"]
+[node name="HealthCounter" parent="HUD/HBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 41.0
+margin_right = 146.0
+margin_bottom = 78.0
