@@ -38,7 +38,7 @@ border_color = Color( 0, 0, 0, 1 )
 shadow_color = Color( 0, 0, 0, 0.403922 )
 shadow_offset = Vector2( 5, 5 )
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="GUI" type="CanvasLayer"]
 __meta__ = {
 "_edit_horizontal_guides_": [ 13.0 ]
 }

@@ -34,8 +34,7 @@ func _on_PauseBtn_pressed():
 
 
 func update_score():
-	$CenterContainer/VBoxContainer/HighScoreCounter.text = str(game_data.score)
-	print(game_data.score)
+	$CenterContainer/Menu/HighScoreCounter.text = str(game_data.score)
 
 
 func _on_TryBtn_pressed()->void:

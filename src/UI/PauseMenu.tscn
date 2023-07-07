@@ -27,13 +27,13 @@ margin_left = -285.5
 margin_right = 285.5
 margin_bottom = 82.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+[node name="HUD" type="HBoxContainer" parent="CenterContainer2"]
 margin_top = 21.0
 margin_right = 571.0
 margin_bottom = 60.0
 custom_constants/separation = 41
 
-[node name="ShootSpeed" type="Label" parent="CenterContainer2/HBoxContainer"]
+[node name="ShootSpeed" type="Label" parent="CenterContainer2/HUD"]
 margin_top = 1.0
 margin_right = 128.0
 margin_bottom = 38.0
@@ -42,7 +42,7 @@ __meta__ = {
 "_editor_description_": "Cкорость стрелбы"
 }
 
-[node name="ShootSpeedCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+[node name="ShootSpeedCounter" parent="CenterContainer2/HUD" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 169.0
@@ -50,28 +50,28 @@ margin_right = 193.0
 margin_bottom = 39.0
 script = ExtResource( 7 )
 
-[node name="Speed" type="Label" parent="CenterContainer2/HBoxContainer"]
+[node name="Speed" type="Label" parent="CenterContainer2/HUD"]
 margin_left = 234.0
 margin_top = 1.0
 margin_right = 305.0
 margin_bottom = 38.0
 text = "Speed: "
 
-[node name="SpeedCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+[node name="SpeedCounter" parent="CenterContainer2/HUD" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 346.0
 margin_right = 370.0
 margin_bottom = 39.0
 
-[node name="Damage" type="Label" parent="CenterContainer2/HBoxContainer"]
+[node name="Damage" type="Label" parent="CenterContainer2/HUD"]
 margin_left = 411.0
 margin_top = 1.0
 margin_right = 506.0
 margin_bottom = 38.0
 text = "   Damage:"
 
-[node name="DamageCounter" parent="CenterContainer2/HBoxContainer" instance=ExtResource( 5 )]
+[node name="DamageCounter" parent="CenterContainer2/HUD" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 547.0
@@ -84,7 +84,7 @@ pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="Menu" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 362.0
 margin_top = 160.0
 margin_right = 662.0
@@ -92,47 +92,47 @@ margin_bottom = 439.0
 rect_min_size = Vector2( 300, 180 )
 custom_constants/separation = 10
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/Menu"]
 margin_right = 300.0
 margin_bottom = 37.0
 text = "Paused"
 align = 1
 valign = 1
 
-[node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="CenterContainer/Menu"]
 margin_top = 47.0
 margin_right = 300.0
 margin_bottom = 47.0
 rect_pivot_offset = Vector2( -659, -126 )
 
-[node name="HighScoreCounter" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="HighScoreCounter" type="Label" parent="CenterContainer/Menu"]
 visible = false
 margin_top = 57.0
 margin_right = 300.0
 margin_bottom = 94.0
 grow_horizontal = 2
 
-[node name="Control2" type="Control" parent="CenterContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="CenterContainer/Menu"]
 margin_top = 57.0
 margin_right = 300.0
 margin_bottom = 57.0
 rect_pivot_offset = Vector2( -659, -126 )
 
-[node name="ResumeBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ResumeBtn" type="Button" parent="CenterContainer/Menu"]
 margin_top = 67.0
 margin_right = 300.0
 margin_bottom = 131.0
 rect_min_size = Vector2( 300, 64 )
 text = "Resume Game"
 
-[node name="TryBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="TryBtn" type="Button" parent="CenterContainer/Menu"]
 margin_top = 141.0
 margin_right = 300.0
 margin_bottom = 205.0
 rect_min_size = Vector2( 300, 64 )
 text = "Try Again"
 
-[node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="CenterContainer/Menu"]
 margin_top = 215.0
 margin_right = 300.0
 margin_bottom = 279.0
@@ -145,6 +145,6 @@ stream = ExtResource( 3 )
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeBtn" to="." method="_on_ResumeBtn_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/TryBtn" to="." method="_on_TryBtn_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/Menu/ResumeBtn" to="." method="_on_ResumeBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/Menu/TryBtn" to="." method="_on_TryBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/Menu/QuitBtn" to="." method="_on_QuitBtn_pressed"]

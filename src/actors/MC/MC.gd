@@ -388,9 +388,9 @@ func stat_inizialization() -> void:
 	
 	HealthCounter = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/HealthCounter")
 	
-	DamageCounter = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/DamageCounter")
-	RPSCounter    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/ShootSpeedCounter")
-	SpeedCounter  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HBoxContainer/SpeedCounter")
+	DamageCounter = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/DamageCounter")
+	RPSCounter    = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/ShootSpeedCounter")
+	SpeedCounter  = get_tree().current_scene.get_node("GUI/PauseMenu/CenterContainer2/HUD/SpeedCounter")
 	
 
 	DeathMenu = get_tree().current_scene.get_node("GUI/DeathMenu")
