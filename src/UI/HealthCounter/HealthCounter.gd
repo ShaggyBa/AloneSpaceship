@@ -1,6 +1,6 @@
-extends NinePatchRect
+extends CanvasItem
 
-onready var points_label := $Label
+onready var points_label := $Counter
 	
 
 func set_points(points: int) -> void:

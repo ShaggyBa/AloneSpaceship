@@ -26,7 +26,8 @@ current = true
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
 nextSpawnTime = 0.1
-hpBonus = false
+damageBonus = false
+shootSpeedBonus = false
 multiplayerBonus = false
 speedBonus = false
 
