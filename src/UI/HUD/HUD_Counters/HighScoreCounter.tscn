@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/HUD/HUD_Counters/Counter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/ScoreCounter/ScoreCounter.gd" type="Script" id=2]
+
+[node name="HighScoreCounter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Text" parent="." index="0"]
+margin_right = 76.0
+text = "Record:"
+
+[node name="Counter" parent="." index="1"]
+margin_left = 80.0
+margin_right = 92.0

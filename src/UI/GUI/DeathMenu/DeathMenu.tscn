@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/GUI/DeathMenu/DeathMenu.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
 [ext_resource path="res://src/UI/HUD/HUD_Counters/Counter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/HUD/HUD_Counters/ScoreCounter/ScoreCounter.gd" type="Script" id=4]
-
+[ext_resource path="res://src/UI/HUD/HUD_Counters/HighScoreCounter.tscn" type="PackedScene" id=5]
 
 [node name="DeathMenu" type="Control"]
 anchor_right = 1.0
@@ -27,9 +27,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 362.0
-margin_top = 154.0
+margin_top = 155.0
 margin_right = 662.0
-margin_bottom = 445.0
+margin_bottom = 444.0
 custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
@@ -42,49 +42,42 @@ valign = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 margin_top = 47.0
 margin_right = 300.0
-margin_bottom = 86.0
+margin_bottom = 84.0
+alignment = 1
 
 [node name="ScoreCounter" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 24.0
-margin_bottom = 39.0
+margin_left = 110.0
+margin_right = 190.0
 size_flags_horizontal = 6
 script = ExtResource( 4 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 96.0
+margin_top = 94.0
 margin_right = 300.0
-margin_bottom = 133.0
+margin_bottom = 131.0
+alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 111.0
-margin_bottom = 37.0
-text = "High Score:"
-
-[node name="HighScoreCounter" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 207.0
-margin_right = 207.0
-margin_bottom = 37.0
-size_flags_horizontal = 6
+[node name="HighScoreCounter" parent="CenterContainer/VBoxContainer/HBoxContainer2" instance=ExtResource( 5 )]
+margin_left = 104.0
+margin_right = 196.0
 
 [node name="Control3" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 143.0
+margin_top = 141.0
 margin_right = 300.0
-margin_bottom = 143.0
+margin_bottom = 141.0
 rect_pivot_offset = Vector2( -659, -126 )
 
 [node name="TryBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 153.0
+margin_top = 151.0
 margin_right = 300.0
-margin_bottom = 217.0
+margin_bottom = 215.0
 rect_min_size = Vector2( 300, 64 )
 text = "Try Again"
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 227.0
+margin_top = 225.0
 margin_right = 300.0
-margin_bottom = 291.0
+margin_bottom = 289.0
 rect_min_size = Vector2( 0, 64 )
 text = "Quit"
 

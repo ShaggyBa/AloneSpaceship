@@ -61,17 +61,18 @@ func _ready():
 
 func _on_SpawnTimer_timeout():
 # Spawn bonus
-	var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
-	
-	var bonus = bonusPreloaded["obj"].instance()
-	
-
-	# Position 
-	bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
-	
-	
+	if activeBonuses:
+		var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
 		
-	get_tree().current_scene.add_child(bonus)
+		var bonus = bonusPreloaded["obj"].instance()
+		
+
+		# Position 
+		bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
+		
+		
+			
+		get_tree().current_scene.add_child(bonus)
 	
 #	if currentScore / 2500 > counter:
 #		counter += 1
@@ -79,5 +80,5 @@ func _on_SpawnTimer_timeout():
 #	else:
 #		nextSpawnTime = rand_range(nextSpawnTime, nextSpawnTime * 2)
 #	# Restart timer
-	spawnTimer.start(nextSpawnTime)
+		spawnTimer.start(nextSpawnTime)
 

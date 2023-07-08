@@ -20,7 +20,7 @@ var current_mc_hp
 var current_mc_speed
 var current_mc_shoot_speed
 var current_mc_damage
-
+var current_score
 
 func _ready() -> void:
 	get_stats()
@@ -28,7 +28,8 @@ func _ready() -> void:
 	
 
 func _process(_delta: float) -> void:
-	score_counter.set_points(current_scene.points)
+	current_score = current_scene.points		
+	score_counter.set_points(current_score)
 
 	if current_mc_hp != mc_instance.mcHP or \
 	 current_mc_speed != stepify((mc_instance.mcSpeed + mc_instance.mcVSpeed) / 2 / start_mc_Speed, 0.01) or \
