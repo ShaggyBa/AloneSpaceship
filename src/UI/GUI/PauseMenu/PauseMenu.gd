@@ -2,7 +2,13 @@ extends Control
 
 onready var game_data = SaveFile.game_data
 
+onready var current_scene = get_parent()
+
+
 var is_paused = false setget set_is_paused
+var main_menu = "res://src/UI/MainMenu/Menu.tscn"
+
+
 
 func _ready():
 	self.is_paused = !is_paused
@@ -10,17 +16,17 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
-		print("coco")
 		self.is_paused = !is_paused
-	else:
-		print('pipi')
 
 
 func set_is_paused(value):
 	is_paused = value
 	get_tree().paused = is_paused
-	visible = is_paused
+	if is_paused:
+		print("get data")
+		
 #	update_score()
+	visible = is_paused	
 
 
 func _on_ResumeBtn_pressed():
@@ -28,7 +34,7 @@ func _on_ResumeBtn_pressed():
 
 
 func _on_QuitBtn_pressed()->void:
-	get_tree().change_scene("res://src/UI/Menu.tscn")
+	get_tree().change_scene(main_menu)
 	
 
 func _on_PauseBtn_pressed():

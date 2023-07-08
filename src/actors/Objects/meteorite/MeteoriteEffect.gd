@@ -2,7 +2,7 @@ extends CPUParticles2D
 
 
 func _ready():
-	amount = rand_range(6, 12)
+	amount = rand_range(6.0, 12.0)
 	emitting = true
 		
 

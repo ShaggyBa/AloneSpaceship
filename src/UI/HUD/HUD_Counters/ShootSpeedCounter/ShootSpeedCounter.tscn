@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/HUD/HUD_Counters/Counter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/ShootSpeedCounter/ShootSpeedCounter.gd" type="Script" id=2]
+
+[node name="ShootSpeedCounter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Text" parent="." index="0"]
+margin_right = 128.0
+text = "Shoot Speed:"
+
+[node name="Counter" parent="." index="1"]
+margin_left = 132.0
+margin_right = 144.0

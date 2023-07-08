@@ -17,7 +17,7 @@ export (float) var duringShieldBonus = 2.0
 export (float) var duringDamageBonus = 5.0
 
 export (float) var coef_hp_bonus = 10.0
-export (float) var coef_dmg_bonus = 2
+export (int) var coef_dmg_bonus = 2
 export (float) var coef_shoot_delay_bonus = 0.05
 
 var plShoot = preload("res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn")

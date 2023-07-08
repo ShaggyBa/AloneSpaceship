@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/UI/HUD/HUD.gd" type="Script" id=2]
-[ext_resource path="res://src/UI/HUD/HUD_Counters/ScoreCounter/ScoreCounter.gd" type="Script" id=3]
-[ext_resource path="res://src/UI/HUD/HUD_Counters/Counter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/ScoreCounter/ScoreCounter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/HealthCounter/HealthCounter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/GUI/PauseMenu/PauseMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=8]
@@ -55,8 +55,9 @@ anchor_bottom = 0.107
 custom_constants/separation = 650
 
 [node name="PauseBtn" type="Button" parent="HUD/HBoxContainer"]
+margin_top = 7.0
 margin_right = 192.0
-margin_bottom = 64.0
+margin_bottom = 71.0
 rect_min_size = Vector2( 192, 64 )
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 8 )
@@ -66,15 +67,17 @@ text = "Pause"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer"]
 margin_left = 842.0
-margin_right = 922.0
-margin_bottom = 64.0
+margin_right = 926.0
+margin_bottom = 78.0
 alignment = 1
 
-[node name="ScoreCounter" parent="HUD/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 13.0
-margin_right = 80.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
+[node name="ScoreCounter" parent="HUD/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 84.0
+
+[node name="HealthCounter" parent="HUD/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 41.0
+margin_right = 84.0
+margin_bottom = 78.0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
 pause_mode = 2

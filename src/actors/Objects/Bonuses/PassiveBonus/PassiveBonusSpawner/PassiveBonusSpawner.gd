@@ -1,6 +1,6 @@
 extends Node2D
 
-export (float) var nextSpawnTime = 1
+export (float) var nextSpawnTime = 1.0
 
 export (bool) var damageBonus = true
 export (bool) var hpBonus = true

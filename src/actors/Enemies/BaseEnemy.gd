@@ -21,7 +21,7 @@ onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
 onready var maxHP = enemyHP
 
-signal add_to_score(value) #value: int
+#signal add_to_score(value) #value: int
 var enemy_death = InputEventAction.new()
 
 onready var aSprite = $AnimatedSprite

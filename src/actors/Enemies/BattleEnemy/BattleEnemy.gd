@@ -3,7 +3,7 @@ extends enemy
 export (float) var enemyBigAttackDelay = 2.5 
 export (float) var enemyAttackDelay = 1.0 
 
-export (int) var enemyBigAttackDamage = 5.0
+export (float) var enemyBigAttackDamage = 5.0
 
 
 onready var muzzles = $FiringPositions.get_children()
