@@ -26,17 +26,13 @@ current = true
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
 nextSpawnTime = 0.1
-damageBonus = false
-shootSpeedBonus = false
 multiplayerBonus = false
-speedBonus = false
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-shootDelay = 0.5
 delayShieldRestoring = 2.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]

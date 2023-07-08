@@ -6,9 +6,7 @@ export (float) var mcSpeed = 200.0 # cкорость полета корабля
 export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
 
 export (int) var mcHP = 5
-
-export (float) var shootDelay = 0.5
-
+export (float) var mcShootSpeed = 0.5
 export (int) var mcDamage = 1
 
 export (float) var delayShieldRestoring = 0.3
@@ -47,6 +45,7 @@ onready var passiveBonusSound = $Audio/PassiveBonus
 
 onready var maxHP = mcHP
 onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
+onready var start_shoot_delay = mcShootSpeed
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -74,7 +73,6 @@ var isDamageUp = false
 var isDead = false
 
 
-onready var start_shoot_delay = shootDelay
 
 
 func _ready() -> void:
@@ -104,13 +102,13 @@ func _physics_process(delta) -> void:
 	
 func setTimerShooting()->void:
 	timerShooting.set_one_shot(true)
-	timerShooting.set_wait_time(shootDelay)
+	timerShooting.set_wait_time(mcShootSpeed)
 	add_child(timerShooting)
 	
 	
 func setTimerBonusShooting()->void:
 	timerBonusShooting.set_one_shot(true)
-	timerBonusShooting.set_wait_time(shootDelay)
+	timerBonusShooting.set_wait_time(mcShootSpeed)
 	add_child(timerBonusShooting)
 	
 	
@@ -324,23 +322,20 @@ func addPassiveSpeed():
 	if mcSpeed < 900:
 		mcSpeed += floor(mcSpeed * 0.02)
 	
-	# SpeedCounter.set_points(String(stepify((mcSpeed + mcVSpeed) / 2 / startMCSpeed, 0.01)) + 'x')
-	
 	
 func addPassiveMultiscoreBonus():
 	get_tree().current_scene.multiscore += 0.1
 	
 	
 func addPassiveShootSpeedBonus():
-	if shootDelay > 0.05:
+	if mcShootSpeed > 0.05:
 		
 		count_of_shoot_delay_bonus += 1		
 		
-		shootDelay -= coef_shoot_delay_bonus / (sqrt(count_of_shoot_delay_bonus) + coef_shoot_delay_bonus)
+		mcShootSpeed -= coef_shoot_delay_bonus / (sqrt(count_of_shoot_delay_bonus) + coef_shoot_delay_bonus)
 		
-		timerShooting.set_wait_time(shootDelay)
+		timerShooting.set_wait_time(mcShootSpeed)
 		
-	#	RPSCounter.set_points(stepify(start_shoot_delay / shootDelay, 0.01))
 	
 
 func addPassiveMaxHPBonus():
