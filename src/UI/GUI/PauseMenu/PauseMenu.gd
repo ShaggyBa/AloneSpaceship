@@ -10,14 +10,17 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
+		print("coco")
 		self.is_paused = !is_paused
+	else:
+		print('pipi')
 
 
 func set_is_paused(value):
 	is_paused = value
 	get_tree().paused = is_paused
 	visible = is_paused
-	update_score()
+#	update_score()
 
 
 func _on_ResumeBtn_pressed():
@@ -27,7 +30,6 @@ func _on_ResumeBtn_pressed():
 func _on_QuitBtn_pressed()->void:
 	get_tree().change_scene("res://src/UI/Menu.tscn")
 	
-
 
 func _on_PauseBtn_pressed():
 	self.is_paused = !is_paused

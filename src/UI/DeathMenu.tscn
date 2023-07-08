@@ -2,8 +2,9 @@
 
 [ext_resource path="res://src/UI/DeathMenu.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/UI/Counter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/UI/ScoreCounter/ScoreCounter.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/Counter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/HUD/HUD_Counters/ScoreCounter/ScoreCounter.gd" type="Script" id=4]
+
 
 [node name="DeathMenu" type="Control"]
 anchor_right = 1.0

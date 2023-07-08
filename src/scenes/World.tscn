@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/actors/MC/MC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/blueLevel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/HUD/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/Objects/Bonuses/ActiveBonus/ActiveBonusSpawner/ActiveBonusSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Assets/Sound/SoundEffects/Simple Music/DeepSpaceA.mp3" type="AudioStream" id=6]
