@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actors/Objects/Bonuses/ActiveBonus/BaseBonus/ActiveBaseBonus.gd"
 }, {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Alone Spaceship"
-run/main_scene="res://src/scenes/World.tscn"
+run/main_scene="res://src/UI/MainMenu/Menu.tscn"
 boot_splash/image="res://src/UI/img/BootImage.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"

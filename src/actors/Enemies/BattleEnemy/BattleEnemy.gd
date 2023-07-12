@@ -35,16 +35,14 @@ var stateChanged = false
 
 func _ready() -> void:
 	randomize()
-	if coef <= 0:
-		coef = 1
-		
+	
+	
 	enemyAttackDelay = rand_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
 	aSprite.speed_scale = enemyAttackDelay	
 	aSprite.playing = true
 	enemyBigAttackDamage = round(enemyBigAttackDamage + coef * 2)
 	setTimerShooting()
 
-	print(coef)
 
 func _process(_delta: float) -> void:
 	shooting()

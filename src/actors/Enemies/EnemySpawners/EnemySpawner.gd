@@ -80,8 +80,11 @@ func createBattleEnemy(enemy):
 	var enemyHorisontalSpeed = enemy.horisontalSpeed
 	enemy.horisontalSpeed = rand_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
 	
-	
-	enemy.coef = difficultCoef - 4
+	if difficultCoef < 5:
+		enemy.coef =  1
+	else:
+		enemy.coef = difficultCoef - 4
+		
 	enemy.global_position = Vector2(pos.global_position.x + 50, rand_range(50, viewportRect.end.y - 50))
 	get_tree().current_scene.add_child(enemy)
 
