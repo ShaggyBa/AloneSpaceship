@@ -15,6 +15,9 @@ onready var _positionToReady = get_tree().current_scene.get_node("positionToRead
 onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
 onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
 
+onready var viewportEndX = viewportRect.end.x + 210
+
+
 var timerShooting = Timer.new()
 
 var currentGun = true
@@ -24,22 +27,24 @@ var directionX = -1
 var directionY = directionX
 
 
-
 var isReady = false
 
-onready var viewportEndX = viewportRect.end.x + 210
 
 var stateChanged = false
 
 
 func _ready() -> void:
 	randomize()
+	if coef <= 0:
+		coef = 1
+		
 	enemyAttackDelay = rand_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
 	aSprite.speed_scale = enemyAttackDelay	
 	aSprite.playing = true
-	enemyBigAttackDamage = floor(enemyBigAttackDamage * coef)
+	enemyBigAttackDamage = round(enemyBigAttackDamage + coef * 2)
 	setTimerShooting()
 
+	print(coef)
 
 func _process(_delta: float) -> void:
 	shooting()
@@ -98,13 +103,15 @@ func shooting():
 		currentGun = !currentGun
 
 
+
+
 func changeState():
 	if float(enemyHP) / float(maxHP) <= 0.5 and not stateChanged:
 		aSprite.speed_scale = 2
 		aSprite.modulate = "f76969"
 		enemyAttackDelay = 0.5
 		enemyDamage += 2
-		verticalSpeed *= 1.25
-		horisontalSpeed *= 1.5
+		verticalSpeed *= 1.1
+		horisontalSpeed *= 1.25
 		timerShooting.set_wait_time(enemyAttackDelay)
 		stateChanged = true

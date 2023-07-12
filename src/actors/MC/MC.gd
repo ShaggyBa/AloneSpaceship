@@ -18,7 +18,7 @@ export (float) var coef_hp_bonus = 10.0
 export (int) var coef_dmg_bonus = 2
 export (float) var coef_shoot_delay_bonus = 0.05
 
-var plShoot = preload("res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn")
+var plShoot = preload("res://src/actors/Projectiles/MCShoot/MCShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
 
 var pFullHP = preload("res://src/Assets/Sprites/MainShip/model/States/FullHP.png")
@@ -43,6 +43,8 @@ onready var ricochet = $Audio/Ricochet
 onready var activeBonusSound = $Audio/ActiveBonus
 onready var passiveBonusSound = $Audio/PassiveBonus
 
+onready var passiveBonusSpawner = get_tree().current_scene.get_node("PassiveBonusSpawner")
+
 onready var maxHP = mcHP
 onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
 onready var start_shoot_delay = mcShootSpeed
@@ -60,19 +62,18 @@ var timerDuringDamageBonus = Timer.new()
 
 var tickRateDamage = Timer.new()
 
+var shootScale = Vector2(1.0, 1.0)
+
 var game_over = InputEventAction.new()
 
 
 var count_of_dmg_bonus = 0
-var count_of_hp_bonus = 0
 var count_of_shoot_delay_bonus = 0
 
 
 var isInvicibility = false
 var isDamageUp = false
 var isDead = false
-
-
 
 
 func _ready() -> void:
@@ -158,6 +159,7 @@ func create_shoot():
 	else: 
 		shoot = plShoot.instance()
 		shoot.damage = mcDamage
+		shoot.scale = shootScale
 	shoot.global_position = muzzle.global_position
 	get_tree().current_scene.add_child(shoot)
 	shotSound.play()
@@ -190,8 +192,11 @@ func takeDamage(damage):
 			yield(get_tree().create_timer(0.15), "timeout")
 			timerShieldRestoring.start()
 		else:
-			mcHP -= damage
-			
+			if mcHP - damage < 0:
+				mcHP = 0
+			else:
+				mcHP -= damage
+				
 			changeState()			
 			
 			
@@ -200,9 +205,6 @@ func takeDamage(damage):
 			if mcHP <= 0 and not isDead:
 				death()
 
-
-func _on_Death_Animation():
-	Input.parse_input_event(game_over)
 
 func burning(delay:int):
 	if isInvicibility or isDead:
@@ -284,7 +286,7 @@ func _on_MC_area_entered(area):
 			
 func heal():
 	if mcHP + (maxHP / 4) < maxHP:
-		mcHP += maxHP / 4
+		mcHP += maxHP / 2
 	else:
 		mcHP = maxHP
 	changeState()
@@ -313,18 +315,28 @@ func disabledShieldBonus():
 
 
 func addPassiveDamageBonus():
-	count_of_dmg_bonus += 1
-	mcDamage += coef_dmg_bonus * (1 - pow(0.5, count_of_dmg_bonus))
+	count_of_dmg_bonus += 1	
+	mcDamage += 2
+	if shootScale < Vector2(2.5, 2.5):
+		shootScale += Vector2(0.25 / count_of_dmg_bonus, 0.25 / count_of_dmg_bonus)
+	
 	
 func addPassiveSpeed():
 	if mcVSpeed < 900:
-		mcVSpeed += floor(mcVSpeed * 0.02)
+		mcVSpeed += floor(mcVSpeed * 0.05)
 	if mcSpeed < 900:
-		mcSpeed += floor(mcSpeed * 0.02)
+		mcSpeed += floor(mcSpeed * 0.05)
+		
+	if delayShieldRestoring > 1:
+		delayShieldRestoring -= 0.1
+		timerShieldRestoring.set_wait_time(delayShieldRestoring) 
 	
 	
 func addPassiveMultiscoreBonus():
-	get_tree().current_scene.multiscore += 0.1
+	get_tree().current_scene.multiscore += 0.25
+	
+	if passiveBonusSpawner.nextSpawnTime > 3:
+		passiveBonusSpawner.nextSpawnTime -= 0.1
 	
 	
 func addPassiveShootSpeedBonus():
@@ -335,26 +347,26 @@ func addPassiveShootSpeedBonus():
 		mcShootSpeed -= coef_shoot_delay_bonus / (sqrt(count_of_shoot_delay_bonus) + coef_shoot_delay_bonus)
 		
 		timerShooting.set_wait_time(mcShootSpeed)
-		
 	
 
 func addPassiveMaxHPBonus():
-	count_of_hp_bonus += 1
-	var coef = coef_hp_bonus * (1 - pow(0.5, count_of_hp_bonus))
+	var coef = 10 + maxHP * 0.1
 	maxHP += round(coef)
 	mcHP += round(coef)
 
 
 func death():
 	isDead = true
+	
+	get_parent().music.stop()
+	
 	collision.queue_free()
 	destroyed.play()
 	shield.queue_free()
 	sprite.animation = "Death"
-	sprite.modulate = "ffffff"
+	sprite.modulate = "ffffff" 
 	sprite.playing = true
-	destroyed.connect("finished", self, "_on_Destroyed")
-	Input.parse_input_event(game_over)
+	sprite.connect("animation_finished", self, "_on_Destroyed")
 
 
 func _on_Destroyed():

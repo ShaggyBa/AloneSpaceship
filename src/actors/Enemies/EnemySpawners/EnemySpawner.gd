@@ -19,6 +19,8 @@ onready var counter = 1
 onready var spawnTimer = $SpawnTimer
 onready var pos = $Position2D
 
+onready var mc_instance = get_tree().current_scene.get_node("MC")
+
 onready var difficultCoef = 1.0
 
 onready var viewportRect = get_viewport_rect()
@@ -28,7 +30,7 @@ func _ready():
 	spawnTimer.start(nextSpawnTime)
 	
 func _on_SpawnTimer_timeout():
-	#var currentScore = get_tree().current_scene.get_node("GUI/Control/HBoxContainer/VBoxContainer4/ScoreCounter").get_points()
+	var currentScore = get_tree().current_scene.points
 	
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
 		
@@ -42,18 +44,18 @@ func _on_SpawnTimer_timeout():
 		if preloadedEnemy == preloadedEnemies[1]:
 			createShooterEnemy(enemy)
 
-		#if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
-		#	preloadedEnemies.append(battleEnemy)
+		if  currentScore > 10000 and not battleEnemy in preloadedEnemies:
+			preloadedEnemies.append(battleEnemy)
 			 
 		if preloadedEnemy == battleEnemy \
-		and get_tree().get_nodes_in_group("BattleEnemy").size() < maxEnemySpawn / 5:
+		and get_tree().get_nodes_in_group("BattleEnemy").size() < maxEnemySpawn / counter:
 			createBattleEnemy(enemy)
 			
 		if changeSpawnRate:
 			if nextSpawnTime > minSpawnRate:
-				nextSpawnTime -= 0.025 
+				nextSpawnTime -= 0.05 
 				
-		#increaseMaxEnemySpawn(currentScore)
+		increaseMaxEnemySpawn(currentScore)
 				
 		# Рестарт таймера
 		spawnTimer.start(nextSpawnTime)
@@ -62,21 +64,25 @@ func _on_SpawnTimer_timeout():
 		
 		
 func increaseMaxEnemySpawn(score):
-	if float(score) / 5000.0 > counter:
+	if score / 2500.0 > counter:
 			counter += 1
-			difficultCoef += 0.5
+			if mc_instance.mcDamage / difficultCoef >= 2:
+				difficultCoef += 1
+			
 			if counter % 2 == 0:
-				maxEnemySpawn += 1
+				maxEnemySpawn += counter
 
 
 func createBattleEnemy(enemy):
 	var enemyVerticalSpeed = enemy.verticalSpeed
-	enemy.verticalSpeed = rand_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 50)	
+	enemy.verticalSpeed = rand_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 20)	
 
 	var enemyHorisontalSpeed = enemy.horisontalSpeed
 	enemy.horisontalSpeed = rand_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
-	enemy.coef = difficultCoef
-	enemy.global_position = Vector2(pos.global_position.x, rand_range(25, viewportRect.end.y - 25))
+	
+	
+	enemy.coef = difficultCoef - 4
+	enemy.global_position = Vector2(pos.global_position.x + 50, rand_range(50, viewportRect.end.y - 50))
 	get_tree().current_scene.add_child(enemy)
 
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/Projectiles/BaseShoot/BaseShoot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/Projectiles/MCShoot/MCShoot.gd" type="Script" id=2]
+
+[node name="Shoot" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+visible = false

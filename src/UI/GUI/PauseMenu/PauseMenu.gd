@@ -16,14 +16,14 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
+		if current_scene.mc_instance.isDead:
+			return
 		self.is_paused = !is_paused
 
 
 func set_is_paused(value):
 	is_paused = value
 	get_tree().paused = is_paused
-	if is_paused:
-		print("get data")
 		
 #	update_score()
 	visible = is_paused	

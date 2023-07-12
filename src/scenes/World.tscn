@@ -23,23 +23,18 @@ current = true
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 
 [node name="ActiveBonusSpawner" parent="." instance=ExtResource( 5 )]
+nextSpawnTime = 7.0
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource( 8 )]
-nextSpawnTime = 0.1
-damageBonus = false
-hpBonus = false
-shootSpeedBonus = false
-multiplayerBonus = false
-speedBonus = false
+nextSpawnTime = 5.0
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource( 4 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 11 )]
-nextSpawnTime = 1.0
-maxEnemySpawn = 100
+changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-delayShieldRestoring = 2.0
+delayShieldRestoring = 4.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 

@@ -123,8 +123,8 @@ scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 3 )
 verticalSpeed = 100.0
 horisontalSpeed = 35.0
-enemyHP = 10
-enemyDamage = 3
+enemyHP = 5
+enemyDamage = 2
 enemyAttackDelay = 1.0
 
 [node name="Engine" parent="." index="0"]
@@ -132,6 +132,7 @@ position = Vector2( 14.6667, 0.666667 )
 rotation = 1.5708
 scale = Vector2( 2.01866, -3.68455 )
 frames = SubResource( 15 )
+frame = 3
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 10 )

@@ -141,12 +141,12 @@ animations = [ {
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 2 )
 verticalSpeed = 100.0
-horisontalSpeed = 50.0
-enemyHP = 25
-enemyDamage = 5
+horisontalSpeed = 35.0
+enemyHP = 50
+enemyDamage = 2
 enemyBigAttackDelay = 2.5
 enemyAttackDelay = 1.0
-enemyBigAttackDamage = 15
+enemyBigAttackDamage = 4.0
 
 [node name="Engine" parent="." index="0"]
 modulate = Color( 0.756863, 0, 1, 1 )

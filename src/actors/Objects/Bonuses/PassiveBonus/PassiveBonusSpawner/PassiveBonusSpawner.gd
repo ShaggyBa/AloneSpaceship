@@ -46,21 +46,24 @@ onready var preloadedBonuses = [
 onready var spawnTimer = $SpawnTimer
 onready var viewportRect = get_viewport_rect()
 
-var counter = 1
+var counter = 0
 
 var activeBonuses = []
 
 func _ready():
 	randomize()
+
 	spawnTimer.start(nextSpawnTime)
 	
 	# Оставляем только активные бонусы
 	for bonus in preloadedBonuses:
 		if bonus["isSpawning"]:
 			activeBonuses.append(bonus)
+	
 
 func _on_SpawnTimer_timeout():
-# Spawn bonus
+	var currentScore = get_tree().current_scene.points
+	
 	if activeBonuses:
 		var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
 		
@@ -74,11 +77,7 @@ func _on_SpawnTimer_timeout():
 			
 		get_tree().current_scene.add_child(bonus)
 	
-#	if currentScore / 2500 > counter:
-#		counter += 1
-#		nextSpawnTime = 1.0
-#	else:
-#		nextSpawnTime = rand_range(nextSpawnTime, nextSpawnTime * 2)
-#	# Restart timer
-		spawnTimer.start(nextSpawnTime)
-
+	# Restart timer
+		spawnTimer.set_wait_time(rand_range(nextSpawnTime, nextSpawnTime * 2))
+		spawnTimer.start()
+		

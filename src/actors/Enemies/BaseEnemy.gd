@@ -19,14 +19,15 @@ onready var destroyed = $Audio/Destroyed
 
 onready var viewportRect = get_viewport_rect()
 onready var isDeath = false
-onready var maxHP = enemyHP
-
-#signal add_to_score(value) #value: int
-var enemy_death = InputEventAction.new()
 
 onready var aSprite = $AnimatedSprite
 onready var engine = $Engine
 onready var collision = $CollisionPolygon2D
+
+
+#signal add_to_score(value) #value: int
+var enemy_death = InputEventAction.new()
+var maxHP
 
 var coef = 1.0
 
@@ -37,9 +38,10 @@ func _ready() -> void:
 	engine.playing = true
 	enemy_death.action = "enemy_death"
 	enemy_death.pressed = true
-	maxHP = floor(maxHP * coef)
-	enemyDamage = floor(enemyDamage * coef)
-
+	
+	enemyHP = floor(enemyHP * coef)
+	enemyDamage = round(enemyDamage + coef)
+	maxHP = enemyHP
 
 func _physics_process(delta):
 	moving(delta)
@@ -56,6 +58,9 @@ func moving(delta:float)->void:
 func takeDamage(amount):
 	enemyHP -= amount
 	hit.play()	
+	if coef > 5:
+		changeState()
+	
 	if enemyHP <= 0:
 		Input.parse_input_event(enemy_death)
 		death()
@@ -90,5 +95,6 @@ func _on_Death_animation_finished():
 		queue_free()
 
 
-
+func changeState():
+	pass
 

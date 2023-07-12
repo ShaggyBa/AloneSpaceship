@@ -109,13 +109,12 @@ script = ExtResource( 2 )
 verticalSpeed = 0.0
 horisontalSpeed = 1000.0
 enemyHP = 3
-enemyDamage = 4
+enemyDamage = 2
 
 [node name="Engine" parent="." index="0"]
 position = Vector2( -3, 0 )
 scale = Vector2( 0.95, 1.5 )
 frames = SubResource( 21 )
-frame = 1
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 8 )

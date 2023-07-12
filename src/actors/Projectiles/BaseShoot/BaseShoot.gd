@@ -23,5 +23,9 @@ func _on_Shoot_area_entered(area):
 		var shootEffect = pShootEffect.instance()
 		shootEffect.position = position
 		get_parent().add_child(shootEffect)
+		if area.is_in_group("enemy"):
+			if damage > area.enemyHP :
+				damage -= area.enemyHP
+				return
 		queue_free()
 

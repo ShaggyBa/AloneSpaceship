@@ -86,9 +86,9 @@ region = Rect2( 500, 0, 100, 100 )
 [sub_resource type="SpriteFrames" id=55]
 animations = [ {
 "frames": [ SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
-"loop": true,
+"loop": false,
 "name": "Death",
-"speed": 2.5
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -112,52 +112,42 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=36]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=37]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=38]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=39]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=40]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=41]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 512, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=42]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 64, 64 )
 
@@ -231,7 +221,6 @@ gravity = 0.0
 script = ExtResource( 2 )
 mcSpeed = 500.0
 mcHP = 20
-shootDelay = 0.1
 mcDamage = 2
 duringShieldBonus = 5.0
 
@@ -246,7 +235,6 @@ animation = "idle"
 scale = Vector2( 1.82739, 1.82739 )
 frames = SubResource( 55 )
 animation = "Death"
-speed_scale = 0.997
 
 [node name="CrushEffects" type="CPUParticles2D" parent="."]
 position = Vector2( 0, -6 )
@@ -291,9 +279,9 @@ limit_bottom = 650
 limit_smoothed = true
 
 [node name="Shield" type="AnimatedSprite" parent="."]
-visible = false
+position = Vector2( 3, 0 )
 rotation = 1.5708
-scale = Vector2( 1.85, 1.85 )
+scale = Vector2( 1.9, 1.95 )
 z_index = 1
 frames = SubResource( 14 )
 animation = "autoshield"

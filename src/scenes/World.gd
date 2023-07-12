@@ -1,18 +1,28 @@
 extends Node
 
-var points := 0.0
+
 export (float) var multiscore = 1.0
-var dec = 1
+export (float) var pointsToSpawnBoss = 100000.0
+
+
 
 onready var music = $Music
-
+onready var mc_instance = $MC
+onready var enemySpawner = $EnemySpawner
 
 onready var plBoss = preload("res://src/actors/Boss/Boss.tscn")
 onready var newBack = preload("res://src/scenes/orangeLevel.tscn")
 
+
 var orangeInst
 var bossIsSpawning = false
+var bossIsDefeating = false
 
+var dec = 1
+var points := 0.0
+
+var currentMultiscore
+var currentCountOfEnemies 
 
 func _ready() -> void:
 	music.play()
@@ -20,31 +30,46 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if points / 1000 > dec:
+	if points / 1000 > dec and not bossIsSpawning:
 		dec += 1
 		multiscore += 0.05
-
+	
 
 	points += delta * 100 * multiscore
-##	counter_final.set_points(points)
-#
-#
-#	if points > 100000 and not bossIsSpawning:
-#		var boss = plBoss.instance()
-#		boss.global_position = Vector2(1100, 300)
-#		add_child(boss)
-#		bossIsSpawning = true
-#
-#	if points > 100000 and get_tree().get_nodes_in_group("boss").size() == 0:
-#		changeBack() 
+	
+	
+	if points >= pointsToSpawnBoss and not bossIsSpawning:
+		var boss = plBoss.instance()
+		boss.global_position = Vector2(1100, 300)
+		boss.connect("boss_defeated", self, "_onBossDefeated")
+		
+		add_child(boss)
+		
+		currentMultiscore = multiscore
+		multiscore = 0.0
+		
+		currentCountOfEnemies = enemySpawner.maxEnemySpawn
+		enemySpawner.maxEnemySpawn = 0
+		
+		bossIsSpawning = true
 
-func changeBack():
+
+
+func _onBossDefeated():
+	multiscore = currentMultiscore
+	bossIsDefeating = true
+	changeLevel()
+
+
+func changeLevel():
 	orangeInst = newBack.instance()
 	add_child(orangeInst)
-	$blueLevel.queue_free()
-		
+	$blueLevel.queue_free()	
+	enemySpawner.maxEnemySpawn = currentCountOfEnemies
+	
 
 
 func _on_Music_finished() -> void:
-	yield(get_tree().create_timer(10), "timeout")
-	music.play()
+	if not mc_instance.isDead:	
+		yield(get_tree().create_timer(10), "timeout")
+		music.play()

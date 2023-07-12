@@ -8,9 +8,11 @@ export (int) var bossHP = 50
 export (int) var bossDamage = 10
 
 
+signal boss_defeated
+
+
 onready var viewportRect = get_viewport_rect()
 onready var canShoot = true
-onready var maxHP = bossHP
 
 
 onready var aSprite = $Sprite
@@ -24,6 +26,7 @@ onready var _target = get_tree().current_scene.get_node("MC")
 onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
 onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
+onready var viewportEndX = viewportRect.end.x + 210
 
 
 var directionY = 1
@@ -34,18 +37,13 @@ var timerShooting = Timer.new()
 
 var stateChanged = false
 var isReady = false
-
-onready var viewportEndX = viewportRect.end.x + 210
+var maxHP
 
 func _ready() -> void:
+	improve_stats()
 	aSprite.playing = true
 	engine.playing = true
 	
-	bossHP += _target.maxHP * (1.0 / _target.shootDelay) + _target.mcDamage * \
-	(1.0 / _target.shootDelay)
-	
-	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
-	print(bossHP, " ", bossDamage)
 	setTimerShooting()
 	
 
@@ -122,8 +120,36 @@ func _on_Boss_area_entered(area):
 	if area is MC:
 		area.takeDamage(bossDamage*5)
 		bossHP -= area.mcDamage * 10
+
+
+func _on_Death_animation_finished():
+	bossDefeated()
+	queue_free()
+
+
+func changeState():
+	if float(bossHP) / float(maxHP) <= 0.5 and not stateChanged:
+		bossAttackDelay = 1		
+		timerShooting.set_wait_time(bossAttackDelay)
+		aSprite.modulate = "f76969"
+
+		aSprite.speed_scale = 2
+		bossDamage *= floor(1.5)
+		attackSound.pitch_scale = 2
+		verticalSpeed *= 2
+		horisontalSpeed *= 2.5
+
+		stateChanged = true
 		
-		
+
+func improve_stats():
+	bossHP += _target.maxHP * (1.0 / _target.mcShootSpeed) + _target.mcDamage * \
+	(1.0 / _target.mcShootSpeed)
+	
+	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
+
+	maxHP = bossHP
+
 func death():
 	canShoot = false
 	
@@ -137,23 +163,8 @@ func death():
 	verticalSpeed *= 0.1
 	horisontalSpeed *= 0.1
 	$Destroyed.play()
+	
 
-
-func _on_Death_animation_finished():
-	queue_free()
-
-
-func changeState():
-	if float(bossHP) / float(maxHP) <= 0.4 and not stateChanged:
-		bossAttackDelay = 1		
-		timerShooting.set_wait_time(bossAttackDelay)
-		aSprite.modulate = "f76969"
-
-		aSprite.speed_scale = 2
-		bossDamage *= floor(1.5)
-		attackSound.pitch_scale = 2
-		verticalSpeed *= 2
-		horisontalSpeed *= 2.5
-
-		stateChanged = true
-		
+func bossDefeated():
+	# Код, выполняемый при победе над боссом
+	emit_signal("boss_defeated")

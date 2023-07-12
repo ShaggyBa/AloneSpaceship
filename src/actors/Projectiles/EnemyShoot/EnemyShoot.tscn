@@ -55,7 +55,7 @@ script = ExtResource( 2 )
 position = Vector2( 33, -14 )
 scale = Vector2( 2, 2.65 )
 frames = SubResource( 1 )
-frame = 3
+frame = 1
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 16, -4.66667 )
