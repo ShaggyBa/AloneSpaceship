@@ -6,3 +6,5 @@
 На данный момент готова демо-версия проекта.
 
 Демонстрация геймплея: https://youtu.be/oSY2cARaPNs
+
+Прототип игры: https://shaggyba.itch.io/alone-spaceship
