@@ -19,9 +19,6 @@ var preloadedEnemies = [
 @onready var spawnTimer = $SpawnTimer
 @onready var pos = $Marker2D
 
-@onready var mc_instance = get_parent().get_node("MC")
-
-
 @onready var difficultCoef = 1.0
 
 @onready var viewportRect = get_viewport_rect()
@@ -68,7 +65,7 @@ func _on_SpawnTimer_timeout():
 func increaseMaxEnemySpawn(score):
 	if score / 2500.0 > counter:
 			counter += 1
-			if mc_instance.mcDamage / difficultCoef >= 2:
+			if Main.MC.mcDamage / difficultCoef >= 2:
 				difficultCoef += 1
 			
 			if counter % 2 == 0:
@@ -105,7 +102,7 @@ func createShooterEnemy(enemy):
 
 func createFastEnemy(enemy):
 	var crntSpeed = enemy.horisontalSpeed
-	var playerPos = get_tree().current_scene.get_node("MC").position.y
+	var playerPos = Main.MC.position.y
 	
 	enemy.horisontalSpeed = randf_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
 	enemy.coef = difficultCoef

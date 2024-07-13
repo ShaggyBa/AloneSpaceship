@@ -77,6 +77,8 @@ var isDead = false
 
 
 func _ready() -> void:
+	Main.MC = $"."
+	
 	viewportSize = get_viewport().size # Получение размеров viewport-а
 
 	setTimerShooting()

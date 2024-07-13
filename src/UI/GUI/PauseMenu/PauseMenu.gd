@@ -2,7 +2,7 @@ extends Control
 
 @onready var game_data = SaveFile.game_data
 
-@onready var current_scene = get_parent()
+
 
 
 var is_paused = false: set = set_is_paused
@@ -16,7 +16,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
-		if current_scene.mc_instance.isDead:
+		if Main.MC.isDead:
 			return
 		self.is_paused = !is_paused
 

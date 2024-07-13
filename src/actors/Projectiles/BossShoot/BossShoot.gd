@@ -9,7 +9,7 @@ extends Area2D
 @onready var raySprite = $Ray
 
 
-@onready var _target = get_tree().current_scene.get_node("MC").global_position
+@onready var _target = Main.MC.global_position
 var targetPos = Vector2.ZERO
 
 

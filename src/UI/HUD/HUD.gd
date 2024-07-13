@@ -11,9 +11,9 @@ extends CanvasLayer
 @onready var score_counter = $HUD/HBoxContainer/VBoxContainer/ScoreCounter
 @onready var health_counter = $HUD/HBoxContainer/VBoxContainer/HealthCounter
 
-@onready var damage_counter = $PauseMenu/CenterContainer2/HUD/DamageCounter
-@onready var speed_counter = $PauseMenu/CenterContainer2/HUD/SpeedCounter
-@onready var shoot_speed_counter = $PauseMenu/CenterContainer2/HUD/ShootSpeedCounter
+@onready var damage_counter = $HUD/PauseMenu/CenterContainer2/HUD/DamageCounter
+@onready var speed_counter = $HUD/PauseMenu/CenterContainer2/HUD/SpeedCounter
+@onready var shoot_speed_counter = $HUD/PauseMenu/CenterContainer2/HUD/ShootSpeedCounter
 
 
 var current_mc_hp

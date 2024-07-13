@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjx8w2c2i53yh"]
 
-[ext_resource type="PackedScene" path="res://src/actors/MC/MC.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dtin2i603kyl0" path="res://src/actors/MC/MC.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/scenes/blueLevel.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/UI/HUD/HUD.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://35v3b2rrbogm" path="res://src/UI/HUD/HUD.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/actors/Objects/meteorite/MeteoriteSpawner.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/actors/Objects/Bonuses/ActiveBonus/ActiveBonusSpawner/ActiveBonusSpawner.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ccaad376njup8" path="res://src/actors/Objects/Bonuses/ActiveBonus/ActiveBonusSpawner/ActiveBonusSpawner.tscn" id="5"]
 [ext_resource type="Script" path="res://src/scenes/World.gd" id="7"]
 [ext_resource type="PackedScene" path="res://src/actors/Objects/Bonuses/PassiveBonus/PassiveBonusSpawner/PassiveBonusSpawner.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/actors/Enemies/EnemySpawners/EnemySpawner.tscn" id="11"]
@@ -13,19 +13,22 @@
 script = ExtResource("7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(512, 302)
+position = Vector2(577, 326)
 
 [node name="HUD" parent="." instance=ExtResource("3")]
 
 [node name="ActiveBonusSpawner" parent="." instance=ExtResource("5")]
+position = Vector2(158, 0)
 nextSpawnTime = 7.0
 
 [node name="PassiveBonusSpawner" parent="." instance=ExtResource("8")]
+position = Vector2(164, -1)
 nextSpawnTime = 5.0
 
 [node name="MeteoriteSpawner" parent="." instance=ExtResource("4")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("11")]
+position = Vector2(112, 0)
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource("1")]

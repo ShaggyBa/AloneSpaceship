@@ -22,7 +22,7 @@ signal boss_defeated
 @onready var muzzle = $muzzle
 
 
-@onready var _target = get_tree().current_scene.get_node("MC")
+@onready var _target = Main.MC
 @onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
 @onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")

@@ -62,7 +62,7 @@ func _ready():
 	
 
 func _on_SpawnTimer_timeout():
-	var currentScore = get_parent().get_node("points")
+	var currentScore = Main.points
 	
 	if activeBonuses:
 		var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
