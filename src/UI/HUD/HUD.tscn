@@ -84,7 +84,6 @@ margin_bottom = 78.0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
 pause_mode = 2
-visible = false
 
 [node name="DeathMenu" parent="." instance=ExtResource( 6 )]
 visible = false

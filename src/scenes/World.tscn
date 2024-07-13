@@ -34,7 +34,7 @@ nextSpawnTime = 5.0
 changeSpawnRate = true
 
 [node name="MC" parent="." instance=ExtResource( 1 )]
-delayShieldRestoring = 4.0
+delayShieldRestoring = 1.0
 
 [node name="blueLevel" parent="." instance=ExtResource( 2 )]
 
