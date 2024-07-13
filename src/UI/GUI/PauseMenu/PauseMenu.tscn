@@ -9,9 +9,9 @@
 [ext_resource path="res://src/UI/HUD/HUD_Counters/ShootSpeedCounter/ShootSpeedCounter.tscn" type="PackedScene" id=7]
 
 [node name="PauseMenu" type="Control"]
-margin_right = 1024.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( -329, -89 )
+offset_right = 1024.0
+offset_bottom = 600.0
+pivot_offset = Vector2( -329, -89 )
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -23,86 +23,86 @@ color = Color( 0.027451, 0.00784314, 0.168627, 0.698039 )
 [node name="CenterContainer2" type="CenterContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -285.5
-margin_right = 285.5
-margin_bottom = 82.0
+offset_left = -285.5
+offset_right = 285.5
+offset_bottom = 82.0
 
 [node name="HUD" type="HBoxContainer" parent="CenterContainer2"]
-margin_left = 26.0
-margin_top = 22.0
-margin_right = 544.0
-margin_bottom = 59.0
-custom_constants/separation = 100
+offset_left = 26.0
+offset_top = 22.0
+offset_right = 544.0
+offset_bottom = 59.0
+theme_override_constants/separation = 100
 
 [node name="SpeedCounter" parent="CenterContainer2/HUD" instance=ExtResource( 5 )]
-margin_right = 81.0
+offset_right = 81.0
 
 [node name="ShootSpeedCounter" parent="CenterContainer2/HUD" instance=ExtResource( 7 )]
-margin_left = 181.0
-margin_right = 325.0
+offset_left = 181.0
+offset_right = 325.0
 
 [node name="DamageCounter" parent="CenterContainer2/HUD" instance=ExtResource( 6 )]
-margin_left = 425.0
-margin_right = 518.0
+offset_left = 425.0
+offset_right = 518.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-pause_mode = 2
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Menu" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 362.0
-margin_top = 160.0
-margin_right = 662.0
-margin_bottom = 439.0
-rect_min_size = Vector2( 300, 180 )
-custom_constants/separation = 10
+offset_left = 362.0
+offset_top = 160.0
+offset_right = 662.0
+offset_bottom = 439.0
+custom_minimum_size = Vector2( 300, 180 )
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/Menu"]
-margin_right = 300.0
-margin_bottom = 37.0
+offset_right = 300.0
+offset_bottom = 37.0
 text = "Paused"
 align = 1
 valign = 1
 
 [node name="Control" type="Control" parent="CenterContainer/Menu"]
-margin_top = 47.0
-margin_right = 300.0
-margin_bottom = 47.0
-rect_pivot_offset = Vector2( -659, -126 )
+offset_top = 47.0
+offset_right = 300.0
+offset_bottom = 47.0
+pivot_offset = Vector2( -659, -126 )
 
 [node name="HighScoreCounter" type="Label" parent="CenterContainer/Menu"]
 visible = false
-margin_top = 57.0
-margin_right = 300.0
-margin_bottom = 94.0
+offset_top = 57.0
+offset_right = 300.0
+offset_bottom = 94.0
 grow_horizontal = 2
 
 [node name="Control2" type="Control" parent="CenterContainer/Menu"]
-margin_top = 57.0
-margin_right = 300.0
-margin_bottom = 57.0
-rect_pivot_offset = Vector2( -659, -126 )
+offset_top = 57.0
+offset_right = 300.0
+offset_bottom = 57.0
+pivot_offset = Vector2( -659, -126 )
 
 [node name="ResumeBtn" type="Button" parent="CenterContainer/Menu"]
-margin_top = 67.0
-margin_right = 300.0
-margin_bottom = 131.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 67.0
+offset_right = 300.0
+offset_bottom = 131.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Resume Game"
 
 [node name="TryBtn" type="Button" parent="CenterContainer/Menu"]
-margin_top = 141.0
-margin_right = 300.0
-margin_bottom = 205.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 141.0
+offset_right = 300.0
+offset_bottom = 205.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Try Again"
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/Menu"]
-margin_top = 215.0
-margin_right = 300.0
-margin_bottom = 279.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 215.0
+offset_right = 300.0
+offset_bottom = 279.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Quit"
 
 [node name="ButtonTap" type="AudioStreamPlayer" parent="."]

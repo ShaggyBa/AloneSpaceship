@@ -2,9 +2,9 @@ extends Area2D
 
 class_name PassiveBonus
 
-export (float) var speed = 500.0
+@export (float) var speed = 500.0
 
-onready var sprite = $AnimatedSprite
+@onready var sprite = $AnimatedSprite2D
 
 func _ready():
 	sprite.playing = true

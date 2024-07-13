@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/273562__n_audioman__hit_hurt39.wav-b67c54569fea9411b770150eb5199361.sample"
+type="AudioStreamWAV"
+uid="uid://6k6rarf2pqyy"
+path="res://.godot/imported/273562__n_audioman__hit_hurt39.wav-b67c54569fea9411b770150eb5199361.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/273562__n_audioman__hit_hurt39.wav"
-dest_files=[ "res://.import/273562__n_audioman__hit_hurt39.wav-b67c54569fea9411b770150eb5199361.sample" ]
+dest_files=["res://.godot/imported/273562__n_audioman__hit_hurt39.wav-b67c54569fea9411b770150eb5199361.sample"]
 
 [params]
 

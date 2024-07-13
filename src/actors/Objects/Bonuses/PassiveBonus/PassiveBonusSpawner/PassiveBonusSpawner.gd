@@ -1,41 +1,41 @@
 extends Node2D
 
-export (float) var nextSpawnTime = 1.0
+@export (float) var nextSpawnTime = 1.0
 
-export (bool) var damageBonus = true
-export (bool) var hpBonus = true
-export (bool) var shootSpeedBonus = true
-export (bool) var multiplayerBonus = true
-export (bool) var speedBonus = true
+@export (bool) var damageBonus = true
+@export (bool) var hpBonus = true
+@export (bool) var shootSpeedBonus = true
+@export (bool) var multiplayerBonus = true
+@export (bool) var speedBonus = true
 
 
-onready var pDamageBonus:Dictionary = {
+@onready var pDamageBonus:Dictionary = {
 	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveDamage/PassiveDamage.tscn"),
 	"isSpawning": damageBonus	
 }
 
-onready var pHpBonus:Dictionary = {
+@onready var pHpBonus:Dictionary = {
 	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveHP/PassiveHP.tscn"),
 	"isSpawning": hpBonus	
 }
 
-onready var pShootSpeedBonus:Dictionary = {
+@onready var pShootSpeedBonus:Dictionary = {
 	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveShootSpeed/PassiveSpeedShoot.tscn"),	
 	"isSpawning": shootSpeedBonus	
 }
 
-onready var pMultiplayerBonus:Dictionary = {
+@onready var pMultiplayerBonus:Dictionary = {
 	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveMulti/PassiveMulti.tscn"),
 	"isSpawning": multiplayerBonus	
 }
 
-onready var pSpeedBonus:Dictionary = {
+@onready var pSpeedBonus:Dictionary = {
 	"obj": preload("res://src/actors/Objects/Bonuses/PassiveBonus/passiveSpeedMC/PassiveSpeedMC.tscn"),
 	"isSpawning": speedBonus	
 }
 
 # Создаем массив всех объектов-бонусов
-onready var preloadedBonuses = [
+@onready var preloadedBonuses = [
 	pDamageBonus, 
 	pHpBonus, 
 	pMultiplayerBonus, 
@@ -43,8 +43,8 @@ onready var preloadedBonuses = [
 	pSpeedBonus
 ]
 
-onready var spawnTimer = $SpawnTimer
-onready var viewportRect = get_viewport_rect()
+@onready var spawnTimer = $SpawnTimer
+@onready var viewportRect = get_viewport_rect()
 
 var counter = 0
 
@@ -67,17 +67,17 @@ func _on_SpawnTimer_timeout():
 	if activeBonuses:
 		var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]
 		
-		var bonus = bonusPreloaded["obj"].instance()
+		var bonus = bonusPreloaded["obj"].instantiate()
 		
 
 		# Position 
-		bonus.position = Vector2($Position2D.global_position.x + 50, rand_range(30, viewportRect.end.y - 30))
+		bonus.position = Vector2($Marker2D.global_position.x + 50, randf_range(30, viewportRect.end.y - 30))
 		
 		
 			
 		get_tree().current_scene.add_child(bonus)
 	
 	# Restart timer
-		spawnTimer.set_wait_time(rand_range(nextSpawnTime, nextSpawnTime * 2))
+		spawnTimer.set_wait_time(randf_range(nextSpawnTime, nextSpawnTime * 2))
 		spawnTimer.start()
 		

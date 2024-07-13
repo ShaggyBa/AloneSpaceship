@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/BLLTRico_Ricochet Metallic_04.wav-d5527b96a40b5483db6a60b518a2b4a6.sample"
+type="AudioStreamWAV"
+uid="uid://d2d065a0qpjei"
+path="res://.godot/imported/BLLTRico_Ricochet Metallic_04.wav-d5527b96a40b5483db6a60b518a2b4a6.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/MainShipSound/BLLTRico_Ricochet Metallic_04.wav"
-dest_files=[ "res://.import/BLLTRico_Ricochet Metallic_04.wav-d5527b96a40b5483db6a60b518a2b4a6.sample" ]
+dest_files=["res://.godot/imported/BLLTRico_Ricochet Metallic_04.wav-d5527b96a40b5483db6a60b518a2b4a6.sample"]
 
 [params]
 

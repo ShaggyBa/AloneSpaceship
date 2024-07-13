@@ -1,6 +1,6 @@
 extends CanvasItem
 
-onready var points_label := $Counter
+@onready var points_label := $Counter
 	
 
 func set_points(points: int) -> void:

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ANMLBat_Creature Vocalisation_01.wav-db3e56e515cb58ca8cb6bf5983798633.sample"
+type="AudioStreamWAV"
+uid="uid://b2wxokgbbe2fq"
+path="res://.godot/imported/ANMLBat_Creature Vocalisation_01.wav-db3e56e515cb58ca8cb6bf5983798633.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/MeteoritesSound/ANMLBat_Creature Vocalisation_01.wav"
-dest_files=[ "res://.import/ANMLBat_Creature Vocalisation_01.wav-db3e56e515cb58ca8cb6bf5983798633.sample" ]
+dest_files=["res://.godot/imported/ANMLBat_Creature Vocalisation_01.wav-db3e56e515cb58ca8cb6bf5983798633.sample"]
 
 [params]
 

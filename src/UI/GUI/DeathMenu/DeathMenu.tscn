@@ -21,64 +21,64 @@ anchor_bottom = 1.0
 color = Color( 0.027451, 0.00784314, 0.168627, 0.698039 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-pause_mode = 2
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 362.0
-margin_top = 155.0
-margin_right = 662.0
-margin_bottom = 444.0
-custom_constants/separation = 10
+offset_left = 362.0
+offset_top = 155.0
+offset_right = 662.0
+offset_bottom = 444.0
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 300.0
-margin_bottom = 37.0
+offset_right = 300.0
+offset_bottom = 37.0
 text = "GAME OVER!"
 align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 47.0
-margin_right = 300.0
-margin_bottom = 84.0
+offset_top = 47.0
+offset_right = 300.0
+offset_bottom = 84.0
 alignment = 1
 
 [node name="ScoreCounter" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 110.0
-margin_right = 190.0
+offset_left = 110.0
+offset_right = 190.0
 size_flags_horizontal = 6
 script = ExtResource( 4 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 94.0
-margin_right = 300.0
-margin_bottom = 131.0
+offset_top = 94.0
+offset_right = 300.0
+offset_bottom = 131.0
 alignment = 1
 
 [node name="HighScoreCounter" parent="CenterContainer/VBoxContainer/HBoxContainer2" instance=ExtResource( 5 )]
-margin_left = 104.0
-margin_right = 196.0
+offset_left = 104.0
+offset_right = 196.0
 
 [node name="Control3" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 141.0
-margin_right = 300.0
-margin_bottom = 141.0
-rect_pivot_offset = Vector2( -659, -126 )
+offset_top = 141.0
+offset_right = 300.0
+offset_bottom = 141.0
+pivot_offset = Vector2( -659, -126 )
 
 [node name="TryBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 151.0
-margin_right = 300.0
-margin_bottom = 215.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 151.0
+offset_right = 300.0
+offset_bottom = 215.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Try Again"
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 225.0
-margin_right = 300.0
-margin_bottom = 289.0
-rect_min_size = Vector2( 0, 64 )
+offset_top = 225.0
+offset_right = 300.0
+offset_bottom = 289.0
+custom_minimum_size = Vector2( 0, 64 )
 text = "Quit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TryBtn" to="." method="_on_TryBtn_pressed"]

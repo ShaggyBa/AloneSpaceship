@@ -2,35 +2,35 @@ extends Area2D
 
 class_name Meteorite
 
-export (float) var minSpeed = 20.0
-export (float) var maxSpeed = 100.0
-export (float) var minRotationRate = -20.0
-export (float) var maxRotationRate = 20.0
+@export (float) var minSpeed = 20.0
+@export (float) var maxSpeed = 100.0
+@export (float) var minRotationRate = -20.0
+@export (float) var maxRotationRate = 20.0
 
-export (int) var meteoriteHP = 1
+@export (int) var meteoriteHP = 1
 
-export (float) var minScale = 0.8
-export (float) var maxScale = 2.5
+@export (float) var minScale = 0.8
+@export (float) var maxScale = 2.5
 
 var speed = null
 var rotationSpeed = null
 var randomScale = null
 
 
-onready var takeHit = $Audio/Hit
-onready var destroyed = $Audio/Destroyed
+@onready var takeHit = $Audio/Hit
+@onready var destroyed = $Audio/Destroyed
 
-onready var collision = $CollisionShape2D
-onready var mSprite = $Sprite
+@onready var collision = $CollisionShape2D
+@onready var mSprite = $Sprite2D
 
 var pMeteoriteEffect = preload("res://src/actors/Objects/meteorite/MeteoriteEffect.tscn")
 
 
 func _ready():
 	randomize()
-	speed = rand_range(minSpeed, maxSpeed)
-	rotationSpeed = rand_range(minRotationRate, maxRotationRate)
-	randomScale = rand_range(minScale, maxScale)
+	speed = randf_range(minSpeed, maxSpeed)
+	rotationSpeed = randf_range(minRotationRate, maxRotationRate)
+	randomScale = randf_range(minScale, maxScale)
 	meteoriteHP += int(randomScale)
 	scale = Vector2(randomScale,  randomScale)
 	
@@ -54,7 +54,7 @@ func death():
 	spawnMeteoriteEffect()
 	
 func spawnMeteoriteEffect():
-	var meteoriteEffect = pMeteoriteEffect.instance()
+	var meteoriteEffect = pMeteoriteEffect.instantiate()
 	meteoriteEffect.texture = mSprite.texture
 	meteoriteEffect.position = Vector2(position.x, position.y + 50)
 	meteoriteEffect.scale = scale

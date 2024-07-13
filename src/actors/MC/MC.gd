@@ -2,21 +2,21 @@ extends Area2D
 class_name MC
 
 
-export (float) var mcSpeed = 200.0 # cкорость полета корабля
-export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
+@export (float) var mcSpeed = 200.0 # cкорость полета корабля
+@export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
 
-export (int) var mcHP = 5
-export (float) var mcShootSpeed = 0.5
-export (int) var mcDamage = 1
+@export (int) var mcHP = 5
+@export (float) var mcShootSpeed = 0.5
+@export (int) var mcDamage = 1
 
-export (float) var delayShieldRestoring = 0.3
+@export (float) var delayShieldRestoring = 0.3
 
-export (float) var duringShieldBonus = 2.0
-export (float) var duringDamageBonus = 5.0
+@export (float) var duringShieldBonus = 2.0
+@export (float) var duringDamageBonus = 5.0
 
-export (float) var coef_hp_bonus = 10.0
-export (int) var coef_dmg_bonus = 2
-export (float) var coef_shoot_delay_bonus = 0.05
+@export (float) var coef_hp_bonus = 10.0
+@export (int) var coef_dmg_bonus = 2
+@export (float) var coef_shoot_delay_bonus = 0.05
 
 var plShoot = preload("res://src/actors/Projectiles/MCShoot/MCShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
@@ -27,27 +27,27 @@ var pLowHP = preload("res://src/Assets/Sprites/MainShip/model/States/LowHP.png")
 var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/States/VeryLowHP.png")
 
 
-onready var muzzle = $Muzzle
-onready var shield = $Shield
-onready var sprite = $MCSprite
-onready var engineSprite = $EngineSprite
-onready var crushEffects = $CrushEffects
-onready var collision = $CollisionShape2D
+@onready var muzzle = $Muzzle
+@onready var shield = $Shield
+@onready var sprite = $MCSprite
+@onready var engineSprite = $EngineSprite
+@onready var crushEffects = $CrushEffects
+@onready var collision = $CollisionShape2D
 
-onready var hitSound = $Audio/Hit
-onready var shotSound = $Audio/ShotSound
-onready var shieldHitSound = $Audio/ShieldHit
-onready var gameOverSound = $Audio/ShieldHit
-onready var destroyed = $Audio/Destroyed
-onready var ricochet = $Audio/Ricochet
-onready var activeBonusSound = $Audio/ActiveBonus
-onready var passiveBonusSound = $Audio/PassiveBonus
+@onready var hitSound = $Audio/Hit
+@onready var shotSound = $Audio/ShotSound
+@onready var shieldHitSound = $Audio/ShieldHit
+@onready var gameOverSound = $Audio/ShieldHit
+@onready var destroyed = $Audio/Destroyed
+@onready var ricochet = $Audio/Ricochet
+@onready var activeBonusSound = $Audio/ActiveBonus
+@onready var passiveBonusSound = $Audio/PassiveBonus
 
-onready var passiveBonusSpawner = get_tree().current_scene.get_node("PassiveBonusSpawner")
+@onready var passiveBonusSpawner = get_tree().current_scene.get_node("PassiveBonusSpawner")
 
-onready var maxHP = mcHP
-onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
-onready var start_shoot_delay = mcShootSpeed
+@onready var maxHP = mcHP
+@onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
+@onready var start_shoot_delay = mcShootSpeed
 
 var inputVector = Vector2.ZERO # вектор скорости
 var viewportSize : Vector2
@@ -88,7 +88,7 @@ func _ready() -> void:
 	setTickRateDamage()
 	
 	game_over.action = "over"
-	game_over.pressed = true
+	game_over.button_pressed = true
 		
 	
 	
@@ -122,19 +122,19 @@ func setTimerInvincibility()->void:
 func setTimerShieldBonus()->void:
 	timerDuringShieldBonus.set_one_shot(true)
 	add_child(timerDuringShieldBonus)
-	timerDuringShieldBonus.connect("timeout", self, "disabledShieldBonus")
+	timerDuringShieldBonus.connect("timeout", Callable(self, "disabledShieldBonus"))
 	
 	
 func setTimerDamageBonus()->void:
 	timerDuringDamageBonus.set_one_shot(true)
 	add_child(timerDuringDamageBonus)
-	timerDuringDamageBonus.connect("timeout", self, "disabledDamageBonus")
+	timerDuringDamageBonus.connect("timeout", Callable(self, "disabledDamageBonus"))
 
 
 func setTickRateDamage()->void:
 	tickRateDamage.set_one_shot(true)
 	tickRateDamage.set_wait_time(1.0)
-	tickRateDamage.connect("timeout", self, "_on_tickRateDamage_timeout")
+	tickRateDamage.connect("timeout", Callable(self, "_on_tickRateDamage_timeout"))
 	add_child(tickRateDamage)
 	
 
@@ -154,10 +154,10 @@ func shooting():
 func create_shoot():
 	var shoot
 	if isDamageUp:
-		shoot = shootBonus.instance()
+		shoot = shootBonus.instantiate()
 		shoot.damage = mcDamage / 1.5
 	else: 
-		shoot = plShoot.instance()
+		shoot = plShoot.instantiate()
 		shoot.damage = mcDamage
 		shoot.scale = shootScale
 	shoot.global_position = muzzle.global_position
@@ -189,7 +189,7 @@ func takeDamage(damage):
 	else:	
 		if timerShieldRestoring.is_stopped():
 			shieldHitSound.play()
-			yield(get_tree().create_timer(0.15), "timeout")
+			await get_tree().create_timer(0.15).timeout
 			timerShieldRestoring.start()
 		else:
 			if mcHP - damage < 0:
@@ -213,7 +213,7 @@ func burning(delay:int):
 	sprite.modulate = "00ff6a"				
 	for _i in range(delay):
 		tickRateDamage.start()
-		yield(tickRateDamage, "timeout")
+		await tickRateDamage.timeout
 	sprite.modulate = "ffffff"				
 	
 
@@ -366,7 +366,7 @@ func death():
 	sprite.animation = "Death"
 	sprite.modulate = "ffffff" 
 	sprite.playing = true
-	sprite.connect("animation_finished", self, "_on_Destroyed")
+	sprite.connect("animation_finished", Callable(self, "_on_Destroyed"))
 
 
 func _on_Destroyed():

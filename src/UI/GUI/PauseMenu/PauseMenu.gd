@@ -1,11 +1,11 @@
 extends Control
 
-onready var game_data = SaveFile.game_data
+@onready var game_data = SaveFile.game_data
 
-onready var current_scene = get_parent()
+@onready var current_scene = get_parent()
 
 
-var is_paused = false setget set_is_paused
+var is_paused = false: set = set_is_paused
 var main_menu = "res://src/UI/MainMenu/Menu.tscn"
 
 
@@ -34,7 +34,7 @@ func _on_ResumeBtn_pressed():
 
 
 func _on_QuitBtn_pressed()->void:
-	get_tree().change_scene(main_menu)
+	get_tree().change_scene_to_file(main_menu)
 	
 
 func _on_PauseBtn_pressed():

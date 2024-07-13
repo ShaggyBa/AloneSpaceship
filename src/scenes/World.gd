@@ -1,17 +1,17 @@
 extends Node
 
 
-export (float) var multiscore = 1.0
-export (float) var pointsToSpawnBoss = 100000.0
+@export (float) var multiscore = 1.0
+@export (float) var pointsToSpawnBoss = 100000.0
 
 
 
-onready var music = $Music
-onready var mc_instance = $MC
-onready var enemySpawner = $EnemySpawner
+@onready var music = $Music
+@onready var mc_instance = $MC
+@onready var enemySpawner = $EnemySpawner
 
-onready var plBoss = preload("res://src/actors/Boss/Boss.tscn")
-onready var newBack = preload("res://src/scenes/orangeLevel.tscn")
+@onready var plBoss = preload("res://src/actors/Boss/Boss.tscn")
+@onready var newBack = preload("res://src/scenes/orangeLevel.tscn")
 
 
 var orangeInst
@@ -39,9 +39,9 @@ func _process(delta: float) -> void:
 	
 	
 	if points >= pointsToSpawnBoss and not bossIsSpawning:
-		var boss = plBoss.instance()
+		var boss = plBoss.instantiate()
 		boss.global_position = Vector2(1100, 300)
-		boss.connect("boss_defeated", self, "_onBossDefeated")
+		boss.connect("boss_defeated", Callable(self, "_onBossDefeated"))
 		
 		add_child(boss)
 		
@@ -62,7 +62,7 @@ func _onBossDefeated():
 
 
 func changeLevel():
-	orangeInst = newBack.instance()
+	orangeInst = newBack.instantiate()
 	add_child(orangeInst)
 	$blueLevel.queue_free()	
 	enemySpawner.maxEnemySpawn = currentCountOfEnemies
@@ -71,5 +71,5 @@ func changeLevel():
 
 func _on_Music_finished() -> void:
 	if not mc_instance.isDead:	
-		yield(get_tree().create_timer(10), "timeout")
+		await get_tree().create_timer(10).timeout
 		music.play()

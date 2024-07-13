@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-onready var pause_button := $Control/HBoxContainer/PauseBtn2
+@onready var pause_button := $Control/HBoxContainer/PauseBtn2
 
-onready var joy_stick := $Control/TouchScreenButton
-onready var inner_circle := $Control/InnerCircle
+@onready var joy_stick := $Control/TouchScreenButton
+@onready var inner_circle := $Control/InnerCircle
 
 
 var move_vector = Vector2(0,0)
@@ -31,7 +31,7 @@ func _input(event):
 				emit_signal("change_move",Vector2(move_vector.x, move_vector.y) )
 	
 	if event is InputEventScreenTouch:
-		if event.pressed == false:
+		if event.button_pressed == false:
 			inner_circle.visible = false
 			emit_signal("change_move",Vector2(0,0))
 

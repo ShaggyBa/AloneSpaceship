@@ -18,22 +18,22 @@ collision_layer = 16
 collision_mask = 7
 script = ExtResource( 2 )
 
-[node name="Engine" type="AnimatedSprite" parent="."]
+[node name="Engine" type="AnimatedSprite2D" parent="."]
 modulate = Color( 0, 1, 0.439216, 1 )
 rotation = -1.5708
 scale = Vector2( 0.95, 1.2 )
 playing = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -1.5708
 frames = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( -10, -0.5 )
-polygon = PoolVector2Array( 29, 1, 11, 17, 6, 9, -0.5, 4.5, 0, -4, 5.5, -7.5, 11.5, -16.5 )
+polygon = PackedVector2Array( 29, 1, 11, 17, 6, 9, -0.5, 4.5, 0, -4, 5.5, -7.5, 11.5, -16.5 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 position = Vector2( 3.5, 0.250001 )
 scale = Vector2( 1.65, 1.875 )
@@ -49,4 +49,4 @@ stream = ExtResource( 4 )
 volume_db = -27.0
 
 [connection signal="area_entered" from="." to="." method="_on_BaseEnemy_area_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

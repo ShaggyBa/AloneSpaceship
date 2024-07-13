@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/DynamicFight_3.mp3-fb59aba58f3cad494f18bbf9cf11e1ee.mp3str"
+uid="uid://dbxl7hvdtvw2r"
+path="res://.godot/imported/DynamicFight_3.mp3-fb59aba58f3cad494f18bbf9cf11e1ee.mp3str"
 
 [deps]
 
 source_file="res://src/Assets/Sound/SoundEffects/Simple Music/DynamicFight_3.mp3"
-dest_files=[ "res://.import/DynamicFight_3.mp3-fb59aba58f3cad494f18bbf9cf11e1ee.mp3str" ]
+dest_files=["res://.godot/imported/DynamicFight_3.mp3-fb59aba58f3cad494f18bbf9cf11e1ee.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

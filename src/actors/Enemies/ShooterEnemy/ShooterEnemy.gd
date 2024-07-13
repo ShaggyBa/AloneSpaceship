@@ -1,13 +1,13 @@
 extends enemy
 
-export (float) var enemyAttackDelay = 1.0
+@export (float) var enemyAttackDelay = 1.0
 
 
-onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn") 
+@onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn") 
 
-onready var muzzles = $FiringPositions.get_children()	
+@onready var muzzles = $FiringPositions.get_children()	
 
-onready var shot = $Audio/shoot
+@onready var shot = $Audio/shoot
 
 
 var timerShooting = Timer.new()
@@ -30,7 +30,7 @@ func setTimerShooting()->void:
 func shooting():
 	if timerShooting.is_stopped() and not isDeath:
 		timerShooting.start()		
-		var shoot = plShoot.instance()
+		var shoot = plShoot.instantiate()
 		shoot.damage = enemyDamage
 		if not currentGun:
 			aSprite.animation = "topGunShoot"

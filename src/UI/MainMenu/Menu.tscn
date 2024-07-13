@@ -2,11 +2,11 @@
 
 [ext_resource path="res://src/UI/MainMenu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/PixelTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/UI/img/Background_space.png" type="Texture" id=3]
+[ext_resource path="res://src/UI/img/Background_space.png" type="Texture2D" id=3]
 
 
 [node name="Menu" type="Control"]
-pause_mode = 2
+process_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -22,41 +22,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 362.0
-margin_top = 204.0
-margin_right = 662.0
-margin_bottom = 395.0
-rect_min_size = Vector2( 300, 95 )
-custom_constants/separation = 13
+offset_left = 362.0
+offset_top = 204.0
+offset_right = 662.0
+offset_bottom = 395.0
+custom_minimum_size = Vector2( 300, 95 )
+theme_override_constants/separation = 13
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 300.0
-margin_bottom = 37.0
+offset_right = 300.0
+offset_bottom = 37.0
 text = "Alone Spaceship"
 align = 1
 valign = 1
 
 [node name="StartBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 50.0
-margin_right = 300.0
-margin_bottom = 114.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 50.0
+offset_right = 300.0
+offset_bottom = 114.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Start"
 
 [node name="OptionsBtn" type="Button" parent="CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 127.0
-margin_right = 300.0
-margin_bottom = 191.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 127.0
+offset_right = 300.0
+offset_bottom = 191.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Option"
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 127.0
-margin_right = 300.0
-margin_bottom = 191.0
-rect_min_size = Vector2( 300, 64 )
+offset_top = 127.0
+offset_right = 300.0
+offset_bottom = 191.0
+custom_minimum_size = Vector2( 300, 64 )
 text = "Quit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]

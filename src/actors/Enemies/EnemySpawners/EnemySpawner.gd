@@ -1,9 +1,9 @@
 extends Node2D
 
-export (float) var nextSpawnTime = 5.0
-export (float) var minSpawnRate = 1.0
-export (int) var maxEnemySpawn = 5
-export (bool) var changeSpawnRate = false 
+@export (float) var nextSpawnTime = 5.0
+@export (float) var minSpawnRate = 1.0
+@export (int) var maxEnemySpawn = 5
+@export (bool) var changeSpawnRate = false 
 
 
 var enemies = []
@@ -12,18 +12,18 @@ var preloadedEnemies = [
 	preload("res://src/actors/Enemies/ShooterEnemy/ShooterEnemy.tscn")
 ]
 
-onready var battleEnemy = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
+@onready var battleEnemy = preload("res://src/actors/Enemies/BattleEnemy/BattleEnemy.tscn")
 
-onready var counter = 1
+@onready var counter = 1
 
-onready var spawnTimer = $SpawnTimer
-onready var pos = $Position2D
+@onready var spawnTimer = $SpawnTimer
+@onready var pos = $Marker2D
 
-onready var mc_instance = get_tree().current_scene.get_node("MC")
+@onready var mc_instance = get_tree().current_scene.get_node("MC")
 
-onready var difficultCoef = 1.0
+@onready var difficultCoef = 1.0
 
-onready var viewportRect = get_viewport_rect()
+@onready var viewportRect = get_viewport_rect()
 
 func _ready():
 	randomize()
@@ -36,7 +36,7 @@ func _on_SpawnTimer_timeout():
 		
 		# Создание врага
 		var preloadedEnemy = preloadedEnemies[randi() % preloadedEnemies.size()]
-		var enemy = preloadedEnemy.instance()
+		var enemy = preloadedEnemy.instantiate()
 
 		if preloadedEnemy == preloadedEnemies[0]:
 			createFastEnemy(enemy)
@@ -75,29 +75,29 @@ func increaseMaxEnemySpawn(score):
 
 func createBattleEnemy(enemy):
 	var enemyVerticalSpeed = enemy.verticalSpeed
-	enemy.verticalSpeed = rand_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 20)	
+	enemy.verticalSpeed = randf_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 20)	
 
 	var enemyHorisontalSpeed = enemy.horisontalSpeed
-	enemy.horisontalSpeed = rand_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
+	enemy.horisontalSpeed = randf_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
 	
 	if difficultCoef < 5:
 		enemy.coef =  1
 	else:
 		enemy.coef = difficultCoef - 4
 		
-	enemy.global_position = Vector2(pos.global_position.x + 50, rand_range(50, viewportRect.end.y - 50))
+	enemy.global_position = Vector2(pos.global_position.x + 50, randf_range(50, viewportRect.end.y - 50))
 	get_tree().current_scene.add_child(enemy)
 
 
 func createShooterEnemy(enemy):
 	var enemyVerticalSpeed = enemy.verticalSpeed
-	enemy.verticalSpeed = rand_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 50)	
+	enemy.verticalSpeed = randf_range(enemyVerticalSpeed - 20, enemyVerticalSpeed + 50)	
 	
 	var enemyHorisontalSpeed = enemy.horisontalSpeed
-	enemy.horisontalSpeed = rand_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
+	enemy.horisontalSpeed = randf_range(enemyHorisontalSpeed - 5, enemyHorisontalSpeed + 50)
 	enemy.coef = difficultCoef
 	
-	enemy.global_position = Vector2(pos.global_position.x, rand_range(25, viewportRect.end.y - 25))
+	enemy.global_position = Vector2(pos.global_position.x, randf_range(25, viewportRect.end.y - 25))
 	get_tree().current_scene.add_child(enemy)
 
 
@@ -105,7 +105,7 @@ func createFastEnemy(enemy):
 	var crntSpeed = enemy.horisontalSpeed
 	var playerPos = get_tree().current_scene.get_node("MC").position.y
 	
-	enemy.horisontalSpeed = rand_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
+	enemy.horisontalSpeed = randf_range(crntSpeed - crntSpeed * 0.1, crntSpeed + crntSpeed * 0.2)
 	enemy.coef = difficultCoef
 	
 	enemy.global_position = Vector2(pos.global_position.x, playerPos)			

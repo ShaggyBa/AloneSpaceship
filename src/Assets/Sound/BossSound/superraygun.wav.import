@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/superraygun.wav-69c82b0d6a104a1b0b3a3884149aa7a7.sample"
+type="AudioStreamWAV"
+uid="uid://cv28eajhw0rwo"
+path="res://.godot/imported/superraygun.wav-69c82b0d6a104a1b0b3a3884149aa7a7.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/BossSound/superraygun.wav"
-dest_files=[ "res://.import/superraygun.wav-69c82b0d6a104a1b0b3a3884149aa7a7.sample" ]
+dest_files=["res://.godot/imported/superraygun.wav-69c82b0d6a104a1b0b3a3884149aa7a7.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample"
+type="AudioStreamWAV"
+uid="uid://b3awcccd3fibp"
+path="res://.godot/imported/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/MeteoritesSound/MeteoriteHit.wav"
-dest_files=[ "res://.import/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample" ]
+dest_files=["res://.godot/imported/MeteoriteHit.wav-89abad42369771ddcf20d78744e40562.sample"]
 
 [params]
 

@@ -4,25 +4,25 @@ extends Area2D
 class_name enemy
 
 
-export (float) var verticalSpeed = 50.0
-export (float) var horisontalSpeed = 100.0
-export (int) var enemyHP = 1
-export (int) var enemyDamage = 1
+@export (float) var verticalSpeed = 50.0
+@export (float) var horisontalSpeed = 100.0
+@export (int) var enemyHP = 1
+@export (int) var enemyDamage = 1
 var kill_points = 25 #очки за убийство противника
 
 
 var direction = 1
 
-onready var hit = $Audio/Hit
-onready var destroyed = $Audio/Destroyed
+@onready var hit = $Audio/Hit
+@onready var destroyed = $Audio/Destroyed
 
 
-onready var viewportRect = get_viewport_rect()
-onready var isDeath = false
+@onready var viewportRect = get_viewport_rect()
+@onready var isDeath = false
 
-onready var aSprite = $AnimatedSprite
-onready var engine = $Engine
-onready var collision = $CollisionPolygon2D
+@onready var aSprite = $AnimatedSprite2D
+@onready var engine = $Engine
+@onready var collision = $CollisionPolygon2D
 
 
 #signal add_to_score(value) #value: int
@@ -34,10 +34,10 @@ var coef = 1.0
 
 func _ready() -> void:
 	aSprite.playing = true
-	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")	
+	aSprite.connect("animation_finished", Callable(self, "_on_Death_animation_finished"))	
 	engine.playing = true
 	enemy_death.action = "enemy_death"
-	enemy_death.pressed = true
+	enemy_death.button_pressed = true
 	
 	enemyHP = floor(enemyHP * coef)
 	enemyDamage = round(enemyDamage + coef)

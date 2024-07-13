@@ -1,18 +1,18 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/scenes/parallaxBackground/ParallaxBackground.gd" type="Script" id=1]
-[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Planets.png" type="Texture" id=2]
-[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/line.png" type="Texture" id=3]
-[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Nebula.png" type="Texture" id=4]
-[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/SpaceBackground.png" type="Texture" id=5]
-[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Stars.png" type="Texture" id=6]
-[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Dust.png" type="Texture" id=7]
+[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Planets.png" type="Texture2D" id=2]
+[ext_resource path="res://src/Assets/Backgrounds/BlueLevel/line.png" type="Texture2D" id=3]
+[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Nebula.png" type="Texture2D" id=4]
+[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/SpaceBackground.png" type="Texture2D" id=5]
+[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Stars.png" type="Texture2D" id=6]
+[ext_resource path="res://src/Assets/Backgrounds/OrangeLevel/Dust.png" type="Texture2D" id=7]
 
 [node name="blueLevel" type="ParallaxBackground"]
 layer = -1
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 530.5, 307.5 )
 scale = Vector2( 6.305, 4.075 )
 texture = ExtResource( 5 )
@@ -21,7 +21,7 @@ texture = ExtResource( 5 )
 motion_scale = Vector2( 0.05, 0.01 )
 motion_mirroring = Vector2( 1200, 800 )
 
-[node name="Sprite" type="Sprite" parent="Stars"]
+[node name="Sprite2D" type="Sprite2D" parent="Stars"]
 texture = ExtResource( 6 )
 centered = false
 
@@ -30,7 +30,7 @@ position = Vector2( -119, -99 )
 motion_scale = Vector2( 0.07, 1 )
 motion_mirroring = Vector2( 1600, 0 )
 
-[node name="Sprite" type="Sprite" parent="Planets2"]
+[node name="Sprite2D" type="Sprite2D" parent="Planets2"]
 position = Vector2( -201, -212 )
 scale = Vector2( 1.295, 1.295 )
 texture = ExtResource( 7 )
@@ -41,7 +41,7 @@ position = Vector2( -119, -99 )
 motion_scale = Vector2( 0.07, 1 )
 motion_mirroring = Vector2( 1300, 0 )
 
-[node name="Sprite" type="Sprite" parent="Planets"]
+[node name="Sprite2D" type="Sprite2D" parent="Planets"]
 position = Vector2( -589, 222 )
 scale = Vector2( 1.18375, 1.18375 )
 texture = ExtResource( 2 )
@@ -51,7 +51,7 @@ centered = false
 position = Vector2( 61, 0 )
 motion_scale = Vector2( 0.1, 1 )
 
-[node name="Sprite" type="Sprite" parent="nebula"]
+[node name="Sprite2D" type="Sprite2D" parent="nebula"]
 position = Vector2( -412, -94 )
 scale = Vector2( 1.44901, 1.4575 )
 texture = ExtResource( 4 )

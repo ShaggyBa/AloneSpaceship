@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/passive.mp3-02f3a7a32b7582d19df9b3cdd2fbb20d.mp3str"
+uid="uid://dnd6f86xeef6g"
+path="res://.godot/imported/passive.mp3-02f3a7a32b7582d19df9b3cdd2fbb20d.mp3str"
 
 [deps]
 
 source_file="res://src/Assets/Sound/BonusesSound/passive.mp3"
-dest_files=[ "res://.import/passive.mp3-02f3a7a32b7582d19df9b3cdd2fbb20d.mp3str" ]
+dest_files=["res://.godot/imported/passive.mp3-02f3a7a32b7582d19df9b3cdd2fbb20d.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -7,9 +7,9 @@
 script = ExtResource( 2 )
 
 [node name="Text" parent="." index="0"]
-margin_right = 68.0
+offset_right = 68.0
 text = "Health:"
 
 [node name="Counter" parent="." index="1"]
-margin_left = 72.0
-margin_right = 84.0
+offset_left = 72.0
+offset_right = 84.0

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/dark2.mp3-1fd6970d8ac0111ab9af0da5f9827a24.mp3str"
+uid="uid://kja1u0lsp65c"
+path="res://.godot/imported/dark2.mp3-1fd6970d8ac0111ab9af0da5f9827a24.mp3str"
 
 [deps]
 
 source_file="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/dark2.mp3"
-dest_files=[ "res://.import/dark2.mp3-1fd6970d8ac0111ab9af0da5f9827a24.mp3str" ]
+dest_files=["res://.godot/imported/dark2.mp3-1fd6970d8ac0111ab9af0da5f9827a24.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

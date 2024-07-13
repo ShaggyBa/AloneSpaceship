@@ -2,7 +2,7 @@ extends Area2D
 
 class_name ShootClass
 
-export (float) var shootSpeed = 1000.0
+@export (float) var shootSpeed = 1000.0
 
 
 var pShootEffect = preload("res://src/actors/Projectiles/BaseShootEffect/BaseShootEffect.tscn")
@@ -20,7 +20,7 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 func _on_Shoot_area_entered(area):
 	if (area.is_in_group("damageable")):
 		area.takeDamage(damage)
-		var shootEffect = pShootEffect.instance()
+		var shootEffect = pShootEffect.instantiate()
 		shootEffect.position = position
 		get_parent().add_child(shootEffect)
 		if area.is_in_group("enemy"):

@@ -1,32 +1,32 @@
 extends Area2D
 
 
-export (float) var bossAttackDelay = 2.0
-export (float) var verticalSpeed = 100.0
-export (float) var horisontalSpeed = 75.0
-export (int) var bossHP = 50
-export (int) var bossDamage = 10
+@export (float) var bossAttackDelay = 2.0
+@export (float) var verticalSpeed = 100.0
+@export (float) var horisontalSpeed = 75.0
+@export (int) var bossHP = 50
+@export (int) var bossDamage = 10
 
 
 signal boss_defeated
 
 
-onready var viewportRect = get_viewport_rect()
-onready var canShoot = true
+@onready var viewportRect = get_viewport_rect()
+@onready var canShoot = true
 
 
-onready var aSprite = $Sprite
-onready var engine = $Engine
-onready var attackSound = $Attack
-onready var takeDamageSound = $TakeDamage
-onready var muzzle = $muzzle
+@onready var aSprite = $Sprite2D
+@onready var engine = $Engine
+@onready var attackSound = $Attack
+@onready var takeDamageSound = $TakeDamage
+@onready var muzzle = $muzzle
 
 
-onready var _target = get_tree().current_scene.get_node("MC")
-onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
+@onready var _target = get_tree().current_scene.get_node("MC")
+@onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
-onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
-onready var viewportEndX = viewportRect.end.x + 210
+@onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
+@onready var viewportEndX = viewportRect.end.x + 210
 
 
 var directionY = 1
@@ -69,21 +69,21 @@ func shooting():
 		attackSound.playing = true
 	
 		
-		var shoot = plShoot.instance()
+		var shoot = plShoot.instantiate()
 		
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		shoot.damage = bossDamage
 		shoot.global_position = muzzle.global_position
 		
 		if stateChanged:
-			var shoot2 = plShoot.instance()
+			var shoot2 = plShoot.instantiate()
 			shoot2.damage = bossDamage
 			shoot2.global_position = muzzle.global_position
 			
 			var doubleShoot = [shoot, shoot2]
 			for i in doubleShoot:
 				get_tree().current_scene.add_child(i)
-				yield(get_tree().create_timer(0.15), "timeout")
+				await get_tree().create_timer(0.15).timeout
 		else:
 			get_tree().current_scene.add_child(shoot)
 		
@@ -146,7 +146,7 @@ func improve_stats():
 	bossHP += _target.maxHP * (1.0 / _target.mcShootSpeed) + _target.mcDamage * \
 	(1.0 / _target.mcShootSpeed)
 	
-	bossDamage += rand_range(_target.mcDamage / 2, _target.mcDamage)
+	bossDamage += randf_range(_target.mcDamage / 2, _target.mcDamage)
 
 	maxHP = bossHP
 
@@ -158,7 +158,7 @@ func death():
 	$CollisionPolygon2D.queue_free()	
 	
 	aSprite.animation = "Death"
-	aSprite.connect("animation_finished", self, "_on_Death_animation_finished")
+	aSprite.connect("animation_finished", Callable(self, "_on_Death_animation_finished"))
 	aSprite.playing = true
 	verticalSpeed *= 0.1
 	horisontalSpeed *= 0.1

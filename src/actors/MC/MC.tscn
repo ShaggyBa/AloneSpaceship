@@ -1,19 +1,19 @@
 [gd_scene load_steps=56 format=2]
 
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/FullHP.png" type="Texture" id=1]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/FullHP.png" type="Texture2D" id=1]
 [ext_resource path="res://src/actors/MC/MC.gd" type="Script" id=2]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main Ship - Shields - Invincibility Shield.png" type="Texture" id=3]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main Ship - Shields - Invincibility Shield.png" type="Texture2D" id=3]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/Blaster.wav" type="AudioStream" id=4]
 [ext_resource path="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/273562__n_audioman__hit_hurt39.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/shield.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/ShieldBonus.png" type="Texture" id=7]
-[ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Powering.png" type="Texture" id=8]
-[ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Idle.png" type="Texture" id=9]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/MainEffects/ShieldBonus.png" type="Texture2D" id=7]
+[ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Powering.png" type="Texture2D" id=8]
+[ext_resource path="res://src/Assets/Sprites/MainShip/Engine/Main Ship - Engines - Base Engine - Idle.png" type="Texture2D" id=9]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/GameOver.mp3" type="AudioStream" id=10]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/SemiHP.png" type="Texture" id=11]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/VeryLowHP.png" type="Texture" id=12]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/LowHP.png" type="Texture" id=13]
-[ext_resource path="res://src/Assets/Sprites/MainShip/model/Death/McDeath.png" type="Texture" id=14]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/SemiHP.png" type="Texture2D" id=11]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/VeryLowHP.png" type="Texture2D" id=12]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/States/LowHP.png" type="Texture2D" id=13]
+[ext_resource path="res://src/Assets/Sprites/MainShip/model/Death/McDeath.png" type="Texture2D" id=14]
 [ext_resource path="res://src/Assets/Sound/MainShipSound/BLLTRico_Ricochet Metallic_04.wav" type="AudioStream" id=15]
 [ext_resource path="res://src/Assets/Sound/BonusesSound/active.wav" type="AudioStream" id=16]
 [ext_resource path="res://src/Assets/Sound/BonusesSound/passive.mp3" type="AudioStream" id=17]
@@ -224,14 +224,14 @@ mcHP = 20
 mcDamage = 2
 duringShieldBonus = 5.0
 
-[node name="EngineSprite" type="AnimatedSprite" parent="."]
+[node name="EngineSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2( 1, 0 )
 rotation = 1.5755
 scale = Vector2( 2, 2 )
 frames = SubResource( 32 )
 animation = "idle"
 
-[node name="MCSprite" type="AnimatedSprite" parent="."]
+[node name="MCSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2( 1.82739, 1.82739 )
 frames = SubResource( 55 )
 animation = "Death"
@@ -262,9 +262,9 @@ color = Color( 1, 0.858824, 0, 1 )
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( 0, 2 )
-polygon = PoolVector2Array( 24, 0, 7, 10, -8, 25, -24, 25, -23, -30, -9, -30, 9, -11, 23, -7 )
+polygon = PackedVector2Array( 24, 0, 7, 10, -8, 25, -24, 25, -23, -30, -9, -30, 9, -11, 23, -7 )
 
-[node name="Muzzle" type="Position2D" parent="." groups=["player"]]
+[node name="Muzzle" type="Marker2D" parent="." groups=["player"]]
 visible = false
 position = Vector2( 35, 0 )
 __meta__ = {
@@ -278,7 +278,7 @@ limit_top = -50
 limit_bottom = 650
 limit_smoothed = true
 
-[node name="Shield" type="AnimatedSprite" parent="."]
+[node name="Shield" type="AnimatedSprite2D" parent="."]
 position = Vector2( 3, 0 )
 rotation = 1.5708
 scale = Vector2( 1.9, 1.95 )

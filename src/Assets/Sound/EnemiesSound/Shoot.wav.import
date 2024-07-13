@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Shoot.wav-762ec9b17040a6660345499309370277.sample"
+type="AudioStreamWAV"
+uid="uid://cjmxh7ktcrici"
+path="res://.godot/imported/Shoot.wav-762ec9b17040a6660345499309370277.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/EnemiesSound/Shoot.wav"
-dest_files=[ "res://.import/Shoot.wav-762ec9b17040a6660345499309370277.sample" ]
+dest_files=["res://.godot/imported/Shoot.wav-762ec9b17040a6660345499309370277.sample"]
 
 [params]
 

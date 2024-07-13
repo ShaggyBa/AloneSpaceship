@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/actors/Objects/Bonuses/ActiveBonus/BaseBonus/ActiveBaseBonus.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/HealBonus.png" type="Texture" id=2]
+[ext_resource path="res://src/Assets/Sprites/MainShip/effects/BonusEffects/ActiveBonus/HealBonus.png" type="Texture2D" id=2]
 
 
 [sub_resource type="AtlasTexture" id=1]
@@ -71,12 +71,12 @@ animations = [ {
 [node name="Heard" groups=["Active", "Heal"] instance=ExtResource( 1 )]
 position = Vector2( 0, -1 )
 
-[node name="AnimatedSprite" parent="." index="0"]
+[node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2( 5, 5 )
 frames = SubResource( 15 )
 animation = "Heart"
 frame = 13
 
-[node name="VisibilityNotifier2D" parent="." index="3"]
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
 position = Vector2( 4, 3 )
 scale = Vector2( 7.07283, 6.25658 )

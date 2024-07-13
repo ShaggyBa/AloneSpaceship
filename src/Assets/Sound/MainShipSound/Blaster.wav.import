@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Blaster.wav-c5cfbebad3c8ee4ce8a8c805aca2c204.sample"
+type="AudioStreamWAV"
+uid="uid://d427m0l2vqou"
+path="res://.godot/imported/Blaster.wav-c5cfbebad3c8ee4ce8a8c805aca2c204.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/MainShipSound/Blaster.wav"
-dest_files=[ "res://.import/Blaster.wav-c5cfbebad3c8ee4ce8a8c805aca2c204.sample" ]
+dest_files=["res://.godot/imported/Blaster.wav-c5cfbebad3c8ee4ce8a8c805aca2c204.sample"]
 
 [params]
 

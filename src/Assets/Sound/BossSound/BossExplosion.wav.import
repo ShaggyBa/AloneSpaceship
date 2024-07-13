@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/BossExplosion.wav-a603025d7c03c6152dbd48a08baa3cfd.sample"
+type="AudioStreamWAV"
+uid="uid://pmr38d5w8e5i"
+path="res://.godot/imported/BossExplosion.wav-a603025d7c03c6152dbd48a08baa3cfd.sample"
 
 [deps]
 
 source_file="res://src/Assets/Sound/BossSound/BossExplosion.wav"
-dest_files=[ "res://.import/BossExplosion.wav-a603025d7c03c6152dbd48a08baa3cfd.sample" ]
+dest_files=["res://.godot/imported/BossExplosion.wav-a603025d7c03c6152dbd48a08baa3cfd.sample"]
 
 [params]
 

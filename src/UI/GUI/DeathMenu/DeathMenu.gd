@@ -1,13 +1,13 @@
 extends Control
 
-onready var game_data = SaveFile.game_data
-onready var game_score = get_parent()
-onready var score_counter = $CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
-onready var high_score_counter = $CenterContainer/VBoxContainer/HBoxContainer2/HighScoreCounter
+@onready var game_data = SaveFile.game_data
+@onready var game_score = get_parent()
+@onready var score_counter = $CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
+@onready var high_score_counter = $CenterContainer/VBoxContainer/HBoxContainer2/HighScoreCounter
 
 signal game_is_over()
 
-var is_paused = false setget set_is_over
+var is_paused = false: set = set_is_over
 var main_menu = "res://src/UI/MainMenu/Menu.tscn"
 
 
@@ -18,7 +18,7 @@ func _on_TryBtn_pressed()->void:
 
 
 func _on_QuitBtn_pressed()->void:
-	get_tree().change_scene(main_menu)
+	get_tree().change_scene_to_file(main_menu)
 
 
 func _unhandled_input(event):

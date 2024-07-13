@@ -42,7 +42,7 @@ delayShieldRestoring = 4.0
 stream = ExtResource( 6 )
 volume_db = -7.0
 
-[node name="positionToReady" type="Position2D" parent="."]
+[node name="positionToReady" type="Marker2D" parent="."]
 position = Vector2( 900, 299 )
 
 [connection signal="finished" from="Music" to="." method="_on_Music_finished"]

@@ -1,21 +1,21 @@
 extends enemy
 
-export (float) var enemyBigAttackDelay = 2.5 
-export (float) var enemyAttackDelay = 1.0 
+@export (float) var enemyBigAttackDelay = 2.5 
+@export (float) var enemyAttackDelay = 1.0 
 
-export (float) var enemyBigAttackDamage = 5.0
+@export (float) var enemyBigAttackDamage = 5.0
 
 
-onready var muzzles = $FiringPositions.get_children()
+@onready var muzzles = $FiringPositions.get_children()
 
-onready var groupGun = [muzzles[0], muzzles[1]]
+@onready var groupGun = [muzzles[0], muzzles[1]]
 
-onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
+@onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
 
-onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
-onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
+@onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
+@onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
 
-onready var viewportEndX = viewportRect.end.x + 210
+@onready var viewportEndX = viewportRect.end.x + 210
 
 
 var timerShooting = Timer.new()
@@ -37,7 +37,7 @@ func _ready() -> void:
 	randomize()
 	
 	
-	enemyAttackDelay = rand_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
+	enemyAttackDelay = randf_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
 	aSprite.speed_scale = enemyAttackDelay	
 	aSprite.playing = true
 	enemyBigAttackDamage = round(enemyBigAttackDamage + coef * 2)
@@ -78,17 +78,17 @@ func moving(delta:float)->void:
 func shooting():
 	if timerShooting.is_stopped() and not isDeath and isReady:
 		timerShooting.start()
-		var shoot = plShoot.instance()
+		var shoot = plShoot.instantiate()
 		shoot.damage = enemyDamage				
 		if not currentGun:
 			aSprite.animation = "topGun"				
 			shoot.global_position = muzzles[2].global_position
 	
 			get_tree().current_scene.add_child(shoot)		
-			yield(get_tree().create_timer(0.15), "timeout")
+			await get_tree().create_timer(0.15).timeout
 			
 			for muzzle in groupGun:
-				var doubleShoot = plBigShoot.instance()
+				var doubleShoot = plBigShoot.instantiate()
 				doubleShoot.damage = enemyBigAttackDamage					
 				doubleShoot.global_position = muzzle.global_position
 				get_tree().current_scene.add_child(doubleShoot)

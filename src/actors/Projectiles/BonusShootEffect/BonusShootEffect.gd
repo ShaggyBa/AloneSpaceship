@@ -1,7 +1,7 @@
-extends Sprite
+extends Sprite2D
 
 
-export (float) var effectDelay = 0.05
+@export (float) var effectDelay = 0.05
 
 
 var timer = Timer.new()

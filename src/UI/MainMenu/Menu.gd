@@ -6,7 +6,7 @@ func _ready():
 
 
 func _on_StartBtn_pressed() -> void:
-	get_tree().change_scene("res://src/scenes/World.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/World.tscn")
 
 
 func _on_QuitBtn_pressed():
@@ -14,4 +14,4 @@ func _on_QuitBtn_pressed():
 
 
 func _on_OptionsBtn_pressed() -> void:
-	get_tree().change_scene("res://src/UI/Options2.tscn")
+	get_tree().change_scene_to_file("res://src/UI/Options2.tscn")

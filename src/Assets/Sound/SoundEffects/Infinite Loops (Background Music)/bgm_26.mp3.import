@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bgm_26.mp3-950ee55828859c59f1e926c0f21467c4.mp3str"
+uid="uid://iymtp27ckgmf"
+path="res://.godot/imported/bgm_26.mp3-950ee55828859c59f1e926c0f21467c4.mp3str"
 
 [deps]
 
 source_file="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/bgm_26.mp3"
-dest_files=[ "res://.import/bgm_26.mp3-950ee55828859c59f1e926c0f21467c4.mp3str" ]
+dest_files=["res://.godot/imported/bgm_26.mp3-950ee55828859c59f1e926c0f21467c4.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,7 +3,7 @@ extends Control
 
 func _on_QuitBtn_pressed():
 	#тут скрипт сохранения настроек должен быть
-	get_tree().change_scene("res://src/UI/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/UI/Menu.tscn")
 
 
 
