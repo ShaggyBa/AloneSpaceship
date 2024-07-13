@@ -9,7 +9,7 @@ preload("res://src/actors/Objects/meteorite/MeteorCopy2/meteorite_3.tscn")
 
 @onready var timer := $SpawnTimer
 
-@export (float) var spawnTimer := 1.0
+@export var spawnTimer := 1.0
 
 func _ready():
 	randomize()

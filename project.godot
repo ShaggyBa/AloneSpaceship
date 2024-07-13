@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SaveFile="*res://src/Save/save_file.gd"
+Main="*res://main.gd"
 
 [display]
 

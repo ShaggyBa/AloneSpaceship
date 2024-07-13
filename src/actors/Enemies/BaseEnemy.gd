@@ -4,10 +4,10 @@ extends Area2D
 class_name enemy
 
 
-@export (float) var verticalSpeed = 50.0
-@export (float) var horisontalSpeed = 100.0
-@export (int) var enemyHP = 1
-@export (int) var enemyDamage = 1
+@export  var verticalSpeed = 50.0
+@export  var horisontalSpeed = 100.0
+@export  var enemyHP = 1
+@export  var enemyDamage = 1
 var kill_points = 25 #очки за убийство противника
 
 
@@ -33,11 +33,11 @@ var coef = 1.0
 
 
 func _ready() -> void:
-	aSprite.playing = true
+	#aSprite.playing = true
 	aSprite.connect("animation_finished", Callable(self, "_on_Death_animation_finished"))	
-	engine.playing = true
+	#engine.playing = true
 	enemy_death.action = "enemy_death"
-	enemy_death.button_pressed = true
+	enemy_death.pressed = true
 	
 	enemyHP = floor(enemyHP * coef)
 	enemyDamage = round(enemyDamage + coef)
@@ -82,8 +82,9 @@ func death():
 	engine.queue_free()
 	
 	collision.queue_free()
-	aSprite.animation = "Death"
-	aSprite.playing = true
+	#aSprite.animation = "Death"
+	aSprite.play("Death")
+	#aSprite.playing = true
 	destroyed.play()
 	
 	horisontalSpeed *= 0.3

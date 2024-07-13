@@ -1,8 +1,8 @@
 extends Node
 
 
-@export (float) var multiscore = 1.0
-@export (float) var pointsToSpawnBoss = 100000.0
+@export var multiscore = 1.0
+@export var pointsToSpawnBoss = 100000.0
 
 
 
@@ -19,7 +19,7 @@ var bossIsSpawning = false
 var bossIsDefeating = false
 
 var dec = 1
-var points := 0.0
+var points = 0
 
 var currentMultiscore
 var currentCountOfEnemies 
@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 
 	points += delta * 100 * multiscore
 	
+	Main.points = points
 	
 	if points >= pointsToSpawnBoss and not bossIsSpawning:
 		var boss = plBoss.instantiate()

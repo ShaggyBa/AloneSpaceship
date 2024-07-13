@@ -1,12 +1,12 @@
 extends Node2D
 
-@export (float) var nextSpawnTime = 1.0
+@export var nextSpawnTime = 1.0
 
-@export (bool) var damageBonus = true
-@export (bool) var hpBonus = true
-@export (bool) var shootSpeedBonus = true
-@export (bool) var multiplayerBonus = true
-@export (bool) var speedBonus = true
+@export var damageBonus = true
+@export var hpBonus = true
+@export  var shootSpeedBonus = true
+@export var multiplayerBonus = true
+@export var speedBonus = true
 
 
 @onready var pDamageBonus:Dictionary = {
@@ -62,7 +62,7 @@ func _ready():
 	
 
 func _on_SpawnTimer_timeout():
-	var currentScore = get_tree().current_scene.points
+	var currentScore = get_parent().get_node("points")
 	
 	if activeBonuses:
 		var bonusPreloaded = activeBonuses[randi() % activeBonuses.size()]

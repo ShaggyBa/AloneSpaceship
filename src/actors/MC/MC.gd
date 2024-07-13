@@ -2,21 +2,21 @@ extends Area2D
 class_name MC
 
 
-@export (float) var mcSpeed = 200.0 # cкорость полета корабля
-@export (float) var mcVSpeed = 300.0 # cкорость вертикального движения корабля
+@export  var mcSpeed = 200.0 # cкорость полета корабля
+@export  var mcVSpeed = 300.0 # cкорость вертикального движения корабля
 
-@export (int) var mcHP = 5
-@export (float) var mcShootSpeed = 0.5
-@export (int) var mcDamage = 1
+@export  var mcHP = 5
+@export  var mcShootSpeed = 0.5
+@export  var mcDamage = 1
 
-@export (float) var delayShieldRestoring = 0.3
+@export  var delayShieldRestoring = 0.3
 
-@export (float) var duringShieldBonus = 2.0
-@export (float) var duringDamageBonus = 5.0
+@export  var duringShieldBonus = 2.0
+@export  var duringDamageBonus = 5.0
 
-@export (float) var coef_hp_bonus = 10.0
-@export (int) var coef_dmg_bonus = 2
-@export (float) var coef_shoot_delay_bonus = 0.05
+@export  var coef_hp_bonus = 10.0
+@export  var coef_dmg_bonus = 2
+@export  var coef_shoot_delay_bonus = 0.05
 
 var plShoot = preload("res://src/actors/Projectiles/MCShoot/MCShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
@@ -43,7 +43,7 @@ var pVeryLowHP = preload("res://src/Assets/Sprites/MainShip/model/States/VeryLow
 @onready var activeBonusSound = $Audio/ActiveBonus
 @onready var passiveBonusSound = $Audio/PassiveBonus
 
-@onready var passiveBonusSpawner = get_tree().current_scene.get_node("PassiveBonusSpawner")
+@onready var passiveBonusSpawner = get_parent().get_node("PassiveBonusSpawner")
 
 @onready var maxHP = mcHP
 @onready var startMCSpeed = (mcSpeed + mcVSpeed) / 2
@@ -88,7 +88,7 @@ func _ready() -> void:
 	setTickRateDamage()
 	
 	game_over.action = "over"
-	game_over.button_pressed = true
+	game_over.pressed = true
 		
 	
 	
@@ -222,10 +222,10 @@ func shieldEffect():
 		return
 	if timerShieldRestoring.is_stopped():
 		shield.visible = true
-		shield.playing = true
+		shield.play("autoshield")
 	else:
 		shield.visible = false
-		shield.playing = false
+		shield.stop()
 		
 		
 func changeState():
@@ -248,11 +248,10 @@ func changeState():
 
 func changeStateEngine(vector: Vector2):
 	if vector.x == 0 and vector.y == 0:
-		engineSprite.set_animation("idle")
+		engineSprite.play("idle")
 	else:
-		engineSprite.set_animation("powering")
-	engineSprite.playing = true 
-	
+		engineSprite.play("powering")
+		 
 	
 func _on_MC_area_entered(area):
 	
@@ -365,7 +364,7 @@ func death():
 	shield.queue_free()
 	sprite.animation = "Death"
 	sprite.modulate = "ffffff" 
-	sprite.playing = true
+	#sprite.playing = true
 	sprite.connect("animation_finished", Callable(self, "_on_Destroyed"))
 
 

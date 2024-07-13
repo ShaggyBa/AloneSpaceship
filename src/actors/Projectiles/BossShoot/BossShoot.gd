@@ -1,8 +1,8 @@
 extends Area2D
 
 
-@export (float) var rayDuracity = 2.0
-@export (float) var speed = 750.0
+@export  var rayDuracity = 2.0
+@export var speed = 750.0
 
 
 @onready var timerRayDuracity = $TimerRayDuracity

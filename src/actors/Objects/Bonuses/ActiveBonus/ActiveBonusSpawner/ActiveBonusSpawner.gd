@@ -6,7 +6,7 @@ var preloadedBonuses = [
 		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusDamage/DamageBonus.tscn"),
 	]
 
-@export (float) var nextSpawnTime = 3.0
+@export var nextSpawnTime = 3.0
 
 @onready var spawnTimer = $SpawnTimer
 @onready var viewportRect = get_viewport_rect()

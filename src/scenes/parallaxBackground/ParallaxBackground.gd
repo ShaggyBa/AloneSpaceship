@@ -1,6 +1,6 @@
 extends ParallaxBackground
 
-@export onready var speedScroll = 200
+@export var speedScroll = 200
 
 var direction = Vector2(1, 0)
 

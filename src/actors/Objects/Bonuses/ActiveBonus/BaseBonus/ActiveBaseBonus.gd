@@ -2,14 +2,15 @@ extends Area2D
 
 class_name ActiveBonus
 
-@export (float) var speed = 500.0
+@export var speed = 500.0
 
 @onready var sprite = $AnimatedSprite2D
 @onready var border = $Border
 
 func _ready():
-	sprite.playing = true
-	border.playing = true
+	#sprite.playing = true
+	#border.playing = true
+	pass
 
 func _physics_process(delta):
 	global_position.x -= speed * delta

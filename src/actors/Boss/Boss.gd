@@ -1,11 +1,11 @@
 extends Area2D
 
 
-@export (float) var bossAttackDelay = 2.0
-@export (float) var verticalSpeed = 100.0
-@export (float) var horisontalSpeed = 75.0
-@export (int) var bossHP = 50
-@export (int) var bossDamage = 10
+@export var bossAttackDelay = 2.0
+@export var verticalSpeed = 100.0
+@export var horisontalSpeed = 75.0
+@export var bossHP = 50
+@export var bossDamage = 10
 
 
 signal boss_defeated

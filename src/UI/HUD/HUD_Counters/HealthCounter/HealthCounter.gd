@@ -4,8 +4,8 @@ extends CanvasItem
 	
 
 func set_points(points: int) -> void:
-	points_label.text = String(points)
+	points_label.text = str(points)
 	
 	
 func get_points():
-	return String(points_label.text)
+	return str(points_label.text)

@@ -1,9 +1,9 @@
 extends Node2D
 
-@export (float) var nextSpawnTime = 5.0
-@export (float) var minSpawnRate = 1.0
-@export (int) var maxEnemySpawn = 5
-@export (bool) var changeSpawnRate = false 
+@export var nextSpawnTime = 5.0
+@export var minSpawnRate = 1.0
+@export  var maxEnemySpawn = 5
+@export  var changeSpawnRate = false 
 
 
 var enemies = []
@@ -19,7 +19,8 @@ var preloadedEnemies = [
 @onready var spawnTimer = $SpawnTimer
 @onready var pos = $Marker2D
 
-@onready var mc_instance = get_tree().current_scene.get_node("MC")
+@onready var mc_instance = get_parent().get_node("MC")
+
 
 @onready var difficultCoef = 1.0
 
@@ -27,10 +28,11 @@ var preloadedEnemies = [
 
 func _ready():
 	randomize()
+
 	spawnTimer.start(nextSpawnTime)
 	
 func _on_SpawnTimer_timeout():
-	var currentScore = get_tree().current_scene.points
+	var currentScore = Main.points
 	
 	if get_tree().get_nodes_in_group("enemy").size() < maxEnemySpawn:
 		

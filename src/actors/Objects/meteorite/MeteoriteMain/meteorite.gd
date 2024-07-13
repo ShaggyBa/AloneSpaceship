@@ -2,15 +2,15 @@ extends Area2D
 
 class_name Meteorite
 
-@export (float) var minSpeed = 20.0
-@export (float) var maxSpeed = 100.0
-@export (float) var minRotationRate = -20.0
-@export (float) var maxRotationRate = 20.0
+@export  var minSpeed = 20.0
+@export  var maxSpeed = 100.0
+@export var minRotationRate = -20.0
+@export  var maxRotationRate = 20.0
 
-@export (int) var meteoriteHP = 1
+@export  var meteoriteHP = 1
 
-@export (float) var minScale = 0.8
-@export (float) var maxScale = 2.5
+@export  var minScale = 0.8
+@export  var maxScale = 2.5
 
 var speed = null
 var rotationSpeed = null
