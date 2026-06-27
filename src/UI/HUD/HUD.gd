@@ -25,11 +25,16 @@ var current_score
 func _ready() -> void:
 	get_stats()
 	set_stats()
+	if current_scene.has_signal("score_changed"):
+		current_scene.score_changed.connect(_on_score_changed)
+	if mc_instance.has_signal("stats_changed"):
+		mc_instance.stats_changed.connect(_on_ship_stats_changed)
 	
 
 func _process(_delta: float) -> void:
-	current_score = current_scene.points		
-	score_counter.set_points(current_score)
+	if not current_scene.has_signal("score_changed"):
+		current_score = current_scene.points		
+		score_counter.set_points(current_score)
 
 	if current_mc_hp != mc_instance.mcHP or \
 	 current_mc_speed != snapped((mc_instance.mcSpeed + mc_instance.mcVSpeed) / 2 / start_mc_Speed, 0.01) or \
@@ -51,3 +56,13 @@ func set_stats():
 	damage_counter.set_points(current_mc_damage)
 	speed_counter.set_points(current_mc_speed)
 	shoot_speed_counter.set_points(current_mc_shoot_speed)
+
+
+func _on_score_changed(score: float) -> void:
+	current_score = score
+	score_counter.set_points(current_score)
+
+
+func _on_ship_stats_changed(_stats: Dictionary) -> void:
+	get_stats()
+	set_stats()

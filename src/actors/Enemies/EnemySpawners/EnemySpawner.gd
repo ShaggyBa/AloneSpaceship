@@ -85,7 +85,7 @@ func createBattleEnemy(enemy):
 		enemy.coef = difficultCoef - 4
 		
 	enemy.global_position = Vector2(pos.global_position.x + 50, randf_range(50, viewportRect.end.y - 50))
-	get_tree().current_scene.add_child(enemy)
+	SpawnService.spawn(enemy)
 
 
 func createShooterEnemy(enemy):
@@ -97,7 +97,7 @@ func createShooterEnemy(enemy):
 	enemy.coef = difficultCoef
 	
 	enemy.global_position = Vector2(pos.global_position.x, randf_range(25, viewportRect.end.y - 25))
-	get_tree().current_scene.add_child(enemy)
+	SpawnService.spawn(enemy)
 
 
 func createFastEnemy(enemy):
@@ -108,4 +108,4 @@ func createFastEnemy(enemy):
 	enemy.coef = difficultCoef
 	
 	enemy.global_position = Vector2(pos.global_position.x, playerPos)			
-	get_tree().current_scene.add_child(enemy)
+	SpawnService.spawn(enemy)

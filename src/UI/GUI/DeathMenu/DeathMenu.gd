@@ -1,7 +1,5 @@
 extends Control
 
-@onready var game_data = SaveFile.game_data
-@onready var game_score = get_parent()
 @onready var score_counter = $CenterContainer/VBoxContainer/HBoxContainer/ScoreCounter
 @onready var high_score_counter = $CenterContainer/VBoxContainer/HBoxContainer2/HighScoreCounter
 
@@ -33,5 +31,13 @@ func set_is_over(value):
 	update_score()
 
 func update_score():
-	score_counter.set_points(game_score.current_score)
-	high_score_counter.set_points(game_data.score)
+	var current_score := int(Main.points)
+	var high_score := int(SaveFile.game_data.get("score", 0))
+
+	if current_score > high_score:
+		high_score = current_score
+		SaveFile.game_data["score"] = high_score
+		SaveFile.save_data()
+
+	score_counter.set_points(current_score)
+	high_score_counter.set_points(high_score)

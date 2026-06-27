@@ -37,6 +37,6 @@ func shooting():
 		else:
 			aSprite.animation = "bottomGunShoot"			
 			shoot.global_position = muzzles[1].global_position		
-		get_tree().current_scene.add_child(shoot)
+		SpawnService.spawn(shoot)
 		currentGun = !currentGun
 

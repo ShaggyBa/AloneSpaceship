@@ -1,6 +1,10 @@
 extends Area2D
 class_name MC
 
+signal health_changed(current_hp: int, max_hp: int)
+signal stats_changed(stats: Dictionary)
+signal bonus_applied(bonus_type: StringName, source: Node)
+
 
 @export var mcSpeed: float = 200.0 # cкорость полета корабля
 @export var mcVSpeed: float = 300.0 # cкорость вертикального движения корабля
@@ -91,6 +95,7 @@ func _ready() -> void:
 	
 	game_over.action = "over"
 	game_over.pressed = true
+	emit_runtime_state()
 		
 	
 	
@@ -162,8 +167,7 @@ func create_shoot():
 		shoot = plShoot.instantiate()
 		shoot.damage = mcDamage
 		shoot.scale = shootScale
-	shoot.global_position = muzzle.global_position
-	get_tree().current_scene.add_child(shoot)
+	SpawnService.spawn_at(shoot, muzzle.global_position)
 	shotSound.play()
 
 
@@ -199,7 +203,8 @@ func takeDamage(damage):
 			else:
 				mcHP -= damage
 				
-			changeState()			
+			changeState()
+			emit_runtime_state()
 			
 			
 			hitSound.play()
@@ -270,10 +275,13 @@ func apply_bonus(area: Area2D) -> bool:
 		play_bonus_sound(activeBonusSound)
 		if area.is_in_group("Heal"):
 			heal()
+			emit_bonus_event(&"heal", area)
 		elif area.is_in_group("ShieldBonus"):
 			shieldBonus()
+			emit_bonus_event(&"shield", area)
 		elif area.is_in_group("DamageBonus"):
 			damageBonus()
+			emit_bonus_event(&"damage", area)
 		return true
 
 	if area.is_in_group("PassiveBonus"):
@@ -281,14 +289,19 @@ func apply_bonus(area: Area2D) -> bool:
 		play_bonus_sound(passiveBonusSound)
 		if area.is_in_group("addDamage"):
 			addPassiveDamageBonus()
+			emit_bonus_event(&"passive_damage", area)
 		elif area.is_in_group("addShootSpeed"):
 			addPassiveShootSpeedBonus()
+			emit_bonus_event(&"passive_shoot_speed", area)
 		elif area.is_in_group("addMaxHP"):
 			addPassiveMaxHPBonus()
+			emit_bonus_event(&"passive_max_hp", area)
 		elif area.is_in_group("addMultiscore"):
 			addPassiveMultiscoreBonus()
+			emit_bonus_event(&"passive_multiscore", area)
 		elif area.is_in_group("addSpeed"):
 			addPassiveSpeed()
+			emit_bonus_event(&"passive_speed", area)
 		return true
 
 	return false
@@ -310,6 +323,7 @@ func heal():
 	else:
 		mcHP = maxHP
 	changeState()
+	emit_runtime_state()
 	
 		
 
@@ -339,6 +353,7 @@ func addPassiveDamageBonus():
 	mcDamage += 2
 	if shootScale < Vector2(2.5, 2.5):
 		shootScale += Vector2(0.25 / count_of_dmg_bonus, 0.25 / count_of_dmg_bonus)
+	emit_runtime_state()
 	
 	
 func addPassiveSpeed():
@@ -350,10 +365,15 @@ func addPassiveSpeed():
 	if delayShieldRestoring > 1:
 		delayShieldRestoring -= 0.1
 		timerShieldRestoring.set_wait_time(delayShieldRestoring) 
+	emit_runtime_state()
 	
 	
 func addPassiveMultiscoreBonus():
-	get_tree().current_scene.multiscore += 0.25
+	var current_scene = get_tree().current_scene
+	if current_scene != null and current_scene.has_method("add_multiscore"):
+		current_scene.add_multiscore(0.25)
+	elif current_scene != null and current_scene.get("multiscore") != null:
+		current_scene.set("multiscore", float(current_scene.get("multiscore")) + 0.25)
 	
 	if passiveBonusSpawner.nextSpawnTime > 3:
 		passiveBonusSpawner.nextSpawnTime -= 0.1
@@ -367,12 +387,14 @@ func addPassiveShootSpeedBonus():
 		mcShootSpeed -= coef_shoot_delay_bonus / (sqrt(count_of_shoot_delay_bonus) + coef_shoot_delay_bonus)
 		
 		timerShooting.set_wait_time(mcShootSpeed)
+		emit_runtime_state()
 	
 
 func addPassiveMaxHPBonus():
 	var coef = 10 + maxHP * 0.1
 	maxHP += round(coef)
 	mcHP += round(coef)
+	emit_runtime_state()
 
 
 func death():
@@ -396,3 +418,28 @@ func _on_Destroyed():
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
+
+
+func get_stats_snapshot() -> Dictionary:
+	return {
+		"hp": mcHP,
+		"max_hp": maxHP,
+		"speed": (mcSpeed + mcVSpeed) / 2,
+		"shoot_delay": mcShootSpeed,
+		"damage": mcDamage,
+		"is_invincible": isInvicibility,
+		"is_damage_up": isDamageUp
+	}
+
+
+func emit_runtime_state() -> void:
+	health_changed.emit(mcHP, maxHP)
+	stats_changed.emit(get_stats_snapshot())
+	GameEvents.emit_health_changed(mcHP, maxHP)
+	GameEvents.emit_ship_stats_changed(get_stats_snapshot())
+
+
+func emit_bonus_event(bonus_type: StringName, source: Node) -> void:
+	bonus_applied.emit(bonus_type, source)
+	GameEvents.emit_bonus_applied(bonus_type, source)
+	emit_runtime_state()

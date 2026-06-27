@@ -21,7 +21,7 @@ func _on_SpawnTimer_timeout():
 	
 	# Position 
 	bonus.position = Vector2($Marker2D.global_position.x + 50, randf_range(30, viewportRect.end.y - 30))
-	get_tree().current_scene.add_child(bonus)
+	SpawnService.spawn(bonus)
 
 	spawnTimer.set_wait_time(randf_range(nextSpawnTime / 2, nextSpawnTime * 2))
 	spawnTimer.start()

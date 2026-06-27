@@ -82,10 +82,10 @@ func shooting():
 			
 			var doubleShoot = [shoot, shoot2]
 			for i in doubleShoot:
-				get_tree().current_scene.add_child(i)
+				SpawnService.spawn(i)
 				await get_tree().create_timer(0.15).timeout
 		else:
-			get_tree().current_scene.add_child(shoot)
+			SpawnService.spawn(shoot)
 		
 
 func takeDamage(amount):

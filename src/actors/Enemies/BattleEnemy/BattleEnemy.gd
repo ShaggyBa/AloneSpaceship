@@ -85,19 +85,19 @@ func shooting():
 			aSprite.animation = "topGun"				
 			shoot.global_position = muzzles[2].global_position
 	
-			get_tree().current_scene.add_child(shoot)		
+			SpawnService.spawn(shoot)
 			await get_tree().create_timer(0.15).timeout
 			
 			for muzzle in groupGun:
 				var doubleShoot = plBigShoot.instantiate()
 				doubleShoot.damage = enemyBigAttackDamage					
 				doubleShoot.global_position = muzzle.global_position
-				get_tree().current_scene.add_child(doubleShoot)
+				SpawnService.spawn(doubleShoot)
 				
 		else:
 			aSprite.animation = "bottomGun"				
 			shoot.global_position = muzzles[3].global_position			
-			get_tree().current_scene.add_child(shoot)
+			SpawnService.spawn(shoot)
 			
 		currentGun = !currentGun
 

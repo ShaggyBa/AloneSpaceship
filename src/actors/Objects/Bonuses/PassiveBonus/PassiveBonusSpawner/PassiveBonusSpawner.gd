@@ -75,7 +75,7 @@ func _on_SpawnTimer_timeout():
 		
 		
 			
-		get_tree().current_scene.add_child(bonus)
+		SpawnService.spawn(bonus)
 	
 	# Restart timer
 		spawnTimer.set_wait_time(randf_range(nextSpawnTime, nextSpawnTime * 2))

@@ -65,7 +65,7 @@ func spawnMeteoriteEffect():
 	meteoriteEffect.rotation = mSprite.global_rotation
 	meteoriteEffect.scale = scale * mSprite.scale
 	meteoriteEffect.global_position = effect_position
-	get_tree().current_scene.add_child(meteoriteEffect)
+	SpawnService.spawn(meteoriteEffect)
 	meteoriteEffect.global_position = effect_position
 	meteoriteEffect.global_rotation = mSprite.global_rotation
 	meteoriteEffect.start_effect()

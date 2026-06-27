@@ -25,6 +25,8 @@ config/icon="res://icon.png"
 
 SaveFile="*res://src/Save/save_file.gd"
 Main="*res://main.gd"
+GameEvents="*res://src/Autoload/GameEvents.gd"
+SpawnService="*res://src/Autoload/SpawnService.gd"
 
 [display]
 

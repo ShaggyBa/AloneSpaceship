@@ -22,7 +22,7 @@ func _on_SpawnTimer_timeout():
 	var meteorPreload = preloadMeteors[randi() % preloadMeteors.size()]
 	var meteor = meteorPreload.instantiate()
 	meteor.position = Vector2($Marker2D.global_position.x, yPos)
-	get_tree().current_scene.add_child(meteor)
+	SpawnService.spawn(meteor)
 	#рестарт таймера
 	timer.start(spawnTimer)
 
