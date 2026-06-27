@@ -19,9 +19,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 
 func _on_Shoot_area_entered(area):
 	if area is MC or area.is_in_group("damageable"):
-		area.takeDamage(damage)
+		DamageService.apply_damage(area, damage, self, &"projectile")
 		var shootEffect = pShootEffect.instantiate()
 		shootEffect.position = position
-		get_parent().add_child(shootEffect)
+		SpawnService.spawn(shootEffect, get_parent())
 		queue_free()
 

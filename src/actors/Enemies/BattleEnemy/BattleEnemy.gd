@@ -10,8 +10,6 @@ extends enemy
 
 @onready var groupGun = [muzzles[0], muzzles[1]]
 
-@onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
-
 @onready var plShoot = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShoot.tscn")
 @onready var plBigShoot = preload("res://src/actors/Projectiles/BattleEnemyShoot/BattleEnemyShoot.tscn")
 
@@ -31,11 +29,13 @@ var isReady = false
 
 
 var stateChanged = false
+var ready_position := Vector2.ZERO
 
 
 func _ready() -> void:
 	super._ready()
 	randomize()
+	ready_position = get_ready_position()
 	
 	
 	enemyAttackDelay = randf_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
@@ -71,7 +71,7 @@ func moving(delta:float)->void:
 	or global_position.x > viewportEndX:
 		directionX *= -1
 
-	if global_position.x <= _positionToReady.x and not isReady:
+	if global_position.x <= ready_position.x and not isReady:
 		viewportEndX -= 290
 		isReady = true
 
@@ -114,3 +114,10 @@ func changeState():
 		horisontalSpeed *= 1.25
 		timerShooting.set_wait_time(enemyAttackDelay)
 		stateChanged = true
+
+
+func get_ready_position() -> Vector2:
+	var marker := get_tree().get_first_node_in_group("enemy_ready_position") as Node2D
+	if marker != null:
+		return marker.global_position
+	return Vector2(viewportRect.end.x / 2, viewportRect.end.y / 2)

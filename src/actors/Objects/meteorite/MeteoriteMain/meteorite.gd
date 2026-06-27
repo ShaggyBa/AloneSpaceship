@@ -46,6 +46,10 @@ func takeDamage(damage):
 	if meteoriteHP <= 0:	
 		death()
 
+
+func take_damage(amount: float, _source: Node = null, _damage_type: StringName = &"default") -> void:
+	takeDamage(amount)
+
 func death():
 	if is_destroyed:
 		return
@@ -73,7 +77,7 @@ func spawnMeteoriteEffect():
 
 func _on_Meteorite_area_entered(area: Area2D) -> void:
 	if area is MC:
-		area.takeDamage(meteoriteHP)
+		DamageService.apply_damage(area, meteoriteHP, self, &"collision")
 		death()
 	if area.is_in_group("boss"):
 		death()

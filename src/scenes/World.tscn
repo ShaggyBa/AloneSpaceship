@@ -39,7 +39,7 @@ delayShieldRestoring = 4.0
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=954510412]
 volume_db = -7.0
 
-[node name="positionToReady" type="Marker2D" parent="." unique_id=1982205548]
+[node name="positionToReady" type="Marker2D" parent="." unique_id=1982205548 groups=["enemy_ready_position"]]
 visible = false
 position = Vector2(900, 299)
 

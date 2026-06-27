@@ -68,13 +68,17 @@ func takeDamage(amount):
 		death()
 
 
+func take_damage(amount: float, _source: Node = null, _damage_type: StringName = &"default") -> void:
+	takeDamage(amount)
+
+
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 
 func _on_BaseEnemy_area_entered(area):
 	if area is MC:
-		area.takeDamage(enemyDamage*5)
+		DamageService.apply_damage(area, enemyDamage * 5, self, &"collision")
 		death()
 		
 		

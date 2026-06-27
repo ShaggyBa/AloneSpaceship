@@ -68,6 +68,20 @@ This note summarizes the main fixes made while updating the project for the curr
 - `World.tscn` was launched headlessly to catch script/runtime errors.
 - Remaining forced-exit resource warnings from `--quit-after` were not tied to GDScript API failures.
 
+## Architecture Cleanup Progress
+
+These items have been closed as part of the preparation pass after the Godot 4 migration:
+
+- Added `GameEvents` autoload as a central place for score, multiscore, health, ship stats, bonus, spawn, and damage events.
+- Added `SpawnService` autoload and moved the main runtime spawns away from direct `current_scene.add_child(...)` calls.
+- Added ship runtime signals and `MC.get_stats_snapshot()` so UI and future controllers can observe player state without reading every field directly.
+- Updated `HUD.gd` to use score/stat signals when available, with fallback polling for older scenes.
+- Added versioned save data with `schema_version`, default data, normalization, and startup loading.
+- Fixed `DeathMenu.gd` so death score/high score no longer depends on a fragile parent node path.
+- Added `DamageService` autoload and `take_damage(...)` compatibility wrappers for the main damageable actors.
+- Replaced `positionToReady` direct scene lookup in boss/BattleEnemy with an `enemy_ready_position` marker group.
+- Replaced direct MC-to-world multiscore mutation with a `GameEvents.multiscore_bonus_requested` signal handled by `World.gd`.
+
 ## Technical Debt Before Gameplay Redesign
 
 Before changing the core gameplay direction away from the current left-to-right runner structure, the project needs a cleanup pass. The current prototype is useful as a combat sandbox, but many systems are tightly coupled to the old flow.
@@ -84,8 +98,8 @@ Before changing the core gameplay direction away from the current left-to-right 
   - audio feedback;
   - death handling;
   - direct interaction with world/spawner state.
-- Many scripts rely on hard-coded scene paths and `get_tree().current_scene`.
-- Gameplay objects communicate through groups and string checks such as `ActiveBonus`, `PassiveBonus`, `damageable`, `addDamage`, and `boss`.
+- Some scripts still rely on hard-coded scene paths and `get_tree().current_scene`.
+- Gameplay objects still partly communicate through groups and string checks such as `ActiveBonus`, `PassiveBonus`, `damageable`, `addDamage`, and `boss`; damage now has a service entry point for future cleanup.
 - Enemy subclasses can accidentally skip base initialization when overriding `_ready()`.
 - Runner assumptions are embedded in object movement:
   - enemies move from right to left;
@@ -93,8 +107,8 @@ Before changing the core gameplay direction away from the current left-to-right 
   - bonuses move from right to left;
   - spawners create objects as a constant stream.
 - Stats and runtime state are mixed together. For example, exported player stats are also mutated directly during a run.
-- Save data is still a loose dictionary without schema versioning or migration logic.
-- HUD and GUI read game state directly instead of reacting to signals/events.
+- Save data now has a schema version and normalization, but future progression migrations still need concrete rules.
+- HUD and GUI now have signal-based entry points, but some fallback direct reads remain for compatibility.
 - Meteorite folders and spawners have duplicate/overlapping structures that should be consolidated.
 
 ### Recommended Refactor Before New Gameplay
@@ -120,14 +134,14 @@ Before changing the core gameplay direction away from the current left-to-right 
   - value;
   - duration;
   - stack rules.
-- Introduce a consistent damage contract:
+- Introduce a consistent damage contract. Initial `DamageService.apply_damage(...)` and `take_damage(...)` wrappers are in place:
   - common `take_damage(...)`;
   - damage amount;
   - source;
   - damage type;
   - optional knockback/status effects.
-- Replace direct `current_scene.add_child(...)` calls with explicit spawn points or a `SpawnService` / `WorldSpawner`.
-- Use signals for UI updates:
+- Replace direct `current_scene.add_child(...)` calls with explicit spawn points or a `SpawnService` / `WorldSpawner`. Initial `SpawnService` pass is complete; explicit spawn-point ownership still needs design.
+- Use signals for UI updates. Initial score, health, stat, bonus, and spawn events are in place:
   - `health_changed`;
   - `score_changed`;
   - `stat_changed`;

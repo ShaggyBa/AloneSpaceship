@@ -23,8 +23,6 @@ signal boss_defeated
 
 
 @onready var _target = Main.MC
-@onready var _positionToReady = get_tree().current_scene.get_node("positionToReady").global_position
-
 @onready var plShoot = preload("res://src/actors/Projectiles/BossShoot/BossShoot.tscn")
 @onready var viewportEndX = viewportRect.end.x + 210
 
@@ -39,8 +37,10 @@ var stateChanged = false
 var isReady = false
 var isDeath = false
 var maxHP
+var ready_position := Vector2.ZERO
 
 func _ready() -> void:
+	ready_position = get_ready_position()
 	improve_stats()
 	aSprite.play()
 	engine.play()
@@ -98,6 +98,10 @@ func takeDamage(amount):
 		death()
 
 
+func take_damage(amount: float, _source: Node = null, _damage_type: StringName = &"default") -> void:
+	takeDamage(amount)
+
+
 func moving(delta:float) :
 	global_position.x += horisontalSpeed * delta * directionX
 	global_position.y += verticalSpeed * delta * directionY
@@ -110,7 +114,7 @@ func moving(delta:float) :
 	or global_position.x > viewportEndX:
 		directionX *= -1
 
-	if global_position.x <= _positionToReady.x and not isReady:
+	if global_position.x <= ready_position.x and not isReady:
 		viewportEndX -= 290
 		isReady = true
 		
@@ -120,7 +124,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Boss_area_entered(area):
 	if area is MC:
-		area.takeDamage(bossDamage*5)
+		DamageService.apply_damage(area, bossDamage * 5, self, &"collision")
 		bossHP -= area.mcDamage * 10
 
 
@@ -175,3 +179,10 @@ func death():
 func bossDefeated():
 	# Код, выполняемый при победе над боссом
 	emit_signal("boss_defeated")
+
+
+func get_ready_position() -> Vector2:
+	var marker := get_tree().get_first_node_in_group("enemy_ready_position") as Node2D
+	if marker != null:
+		return marker.global_position
+	return Vector2(viewportRect.end.x / 2, viewportRect.end.y / 2)

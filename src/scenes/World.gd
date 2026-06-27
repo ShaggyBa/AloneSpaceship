@@ -29,6 +29,8 @@ var currentCountOfEnemies
 
 func _ready() -> void:
 	music.play()
+	if not GameEvents.multiscore_bonus_requested.is_connected(_on_multiscore_bonus_requested):
+		GameEvents.multiscore_bonus_requested.connect(_on_multiscore_bonus_requested)
 	GameEvents.emit_multiscore_changed(multiscore)
 	
 
@@ -90,3 +92,7 @@ func set_multiscore(value: float) -> void:
 
 func add_multiscore(value: float) -> void:
 	set_multiscore(multiscore + value)
+
+
+func _on_multiscore_bonus_requested(amount: float) -> void:
+	add_multiscore(amount)

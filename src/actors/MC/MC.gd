@@ -213,6 +213,10 @@ func takeDamage(damage):
 				death()
 
 
+func take_damage(amount: float, _source: Node = null, _damage_type: StringName = &"default") -> void:
+	takeDamage(amount)
+
+
 func burning(delay:int):
 	if isInvicibility or isDead:
 		return
@@ -369,11 +373,7 @@ func addPassiveSpeed():
 	
 	
 func addPassiveMultiscoreBonus():
-	var current_scene = get_tree().current_scene
-	if current_scene != null and current_scene.has_method("add_multiscore"):
-		current_scene.add_multiscore(0.25)
-	elif current_scene != null and current_scene.get("multiscore") != null:
-		current_scene.set("multiscore", float(current_scene.get("multiscore")) + 0.25)
+	GameEvents.request_multiscore_bonus(0.25)
 	
 	if passiveBonusSpawner.nextSpawnTime > 3:
 		passiveBonusSpawner.nextSpawnTime -= 0.1
