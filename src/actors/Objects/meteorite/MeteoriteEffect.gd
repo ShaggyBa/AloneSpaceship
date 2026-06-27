@@ -1,11 +1,19 @@
 extends CPUParticles2D
 
+var started := false
+
 
 func _ready():
-	amount = randf_range(6.0, 12.0)
-	emitting = true
+	emitting = false
 		
 
 func _process(_delta):
-	if !emitting:
+	if started and !emitting:
 		queue_free()
+
+
+func start_effect() -> void:
+	amount = randi_range(6, 12)
+	started = true
+	restart()
+	emitting = true

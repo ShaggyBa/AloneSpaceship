@@ -7,8 +7,8 @@ func set_points(points: float) -> void:
 	if points >= 10:
 		points_label.text = "MAX"
 	else:
-		points_label.text = String(points) + 'X'
+		points_label.text = str(points) + 'X'
 	
 	
 func get_points():
-	return String(points_label.text)
+	return str(points_label.text)

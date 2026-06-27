@@ -1,1 +1,1 @@
-extends Bonus
+extends ActiveBonus

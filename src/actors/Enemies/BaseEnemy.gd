@@ -4,10 +4,10 @@ extends Area2D
 class_name enemy
 
 
-@export (float) var verticalSpeed = 50.0
-@export (float) var horisontalSpeed = 100.0
-@export (int) var enemyHP = 1
-@export (int) var enemyDamage = 1
+@export var verticalSpeed: float = 50.0
+@export var horisontalSpeed: float = 100.0
+@export var enemyHP: int = 1
+@export var enemyDamage: int = 1
 var kill_points = 25 #очки за убийство противника
 
 
@@ -33,11 +33,11 @@ var coef = 1.0
 
 
 func _ready() -> void:
-	aSprite.playing = true
+	aSprite.play()
 	aSprite.connect("animation_finished", Callable(self, "_on_Death_animation_finished"))	
-	engine.playing = true
+	engine.play()
 	enemy_death.action = "enemy_death"
-	enemy_death.button_pressed = true
+	enemy_death.pressed = true
 	
 	enemyHP = floor(enemyHP * coef)
 	enemyDamage = round(enemyDamage + coef)
@@ -56,6 +56,8 @@ func moving(delta:float)->void:
 
 
 func takeDamage(amount):
+	if isDeath:
+		return
 	enemyHP -= amount
 	hit.play()	
 	if coef > 5:
@@ -77,13 +79,18 @@ func _on_BaseEnemy_area_entered(area):
 		
 		
 func death():
+	if isDeath:
+		return
 	isDeath = true
 	
 	engine.queue_free()
 	
 	collision.queue_free()
-	aSprite.animation = "Death"
-	aSprite.playing = true
+	var death_finished := Callable(self, "_on_Death_animation_finished")
+	if not aSprite.animation_finished.is_connected(death_finished):
+		aSprite.animation_finished.connect(death_finished)
+	aSprite.play("Death")
+	aSprite.set_frame_and_progress(0, 0.0)
 	destroyed.play()
 	
 	horisontalSpeed *= 0.3

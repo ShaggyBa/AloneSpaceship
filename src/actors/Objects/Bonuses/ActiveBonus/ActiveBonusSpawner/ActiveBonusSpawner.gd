@@ -6,7 +6,7 @@ var preloadedBonuses = [
 		preload("res://src/actors/Objects/Bonuses/ActiveBonus/BonusDamage/DamageBonus.tscn"),
 	]
 
-@export (float) var nextSpawnTime = 3.0
+@export var nextSpawnTime: float = 3.0
 
 @onready var spawnTimer = $SpawnTimer
 @onready var viewportRect = get_viewport_rect()
@@ -21,6 +21,7 @@ func _on_SpawnTimer_timeout():
 	
 	# Position 
 	bonus.position = Vector2($Marker2D.global_position.x + 50, randf_range(30, viewportRect.end.y - 30))
+	print("[ActiveBonusSpawner] Spawned %s at %s groups=%s" % [bonus.name, bonus.position, bonus.get_groups()])
 	get_tree().current_scene.add_child(bonus)
 
 	spawnTimer.set_wait_time(randf_range(nextSpawnTime / 2, nextSpawnTime * 2))

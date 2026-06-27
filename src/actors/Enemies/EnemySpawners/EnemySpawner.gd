@@ -1,9 +1,9 @@
 extends Node2D
 
-@export (float) var nextSpawnTime = 5.0
-@export (float) var minSpawnRate = 1.0
-@export (int) var maxEnemySpawn = 5
-@export (bool) var changeSpawnRate = false 
+@export var nextSpawnTime: float = 5.0
+@export var minSpawnRate: float = 1.0
+@export var maxEnemySpawn: int = 5
+@export var changeSpawnRate: bool = false 
 
 
 var enemies = []

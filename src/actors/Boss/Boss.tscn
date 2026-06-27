@@ -223,7 +223,7 @@ region = Rect2( 0, 0, 128, 128 )
 [sub_resource type="SpriteFrames" id=36]
 animations = [ {
 "frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
-"loop": true,
+"loop": false,
 "name": "Death",
 "speed": 4.0
 }, {

@@ -1,10 +1,9 @@
 extends Node2D
 
 
-@export (int) var numberOfMeteorites
-@export (float) var meteoriteSpawnTimer
-@export (Vector2) var randomMeteoritePosition
-
+@export var numberOfMeteorites: int
+@export var meteoriteSpawnTimer: float
+@export var randomMeteoritePosition: Vector2
 var meteoritePath = preload("res://src/actors/Objects/meteorite/meteorite.tscn")
 
 func _ready():

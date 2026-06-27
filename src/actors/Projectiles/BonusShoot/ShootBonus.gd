@@ -8,9 +8,7 @@ var bonusShootEffect = preload("res://src/actors/Projectiles/BonusShootEffect/Bo
 
 
 func _ready():
-	sprite.playing = true
-	
-
+	sprite.play()
 func _process(delta):
 	scale += scaleShoot * delta * 10
 

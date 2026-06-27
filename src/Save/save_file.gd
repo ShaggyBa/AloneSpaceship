@@ -8,19 +8,17 @@ func _ready():
 	
 	
 func save_data():
-	var file = File.new()
-	file.open(SAVE_FILE, File.WRITE)
+	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
 	file.store_var(game_data)
 	file.close()
 	
 	
 func load_data():
-	var file = File.new()
-	if not file.file_exists(SAVE_FILE):
+	if not FileAccess.file_exists(SAVE_FILE):
 		game_data = {
 			"score": 0
 		}
 		save_data()
-	file.open(SAVE_FILE, file.READ)
+	var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
 	game_data = file.get_var()
 	file.close()

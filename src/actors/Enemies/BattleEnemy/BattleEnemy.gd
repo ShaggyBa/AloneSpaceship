@@ -1,9 +1,9 @@
 extends enemy
 
-@export (float) var enemyBigAttackDelay = 2.5 
-@export (float) var enemyAttackDelay = 1.0 
+@export var enemyBigAttackDelay: float = 2.5 
+@export var enemyAttackDelay: float = 1.0 
 
-@export (float) var enemyBigAttackDamage = 5.0
+@export var enemyBigAttackDamage: float = 5.0
 
 
 @onready var muzzles = $FiringPositions.get_children()
@@ -34,12 +34,13 @@ var stateChanged = false
 
 
 func _ready() -> void:
+	super._ready()
 	randomize()
 	
 	
 	enemyAttackDelay = randf_range(enemyAttackDelay - 0.1, enemyAttackDelay + 0.1)
 	aSprite.speed_scale = enemyAttackDelay	
-	aSprite.playing = true
+	aSprite.play()
 	enemyBigAttackDamage = round(enemyBigAttackDamage + coef * 2)
 	setTimerShooting()
 

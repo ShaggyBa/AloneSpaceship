@@ -1,12 +1,12 @@
 extends Node2D
 
-@export (float) var nextSpawnTime = 1.0
+@export var nextSpawnTime: float = 1.0
 
-@export (bool) var damageBonus = true
-@export (bool) var hpBonus = true
-@export (bool) var shootSpeedBonus = true
-@export (bool) var multiplayerBonus = true
-@export (bool) var speedBonus = true
+@export var damageBonus: bool = true
+@export var hpBonus: bool = true
+@export var shootSpeedBonus: bool = true
+@export var multiplayerBonus: bool = true
+@export var speedBonus: bool = true
 
 
 @onready var pDamageBonus:Dictionary = {
@@ -72,6 +72,7 @@ func _on_SpawnTimer_timeout():
 
 		# Position 
 		bonus.position = Vector2($Marker2D.global_position.x + 50, randf_range(30, viewportRect.end.y - 30))
+		print("[PassiveBonusSpawner] Spawned %s at %s groups=%s" % [bonus.name, bonus.position, bonus.get_groups()])
 		
 		
 			

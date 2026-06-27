@@ -64,7 +64,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="Bonus" groups=["Active", "ShieldBonus"] instance=ExtResource( 1 )]
+[node name="Bonus" groups=["ActiveBonus", "Active", "ShieldBonus"] instance=ExtResource( 1 )]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 frames = SubResource( 14 )
