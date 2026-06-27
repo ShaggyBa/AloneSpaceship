@@ -72,7 +72,6 @@ func _on_SpawnTimer_timeout():
 
 		# Position 
 		bonus.position = Vector2($Marker2D.global_position.x + 50, randf_range(30, viewportRect.end.y - 30))
-		print("[PassiveBonusSpawner] Spawned %s at %s groups=%s" % [bonus.name, bonus.position, bonus.get_groups()])
 		
 		
 			
