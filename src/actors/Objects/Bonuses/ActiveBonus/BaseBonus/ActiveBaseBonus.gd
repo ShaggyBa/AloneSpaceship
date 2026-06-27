@@ -17,7 +17,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 func _on_Bonus_area_entered(area):
-	print("[ActiveBonus] area_entered self=%s other=%s other_groups=%s" % [name, area.name, area.get_groups()])
 	if area is MC:
 		area.apply_bonus(self)
 	queue_free()

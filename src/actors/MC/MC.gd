@@ -254,73 +254,47 @@ func changeStateEngine(vector: Vector2):
 	engineSprite.play()
 
 
-func play_bonus_sound(player: AudioStreamPlayer, label: String) -> void:
-	print("[MC] Playing %s bonus sound. stream=%s volume_db=%s was_playing=%s" % [label, player.stream, player.volume_db, player.playing])
+func play_bonus_sound(player: AudioStreamPlayer) -> void:
 	if player.stream == null:
-		push_warning("[MC] %s bonus sound has no stream assigned." % label)
 		return
 	player.stop()
 	player.play()
-	print("[MC] %s bonus sound started. playing=%s" % [label, player.playing])
 
 
 func apply_bonus(area: Area2D) -> bool:
 	if area.has_meta("bonus_applied"):
-		print("[MC] Bonus already applied, skipping duplicate: %s" % area.name)
 		return false
 
 	if area.is_in_group("ActiveBonus"):
 		area.set_meta("bonus_applied", true)
-		print("[MC] Active bonus detected: %s groups=%s" % [area.name, area.get_groups()])
-		play_bonus_sound(activeBonusSound, "active")
+		play_bonus_sound(activeBonusSound)
 		if area.is_in_group("Heal"):
-			print("[MC] Applying heal bonus. hp=%s max_hp=%s" % [mcHP, maxHP])
 			heal()
-			print("[MC] Heal applied. hp=%s max_hp=%s" % [mcHP, maxHP])
 		elif area.is_in_group("ShieldBonus"):
-			print("[MC] Applying shield bonus.")
 			shieldBonus()
 		elif area.is_in_group("DamageBonus"):
-			print("[MC] Applying damage bonus. damage=%s duration=%s" % [mcDamage, duringDamageBonus])
 			damageBonus()
-		else:
-			print("[MC] Active bonus has no known effect group: %s" % [area.get_groups()])
 		return true
 
 	if area.is_in_group("PassiveBonus"):
 		area.set_meta("bonus_applied", true)
-		print("[MC] Passive bonus detected: %s groups=%s" % [area.name, area.get_groups()])
-		play_bonus_sound(passiveBonusSound, "passive")
+		play_bonus_sound(passiveBonusSound)
 		if area.is_in_group("addDamage"):
-			print("[MC] Applying passive damage bonus. damage=%s shoot_scale=%s" % [mcDamage, shootScale])
 			addPassiveDamageBonus()
-			print("[MC] Passive damage applied. damage=%s shoot_scale=%s" % [mcDamage, shootScale])
 		elif area.is_in_group("addShootSpeed"):
-			print("[MC] Applying passive shoot speed bonus. shoot_delay=%s" % mcShootSpeed)
 			addPassiveShootSpeedBonus()
-			print("[MC] Passive shoot speed applied. shoot_delay=%s" % mcShootSpeed)
 		elif area.is_in_group("addMaxHP"):
-			print("[MC] Applying passive max HP bonus. hp=%s max_hp=%s" % [mcHP, maxHP])
 			addPassiveMaxHPBonus()
-			print("[MC] Passive max HP applied. hp=%s max_hp=%s" % [mcHP, maxHP])
 		elif area.is_in_group("addMultiscore"):
-			print("[MC] Applying passive multiscore bonus. multiscore=%s" % get_tree().current_scene.multiscore)
 			addPassiveMultiscoreBonus()
-			print("[MC] Passive multiscore applied. multiscore=%s" % get_tree().current_scene.multiscore)
 		elif area.is_in_group("addSpeed"):
-			print("[MC] Applying passive speed bonus. speed=%s vertical_speed=%s shield_delay=%s" % [mcSpeed, mcVSpeed, delayShieldRestoring])
 			addPassiveSpeed()
-			print("[MC] Passive speed applied. speed=%s vertical_speed=%s shield_delay=%s" % [mcSpeed, mcVSpeed, delayShieldRestoring])
-		else:
-			print("[MC] Passive bonus has no known effect group: %s" % [area.get_groups()])
 		return true
 
 	return false
 
 
 func _on_MC_area_entered(area):
-	print("[MC] area_entered: name=%s groups=%s" % [area.name, area.get_groups()])
-	
 	if apply_bonus(area):
 		return
 

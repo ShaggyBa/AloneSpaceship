@@ -69,7 +69,6 @@ func spawnMeteoriteEffect():
 	meteoriteEffect.global_position = effect_position
 	meteoriteEffect.global_rotation = mSprite.global_rotation
 	meteoriteEffect.start_effect()
-	print("[Meteorite] Spawned destruction effect at %s node_origin=%s sprite_global=%s scale=%s texture=%s" % [meteoriteEffect.global_position, global_position, mSprite.global_position, meteoriteEffect.scale, meteoriteEffect.texture])
 	
 
 func _on_Meteorite_area_entered(area: Area2D) -> void:
