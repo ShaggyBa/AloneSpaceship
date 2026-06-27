@@ -78,7 +78,7 @@ extents = Vector2( 40, 39.6667 )
 [node name="ActiveBonus" type="Area2D" groups=["ActiveBonus"]]
 position = Vector2( -4, 0 )
 scale = Vector2( 0.75, 0.75 )
-collision_layer = 0
+collision_layer = 64
 collision_mask = 2
 script = ExtResource( 2 )
 speed = 200.0
@@ -104,4 +104,4 @@ position = Vector2( 4, 3.81611 )
 scale = Vector2( 7.54931, 6.51839 )
 
 [connection signal="area_entered" from="." to="." method="_on_Bonus_area_entered"]
-[connection signal="viewport_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

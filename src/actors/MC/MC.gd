@@ -2,21 +2,21 @@ extends Area2D
 class_name MC
 
 
-@export  var mcSpeed = 200.0 # cкорость полета корабля
-@export  var mcVSpeed = 300.0 # cкорость вертикального движения корабля
+@export var mcSpeed: float = 200.0 # cкорость полета корабля
+@export var mcVSpeed: float = 300.0 # cкорость вертикального движения корабля
 
-@export  var mcHP = 5
-@export  var mcShootSpeed = 0.5
-@export  var mcDamage = 1
+@export var mcHP: int = 5
+@export var mcShootSpeed: float = 0.5
+@export var mcDamage: int = 1
 
-@export  var delayShieldRestoring = 0.3
+@export var delayShieldRestoring: float = 0.3
 
-@export  var duringShieldBonus = 2.0
-@export  var duringDamageBonus = 5.0
+@export var duringShieldBonus: float = 2.0
+@export var duringDamageBonus: float = 5.0
 
-@export  var coef_hp_bonus = 10.0
-@export  var coef_dmg_bonus = 2
-@export  var coef_shoot_delay_bonus = 0.05
+@export var coef_hp_bonus: float = 10.0
+@export var coef_dmg_bonus: int = 2
+@export var coef_shoot_delay_bonus: float = 0.05
 
 var plShoot = preload("res://src/actors/Projectiles/MCShoot/MCShoot.tscn")
 var shootBonus = preload("res://src/actors/Projectiles/BonusShoot/ShootBonus.tscn")
@@ -224,12 +224,10 @@ func shieldEffect():
 		return
 	if timerShieldRestoring.is_stopped():
 		shield.visible = true
-		shield.play("autoshield")
+		shield.play()
 	else:
 		shield.visible = false
 		shield.stop()
-		
-		
 func changeState():
 	var MCCurrentState = float(mcHP) / float(maxHP)
 	if MCCurrentState >= 0.8: 
@@ -252,34 +250,81 @@ func changeStateEngine(vector: Vector2):
 	if vector.x == 0 and vector.y == 0:
 		engineSprite.play("idle")
 	else:
-		engineSprite.play("powering")
-		 
-	
-func _on_MC_area_entered(area):
-	
+		engineSprite.set_animation("powering")
+	engineSprite.play()
+
+
+func play_bonus_sound(player: AudioStreamPlayer, label: String) -> void:
+	print("[MC] Playing %s bonus sound. stream=%s volume_db=%s was_playing=%s" % [label, player.stream, player.volume_db, player.playing])
+	if player.stream == null:
+		push_warning("[MC] %s bonus sound has no stream assigned." % label)
+		return
+	player.stop()
+	player.play()
+	print("[MC] %s bonus sound started. playing=%s" % [label, player.playing])
+
+
+func apply_bonus(area: Area2D) -> bool:
+	if area.has_meta("bonus_applied"):
+		print("[MC] Bonus already applied, skipping duplicate: %s" % area.name)
+		return false
+
 	if area.is_in_group("ActiveBonus"):
-		activeBonusSound.play()
+		area.set_meta("bonus_applied", true)
+		print("[MC] Active bonus detected: %s groups=%s" % [area.name, area.get_groups()])
+		play_bonus_sound(activeBonusSound, "active")
 		if area.is_in_group("Heal"):
+			print("[MC] Applying heal bonus. hp=%s max_hp=%s" % [mcHP, maxHP])
 			heal()
+			print("[MC] Heal applied. hp=%s max_hp=%s" % [mcHP, maxHP])
 		elif area.is_in_group("ShieldBonus"):
+			print("[MC] Applying shield bonus.")
 			shieldBonus()
 		elif area.is_in_group("DamageBonus"):
+			print("[MC] Applying damage bonus. damage=%s duration=%s" % [mcDamage, duringDamageBonus])
 			damageBonus()
-	
+		else:
+			print("[MC] Active bonus has no known effect group: %s" % [area.get_groups()])
+		return true
+
 	if area.is_in_group("PassiveBonus"):
-		passiveBonusSound.play()
+		area.set_meta("bonus_applied", true)
+		print("[MC] Passive bonus detected: %s groups=%s" % [area.name, area.get_groups()])
+		play_bonus_sound(passiveBonusSound, "passive")
 		if area.is_in_group("addDamage"):
+			print("[MC] Applying passive damage bonus. damage=%s shoot_scale=%s" % [mcDamage, shootScale])
 			addPassiveDamageBonus()
+			print("[MC] Passive damage applied. damage=%s shoot_scale=%s" % [mcDamage, shootScale])
 		elif area.is_in_group("addShootSpeed"):
+			print("[MC] Applying passive shoot speed bonus. shoot_delay=%s" % mcShootSpeed)
 			addPassiveShootSpeedBonus()
+			print("[MC] Passive shoot speed applied. shoot_delay=%s" % mcShootSpeed)
 		elif area.is_in_group("addMaxHP"):
-			addPassiveMaxHPBonus()	
+			print("[MC] Applying passive max HP bonus. hp=%s max_hp=%s" % [mcHP, maxHP])
+			addPassiveMaxHPBonus()
+			print("[MC] Passive max HP applied. hp=%s max_hp=%s" % [mcHP, maxHP])
 		elif area.is_in_group("addMultiscore"):
+			print("[MC] Applying passive multiscore bonus. multiscore=%s" % get_tree().current_scene.multiscore)
 			addPassiveMultiscoreBonus()
+			print("[MC] Passive multiscore applied. multiscore=%s" % get_tree().current_scene.multiscore)
 		elif area.is_in_group("addSpeed"):
+			print("[MC] Applying passive speed bonus. speed=%s vertical_speed=%s shield_delay=%s" % [mcSpeed, mcVSpeed, delayShieldRestoring])
 			addPassiveSpeed()
+			print("[MC] Passive speed applied. speed=%s vertical_speed=%s shield_delay=%s" % [mcSpeed, mcVSpeed, delayShieldRestoring])
+		else:
+			print("[MC] Passive bonus has no known effect group: %s" % [area.get_groups()])
+		return true
+
+	return false
+
+
+func _on_MC_area_entered(area):
+	print("[MC] area_entered: name=%s groups=%s" % [area.name, area.get_groups()])
 	
-	elif area.is_in_group("damageable"):
+	if apply_bonus(area):
+		return
+
+	if area.is_in_group("damageable"):
 		timerDuringShieldBonus.stop()
 		if timerDuringShieldBonus.is_stopped():
 			disabledShieldBonus()
@@ -366,7 +411,7 @@ func death():
 	shield.queue_free()
 	sprite.animation = "Death"
 	sprite.modulate = "ffffff" 
-	#sprite.playing = true
+	sprite.play()
 	sprite.connect("animation_finished", Callable(self, "_on_Destroyed"))
 
 
@@ -377,4 +422,3 @@ func _on_Destroyed():
 func _on_tickRateDamage_timeout():
 	takeDamage(mcHP * 0.2)
 	sprite.modulate = "ffffff"
-

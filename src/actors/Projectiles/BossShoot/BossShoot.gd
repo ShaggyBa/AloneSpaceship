@@ -1,8 +1,8 @@
 extends Area2D
 
 
-@export  var rayDuracity = 2.0
-@export var speed = 750.0
+@export var rayDuracity: float = 2.0
+@export var speed: float = 750.0
 
 
 @onready var timerRayDuracity = $TimerRayDuracity
@@ -18,8 +18,7 @@ var damage
 
 func _ready() -> void:
 	timerRayDuracity.start(rayDuracity)
-	raySprite.playing = true
-	
+	raySprite.play()
 	var angle = get_angle_to(_target)
 	targetPos = Vector2(cos(angle), sin(angle))
 	

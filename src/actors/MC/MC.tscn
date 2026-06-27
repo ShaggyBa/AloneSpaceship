@@ -1,7 +1,7 @@
-[gd_scene load_steps=56 format=3 uid="uid://dtin2i603kyl0"]
+[gd_scene format=3 uid="uid://cfgwb0fdcwwmv"]
 
 [ext_resource type="Texture2D" uid="uid://djdhem3mdr66o" path="res://src/Assets/Sprites/MainShip/model/States/FullHP.png" id="1"]
-[ext_resource type="Script" path="res://src/actors/MC/MC.gd" id="2"]
+[ext_resource type="Script" uid="uid://dsv301d5wxefu" path="res://src/actors/MC/MC.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://16pf4wpgxx7y" path="res://src/Assets/Sprites/MainShip/effects/MainEffects/Main Ship - Shields - Invincibility Shield.png" id="3"]
 [ext_resource type="AudioStream" uid="uid://d427m0l2vqou" path="res://src/Assets/Sound/MainShipSound/Blaster.wav" id="4"]
 [ext_resource type="AudioStream" uid="uid://6k6rarf2pqyy" path="res://src/Assets/Sound/SoundEffects/Infinite Loops (Background Music)/273562__n_audioman__hit_hurt39.wav" id="5"]
@@ -58,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("27")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -75,7 +75,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("31")
 }],
-"loop": true,
+"loop": 1,
 "name": &"powering",
 "speed": 10.0
 }]
@@ -125,7 +125,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("61")
 }],
-"loop": false,
+"loop": 0,
 "name": &"Death",
 "speed": 4.0
 }, {
@@ -133,7 +133,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"FullHP",
 "speed": 0.0
 }, {
@@ -141,7 +141,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13")
 }],
-"loop": true,
+"loop": 1,
 "name": &"LowHP",
 "speed": 0.0
 }, {
@@ -149,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11")
 }],
-"loop": true,
+"loop": 1,
 "name": &"SemiHP",
 "speed": 0.0
 }, {
@@ -157,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12")
 }],
-"loop": true,
+"loop": 1,
 "name": &"VeryLowHP",
 "speed": 0.0
 }]
@@ -283,7 +283,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("42")
 }],
-"loop": true,
+"loop": 1,
 "name": &"autoshield",
 "speed": 10.0
 }, {
@@ -324,16 +324,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("54")
 }],
-"loop": true,
+"loop": 1,
 "name": &"invincibility",
 "speed": 24.0
 }]
 
-[node name="MC" type="Area2D"]
+[node name="MC" type="Area2D" unique_id=1987523440]
 z_index = 1
 position = Vector2(150, 300)
 collision_layer = 2
-collision_mask = 57
+collision_mask = 121
 gravity = 0.0
 script = ExtResource("2")
 mcSpeed = 500.0
@@ -341,19 +341,19 @@ mcHP = 20
 mcDamage = 2
 duringShieldBonus = 5.0
 
-[node name="EngineSprite" type="AnimatedSprite2D" parent="."]
+[node name="EngineSprite" type="AnimatedSprite2D" parent="." unique_id=1875940024]
 position = Vector2(1, 0)
 rotation = 1.5755
 scale = Vector2(2, 2)
 sprite_frames = SubResource("32")
 animation = &"idle"
 
-[node name="MCSprite" type="AnimatedSprite2D" parent="."]
+[node name="MCSprite" type="AnimatedSprite2D" parent="." unique_id=122364615]
 scale = Vector2(1.82739, 1.82739)
 sprite_frames = SubResource("55")
 animation = &"Death"
 
-[node name="CrushEffects" type="CPUParticles2D" parent="."]
+[node name="CrushEffects" type="CPUParticles2D" parent="." unique_id=647014127]
 position = Vector2(0, -6)
 emitting = false
 amount = 5
@@ -366,23 +366,23 @@ spread = 180.0
 gravity = Vector2(-100, 0)
 color = Color(1, 0.858824, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=556012146]
 visible = false
 position = Vector2(0, 2)
 polygon = PackedVector2Array(24, 0, 7, 10, -8, 25, -24, 25, -23, -30, -9, -30, 9, -11, 23, -7)
 
-[node name="Muzzle" type="Marker2D" parent="." groups=["player"]]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1172533373 groups=["player"]]
 visible = false
 position = Vector2(35, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1921693042]
 visible = false
 position = Vector2(0, -1)
 limit_top = -50
 limit_bottom = 650
 limit_smoothed = true
 
-[node name="Shield" type="AnimatedSprite2D" parent="."]
+[node name="Shield" type="AnimatedSprite2D" parent="." unique_id=1657216095]
 z_index = 1
 position = Vector2(3, 0)
 rotation = 1.5708
@@ -391,35 +391,35 @@ sprite_frames = SubResource("14")
 animation = &"autoshield"
 frame = 3
 
-[node name="Audio" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="AudioStreamPlayer" parent="." unique_id=1190538509]
 
-[node name="Destroyed" type="AudioStreamPlayer" parent="Audio"]
+[node name="Destroyed" type="AudioStreamPlayer" parent="Audio" unique_id=272651622]
 stream = ExtResource("10")
 volume_db = -14.017
 
-[node name="ShotSound" type="AudioStreamPlayer" parent="Audio"]
+[node name="ShotSound" type="AudioStreamPlayer" parent="Audio" unique_id=2102916581]
 stream = ExtResource("4")
 volume_db = -22.608
 
-[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
+[node name="Hit" type="AudioStreamPlayer" parent="Audio" unique_id=1158472204]
 stream = ExtResource("5")
 volume_db = -19.656
 
-[node name="ShieldHit" type="AudioStreamPlayer" parent="Audio"]
+[node name="ShieldHit" type="AudioStreamPlayer" parent="Audio" unique_id=1018033621]
 stream = ExtResource("6")
 volume_db = -25.0
 
-[node name="Ricochet" type="AudioStreamPlayer" parent="Audio"]
+[node name="Ricochet" type="AudioStreamPlayer" parent="Audio" unique_id=795061108]
 stream = ExtResource("15")
 volume_db = -20.671
 
-[node name="ActiveBonus" type="AudioStreamPlayer" parent="Audio"]
+[node name="ActiveBonus" type="AudioStreamPlayer" parent="Audio" unique_id=1678940776]
 stream = ExtResource("16")
-volume_db = -25.0
+volume_db = -12.0
 
-[node name="PassiveBonus" type="AudioStreamPlayer" parent="Audio"]
+[node name="PassiveBonus" type="AudioStreamPlayer" parent="Audio" unique_id=1471027357]
 stream = ExtResource("17")
-volume_db = -25.0
+volume_db = -12.0
 pitch_scale = 0.75
 
 [connection signal="area_entered" from="." to="." method="_on_MC_area_entered"]

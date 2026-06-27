@@ -1,8 +1,8 @@
 extends Node
 
 
-@export var multiscore = 1.0
-@export var pointsToSpawnBoss = 100000.0
+@export var multiscore: float = 1.0
+@export var pointsToSpawnBoss: float = 100000.0
 
 
 

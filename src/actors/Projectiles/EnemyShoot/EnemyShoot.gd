@@ -1,7 +1,7 @@
 extends Area2D
 
 
-@export var shootSpeed = 500.0
+@export var shootSpeed: float = 500.0
 var damage
 
 
@@ -9,10 +9,7 @@ var pShootEffect = preload("res://src/actors/Projectiles/EnemyShoot/EnemyShootEf
 
 
 func _ready():
-	#$Sprite2D.playing = true
-	pass
-
-
+	$Sprite2D.play()
 func _physics_process(delta):
 	global_position.x -= shootSpeed * delta
 

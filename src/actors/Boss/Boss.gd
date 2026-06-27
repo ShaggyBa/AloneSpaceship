@@ -1,11 +1,11 @@
 extends Area2D
 
 
-@export var bossAttackDelay = 2.0
-@export var verticalSpeed = 100.0
-@export var horisontalSpeed = 75.0
-@export var bossHP = 50
-@export var bossDamage = 10
+@export var bossAttackDelay: float = 2.0
+@export var verticalSpeed: float = 100.0
+@export var horisontalSpeed: float = 75.0
+@export var bossHP: int = 50
+@export var bossDamage: int = 10
 
 
 signal boss_defeated
@@ -37,13 +37,13 @@ var timerShooting = Timer.new()
 
 var stateChanged = false
 var isReady = false
+var isDeath = false
 var maxHP
 
 func _ready() -> void:
 	improve_stats()
-	aSprite.playing = true
-	engine.playing = true
-	
+	aSprite.play()
+	engine.play()
 	setTimerShooting()
 	
 
@@ -66,12 +66,12 @@ func shooting():
 	if timerShooting.is_stopped() and canShoot and isReady:
 		timerShooting.start()	
 		aSprite.animation = "attack"
-		attackSound.playing = true
-	
-		
+		attackSound.play()
 		var shoot = plShoot.instantiate()
 		
 		await get_tree().create_timer(1.0).timeout
+		if isDeath:
+			return
 		shoot.damage = bossDamage
 		shoot.global_position = muzzle.global_position
 		
@@ -89,6 +89,8 @@ func shooting():
 		
 
 func takeDamage(amount):
+	if isDeath:
+		return
 	bossHP -= amount
 	takeDamageSound.play()	
 	changeState()
@@ -151,15 +153,20 @@ func improve_stats():
 	maxHP = bossHP
 
 func death():
+	if isDeath:
+		return
+	isDeath = true
 	canShoot = false
 	
 	engine.queue_free()
 	
 	$CollisionPolygon2D.queue_free()	
 	
-	aSprite.animation = "Death"
-	aSprite.connect("animation_finished", Callable(self, "_on_Death_animation_finished"))
-	aSprite.playing = true
+	var death_finished := Callable(self, "_on_Death_animation_finished")
+	if not aSprite.animation_finished.is_connected(death_finished):
+		aSprite.animation_finished.connect(death_finished)
+	aSprite.play("Death")
+	aSprite.set_frame_and_progress(0, 0.0)
 	verticalSpeed *= 0.1
 	horisontalSpeed *= 0.1
 	$Destroyed.play()

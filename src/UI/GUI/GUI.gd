@@ -31,7 +31,7 @@ func _input(event):
 				emit_signal("change_move",Vector2(move_vector.x, move_vector.y) )
 	
 	if event is InputEventScreenTouch:
-		if event.button_pressed == false:
+		if event.pressed == false:
 			inner_circle.visible = false
 			emit_signal("change_move",Vector2(0,0))
 
